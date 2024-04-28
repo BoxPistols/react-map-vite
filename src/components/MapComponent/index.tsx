@@ -3,9 +3,9 @@ import mapboxgl from 'mapbox-gl';
 
 const Mapbox = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
-    const [lng, _setLng] = useState(139.7673068); // 初期経度
-    const [lat, _setLat] = useState(35.6809591); // 初期緯度
-    const [zoom, _setZoom] = useState(9); // 初期ズームレベル
+    const [lng,] = useState(139.7673068); // 初期経度
+    const [lat,] = useState(35.6809591); // 初期緯度
+    const [zoom,] = useState(9); // 初期ズームレベル
 
     useEffect(() => {
         if (mapContainer.current) {
