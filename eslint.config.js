@@ -21,6 +21,6 @@ export default [
     rules: {},
   },
   {
-    ignores: [".astro"],
+    ignores: [".astro", "dist/**", "node_modules/**"],
   },
 ];
