@@ -1,5 +1,5 @@
-import {useEffect, useRef} from "react";
-import mapboxgl from "mapbox-gl";
+import { useEffect, useRef } from 'react';
+import mapboxgl from 'mapbox-gl';
 
 type MapboxProps = {
   latitude: number; // 緯度
@@ -7,7 +7,7 @@ type MapboxProps = {
   zoom: number; // ズームレベル
 };
 
-const Mapbox = ({latitude, longitude, zoom}: MapboxProps) => {
+const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Mapbox = ({latitude, longitude, zoom}: MapboxProps) => {
 
       const map = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
+        style: 'mapbox://styles/mapbox/streets-v11',
         center: [longitude, latitude],
         zoom: zoom,
       });
@@ -34,13 +34,7 @@ const Mapbox = ({latitude, longitude, zoom}: MapboxProps) => {
     }
   }, [latitude, longitude, zoom]);
 
-  return (
-    <div
-      ref={mapContainer}
-      id="mapContainer"
-      style={{width: "100vw", height: "100vh"}}
-    />
-  );
+  return <div ref={mapContainer} id="mapContainer" style={{ width: '100vw', height: '100vh' }} />;
 };
 
 export default Mapbox;
