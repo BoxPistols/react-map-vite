@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "init": "^0.1.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sb": "^8.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
