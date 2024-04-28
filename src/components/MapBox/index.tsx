@@ -1,11 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-const Mapbox = () => {
+type MapboxProps = {
+    latitude: number;   // 緯度
+    longitude: number;  // 経度
+    zoom: number;       // ズームレベル
+};
+
+const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
     const mapContainer = useRef<HTMLDivElement>(null);
-    const [lng,] = useState(139.7673068); // 初期経度
-    const [lat,] = useState(35.6809591); // 初期緯度
-    const [zoom,] = useState(9); // 初期ズームレベル
 
     useEffect(() => {
         if (mapContainer.current) {
@@ -14,7 +17,7 @@ const Mapbox = () => {
             const map = new mapboxgl.Map({
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: [lng, lat],
+                center: [longitude, latitude],
                 zoom: zoom,
             });
 
@@ -29,7 +32,7 @@ const Mapbox = () => {
                 map.remove();
             };
         }
-    }, [lng, lat, zoom]);
+    }, [latitude, longitude, zoom]);
 
     return <div ref={mapContainer} style={{ width: '100%', height: '400px' }} />;
 };
