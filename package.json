@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -26,6 +27,7 @@
     "@storybook/addon-interactions": "8.1.0-alpha.7",
     "@storybook/addon-links": "8.1.0-alpha.7",
     "@storybook/addon-onboarding": "8.1.0-alpha.7",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/blocks": "8.1.0-alpha.7",
     "@storybook/react": "8.1.0-alpha.7",
     "@storybook/react-vite": "8.1.0-alpha.7",
