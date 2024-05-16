@@ -15,6 +15,10 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.18",
+    "@mui/material": "^5.15.18",
     "cli-table3": "^0.6.4",
     "init": "^0.1.2",
     "mapbox-gl": "^3.3.0",
@@ -36,8 +40,8 @@
     "@storybook/react-vite": "8.1.0-alpha.7",
     "@storybook/test": "8.1.0-alpha.7",
     "@storybook/testing-library": "^0.2.2",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "@vitejs/plugin-react": "^4.2.1",
