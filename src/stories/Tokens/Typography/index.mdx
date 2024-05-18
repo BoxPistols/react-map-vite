@@ -1,0 +1,150 @@
+import { Meta } from "@storybook/blocks"
+// import Colors from '@/stories/assets/colors.svg';
+import { Container, Button, Box, Typography } from "@mui/material"
+import { ThemeProvider } from "@mui/material/styles"
+import { theme } from "@/lib/theme"
+
+<Meta title="Tokens/Typography/Info" />
+
+<ThemeProvider theme={theme}>
+<Container>
+
+# Typography
+
+## About
+
+Typography コンポーネントは、テキストのスタイルやフォーマットを指定するために使用されます。 [Mui Typography](https://mui.com/material-ui/react-typography/)
+
+## WebFont
+
+- この環境では日本語に **Noto Sans JP** を使用しています。Google が開発したオープンソースの日本語フォントです。[Google Fonts: Noto Sans JP](https://fonts.google.com/specimen/Noto+Sans+JP)
+  - Noto Sans JP の特徴は、日本語のバランスを崩さずに、英語のフォントとの組み合わせが美しく見えることで、WebFont を使うことで OS に依存しない日本語の表示を実現できます。
+- 英語は **Inter** を使用しています。Inter は、Google が開発したオープンソースの英語フォントです。[Google Fonts: Inter](https://fonts.google.com/specimen/Inter)
+  - Inter は、日本語のフォントとの組み合わせが美しく見えることも特徴です。
+
+## 概要
+
+- 文字の大きさ、太字、カラー、行間など、さまざまなスタイルをカスタマイズも含めて汎用的に適用できます
+- 特に variant オプションの命名が特徴的ですが、マテリアルデザインの Type System に基づいています[Material Dedign / The type system](https://m2.material.io/design/typography/the-type-system.html#type-scale)
+- 特徴としてマークアップ構造と UI の関心事を分離しながらスタイル実装を実現することができます。
+  - 基本記述方法 `<Typography variant="xxx" component="yyy">Text</Typography>`
+  - variant=スタイルの適応
+  - component=マークアップ構造の適応
+- 実装としてマークアップ構造は意識せずとも良い設定をしており、基本的には`<Typography variant="xxx">Text</Typography>`だけで良いかと思います
+- また、カラー指定や余白の追加などは`<Typography color='text.secondary' mb={2} px={1}>`などでスタイルを指定することもできます
+- また、fontWeight は`<Typography fontWeight='bold'>`、block は`<Typography display="flex">`などで指定することもできますので、他のコンポーネントも含めて sx を書く前により短く書けないか一度試みてください
+
+### 余白指定
+
+余白は 8 の倍数で省略記法も可能です
+
+- mt: maginTop
+- mr: maginRight
+- mb: maginBottom
+- ml: maginLeft
+- m: 全４方向一括指定
+- mx: 左右 2 方向一括指定
+- my: 上下 2 方向一括指
+
+padding も m→p で同様の作用
+
+### 主要なオプション
+
+- <code>noWrap</code>: 改行防止
+- <code>align</code>: textAlign です。"center"や"left/right"などが使えます
+- <code>gutterBottom</code> Typography コンポーネントの直下が狭い場合、下部に一定の余白を付けます
+
+## variant
+
+Mui Typography コンポーネントは、以下のような主要なバリアントを持っています：
+
+- **h1** - **h6** 見出し。`h1`が最も大きく、`h6`が最も小さい。
+  - 今回は h1 はロゴのマークアップ用途として使い、実質 h2 が最も大きなテキストとして扱います
+  - heading は全て variant としては div 扱いになりますので、component="h2"などを書かない限りマークアップ構造はあまり気にせずデザインとして利用できます
+- **subtitle1** - サブタイトルに適したスタイル。主に h2 や h3 レベルの見出しの下に使用されます。小さな見出しには通常は使いません。
+- **subtitle2** - サブタイトルに適したもう少し小さいスタイル。主に h3-h6 レベル の下に使用されます。
+- **body1** - 本文に適したスタイル。最も一般的なスタイルで、基本的には未指定の場合のデフォルトスタイルと同じになります。
+- **body2** - 本文に適したもう少し小さいスタイル
+- **caption** - 小さな文字の Utilty テキストとしても使用できます
+- **overline** - 小さな文字の Utilty テキストとしても使用できます
+- **button** - ボタンのテキストスタイル
+
+### 拡張 variant
+
+- マテリアルデザインの Typography の命名ルールがマッチしないケースもありますので、拡張 variant を用意しています。
+- 具体的な Typography variant の一覧を[Variants](/story/tokens-typography--vatiants)にまとめていまるので、そちらを参照してください。
+
+### Use Case
+
+{/* Storybook mdxでのTypographyはMarkdownのLintやフォーマットの時にテキストが折り返されてしまう事があるので、{"text"}で明示的に囲むと問題なく表示されます */}
+
+<Box mt={3}>
+
+{' '}
+
+<Typography variant="h2">{"h2 見出しテキスト"}</Typography>
+<Typography variant="subtitle1">
+  {"subtitle1 サブタイトル、説明文を書く"}
+</Typography>
+```tsx
+<Typography variant="h2">{"h2 見出しテキスト"}</Typography>
+<Typography variant="subtitle1">
+  {"subtitle1 サブタイトル、説明文を書く"}
+</Typography>
+```
+
+<Typography variant="h3">h3 見出しテキスト</Typography>
+<Typography variant="subtitle2">
+  {"subtitle2 サブタイトル、説明文を書く"}
+</Typography>
+```tsx
+<Typography variant="h3">{"h3 見出しテキスト"}</Typography>
+<Typography variant="subtitle2">
+  {"subtitle2 サブタイトル、説明文を書く"}
+</Typography>
+```
+
+{' '}
+
+<Typography variant="lg">{"lg拡張variant"}</Typography>
+<Typography variant="sm">{"sm拡張variant"}</Typography>
+```tsx
+<Typography variant="lg">{"lg拡張variant"}</Typography>
+<Typography variant="sm">{"sm拡張variant"}</Typography>
+```
+
+{' '}
+
+<Typography
+  variant="ml"
+  color="warning.main"
+  align="center"
+  fontWeight="bold"
+  display="block"
+  mt={2}
+>
+  {"オプション指定"}
+</Typography>
+```tsx
+<Typography
+  color="warning.main"
+  align="center"
+  fontWeight="bold"
+  display="block"
+  mt={2}
+>
+  {"オプション指定"}
+</Typography>
+```
+
+</Box>
+
+## Links
+
+Mui Reference
+
+- [Typography](https://mui.com/components/typography/)
+- [Typography API](https://mui.com/api/typography/)
+
+</Container>
+</ThemeProvider>

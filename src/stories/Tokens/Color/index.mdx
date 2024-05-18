@@ -1,0 +1,105 @@
+import { Meta } from '@storybook/blocks';
+import { Container, Button, Box, Typography } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from '@/lib/theme';
+
+<Meta title="Tokens/Color/Info" />
+
+<ThemeProvider theme={theme}>
+<Container>
+
+# Color Token
+
+## About
+
+Mui のカラーはマテリアルデザインのカラースキームを採用していますそのため、Mui のカラーを理解するには、マテリアルデザインのカラースキームを理解する必要があります
+
+以下のリンクを参照してください<br/>
+
+- [Material Design Color](https://material.io/design/color/the-color-system.html#color-theme-creation)
+- [Material Design Color Tool](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FFC107&secondary.color=FFC107)
+
+このプロダクトで theme で保持しているカラーの一覧を[Colors](/story/tokens-color--color-map)にまとめています。
+
+## 主なテーマカラー
+
+プロダクトにおいて特に活用するカラーは、主に以下の 3 つのカラーです
+
+- primary
+  - プロダクトのメインカラーで、ボタンやリンクなどに使用します
+- secondary
+  - primary とのコントラストを考慮したカラーで、primary を補助するようなキャンセルボタンや目立たないリンクなどに使用します
+- error
+  - 主にエラーメッセージやエラーを表すテキスト、アラート、削除箇所などに使用します
+- warning
+  - 主に警告、より注意する箇所に使用します
+- success
+  - 主に成功メッセージやポジティブなメッセージに使用します
+- info
+  - 主に情報やガイダンスメッセージに使用します
+
+## カラーテーマ設定
+
+- Mui の theme の特性で、明るさの展開として main カラーの他にも `light` `lighter` `dark` カラーが存在します
+  - lighter は Mui のデフォルトにはありませんが、後から拡張追加したバリエーションです
+- これらのカラーは、`theme.palette.primary.light`、`theme.palette.secondary.dark`のように指定することができます
+- また、`theme.palette.primary.contrastText`のように、最もコントラスト比率の高い、ハイライトのような用途の contrastText カラーも指定することができます
+- `theme`ファイルで`main`カラーを設定すると、light カラー、dark カラー、contrastText カラーは未指定であっても自動で展開設定されますが、今回は個別詳細に設定しています
+
+### contrastText
+
+- `primary.contrastText`は、Mui のテーマカラーの primary の contrastText カラーを指定しています
+- `contrastText`とは、端的には最も明るい色を指し、背景とのコントラストを確保しながら、同じグループのテキストカラーとして使用することができます
+- `white`などを直接指定することもできますが`contrastText`を使用することで、テーマカラーの変更に柔軟に対応することができます
+
+<Box bgcolor={theme.palette.primary.main} color={theme.palette.primary.contrastText} width="fit-content" p={1}>
+  {'box'}
+</Box>
+
+```tsx
+<Box bgcolor={theme.palette.primary.main} color={theme.palette.primary.contrastText} width="fit-content" p={1}>
+  {'box'}
+</Box>
+```
+
+例えばこのような長い記述が同じ用途で何度も出てくるようであれば、デザインを目的としたカスタムコンポーネントの作成も考えられます
+
+## グレーカラー
+
+表示は**gray**でなく**grey**ですので注意してください
+
+- Mui では、グレーカラーのテーマを設定することができます
+- グレーはマテリアルデザインのカラーパレットに含まれているため、グレーカラーのテーマを設定することで、グレーカラーを統一することができます
+- 段階表示的に明るい順から、`50`、`100`、`200`、`300`、`400`、`500`、`600`、`700`、`800`、`900`などのグレーカラーが用意されています
+- `grey.100`や`theme.palette.grey[50]`のように数字を指定することで、グレーカラーの濃さを指定することができます
+- 実装方法は実装箇所によって替わってきますので、すでに実装済みのコンポーネントを参考にしてください
+  - 基本的には useTheme を使用する方法と、useTheme を使用せずに theme を直接指定する方法があります
+
+### 例コード
+
+<Box
+  backgroundColor="grey.200"
+  px={2}
+  sx={{
+    border: `1px solid ${theme.palette.grey[700]}`,
+    width: 'fit-content',
+  }}
+>
+  {'greyBox'}
+</Box>
+
+```tsx
+<Box
+  backgroundColor="grey.200"
+  px={2}
+  sx={{
+    border: `1px solid ${theme.palette.grey[700]}`,
+    width: 'fit-content',
+  }}
+>
+  {'greyBox'}
+</Box>
+```
+
+</Container>
+</ThemeProvider>
