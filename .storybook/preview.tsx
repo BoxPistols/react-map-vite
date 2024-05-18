@@ -1,29 +1,29 @@
-import React from 'react';
-import { ThemeProvider } from '@mui/system';
-import { CssBaseline } from '@mui/material';
-import { theme } from '../src/lib/theme';
-
-import type { Preview } from '@storybook/react';
-import '../src/index.css';
+import React from 'react'
+import { ThemeProvider, CssBaseline } from '@mui/material'
+import { theme } from '../src/lib/theme'
+import type { Preview } from '@storybook/react'
+import '../src/index.css'
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
     },
+    backgrounds: {
+      default: 'light',
+    },
   },
   decorators: [
-    (Story) => (
+    (Story, context) => (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Story />
+        <Story {...context} />
       </ThemeProvider>
     ),
   ],
-};
+}
 
-export default preview;
+export default preview
