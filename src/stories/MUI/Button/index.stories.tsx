@@ -33,9 +33,13 @@ export default meta
 
 type Story = StoryObj<CustomButtonProps>
 
-const getColorShade = (theme: Theme, color: keyof Theme['palette'], shade: 'main' | 'dark' | 'light' | 'lighter') => {
+const getColorShade = (
+  theme: Theme,
+  color: keyof Theme['palette'] | 'inherit',
+  shade: keyof Theme['palette'][keyof Theme['palette']]
+) => {
   if (color === 'inherit' || !theme.palette[color]) return undefined
-  return theme.palette[color][shade as keyof (typeof theme.palette)[color]]
+  return theme.palette[color][shade]
 }
 
 export const Variants: Story = {
@@ -48,7 +52,11 @@ export const Variants: Story = {
   },
   render: (args) => {
     const theme = useTheme()
-    const color = getColorShade(theme, args.color, args.colorShade) || theme.palette[args.color].main || undefined
+    const color = getColorShade(
+      theme,
+      args.color as keyof Theme['palette'] | 'inherit',
+      args.colorShade as keyof Theme['palette'][keyof Theme['palette']]
+    )
     const textColor = args.colorShade === 'lighter' ? theme.palette.text.primary : undefined
 
     return (
