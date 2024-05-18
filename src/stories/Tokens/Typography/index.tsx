@@ -149,10 +149,14 @@ const Typographies = () => {
 
   type TypographyVariant = keyof typeof theme.typography
 
+  type TypographyStyle = {
+    fontSize: string
+    lineHeight: string
+  }
+
   // フォントサイズとline-heightを取得するためのヘルパー関数
   const getTypographyStyle = (variant: TypographyVariant) => {
-    // @ts-ignore
-    const style = theme.typography[variant] as any
+    const style = theme.typography[variant] as TypographyStyle
     const fontSizeRem = style.fontSize
     const lineHeight = style.lineHeight
     // Parse float value from rem string and convert to px

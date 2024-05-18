@@ -279,8 +279,7 @@ export const theme = createTheme({
       lineHeight: lineHeight.medium,
       textTransform: 'none',
     },
-    // 拡張追加されたvariantのスタイル
-    // @ts-ignore
+    // @ts-expect-error - MUI5のTypographyを拡張するための設定
     xxl: {
       fontSize: fontSizesVariant.xxl, // 1.571rem = 22px
       ...heading,
