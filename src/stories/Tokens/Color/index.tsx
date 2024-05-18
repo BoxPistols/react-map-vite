@@ -29,9 +29,11 @@ const Color = () => {
   )
 
   // 文字の色は背景色に応じて黒または白になります。
-  const getContrastTextColor = (color: PaletteColor | string): string => {
+  const getContrastTextColor = (color: PaletteColor | string, shade: string): string => {
+    if (shade === 'main') {
+      return '#fff'
+    }
     // パレットの色はオブジェクトまたはmainプロパティを持つ文字列です
-    // if (typeof color === "object" && "main" in color) {
     if (typeof color === 'object') {
       return theme.palette.getContrastText(color.main)
     } else if (typeof color === 'string') {
@@ -74,7 +76,7 @@ const Color = () => {
                             fontSize={14}
                             fontWeight={500}
                             style={{
-                              color: getContrastTextColor(color),
+                              color: getContrastTextColor(color, shade),
                             }}
                           >
                             {shade} : {color}
@@ -152,8 +154,6 @@ const Color = () => {
           icon palette
         </Typography>
         <Box display="flex" gap={2}>
-          {/* //  iconLight: colorData.icon.light, iconDark: colorData.icon.dark,
-          iconAction: colorData.icon.action, iconDisabled: colorData.icon.disabled, */}
           <BoxStyled
             style={{
               backgroundColor: theme.palette.iconWhite,
