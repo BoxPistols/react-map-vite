@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Mapbox from '.'; // Mapbox コンポーネントの正しいインポートパスを確認してください
+import type { Meta, StoryObj } from '@storybook/react'
+import Mapbox from '.' // Mapbox コンポーネントの正しいインポートパスを確認してください
 
 const meta: Meta<typeof Mapbox> = {
   title: 'Components/Mapbox',
@@ -30,14 +30,14 @@ const meta: Meta<typeof Mapbox> = {
     longitude: 139.7673068,
     zoom: 9,
   },
-} satisfies Meta<typeof Mapbox>;
+} satisfies Meta<typeof Mapbox>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     // 既定値をここに設定、必要に応じて上記で定義したデフォルト値を使用
   },
-};
+}

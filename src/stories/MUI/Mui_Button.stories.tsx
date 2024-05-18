@@ -1,12 +1,12 @@
-import { Meta } from '@storybook/react';
-import { Button } from '@mui/material';
+import { Meta } from '@storybook/react'
+import { Button } from '@mui/material'
 
 const meta: Meta<typeof Button> = {
   title: 'Mui/Button',
   component: Button,
-};
+}
 
-export default meta;
+export default meta
 
 export const Primary = {
   args: {
@@ -14,7 +14,7 @@ export const Primary = {
     color: 'primary',
     children: 'Primary Button',
   },
-};
+}
 
 export const Secondary = {
   args: {
@@ -22,4 +22,4 @@ export const Secondary = {
     color: 'secondary',
     children: 'Secondary Button',
   },
-};
+}

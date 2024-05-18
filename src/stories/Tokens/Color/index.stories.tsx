@@ -1,11 +1,11 @@
-import { Meta } from '@storybook/react';
-import Color from '.';
+import { Meta } from '@storybook/react'
+import Color from '.'
 
 const ColorStory: Meta = {
   title: 'Tokens/Color',
   component: Color,
-};
+}
 
-export default ColorStory;
+export default ColorStory
 
-export const ColorMap = () => <Color />;
+export const ColorMap = () => <Color />

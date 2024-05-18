@@ -1,7 +1,7 @@
-import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import ContactForm from '../components/ContactForm';
+import React from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import ContactForm from '../components/ContactForm'
 
 const HomePage: React.FC = () => {
   return (
@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

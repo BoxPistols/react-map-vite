@@ -1,18 +1,18 @@
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import Mapbox from './components/MapBox';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
-import { theme } from './lib/theme';
+import Button from '@mui/material/Button'
+import DeleteIcon from '@mui/icons-material/Delete'
+import SendIcon from '@mui/icons-material/Send'
+import Mapbox from './components/MapBox'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
+import { theme } from './lib/theme'
 
 const App = () => {
   const cache = createCache({
     key: 'css',
     prepend: true,
     stylisPlugins: [],
-  });
+  })
 
   return (
     <ThemeProvider theme={theme}>
@@ -39,7 +39,7 @@ const App = () => {
         </div>
       </CacheProvider>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

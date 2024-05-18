@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const ContactForm: React.FC = () => {
   return (
@@ -39,7 +39,7 @@ const ContactForm: React.FC = () => {
         </button>
       </form>
     </section>
-  );
-};
+  )
+}
 
-export default ContactForm;
+export default ContactForm
