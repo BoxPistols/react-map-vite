@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
       <header className="relative">
         <img
           alt="Drone"
-          className="w-full h-auto object-cover"
+          className="h-auto w-full object-cover"
           height="768"
           src="https://picsum.photos/id/68/800/600"
           style={{ aspectRatio: '1344/768', objectFit: 'cover' }}
@@ -24,11 +24,11 @@ const HomePage: React.FC = () => {
       </header>
       <main className="container mx-auto px-4 py-16">
         <section className="mb-16" id="about">
-          <h2 className="text-3xl font-bold mb-4">企業情報</h2>
+          <h2 className="mb-4 text-3xl font-bold">企業情報</h2>
           {/* 企業情報セクションのコードをここに追加 */}
         </section>
         <section className="mb-16" id="services">
-          <h2 className="text-3xl font-bold mb-4">サービス</h2>
+          <h2 className="mb-4 text-3xl font-bold">サービス</h2>
           {/* サービスセクションのコードをここに追加 */}
         </section>
         <ContactForm />

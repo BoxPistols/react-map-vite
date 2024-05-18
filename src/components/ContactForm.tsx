@@ -4,14 +4,14 @@ const ContactForm: React.FC = () => {
   return (
     <section className="mb-16" id="contact">
       {/* お問い合わせフォームのコードをここに追加 */}
-      <h2 className="text-2xl font-bold mb-4">お問い合わせ</h2>
+      <h2 className="mb-4 text-2xl font-bold">お問い合わせ</h2>
       <form className="space-y-4">
         <div>
           <label className="block" htmlFor="name">
             お名前
           </label>
           <input
-            className="w-full border border-gray-300 rounded px-4 py-2"
+            className="w-full rounded border border-gray-300 px-4 py-2"
             id="name"
             type="text"
             placeholder="山田 太郎"
@@ -22,7 +22,7 @@ const ContactForm: React.FC = () => {
             メールアドレス
           </label>
           <input
-            className="w-full border border-gray-300 rounded px-4 py-2"
+            className="w-full rounded border border-gray-300 px-4 py-2"
             id="email"
             type="email"
             placeholder="input here"
@@ -32,9 +32,9 @@ const ContactForm: React.FC = () => {
           <label className="block" htmlFor="message">
             お問い合わせ内容
           </label>
-          <textarea className="w-full border border-gray-300 rounded px-4 py-2" id="message" placeholder="input here" />
+          <textarea className="w-full rounded border border-gray-300 px-4 py-2" id="message" placeholder="input here" />
         </div>
-        <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="submit">
+        <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white" type="submit">
           送信
         </button>
       </form>
