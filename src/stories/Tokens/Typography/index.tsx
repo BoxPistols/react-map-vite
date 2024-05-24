@@ -161,7 +161,9 @@ const Typographies = () => {
     const lineHeight = style.lineHeight
     // Parse float value from rem string and convert to px
     const fontSizeRemValue = parseFloat(fontSizeRem)
-    const fontSizePx = (fontSizeRemValue * theme.typography.htmlFontSize).toFixed(0)
+    const fontSizePx = (
+      fontSizeRemValue * theme.typography.htmlFontSize
+    ).toFixed(0)
     const fontSize = `${fontSizeRem} (${fontSizePx}px相当)`
     return `font-size: ${fontSize}, line-height: ${lineHeight}`
   }
@@ -186,13 +188,26 @@ const Typographies = () => {
           <b style={{ color: 'tomato' }}>{theme.typography.fontSize}px</b>
         </Typography>
         {/* // 各TextStyledDisplayにパージ内リンクを設定 */}
-        <Button variant="outlined" size="small" onClick={handleClick('heading')}>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleClick('heading')}
+        >
           Heading
         </Button>
-        <Button variant="outlined" size="small" sx={{ m: 1 }} onClick={handleClick('util')}>
+        <Button
+          variant="outlined"
+          size="small"
+          sx={{ m: 1 }}
+          onClick={handleClick('util')}
+        >
           body + util
         </Button>
-        <Button variant="outlined" size="small" onClick={handleClick('extended')}>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleClick('extended')}
+        >
           Extended
         </Button>
 
@@ -210,8 +225,12 @@ const Typographies = () => {
           {typographyVariantsHeading.map(({ variant, note }) => (
             <Box key={variant} sx={{ marginBottom: 2 }}>
               <TextStyledVariant>{variant}</TextStyledVariant>
-              <TextStyledSmall>{getTypographyStyle(variant as never)}</TextStyledSmall>
-              <TextStyledSample variant={variant as never}>SampleText: {sampleText}</TextStyledSample>
+              <TextStyledSmall>
+                {getTypographyStyle(variant as never)}
+              </TextStyledSmall>
+              <TextStyledSample variant={variant as never}>
+                SampleText: {sampleText}
+              </TextStyledSample>
               <TextStyledNote>{note}</TextStyledNote>
             </Box>
           ))}
@@ -243,8 +262,12 @@ const Typographies = () => {
           {typographyVariants.map(({ variant, note }) => (
             <Box key={variant} sx={{ marginBottom: 2 }}>
               <TextStyledVariant>{variant}</TextStyledVariant>
-              <TextStyledSmall>{getTypographyStyle(variant as never)}</TextStyledSmall>
-              <TextStyledSample variant={variant as never}>SampleText: {sampleText}</TextStyledSample>
+              <TextStyledSmall>
+                {getTypographyStyle(variant as never)}
+              </TextStyledSmall>
+              <TextStyledSample variant={variant as never}>
+                SampleText: {sampleText}
+              </TextStyledSample>
               <TextStyledNote>{note}</TextStyledNote>
             </Box>
           ))}
@@ -269,8 +292,12 @@ const Typographies = () => {
           {typographyVariantsExtended.map(({ variant, note }) => (
             <Box key={variant} sx={{ marginBottom: 2 }}>
               <TextStyledVariant>{variant}</TextStyledVariant>
-              <TextStyledSmall>{getTypographyStyle(variant as never)}</TextStyledSmall>
-              <TextStyledSample variant={variant as never}>SampleText: {sampleText}</TextStyledSample>
+              <TextStyledSmall>
+                {getTypographyStyle(variant as never)}
+              </TextStyledSmall>
+              <TextStyledSample variant={variant as never}>
+                SampleText: {sampleText}
+              </TextStyledSample>
               <TextStyledNote>{note}</TextStyledNote>
             </Box>
           ))}
