@@ -34,7 +34,13 @@ const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
     }
   }, [latitude, longitude, zoom])
 
-  return <div ref={mapContainer} id="mapContainer" style={{ width: '100vw', height: '100vh' }} />
+  return (
+    <div
+      ref={mapContainer}
+      id="mapContainer"
+      style={{ width: '100vw', height: '100vh' }}
+    />
+  )
 }
 
 export default Mapbox

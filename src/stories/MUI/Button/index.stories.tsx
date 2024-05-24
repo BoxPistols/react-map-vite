@@ -19,7 +19,15 @@ const meta: Meta<CustomButtonProps> = {
       control: { type: 'select' },
     },
     color: {
-      options: ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'],
+      options: [
+        'inherit',
+        'primary',
+        'secondary',
+        'error',
+        'info',
+        'success',
+        'warning',
+      ],
       control: { type: 'select' },
     },
     colorShade: {
@@ -36,7 +44,7 @@ type Story = StoryObj<CustomButtonProps>
 const getColorShade = (
   theme: Theme,
   color: keyof Theme['palette'] | 'inherit',
-  shade: keyof Theme['palette'][keyof Theme['palette']]
+  shade: keyof Theme['palette'][keyof Theme['palette']],
 ) => {
   if (color === 'inherit' || !theme.palette[color]) return undefined
   return theme.palette[color][shade]
@@ -55,9 +63,10 @@ export const Variants: Story = {
     const color = getColorShade(
       theme,
       args.color as keyof Theme['palette'] | 'inherit',
-      args.colorShade as keyof Theme['palette'][keyof Theme['palette']]
+      args.colorShade as keyof Theme['palette'][keyof Theme['palette']],
     )
-    const textColor = args.colorShade === 'lighter' ? theme.palette.text.primary : undefined
+    const textColor =
+      args.colorShade === 'lighter' ? theme.palette.text.primary : undefined
 
     return (
       <>
@@ -66,7 +75,10 @@ export const Variants: Story = {
         </Typography>
         <Button
           {...args}
-          sx={{ backgroundColor: args.variant === 'contained' ? color : undefined, color: textColor }}
+          sx={{
+            backgroundColor: args.variant === 'contained' ? color : undefined,
+            color: textColor,
+          }}
         />
       </>
     )
