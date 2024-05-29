@@ -25,13 +25,13 @@ const Color = () => {
     (key) =>
       // オブジェクトとしてパレットに含まれている色のみをフィルタリングします
       // ..."object" && key !== "grey" グレーは除外するケース
-      typeof theme.palette[key as keyof Palette] === 'object' && key,
+      typeof theme.palette[key as keyof Palette] === 'object' && key
   )
 
   // 文字の色は背景色に応じて黒または白になります。
   const getContrastTextColor = (
     color: PaletteColor | string,
-    shade: string,
+    shade: string
   ): string => {
     if (shade === 'main') {
       return '#fff'
@@ -66,7 +66,7 @@ const Color = () => {
               {Object.keys(
                 theme.palette[colorGroup as keyof Palette] as
                   | PaletteColor
-                  | CommonColors,
+                  | CommonColors
               ).map((shade: string) => {
                 const color =
                   theme.palette[colorGroup as keyof Palette]?.[
