@@ -19,7 +19,9 @@ const HomePage: React.FC = () => {
         <div className="absolute inset-0 bg-black opacity-25"></div>
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
           <h2 className="text-4xl font-bold">産業用計測ドローン</h2>
-          <p className="mt-2 text-xl">高精度な測定を実現する最先端のドローンテクノロジー</p>
+          <p className="mt-2 text-xl">
+            高精度な測定を実現する最先端のドローンテクノロジー
+          </p>
         </div>
       </header>
       <main className="container mx-auto px-4 py-16">
