@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SendIcon from '@mui/icons-material/Send'
-import Mapbox from './components/MapBox'
+import Mapbox from '@/components/MapBox'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
