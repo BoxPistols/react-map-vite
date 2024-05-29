@@ -1,8 +1,8 @@
 {
-  "name": "sdpf-frontend",
+  "name": "react-drone-vite",
   "version": "0.0.1",
-  "repository": "git@github.com:KDDIsmartdrone-dev/sdpf-frontend.git",
-  "author": "KDDI Smart Drone",
+  "repository": "git@github.com:BoxPistols/react-drone-vite.git",
+  "author": "BoxPistols",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
