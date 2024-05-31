@@ -1,7 +1,7 @@
+import { Box, Button, Container, Divider, Typography } from '@mui/material'
+import { indigo } from '@mui/material/colors'
 // src/stories/Tokens/Typography/index.tsx
 import { styled, useTheme } from '@mui/material/styles'
-import { Divider, Typography, Box, Container, Button } from '@mui/material'
-import { indigo } from '@mui/material/colors'
 const display = indigo[200]
 const noteText = indigo[600]
 const displayTitle = indigo[900]
@@ -160,7 +160,7 @@ const Typographies = () => {
     const fontSizeRem = style.fontSize
     const lineHeight = style.lineHeight
     // Parse float value from rem string and convert to px
-    const fontSizeRemValue = parseFloat(fontSizeRem)
+    const fontSizeRemValue = Number.parseFloat(fontSizeRem)
     const fontSizePx = (
       fontSizeRemValue * theme.typography.htmlFontSize
     ).toFixed(0)

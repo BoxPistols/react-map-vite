@@ -1,6 +1,6 @@
+import { Box, Container, Grid, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
-import { Grid, Box, Typography, Container } from '@mui/material'
-import { Palette, PaletteColor, CommonColors } from '@mui/material/styles'
+import type { CommonColors, Palette, PaletteColor } from '@mui/material/styles'
 
 const TextStyled = styled(Typography)`
   font-size: 14px;
@@ -39,11 +39,11 @@ const Color = () => {
     // パレットの色はオブジェクトまたはmainプロパティを持つ文字列です
     if (typeof color === 'object') {
       return theme.palette.getContrastText(color.main)
-    } else if (typeof color === 'string') {
-      return theme.palette.getContrastText(color)
-    } else {
-      return theme.palette.text.primary
     }
+    if (typeof color === 'string') {
+      return theme.palette.getContrastText(color)
+    }
+    return theme.palette.text.primary
   }
 
   return (

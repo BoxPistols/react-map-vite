@@ -1,7 +1,7 @@
-import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import type React from 'react'
 import ContactForm from '../components/ContactForm'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 const HomePage: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
           style={{ aspectRatio: '1344/768', objectFit: 'cover' }}
           width="1344"
         />
-        <div className="absolute inset-0 bg-black opacity-25"></div>
+        <div className="absolute inset-0 bg-black opacity-25" />
         <div className="absolute inset-x-0 bottom-0 p-8 text-white">
           <h2 className="text-4xl font-bold">産業用計測ドローン</h2>
           <p className="mt-2 text-xl">

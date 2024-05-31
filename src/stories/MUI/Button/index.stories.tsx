@@ -1,6 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button, ButtonProps, Typography, useTheme, Theme } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
+import {
+  Button,
+  type ButtonProps,
+  type Theme,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react'
 
 interface CustomButtonProps extends ButtonProps {
   colorShade: 'main' | 'dark' | 'light' | 'lighter'
@@ -118,7 +124,7 @@ export const StartIcon: Story = {
   },
 }
 
-export const Error: Story = {
+export const ErrorButton: Story = {
   args: {
     children: 'Button',
     color: 'error',
@@ -133,6 +139,10 @@ export const Disabled: Story = {
     disabled: true,
     variant: 'contained',
     colorShade: 'main',
+    sx: {
+      opacity: 0.5,
+      cursor: 'not-allowed',
+    },
   },
 }
 
