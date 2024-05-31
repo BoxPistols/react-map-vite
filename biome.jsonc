@@ -8,5 +8,22 @@
 		"rules": {
 			"recommended": true
 		}
+	},
+	"formatter": {
+		"enabled": false,
+		"formatWithErrors": false,
+		"ignore": [
+			"**/node_modules/**",
+			"**/dist/**",
+			"**/build/**",
+			"**/coverage/**",
+			"**/.git/**",
+			"**/.vscode/**",
+			"**/.idea/**",
+			"**/.DS_Store/**",
+			"**/yarn.lock",
+			"**/package-lock.json",
+			"**/yarn-error.log"
+		]
 	}
 }

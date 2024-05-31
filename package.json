@@ -16,7 +16,10 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "bio": "yarn biome lint ./src",
+    "biofix": "yarn biome check --apply-unsafe ./src",
+    "fixall": "yarn run fix && yarn run biofix"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
