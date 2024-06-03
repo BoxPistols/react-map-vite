@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
 import mapboxgl from 'mapbox-gl'
+import { useEffect, useRef } from 'react'
 
 type MapboxProps = {
   latitude: number // 緯度

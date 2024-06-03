@@ -1,0 +1,29 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	},
+	"formatter": {
+		"enabled": false,
+		"formatWithErrors": false,
+		"ignore": [
+			"**/node_modules/**",
+			"**/dist/**",
+			"**/build/**",
+			"**/coverage/**",
+			"**/.git/**",
+			"**/.vscode/**",
+			"**/.idea/**",
+			"**/.DS_Store/**",
+			"**/yarn.lock",
+			"**/package-lock.json",
+			"**/yarn-error.log"
+		]
+	}
+}

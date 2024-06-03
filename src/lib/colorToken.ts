@@ -1,5 +1,5 @@
 // base https://mui.com/material-ui/customization/color/
-import { pink, blue, amber, grey } from '@mui/material/colors'
+import { amber, blue, grey, pink } from '@mui/material/colors'
 
 export const colorData = {
   // チャートカラー

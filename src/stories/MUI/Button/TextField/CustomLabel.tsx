@@ -1,6 +1,6 @@
 import { InputLabel, styled } from '@mui/material'
-import { SxProps } from '@mui/system'
-import { ReactNode } from 'react'
+import type { SxProps } from '@mui/system'
+import type { ReactNode } from 'react'
 
 // Types
 type Props = {
