@@ -19,7 +19,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <CacheProvider value={cache}>
-        <div className='relative h-screen'>
+        <div className='relative h-screen overflow-hidden'>
           <header className='flex items-center justify-between bg-gray-800 px-4 py-2 text-white'>
             <h1 className='text-2xl font-bold'>Map App</h1>
             <div className='flex gap-4'>
