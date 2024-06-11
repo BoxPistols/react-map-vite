@@ -170,6 +170,7 @@ const Typographies = () => {
 
   //ページ内リンク用
   function handleClick(id: string) {
+    // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
     return (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
       const element = document.getElementById(id)
@@ -181,41 +182,38 @@ const Typographies = () => {
 
   return (
     <>
-      <Container sx={{ p: 1, m: 1 }} id="top">
-        <Typography variant="h1">Typography variants</Typography>
-        <Typography variant="subtitle1" mb={1}>
+      <Container sx={{ p: 1, m: 1 }} id='top'>
+        <Typography variant='h1'>Typography variants</Typography>
+        <Typography variant='subtitle1' mb={1}>
           現在のhtml基準フォントサイズ:
           <b style={{ color: 'tomato' }}>{theme.typography.fontSize}px</b>
         </Typography>
         {/* // 各TextStyledDisplayにパージ内リンクを設定 */}
         <Button
-          variant="outlined"
-          size="small"
-          onClick={handleClick('heading')}
-        >
+          variant='outlined'
+          size='small'
+          onClick={handleClick('heading')}>
           Heading
         </Button>
         <Button
-          variant="outlined"
-          size="small"
+          variant='outlined'
+          size='small'
           sx={{ m: 1 }}
-          onClick={handleClick('util')}
-        >
+          onClick={handleClick('util')}>
           body + util
         </Button>
         <Button
-          variant="outlined"
-          size="small"
-          onClick={handleClick('extended')}
-        >
+          variant='outlined'
+          size='small'
+          onClick={handleClick('extended')}>
           Extended
         </Button>
 
         <>
-          <TextStyledDisplay id="heading" mt={2}>
+          <TextStyledDisplay id='heading' mt={2}>
             Heading
           </TextStyledDisplay>
-          <Typography variant="body2" mb={2}>
+          <Typography variant='body2' mb={2}>
             Mui 見出し / h1以外は <code>{"variant='h(x)'"}</code>
             で見出しデザインを持った<code>div</code>
             となるため、マークアップ構造自体は気にしなくて良い仕組みです。
@@ -235,14 +233,14 @@ const Typographies = () => {
             </Box>
           ))}
         </>
-        <Button variant="outlined" size="small" onClick={handleClick('top')}>
+        <Button variant='outlined' size='small' onClick={handleClick('top')}>
           To Top
         </Button>
         <Divider sx={{ my: 3 }} />
         {/* 本文 */}
         <>
-          <TextStyledDisplay id="util">body + util</TextStyledDisplay>
-          <Typography variant="body2">
+          <TextStyledDisplay id='util'>body + util</TextStyledDisplay>
+          <Typography variant='body2'>
             Mui 本文 / 見出しの下に使うサブタイトル / ユーティリティテキスト
             <br />
             <code>{"variant='body1'"}</code>はデフォルトとなり、何も指定しない
@@ -253,7 +251,7 @@ const Typographies = () => {
             <span>{theme.typography.fontSize}px</span>
             を指定しているため、これが基準（1rem）となります。
           </Typography>
-          <Typography variant="body2" mb={2}>
+          <Typography variant='body2' mb={2}>
             要素対応リスト:
             <code>
               {`body1: 'p', body2: 'p', subtitle1: 'p', subtitle2: 'p', overline:'span', caption: 'span', button: 'p',`}
@@ -272,19 +270,19 @@ const Typographies = () => {
             </Box>
           ))}
         </>
-        <Button variant="outlined" size="small" onClick={handleClick('top')}>
+        <Button variant='outlined' size='small' onClick={handleClick('top')}>
           To Top
         </Button>
         <Divider sx={{ my: 3 }} />
         {/* 拡張variant */}
         <>
-          <TextStyledDisplay id="extended">Extended variant</TextStyledDisplay>
-          <Typography variant="body2">
+          <TextStyledDisplay id='extended'>Extended variant</TextStyledDisplay>
+          <Typography variant='body2'>
             これはMuiから拡張した独自variantです。
             <br />
             抽象化されたvariantを使うことで、マークアップ構造を気にせずに汎用的なテキストを作成できます。
           </Typography>
-          <Typography variant="body2" mb={2}>
+          <Typography variant='body2' mb={2}>
             要素対応リスト:
             <code>{`xxl: 'div', xl: 'div', lg: 'div', ml: 'p', md: 'p', sm: 'p', xs: 'p', xxs: 'span', xxxs: 'span'`}</code>
           </Typography>
@@ -302,7 +300,7 @@ const Typographies = () => {
             </Box>
           ))}
         </>
-        <Button variant="outlined" size="small" onClick={handleClick('top')}>
+        <Button variant='outlined' size='small' onClick={handleClick('top')}>
           To Top
         </Button>
         <Divider sx={{ my: 3 }} />
