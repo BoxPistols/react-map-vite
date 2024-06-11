@@ -48,7 +48,7 @@ const Color = () => {
 
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         {colorGroups.map((colorGroup) => (
           <Box key={colorGroup}>
             <Typography
@@ -56,8 +56,7 @@ const Color = () => {
               mb={0.5}
               fontSize={14}
               fontWeight={700}
-              color={theme.palette.grey[700]}
-            >
+              color={theme.palette.grey[700]}>
               {colorGroup !== 'action' && colorGroup !== 'background'
                 ? colorGroup
                 : null}
@@ -89,15 +88,13 @@ const Color = () => {
                           padding: '10px',
                           borderRadius: '5px',
                           boxShadow: '2px 4px 8px rgba(0, 0, 0, 0.25)',
-                        }}
-                      >
+                        }}>
                         <Typography
                           fontSize={14}
                           fontWeight={500}
                           style={{
                             color: getContrastTextColor(color, shade),
-                          }}
-                        >
+                          }}>
                           {shade} : {color}
                         </Typography>
                       </Box>
@@ -114,23 +111,20 @@ const Color = () => {
           mb={1}
           fontSize={14}
           fontWeight={700}
-          color={theme.palette.grey[700]}
-        >
+          color={theme.palette.grey[700]}>
           palette others
         </Typography>
-        <Box display="flex" gap={2}>
+        <Box display='flex' gap={2}>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.divider,
-            }}
-          >
+            }}>
             <TextStyled>divider {theme.palette.divider}</TextStyled>
           </BoxStyled>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.background.default,
-            }}
-          >
+            }}>
             <TextStyled>
               background.default {theme.palette.background.default}
             </TextStyled>
@@ -138,8 +132,7 @@ const Color = () => {
           <BoxStyled
             style={{
               backgroundColor: theme.palette.background.paper,
-            }}
-          >
+            }}>
             <TextStyled>
               background.paper {theme.palette.background.paper}
             </TextStyled>
@@ -151,16 +144,14 @@ const Color = () => {
           mb={1}
           fontSize={14}
           fontWeight={700}
-          color={theme.palette.grey[700]}
-        >
+          color={theme.palette.grey[700]}>
           palette surfaceBackground
         </Typography>
-        <Box display="flex" gap={2}>
+        <Box display='flex' gap={2}>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.surfaceBackground,
-            }}
-          >
+            }}>
             <TextStyled>
               surfaceBackground {theme.palette.surfaceBackground}
             </TextStyled>
@@ -168,21 +159,18 @@ const Color = () => {
           <BoxStyled
             style={{
               backgroundColor: theme.palette.surfaceBackgroundDark,
-            }}
-          >
+            }}>
             <TextStyled
               style={{
                 color: 'white',
-              }}
-            >
+              }}>
               surfaceBackgroundDark {theme.palette.surfaceBackgroundDark}
             </TextStyled>
           </BoxStyled>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.surfaceBackgroundDisabled,
-            }}
-          >
+            }}>
             <TextStyled>
               surfaceBackgroundDisabled{' '}
               {theme.palette.surfaceBackgroundDisabled}
@@ -194,56 +182,48 @@ const Color = () => {
           mb={1}
           fontSize={14}
           fontWeight={700}
-          color={theme.palette.grey[700]}
-        >
+          color={theme.palette.grey[700]}>
           icon palette
         </Typography>
-        <Box display="flex" gap={2}>
+        <Box display='flex' gap={2}>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.iconWhite,
-            }}
-          >
+            }}>
             <TextStyled>iconWhite {theme.palette.iconWhite}</TextStyled>
           </BoxStyled>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.iconLight,
-            }}
-          >
+            }}>
             <TextStyled
               style={{
                 color: 'white',
-              }}
-            >
+              }}>
               iconLight {theme.palette.iconLight}
             </TextStyled>
           </BoxStyled>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.iconDark,
-            }}
-          >
+            }}>
             <TextStyled
               style={{
                 color: 'white',
-              }}
-            >
+              }}>
               iconDark {theme.palette.iconDark}
             </TextStyled>
           </BoxStyled>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.iconAction,
-            }}
-          >
+            }}>
             <TextStyled>iconAction {theme.palette.iconAction}</TextStyled>
           </BoxStyled>
           <BoxStyled
             style={{
               backgroundColor: theme.palette.iconDisabled,
-            }}
-          >
+            }}>
             <TextStyled>iconDisabled {theme.palette.iconDisabled}</TextStyled>
           </BoxStyled>
         </Box>

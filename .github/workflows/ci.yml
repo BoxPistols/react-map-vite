@@ -28,5 +28,5 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies
         run: yarn install
-      - name: Run ESLint
+      - name: Run Biome Lint
         run: yarn lint

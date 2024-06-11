@@ -1,0 +1,35 @@
+{
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "always",
+		"source.organizeImports.biome": "always"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.tabSize": 2
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.tabSize": 2
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.tabSize": 2
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.tabSize": 2
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+		"editor.tabSize": 2
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.tabSize": 2
+	},
+	"trailing-spaces.trimOnSave": true,
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true
+}
