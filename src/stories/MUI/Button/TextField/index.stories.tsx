@@ -41,17 +41,16 @@ export const Variants = {
   args: {},
   render: ({ variant, label, id }: TextFieldProps) => (
     <Box
-      component="form"
+      component='form'
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
       }}
       noValidate
-      autoComplete="off"
-    >
-      <Typography variant="h3" gutterBottom>
+      autoComplete='off'>
+      <Typography variant='h3' gutterBottom>
         Basic TextFields
       </Typography>
-      <TextField id={id} label={label} variant={variant} size="small" />
+      <TextField id={id} label={label} variant={variant} size='small' />
       <TextField id={id} label={label} variant={variant} />
     </Box>
   ),

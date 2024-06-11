@@ -76,7 +76,7 @@ export const Variants: Story = {
 
     return (
       <>
-        <Typography variant="body2" gutterBottom>
+        <Typography variant='body2' gutterBottom>
           Buttonバリエーション検証
         </Typography>
         <Button
