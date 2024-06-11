@@ -15,7 +15,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "extensions": "code --install-extension biomejs.biome && code --install-extension usernamehw.errorlens && code --install-extension davidanson.vscode-markdownlint"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
