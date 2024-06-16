@@ -61,7 +61,7 @@ const Color = () => {
                 ? colorGroup
                 : null}
             </Typography>
-            <Grid container spacing={2} gap={2}>
+            <Grid container spacing={4} gap={2}>
               {Object.keys(
                 theme.palette[colorGroup as keyof Palette] as
                   | PaletteColor
