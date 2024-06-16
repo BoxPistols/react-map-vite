@@ -372,15 +372,39 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: 'none',
+          background: 'rgb(0,20,55)',
         },
       },
     },
     MuiToolbar: {
       styleOverrides: {
         root: {
-          '.MuiTypography-root': {
+          '& .MuiTypography-root': {
             color: colorData.common.white,
           },
+          '@media (min-width:0px)': {
+            minHeight: 44,
+            maxHeight: 44,
+          },
+          '@media (min-width:480px)': {
+            minHeight: 44,
+            maxHeight: 44,
+          },
+          '@media (min-width:600px)': {
+            minHeight: 44,
+            maxHeight: 44,
+          },
+        },
+      },
+    },
+    // Drawerのスタイル
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          // 背景
+          top: '44px',
+          background: 'rgba(0,0,0,0.8)',
+          backdropFilter: 'blur(3px)',
         },
       },
     },
@@ -390,8 +414,12 @@ export const theme = createTheme({
         variant: 'contained', // デフォルトのボタンの種類を設定
         // disableElevation: true, // デフォルトの影を削除
         // disableRipple: true, // デフォルトのrippleを削除
+        size: 'small', // デフォルトのボタンのサイズを設定
       },
       styleOverrides: {
+        sizeSmall: {
+          padding: '0.25em 0.875em',
+        },
         contained: {
           // 背景がcontainedの時のスタイル
           '&.MuiButton-contained.MuiButton-root': {
@@ -469,6 +497,7 @@ export const theme = createTheme({
   /*
   spacing: 8, // = デフォルト値 = 8
   */
+  spacing: 4, // = デフォルト値 = 8
 
   // ===== Z-Index コンポーネントの重なり順の不具合があった時に必要応じて設定 =====
   // example
