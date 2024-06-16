@@ -1874,6 +1874,14 @@
   resolved "https://registry.npmjs.org/@sindresorhus/merge-streams/-/merge-streams-2.3.0.tgz"
   integrity sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==
 
+"@storybook/addon-a11y@^8.1.9":
+  version "8.1.9"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-8.1.9.tgz#3660374e058b978b3da3e2cd9cca0d0aca9667d0"
+  integrity sha512-UNA0uGUU7bS43Ue9uSwvqHxalNB6rGo7y15CqU4vBFY3ilZlnwLiIJ/sjdyuUt03i1lNu6avAM9nTic8uI5jWg==
+  dependencies:
+    "@storybook/addon-highlight" "8.1.9"
+    axe-core "^4.2.0"
+
 "@storybook/addon-actions@8.1.4":
   version "8.1.4"
   resolved "https://registry.npmjs.org/@storybook/addon-actions/-/addon-actions-8.1.4.tgz"
@@ -1955,6 +1963,13 @@
   version "8.1.4"
   resolved "https://registry.npmjs.org/@storybook/addon-highlight/-/addon-highlight-8.1.4.tgz"
   integrity sha512-Wx8p/DrEuf/fis5x9XHT1gYEJaM9ia/aPPqUfFq/o66z2jUPgITZ49aYRMA2VXxViG6RPAu2cp2ma4FrHy0FuA==
+  dependencies:
+    "@storybook/global" "^5.0.0"
+
+"@storybook/addon-highlight@8.1.9":
+  version "8.1.9"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-highlight/-/addon-highlight-8.1.9.tgz#e50b65029b71e2e515877c01ecc0f54e9cfa0eba"
+  integrity sha512-7jcjepeP/Z6XhKXKIfMqrM72tsTwo3wAaytuVWG9mHeNTTphepqO0YXZphaEh5EhupaT0DOYWT6jVxOkiw+xpA==
   dependencies:
     "@storybook/global" "^5.0.0"
 
@@ -3112,6 +3127,11 @@ available-typed-arrays@^1.0.7:
   integrity sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==
   dependencies:
     possible-typed-array-names "^1.0.0"
+
+axe-core@^4.2.0:
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.9.1.tgz#fcd0f4496dad09e0c899b44f6c4bb7848da912ae"
+  integrity sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==
 
 babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"

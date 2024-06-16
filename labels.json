@@ -40,7 +40,7 @@
     "description": "バグ、不具合の対応"
   },
   {
-    "name": "package",
+    "name": "env",
     "color": "16C9F5",
     "description": "パッケージの追加、選定検証、変更、アップデート"
   },
