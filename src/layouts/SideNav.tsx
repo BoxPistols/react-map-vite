@@ -1,8 +1,11 @@
 import { List } from '@mui/material'
 
 import App from '@/App'
+import { Drawer, DrawerHeader } from '@/layouts/util'
 import { MoveToInbox as InboxIcon } from '@mui/icons-material'
-import { Drawer, DrawerHeader } from './util'
+import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import WifiSharpIcon from '@mui/icons-material/WifiSharp'
 
 type SideNavProps = {
   open: boolean
@@ -18,15 +21,15 @@ export const SideNav = ({ open }: SideNavProps) => {
         <List>
           <nav className='grid grid-cols-1 gap-1'>
             <a href='#foo' className={classNavi}>
-              <InboxIcon />
+              <DashboardIcon />
               <span className={classNaviActive}>Dashboard</span>
             </a>
             <a href='#foo' className={classNavi}>
-              <InboxIcon />
+              <ConnectingAirportsSharpIcon />
               <span className={classNaviActive}>Navi</span>
             </a>
             <a href='#foo' className={classNavi}>
-              <InboxIcon />
+              <WifiSharpIcon />
               <span className={classNaviActive}>Navi</span>
             </a>
             <a href='#foo' className={classNavi}>
@@ -40,9 +43,11 @@ export const SideNav = ({ open }: SideNavProps) => {
       {/* MAP */}
       <App />
       <footer
-        className='fixed bottom-0 w-full bg-gray-800 text-white
-      text-center text-xs py-1
-      '>
+        className={`fixed bottom-0 bg-gray-800 text-white text-center text-xs py-1 transition-all duration-100 ${
+          open
+            ? 'ml-[180px] w-[calc(100%-180px)]'
+            : 'ml-[64px] w-[calc(100%-64px)]'
+        }`}>
         Copy right 2024 by Map App
       </footer>
     </>

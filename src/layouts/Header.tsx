@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -9,11 +9,11 @@ import SendIcon from '@mui/icons-material/Send'
 import { IconButton, Toolbar, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 
-import { SideNav } from './SideNav'
-import { AppBar } from './util'
+import { SideNav } from '@/layouts/SideNav'
+import { AppBar } from '@/layouts/util'
 
 export default function Header() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(true)
   const handleDrawerOpen = () => {
     setOpen(!open)
   }
