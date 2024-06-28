@@ -1,11 +1,10 @@
-import { List } from '@mui/material'
-
-import App from '@/App'
 import { Drawer, DrawerHeader } from '@/layouts/util'
-import { MoveToInbox as InboxIcon } from '@mui/icons-material'
+import { Home, MoveToInbox as InboxIcon } from '@mui/icons-material'
 import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
+import { List } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 type SideNavProps = {
   open: boolean
@@ -17,39 +16,41 @@ export const SideNav = ({ open }: SideNavProps) => {
 
   return (
     <>
-      <Drawer variant='permanent' open={open}>
+      <Drawer
+        variant='permanent'
+        open={open}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: open ? '180px' : '64px',
+            transition: 'width 0.3s',
+          },
+        }}>
         <List>
           <nav className='grid grid-cols-1 gap-1'>
-            <a href='#foo' className={classNavi}>
+            <Link to='/' className={classNavi}>
+              <Home />
+              <span className={classNaviActive}>Home</span>
+            </Link>
+            <Link to='/dashboard' className={classNavi}>
               <DashboardIcon />
               <span className={classNaviActive}>Dashboard</span>
-            </a>
-            <a href='#foo' className={classNavi}>
+            </Link>
+            <Link to='/navi' className={classNavi}>
               <ConnectingAirportsSharpIcon />
               <span className={classNaviActive}>Navi</span>
-            </a>
-            <a href='#foo' className={classNavi}>
+            </Link>
+            <Link to='/wifi' className={classNavi}>
               <WifiSharpIcon />
-              <span className={classNaviActive}>Navi</span>
-            </a>
-            <a href='#foo' className={classNavi}>
+              <span className={classNaviActive}>Wifi</span>
+            </Link>
+            <Link to='/inbox' className={classNavi}>
               <InboxIcon />
-              <span className={classNaviActive}>Navi</span>
-            </a>
+              <span className={classNaviActive}>Inbox</span>
+            </Link>
           </nav>
         </List>
       </Drawer>
       <DrawerHeader />
-      {/* MAP */}
-      <App />
-      <footer
-        className={`fixed bottom-0 bg-gray-800 text-white text-center text-xs py-1 transition-all duration-100 ${
-          open
-            ? 'ml-[180px] w-[calc(100%-180px)]'
-            : 'ml-[64px] w-[calc(100%-64px)]'
-        }`}>
-        Copy right 2024 by Map App
-      </footer>
     </>
   )
 }
