@@ -372,7 +372,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: 'none',
-          background: 'rgb(0,20,55)',
+          backgroundColor: colorData.primary.main,
         },
       },
     },
@@ -401,10 +401,9 @@ export const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          // 背景
+          width: 180, // サイドナビゲーションの幅を設定
           top: '44px',
-          background: 'rgba(0,0,0,0.8)',
-          backdropFilter: 'blur(3px)',
+          backgroundColor: colorData.grey[900],
         },
       },
     },
@@ -483,22 +482,26 @@ export const theme = createTheme({
       },
     },
   },
-
   // ======== global settings 全体調整で必要な時に設置 ========
 
   // ===== Shape Muiコンポーネント全て、の丸み感の調整 =====
-  /*
   shape: {
-    borderRadius: 4, // デフォルト値 = 4
+    borderRadius: 2, // デフォルト値 = 4
   },
-  */
-
+  // アニメーションの設定
+  transitions: {
+    easing: {
+      // ...
+      sharp: 'cubic-bezier(0.4, 0, 0.6, 1)',
+    },
+    duration: {
+      // ...
+      leavingScreen: 100,
+      enteringScreen: 100,
+    },
+  },
   // ===== Spacing 余白やコンポーネントの大きさ等、Muiすべてのベースのサイズ基準 =====
-  /*
-  spacing: 8, // = デフォルト値 = 8
-  */
   spacing: 4, // = デフォルト値 = 8
-
   // ===== Z-Index コンポーネントの重なり順の不具合があった時に必要応じて設定 =====
   // example
   /*
