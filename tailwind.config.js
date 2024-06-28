@@ -1,9 +1,16 @@
-/* eslint-env node */
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import purgecss from '@fullhuman/postcss-purgecss'
+import autoprefixer from 'autoprefixer'
+import tailwindcss from 'tailwindcss'
+
+const purge = purgecss({
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+  defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+})
+
+export default {
+  plugins: [
+    tailwindcss,
+    autoprefixer,
+    ...(process.env.NODE_ENV === 'production' ? [purge] : []),
+  ],
 }

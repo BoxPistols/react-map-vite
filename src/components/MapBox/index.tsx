@@ -35,15 +35,15 @@ const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
   }, [latitude, longitude, zoom])
 
   return (
-    <div className='relative h-screen overflow-hidden'>
-      <main className='absolute inset-0'>
-        <div
-          ref={mapContainer}
-          id='mapContainer'
-          style={{ width: '100vw', height: '100vh' }}
-        />
-      </main>
-    </div>
+    // <div className='relative h-screen overflow-hidden'>
+    <main className='absolute inset-0'>
+      <div
+        ref={mapContainer}
+        id='mapContainer'
+        style={{ width: '100vw', height: '100vh' }}
+      />
+    </main>
+    // </div>
   )
 }
 

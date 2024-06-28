@@ -27,10 +27,10 @@ export const colorData = {
   },
   // Mui テーマカラー
   primary: {
-    main: '#3663C1',
-    dark: '#0D47A1',
-    light: '#4D7BD1',
-    lighter: '#E7F3FD',
+    main: '#0e0d6a',
+    dark: '#0d0d37',
+    light: '#21208a',
+    lighter: '#6867dc',
   },
   secondary: {
     main: '#696881',

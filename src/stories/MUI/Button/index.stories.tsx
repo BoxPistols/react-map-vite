@@ -152,7 +152,7 @@ export const Custom: Story = {
     variant: 'outlined',
     colorShade: 'main',
     sx: {
-      minWidth: 240,
+      minWidth: 210,
       maxWidth: 480,
       color: 'dimgray',
       background: 'white',
