@@ -2,7 +2,10 @@
   "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
   "organizeImports": {
     "enabled": true,
-    "ignore": ["**/dist", "**/node_modules/"]
+    "ignore": [
+      "**/dist",
+      "**/node_modules/"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -138,13 +141,20 @@
       }
     },
     {
-      "include": [".storybook/main.@(js|cjs|mjs|ts)"],
+      "include": [
+        ".storybook/main.@(js|cjs|mjs|ts)"
+      ],
       "linter": {
         "rules": {}
       }
     },
     {
-      "include": ["*.ts", "*.tsx", "*.mts", "*.cts"],
+      "include": [
+        "*.ts",
+        "*.tsx",
+        "*.mts",
+        "*.cts"
+      ],
       "linter": {
         "rules": {
           "correctness": {
@@ -176,5 +186,8 @@
         }
       }
     }
-  ]
+  ],
+  "files": {
+    "maxSize": 2048 // ファイルサイズ制限を2 MiBに変更
+  }
 }

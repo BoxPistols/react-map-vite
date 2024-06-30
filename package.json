@@ -15,7 +15,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "sb-build": "storybook build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build-all": "yarn run build && yarn run sb-build"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
