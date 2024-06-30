@@ -2,7 +2,7 @@ import React from 'react'
 
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import type { Preview } from '@storybook/react'
-import { theme } from '../src/lib/theme'
+import { theme } from '../src/lib/themes/theme'
 
 import '../src/index.css'
 
