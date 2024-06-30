@@ -1,9 +1,10 @@
-import { ThemeProvider, CssBaseline } from '@mui/material'
-import { theme } from '../src/lib/theme'
+import React from 'react'
+
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import type { Preview } from '@storybook/react'
+import { theme } from '../src/lib/theme'
 
 import '../src/index.css'
-import React from 'react'
 
 const preview: Preview = {
   parameters: {

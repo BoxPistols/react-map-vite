@@ -14,7 +14,7 @@
     "fix": "yarn run lint && yarn run format",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "sb-build": "storybook build",
     "prepare": "husky install"
   },
   "dependencies": {
