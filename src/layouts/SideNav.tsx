@@ -1,9 +1,11 @@
 import { Drawer, DrawerHeader } from '@/layouts/util'
-import { Home, MoveToInbox as InboxIcon } from '@mui/icons-material'
+import { MoveToInbox as InboxIcon } from '@mui/icons-material'
 import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
 import DashboardIcon from '@mui/icons-material/Dashboard'
+import HomeIcon from '@mui/icons-material/Home'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
 import { List } from '@mui/material'
+
 import { Link } from 'react-router-dom'
 
 type SideNavProps = {
@@ -21,14 +23,14 @@ export const SideNav = ({ open }: SideNavProps) => {
         open={open}
         sx={{
           '& .MuiDrawer-paper': {
-            width: open ? '180px' : '64px',
+            width: open ? '240px' : '64px',
             transition: 'width 0.3s',
           },
         }}>
         <List>
           <nav className='grid grid-cols-1 gap-1'>
             <Link to='/' className={classNavi}>
-              <Home />
+              <HomeIcon />
               <span className={classNaviActive}>Home</span>
             </Link>
             <Link to='/dashboard' className={classNavi}>

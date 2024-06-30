@@ -1,6 +1,4 @@
-import type React from 'react'
-
-const DashboardPage: React.FC = () => {
+const DashboardPage = () => {
   return (
     <div>
       <h1>Dashboard</h1>

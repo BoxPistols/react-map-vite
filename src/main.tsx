@@ -1,12 +1,13 @@
+import { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
+
+import { theme } from '@/lib/theme'
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-// src/main.tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import { theme } from './lib/theme'
-import './index.css'
+
+import App from '@/App'
+import '@/index.css'
 
 const cache = createCache({
   key: 'css',
@@ -16,7 +17,7 @@ const cache = createCache({
 
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <CacheProvider value={cache}>
@@ -25,5 +26,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </div>
       </CacheProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  </StrictMode>
 )

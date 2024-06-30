@@ -1,6 +1,4 @@
-import type React from 'react'
-
-const WifiPage: React.FC = () => {
+const WifiPage = () => {
   return (
     <div>
       <h1>Wifi</h1>

@@ -1,23 +1,22 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
-import type React from 'react'
 
 type HeaderProps = {
   toggleDrawer: () => void
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleDrawer }) => {
+const Header = ({ toggleDrawer }: HeaderProps) => {
   return (
     <AppBar position='fixed'>
-      <Toolbar>
+      <Toolbar sx={{ ml: 1.5 }}>
         <IconButton
           edge='start'
           color='inherit'
           aria-label='menu'
           onClick={toggleDrawer}>
-          <MenuIcon />
+          <MenuIcon sx={{ fontSize: 28 }} />
         </IconButton>
-        <Typography variant='h6' noWrap>
+        <Typography variant='lg' noWrap>
           Map App
         </Typography>
       </Toolbar>

@@ -1,15 +1,17 @@
-import React from 'react'
+import { useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import Header from './layouts/Header'
-import { SideNav } from './layouts/SideNav'
-import DashboardPage from './pages/DashboardPage'
-import HomePage from './pages/HomePage'
-import InboxPage from './pages/InboxPage'
-import NaviPage from './pages/NaviPage'
-import WifiPage from './pages/WifiPage'
 
-const App: React.FC = () => {
-  const [open, setOpen] = React.useState(true)
+import Header from '@/layouts/Header'
+import { SideNav } from '@/layouts/SideNav'
+
+import DashboardPage from '@/pages/DashboardPage'
+import HomePage from '@/pages/HomePage'
+import InboxPage from '@/pages/InboxPage'
+import NaviPage from '@/pages/NaviPage'
+import WifiPage from '@/pages/WifiPage'
+
+const App = () => {
+  const [open, setOpen] = useState<boolean>(false)
 
   const toggleDrawer = () => {
     setOpen((prevOpen) => !prevOpen)
@@ -20,7 +22,7 @@ const App: React.FC = () => {
       <Header toggleDrawer={toggleDrawer} />
       <SideNav open={open} />
       <main
-        className={`content ${open ? 'ml-60' : 'ml-24'} transition-all duration-300`}>
+        className={`content ${open ? 'ml-72' : 'ml-28'} transition-all duration-300`}>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/dashboard' element={<DashboardPage />} />
