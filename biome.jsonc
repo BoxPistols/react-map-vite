@@ -116,7 +116,12 @@
         "useValidTypeof": "error"
       }
     },
-    "ignore": ["**/dist", "**/node_modules/", "**/tailwind.config.js"]
+    "ignore": [
+      "**/dist",
+      "**/node_modules/",
+      "**/tailwind.config.js",
+      "**/postcss.config.js"
+    ]
   },
   "overrides": [
     {
