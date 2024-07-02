@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import MapLibre from '.' // MapLibre コンポーネントの正しいインポートパスを確認してください
+import MapLibre from '.'
 
 const meta: Meta<typeof MapLibre> = {
   title: 'Components/MapLibre',
@@ -10,34 +10,44 @@ const meta: Meta<typeof MapLibre> = {
   tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
     latitude: {
-      control: 'number',
+      control: { type: 'number', min: -90, max: 90, step: 0.000001 },
       description: '緯度',
-      defaultValue: 35.6809591, // 東京の緯度
     },
     longitude: {
-      control: 'number',
+      control: { type: 'number', min: -180, max: 180, step: 0.000001 },
       description: '経度',
-      defaultValue: 139.7673068, // 東京の経度
     },
     zoom: {
-      control: 'number',
+      control: { type: 'number', min: 0, max: 22, step: 0.1 },
       description: 'ズームレベル',
-      defaultValue: 9,
     },
   },
+}
+
+export default meta
+
+type Story = StoryObj<typeof MapLibre>
+
+export const Default: Story = {
   args: {
     latitude: 35.6809591,
     longitude: 139.7673068,
     zoom: 9,
   },
-} satisfies Meta<typeof MapLibre>
+}
 
-export default meta
-
-type Story = StoryObj<typeof meta>
-
-export const Default: Story = {
+export const LowZoom: Story = {
   args: {
-    // 既定値をここに設定、必要に応じて上記で定義したデフォルト値を使用
+    latitude: 35.6809591,
+    longitude: 139.7673068,
+    zoom: 4,
+  },
+}
+
+export const NewYork: Story = {
+  args: {
+    latitude: 40.7128,
+    longitude: -74.006,
+    zoom: 4,
   },
 }
