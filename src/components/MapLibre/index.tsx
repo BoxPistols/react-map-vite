@@ -1,4 +1,5 @@
 import maplibregl from 'maplibre-gl'
+import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
@@ -8,7 +9,6 @@ interface MapLibreProps {
   zoom?: number
 }
 
-// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 const MapLibre: React.FC<MapLibreProps> = ({
   latitude = 35.6814,
   longitude = 139.767,
@@ -27,8 +27,8 @@ const MapLibre: React.FC<MapLibreProps> = ({
       map.current = new maplibregl.Map({
         container: mapContainer.current,
         style: 'https://demotiles.maplibre.org/style.json', // デモタイルのスタイルを使用
-        center: [lng, lat],
-        zoom: zoomLevel,
+        center: [longitude, latitude],
+        zoom: zoom,
       })
 
       map.current.on('move', () => {
@@ -40,14 +40,17 @@ const MapLibre: React.FC<MapLibreProps> = ({
         }
       })
     }
-  }, [])
+  }, []) // 初期化時のみ実行
 
   useEffect(() => {
     if (map.current) {
       map.current.setCenter([longitude, latitude])
       map.current.setZoom(zoom)
     }
-  }, [latitude, longitude, zoom])
+    setLng(longitude)
+    setLat(latitude)
+    setZoomLevel(zoom)
+  }, [latitude, longitude, zoom]) // propsの変更を監視
 
   return (
     <div>
@@ -57,12 +60,15 @@ const MapLibre: React.FC<MapLibreProps> = ({
           position: 'absolute',
           top: 10,
           left: 10,
-          backgroundColor: 'white',
-          padding: '5px',
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          padding: '10px',
+          borderRadius: '4px',
           fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontSize: '14px',
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         }}>
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoomLevel}
+        Longitude: {lng.toFixed(4)} | Latitude: {lat.toFixed(4)} | Zoom:{' '}
+        {zoomLevel.toFixed(2)}
       </div>
     </div>
   )

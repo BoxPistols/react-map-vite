@@ -44,7 +44,7 @@ const App = () => {
         sx={{
           position: 'absolute',
           bottom: 0,
-          width: `calc(100vw + ${InnerWidth})`,
+          width: '100%',
           textAlign: 'center',
           backgroundColor: theme.palette.grey[800],
           color: theme.palette.grey[100],
