@@ -1,4 +1,5 @@
-import Mapbox from '@/components/MapBox'
+// import Mapbox from '@/components/MapBox'
+import MapLibre from '@/components/MapLibre'
 
 const MapPage = () => {
   return (
@@ -12,7 +13,8 @@ const MapPage = () => {
         minWidth: '100vh',
         minHeight: '100vh',
       }}>
-      <Mapbox latitude={35.6809591} longitude={139.7673068} zoom={9} />
+      {/* <Mapbox latitude={35.6809591} longitude={139.7673068} zoom={9} /> */}
+      <MapLibre />
     </main>
   )
 }
