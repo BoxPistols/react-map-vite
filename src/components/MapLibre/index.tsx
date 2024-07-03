@@ -54,7 +54,7 @@ const MapLibre: React.FC<MapLibreProps> = ({
 
   return (
     <div>
-      <div ref={mapContainer} style={{ width: '100vw', height: '100vh' }} />
+      <div ref={mapContainer} style={{ width: '100%', height: '100vh' }} />
       <div
         style={{
           position: 'absolute',

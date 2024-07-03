@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import MapLibre from '.'
 
 const meta: Meta<typeof MapLibre> = {
-  title: 'Components/MapLibre',
+  title: 'Components/Map/MapLibre/Normal',
   component: MapLibre,
   parameters: {
     layout: 'fullscreen',

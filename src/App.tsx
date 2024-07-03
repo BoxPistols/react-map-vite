@@ -42,7 +42,8 @@ const App = () => {
       </Router>
       <Box
         sx={{
-          position: 'absolute',
+          position: 'fixed',
+          overflowY: 'hidden',
           bottom: 0,
           width: '100%',
           textAlign: 'center',
