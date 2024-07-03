@@ -47,7 +47,7 @@ const App = () => {
           bottom: 0,
           width: '100%',
           textAlign: 'center',
-          backgroundColor: theme.palette.grey[800],
+          backgroundColor: theme.palette.grey[900],
           color: theme.palette.grey[100],
           p: 1,
         }}>

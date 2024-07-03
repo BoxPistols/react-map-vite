@@ -144,7 +144,8 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: 'none',
-          backgroundColor: colorData.primary.main,
+          backgroundColor: colorData.grey[900],
+          color: colorData.grey[200],
         },
       },
     },
