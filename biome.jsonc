@@ -23,7 +23,8 @@
       "**/.DS_Store/**",
       "**/yarn.lock",
       "**/package-lock.json",
-      "**/yarn-error.log"
+      "**/yarn-error.log",
+      "**/storybook-static/**"
     ]
   },
   "javascript": {
@@ -120,7 +121,8 @@
       "**/dist",
       "**/node_modules/",
       "**/tailwind.config.js",
-      "**/postcss.config.js"
+      "**/postcss.config.js",
+      "**/storybook-static"
     ]
   },
   "overrides": [

@@ -1,10 +1,7 @@
 import maplibregl from 'maplibre-gl'
-// src/components/Map3D.tsx
-import type React from 'react'
 import { useEffect, useRef } from 'react'
-import 'maplibre-gl/dist/maplibre-gl.css'
 
-const Map3D: React.FC = () => {
+export const Map3D = () => {
   const mapContainer = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -91,5 +88,3 @@ const Map3D: React.FC = () => {
     />
   )
 }
-
-export default Map3D

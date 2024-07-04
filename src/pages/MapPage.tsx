@@ -1,7 +1,7 @@
 // import MapLibre from '@/components/MapLibre'
 // import Mapbox from '@/components/MapBox'
 
-import Map3D from '@/components/Map3D'
+import { Map3D } from '@/components/Map3D'
 import { Box } from '@mui/material'
 
 const MapPage = () => {

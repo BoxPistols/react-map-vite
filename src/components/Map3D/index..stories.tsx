@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Map3D from '.'
+import { Map3D } from '.'
 
 export default {
   title: 'Components/Map/MapLibre/Map3D',

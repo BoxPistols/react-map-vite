@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+
 import Header from '@/layouts/Header'
 import { SideNav } from '@/layouts/SideNav'
 import DashboardPage from '@/pages/DashboardPage'
@@ -5,13 +8,15 @@ import InboxPage from '@/pages/InboxPage'
 import MapPage from '@/pages/MapPage'
 import NaviPage from '@/pages/NaviPage'
 import WifiPage from '@/pages/WifiPage'
+
 import { Box, Typography } from '@mui/material'
-import { useState } from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { theme } from './lib/themes/theme'
 
+import 'maplibre-gl/dist/maplibre-gl.css'
+
 const App = () => {
-  const [open, setOpen] = useState<boolean>(false)
+  // TODO: LocalStorageで永続化
+  const [open, setOpen] = useState<boolean>(true)
 
   const toggleDrawer = () => {
     setOpen((prevOpen) => !prevOpen)
@@ -48,8 +53,8 @@ const App = () => {
           width: '100%',
           textAlign: 'center',
           backgroundColor: theme.palette.grey[900],
-          color: theme.palette.grey[100],
-          p: 1,
+          color: theme.palette.grey[500],
+          p: 0.5,
         }}>
         <footer>
           <Typography variant='xxs'>Copy right 2024 by Map App</Typography>

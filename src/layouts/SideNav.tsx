@@ -52,7 +52,7 @@ export const SideNav = ({ open }: SideNavProps) => {
               sx={{
                 minWidth: 'auto',
                 marginBottom: '4px',
-                color: colorData.grey[100],
+                color: colorData.grey[300],
               }}>
               {item.icon}
             </ListItemIcon>

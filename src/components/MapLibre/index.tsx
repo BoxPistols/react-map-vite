@@ -1,7 +1,6 @@
 import maplibregl from 'maplibre-gl'
 import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import 'maplibre-gl/dist/maplibre-gl.css'
 
 interface MapLibreProps {
   latitude?: number
