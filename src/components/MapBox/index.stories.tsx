@@ -1,8 +1,9 @@
+import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import Mapbox from '.' // Mapbox コンポーネントの正しいインポートパスを確認してください
 
 const meta: Meta<typeof Mapbox> = {
-  title: 'Components/Mapbox',
+  title: 'Components/Map/Mapbox',
   component: Mapbox,
   parameters: {
     layout: 'fullscreen',
@@ -36,8 +37,17 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// export const Default: Story = {
+//   args: {
+//     // 既定値をここに設定、必要に応じて上記で定義したデフォルト値を使用
+//   },
+// }
+
+// stylingを適用するために、MapboxコンポーネントをBoxコンポーネントでラップします
 export const Default: Story = {
-  args: {
-    // 既定値をここに設定、必要に応じて上記で定義したデフォルト値を使用
-  },
+  render: ({ latitude, longitude, zoom }) => (
+    <Box sx={{ width: '100%', height: '100vh' }}>
+      <Mapbox latitude={latitude} longitude={longitude} zoom={zoom} />
+    </Box>
+  ),
 }

@@ -5,6 +5,7 @@ import type { Preview } from '@storybook/react'
 import { theme } from '../src/lib/themes/theme'
 
 import '../src/index.css'
+import 'maplibre-gl/dist/maplibre-gl.css'
 
 const preview: Preview = {
   parameters: {

@@ -29,10 +29,11 @@ export const SideNav = ({ open }: SideNavProps) => {
       sx={{
         '& .MuiDrawer-paper': {
           width: open ? '210px' : '64px',
-          backgroundColor: theme.palette.primary.dark,
-          color: theme.palette.primary.contrastText,
-          overflowX: 'hidden',
+          backgroundColor: colorData.grey[800],
+          color: colorData.grey[200],
+          overflowX: 'auto',
           transition: 'width 0.3s',
+          border: 'none',
         },
       }}>
       <DrawerHeader />
@@ -44,14 +45,14 @@ export const SideNav = ({ open }: SideNavProps) => {
             to={item.to}
             sx={{
               '&:hover': {
-                backgroundColor: colorData.primary.light,
+                backgroundColor: colorData.grey[700],
               },
             }}>
             <ListItemIcon
               sx={{
-                color: theme.palette.primary.contrastText,
                 minWidth: 'auto',
                 marginBottom: '4px',
+                color: colorData.grey[300],
               }}>
               {item.icon}
             </ListItemIcon>
@@ -64,6 +65,7 @@ export const SideNav = ({ open }: SideNavProps) => {
                 '& .MuiListItemText-primary': {
                   fontSize: '0.8rem',
                   textAlign: 'center',
+                  fontWeight: theme.typography.fontWeightBold,
                 },
               }}
             />

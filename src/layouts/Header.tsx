@@ -8,15 +8,15 @@ type HeaderProps = {
 const Header = ({ toggleDrawer }: HeaderProps) => {
   return (
     <AppBar position='fixed'>
-      <Toolbar sx={{ ml: 1.5 }}>
+      <Toolbar sx={{ ml: 2 }}>
         <IconButton
           edge='start'
           color='inherit'
           aria-label='menu'
           onClick={toggleDrawer}>
-          <MenuIcon sx={{ fontSize: 28 }} />
+          <MenuIcon />
         </IconButton>
-        <Typography variant='lg' noWrap>
+        <Typography variant='lg' ml={4} noWrap>
           Map App
         </Typography>
       </Toolbar>
