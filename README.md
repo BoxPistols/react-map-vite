@@ -58,6 +58,10 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 - Biome <https://marketplace.visualstudio.com/items?itemName=biomejs.biome>
 - ErrorLens <https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens>
 - MarkdownLint <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
+    
+VSCode拡張検索枠に @recommended を入力すると、この開発環境に必要な拡張機能が表示されます
+
+![Code 2024-07-10 20 59 57](https://github.com/BoxPistols/react-drone-vite/assets/10333049/518a259e-09eb-43cc-8e3b-9b841226fcaa)
 
 #### VSCode 設定
 
