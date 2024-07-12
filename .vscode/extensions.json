@@ -6,4 +6,5 @@
     "wayou.vscode-todo-highlight",
     "gruntfuggly.todo-tree"
   ]
+  // VsCode拡張ツールの入力欄に@recommendedと入力すると、このリストが表示される
 }
