@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
-import Header from '@/layouts/Header'
-import { SideNav } from '@/layouts/SideNav'
+import { Header } from '@/layouts/header'
+import { SideNav } from '@/layouts/sideNav'
 import DashboardPage from '@/pages/DashboardPage'
 import InboxPage from '@/pages/InboxPage'
 import MapPage from '@/pages/MapPage'
