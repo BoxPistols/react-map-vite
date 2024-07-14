@@ -2,10 +2,10 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 
 type HeaderProps = {
-  toggleDrawer: () => void
+  toggleDrawer?: () => void
 }
 
-const Header = ({ toggleDrawer }: HeaderProps) => {
+export const Header = ({ toggleDrawer }: HeaderProps) => {
   return (
     <AppBar position='fixed'>
       <Toolbar sx={{ ml: 2 }}>
@@ -23,5 +23,3 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
     </AppBar>
   )
 }
-
-export default Header

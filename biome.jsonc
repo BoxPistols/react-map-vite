@@ -122,7 +122,8 @@
       "**/node_modules/",
       "**/tailwind.config.js",
       "**/postcss.config.js",
-      "**/storybook-static"
+      "**/storybook-static",
+      "**/*.d.ts"
     ]
   },
   "overrides": [
@@ -131,6 +132,7 @@
         "*.stories.@(ts|tsx|js|jsx|mjs|cjs)",
         "*.story.@(ts|tsx|js|jsx|mjs|cjs)"
       ],
+      "ignore": ["*.d.ts"],
       "linter": {
         "rules": {
           "correctness": {
