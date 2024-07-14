@@ -1,8 +1,9 @@
-import { theme } from '@/lib/themes/theme' // テーマのインポートパスを確認してください
-import { ThemeProvider } from '@mui/material/styles'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BrowserRouter } from 'react-router-dom'
-import { SideNav } from '.' // SideNavコンポーネントの正しいインポートパスを確認してください
+
+import { theme } from '@/lib/themes/theme'
+import { ThemeProvider } from '@mui/material/styles'
+import { SideNav } from '.'
 
 const meta: Meta<typeof SideNav> = {
   title: 'Layouts/SideNav',
