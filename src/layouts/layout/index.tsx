@@ -19,9 +19,9 @@ const Layout = ({ open = false, onToggle }: LayoutProps) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          marginLeft: open ? '210px' : '64px',
+          marginLeft: open ? '32px' : 0,
           marginTop: '64px',
-          transition: 'margin-left 0.3s',
+          // transition: 'margin-left 0.3s',
         }}>
         Main Content Area
       </Box>

@@ -1,7 +1,7 @@
-import { Meta } from '@storybook/blocks';
-import { Container, Button, Box, Typography } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '@/lib/themes/theme';
+import { Meta } from "@storybook/blocks";
+import { Container, Button, Box, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "@/lib/themes/theme";
 
 <Meta title="Tokens/Color/Info" />
 
@@ -12,53 +12,93 @@ import { theme } from '@/lib/themes/theme';
 
 ## About
 
-Mui のカラーはマテリアルデザインのカラースキームを採用していますそのため、Mui のカラーを理解するには、マテリアルデザインのカラースキームを理解する必要があります
-
-以下のリンクを参照してください<br/>
+Muiのカラーはマテリアルデザインのカラースキームを採用しています。<br/>
+Muiのテーマカラーは、主にprimary、secondary、error、warning、success、infoなどのカラーを持っています。<br/>
+これらのカラースキームの深い理解には、以下のリンクを参照ください<br/>
 
 - [Material Design Color](https://material.io/design/color/the-color-system.html#color-theme-creation)
 - [Material Design Color Tool](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FFC107&secondary.color=FFC107)
 
-このプロダクトで theme で保持しているカラーの一覧を[Colors](/story/tokens-color--color-map)にまとめています。
+このプロダクトのカラートークン、themeファイルで保持しているカラーの一覧を以下にまとめています
+
+- [Color Map](/story/tokens-color--color-map)
 
 ## 主なテーマカラー
 
-プロダクトにおいて特に活用するカラーは、主に以下の 3 つのカラーです
+プロダクトにおいて特に活用するカラーは、主に以下のカラーです。<br/>**
+意味や用途に合わせて適切なカラーを使用しします。**
 
-- primary
-  - プロダクトのメインカラーで、ボタンやリンクなどに使用します
-- secondary
-  - primary とのコントラストを考慮したカラーで、primary を補助するようなキャンセルボタンや目立たないリンクなどに使用します
-- error
-  - 主にエラーメッセージやエラーを表すテキスト、アラート、削除箇所などに使用します
-- warning
-  - 主に警告、より注意する箇所に使用します
-- success
-  - 主に成功メッセージやポジティブなメッセージに使用します
-- info
-  - 主に情報やガイダンスメッセージに使用します
+- <Typography variant="lg" style={{ color: theme.palette.primary.main }}>
+    {"primary"}
+  </Typography>
+  - プロダクトのメインカラーで、ボタンやリンク、アクセントカラーなどに使用します
+- <Typography variant="lg" color={theme.palette.secondary.main}>
+    {"secondary"}
+  </Typography>
+  - primary とのコントラストを考慮したカラーで、primary
+  を補助するようなキャンセルボタンや目立たないリンクなどに使用します
+- <Typography variant="lg" color={theme.palette.error.main}>
+    {"error"}
+  </Typography>
+  - エラーメッセージやエラーを表すテキスト、アラート、削除箇所などに使用します
+- <Typography variant="lg" color={theme.palette.warning.main}>
+    {"warning"}
+  </Typography>
+  - 警告、より注意する箇所に使用します
+- <Typography variant="lg" color={theme.palette.success.main}>
+    {"success"}
+  </Typography>
+  - 成功メッセージやポジティブなメッセージに使用します
+- <Typography variant="lg" color={theme.palette.info.main}>
+    {"info"}
+  </Typography>
+  - 情報やガイダンスメッセージに使用します
+- <Typography variant="lg" color={theme.palette.text.primary}>
+    {"text.primary"}
+  </Typography>
+  - テキストのメインカラーとして使用します
+- <Typography variant="lg" color={theme.palette.text.secondary}>
+    {"text.secondary"}
+  </Typography>
+  - テキストのセカンダリカラーとして使用します
+- <Typography variant="lg" color={theme.palette.text.disabled}>
+    {"text.disabled"}
+  </Typography>
+  - テキストの無効カラーとして使用します
 
-## カラーテーマ設定
+## 明度パターン
 
-- Mui の theme の特性で、明るさの展開として main カラーの他にも `light` `lighter` `dark` カラーが存在します
-  - lighter は Mui のデフォルトにはありませんが、後から拡張追加したバリエーションです
+- Muiのthemeの特性で、明るさの展開としてmain カラーの他にも `light` `lighter` `dark` カラーが存在します
+  - `lighter`はMuiのデフォルトにはありませんが、背景専門色の用途として後から拡張追加したバリエーションです
 - これらのカラーは、`theme.palette.primary.light`、`theme.palette.secondary.dark`のように指定することができます
-- また、`theme.palette.primary.contrastText`のように、最もコントラスト比率の高い、ハイライトのような用途の contrastText カラーも指定することができます
-- `theme`ファイルで`main`カラーを設定すると、light カラー、dark カラー、contrastText カラーは未指定であっても自動で展開設定されますが、今回は個別詳細に設定しています
+- MUIのコンポーネント全体、また`theme`ファイルで各`main`カラーを設定すると、lightカラー、darkカラー、contrastTextカラーは未指定であっても自動で展開設定され、適時個別に設定していきます
 
 ### contrastText
 
-- `primary.contrastText`は、Mui のテーマカラーの primary の contrastText カラーを指定しています
+- `theme.palette.primary.contrastText`のように、最もコントラスト比率が高いカラーも指定することができ、背景色を有したUIの文字カラーに対して`color: #fff`のようなハードコーディングを避けることができます
+- `primary.contrastText`は、MuiのテーマカラーのprimaryのcontrastTextカラーを指定しています
 - `contrastText`とは、端的には最も明るい色を指し、背景とのコントラストを確保しながら、同じグループのテキストカラーとして使用することができます
-- `white`などを直接指定することもできますが`contrastText`を使用することで、テーマカラーの変更に柔軟に対応することができます
+- `white`などを直接指定することもできますが`contrastText`を使用することで、テーマカラーの変更に柔軟に対応することができるため、やはりハードコードは避けるべきです
 
-<Box bgcolor={theme.palette.primary.main} color={theme.palette.primary.contrastText} width="fit-content" p={1}>
-  {'box'}
+<Box
+  bgcolor={theme.palette.primary.main}
+  color={theme.palette.primary.contrastText}
+  width="fit-content"
+  p={1}
+  px={2}
+>
+  {"Example"}
 </Box>
 
 ```tsx
-<Box bgcolor={theme.palette.primary.main} color={theme.palette.primary.contrastText} width="fit-content" p={1}>
-  {'box'}
+<Box
+  bgcolor={theme.palette.primary.main}
+  color={theme.palette.primary.contrastText}
+  width="fit-content"
+  py={1}
+  px={2}
+>
+  {"Example"}
 </Box>
 ```
 
@@ -66,14 +106,15 @@ Mui のカラーはマテリアルデザインのカラースキームを採用�
 
 ## グレーカラー
 
-表示は**gray**でなく**grey**ですので注意してください
+グレーの表記文字は**gray**でなく**grey**(イギリス英語？)ですので注意してください
 
 - Mui では、グレーカラーのテーマを設定することができます
 - グレーはマテリアルデザインのカラーパレットに含まれているため、グレーカラーのテーマを設定することで、グレーカラーを統一することができます
 - 段階表示的に明るい順から、`50`、`100`、`200`、`300`、`400`、`500`、`600`、`700`、`800`、`900`などのグレーカラーが用意されています
 - `grey.100`や`theme.palette.grey[50]`のように数字を指定することで、グレーカラーの濃さを指定することができます
 - 実装方法は実装箇所によって替わってきますので、すでに実装済みのコンポーネントを参考にしてください
-  - 基本的には useTheme を使用する方法と、useTheme を使用せずに theme を直接指定する方法があります
+  - 基本的には useTheme を使用する方法と、useThemeを使用せずにthemeを直接指定する方法があります
+- グレーの段階設計は精密であり、デザインとしても有効なため、今後追加していくことも考えられます
 
 ### 例コード
 
@@ -81,11 +122,12 @@ Mui のカラーはマテリアルデザインのカラースキームを採用�
   backgroundColor="grey.200"
   px={2}
   sx={{
-    border: `1px solid ${theme.palette.grey[700]}`,
-    width: 'fit-content',
+    border: `1px solid ${theme.palette.grey[400]}`,
+    width: "fit-content",
+    color: theme.palette.grey[700],
   }}
 >
-  {'greyBox'}
+  {"greyBox"}
 </Box>
 
 ```tsx
@@ -93,13 +135,110 @@ Mui のカラーはマテリアルデザインのカラースキームを採用�
   backgroundColor="grey.200"
   px={2}
   sx={{
-    border: `1px solid ${theme.palette.grey[700]}`,
-    width: 'fit-content',
+    border: `1px solid ${theme.palette.grey[400]}`,
+    width: "fit-content",
+    color: theme.palette.grey[700],
   }}
 >
-  {'greyBox'}
+  {"greyBox"}
 </Box>
 ```
+
+{/* About Tailwind */}
+
+## Tailwind CSSの利用
+
+このプロジェクトでは、MUIとTailwindCSSを併用しています。TailwindCSSは、ユーティリティファーストのCSSフレームワークで、迅速なスタイリングを可能にします。<br/>
+公式 : [Tailwind CSS](https://tailwindcss.com/)
+
+### なぜMUIにTailwind**を合わせるのか**
+
+MUIは優れたコンポーネントライブラリですが、細かいカスタマイズや迅速なスタイリングにおいては制限があることがあります。<br/>
+TailwindCSSを組み合わせることで、以下のメリットが得られます：
+
+1. **柔軟性の向上**: MUIコンポーネントを基礎としつつ、Tailwindの豊富なユーティリティクラスでより細かいカスタマイズが可能になります。
+2. **開発速度の向上**: Tailwindのユーティリティクラスを使用することで、カスタムCSSを書く時間を削減できます。
+3. **一貫性の維持**:Tailwindの事前定義されたクラスを使用することで、プロジェクト全体でデザインの一貫性を保ちやすくなります。
+4. **レスポンシブデザインの容易さ**: Tailwind**の便利なレスポンシブユーティリティを活用できます。**
+
+### Tailwind CSS とMUIの併用方法
+
+#### **基本的な使用方法**
+
+MUI コンポーネントにTailwindのクラスを直接適用できます。ただし競合も考慮して、適切に使用してください。
+
+<Box>
+  <div className="bg-orange-400 hover:bg-green-700 py-1 px-4 text-white">
+    {"Tw in MUI"}
+  </div>
+</Box>
+
+```jsx
+<Box>
+  <div className="bg-orange-400 hover:bg-green-700 py-1 px-4 text-white">
+    {"Tw in MUI"}
+  </div>
+</Box>
+```
+
+MUIが比較的難解であるレイアウトや部分最適化のスタイリングにTailwindを活用することで、開発効率を向上させることが期待出来ます
+
+2. カスタムテーマとの統合:
+
+Tailwindの設定ファイル（`tailwind.config.js`）で、MUIのテーマカラーをTailwindのカラーパレットに追加できます。
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          main: "#num",
+          dark: "#num",
+          ...
+        },
+        // Other colors
+      },
+    },
+  },
+};
+```
+
+<div className="bg-primary-main hover:bg-primary-light py-1 px-4 text-white">
+  {"Tw Primary"}
+</div>
+
+```jsx
+<div className="bg-primary-main hover:bg-primary-light py-1 px-4 text-white">
+  {"Tw Primary"}
+</div>
+```
+
+3. レスポンシブデザイン:
+
+Tailwindの便利なレスポンシブユーティリティを活用できます。
+
+```jsx
+<Box className="md:flex md:items-center md:justify-between">
+  {"Hello Tailwind on MUI"}
+</Box>
+```
+
+### メリット
+
+- **迅速な開発**: 事前定義されたクラスを使用することで、カスタムCSSを書く必要が減少します。
+- **一貫性**: 定義済みのスケールを使用することで、デザインの一貫性が保たれます。
+- **カスタマイズ性**: `tailwind.config.js`を通じて、プロジェクト固有のニーズに合わせてカスタマイズできます。
+- **パフォーマンス**: Tailwindは使用されていないスタイルを自動的に削除し、最終的なCSSのサイズを最小限に抑えます。
+
+### 注意点
+
+- **スタイルの競合**: MUIのスタイルとTailwindのスタイルが競合する可能性があります。優先順位に注意してください。
+- **学習曲線**: 両方のフレームワークを効果的に使用するには、それぞれの特性を理解する必要があります。
+- **メンテナンス**: 二つのシステムを維持することになるため、長期的なメンテナンスが複雑になる可能性があります。
+
+TailwindCSSを効果的に使用することで、MUIコンポーネントのカスタマイズと迅速なスタイリングが可能になり、開発効率が向上します。<br/>
+ただし、上記の注意点に留意しながら、プロジェクトのニーズに合わせて適切に使用することが重要です。
 
 </Container>
 </ThemeProvider>

@@ -26,13 +26,24 @@
     font-size: 1rem;
   }
 
+  a:-webkit-any-link {
+    color: currentColor;
+  }
   /* maplibregl-mapのスタイル */
   .sb-show-main.sb-main-padded:has(.maplibregl-map) {
     padding: 0;
   }
 
   .sbdocs.sbdocs-wrapper {
-    padding: 3vh 3vw;
+    padding: 2vh 2ch;
+  }
+
+  .sbdocs .sbdocs-content {
+    max-width: 840px;
+  }
+
+  .sbdocs .sbdocs-content + div {
+    width: 12rem;
   }
 
   /* 自動生成されるinfoページの抽出一覧のスタイル */
@@ -269,5 +280,9 @@
   .link-item p {
     margin-top: 4px;
     color: #666666;
+  }
+
+  .toc-list-item a {
+    font-size: 12px;
   }
 </style>

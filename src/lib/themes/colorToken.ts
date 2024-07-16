@@ -1,5 +1,4 @@
-// base https://mui.com/material-ui/customization/color/
-import { amber, blue, grey, pink } from '@mui/material/colors'
+import { amber, blue, grey, indigo, pink } from '@mui/material/colors'
 
 export const colorData = {
   // チャートカラー
@@ -28,9 +27,9 @@ export const colorData = {
   // Mui テーマカラー
   primary: {
     main: '#0e0d6a',
-    dark: '#0d0d37',
-    light: '#21208a',
-    lighter: '#6867dc',
+    dark: '#0a094a',
+    light: '#7373a9',
+    lighter: '#e7e7f0',
   },
   secondary: {
     main: '#696881',
@@ -75,8 +74,6 @@ export const colorData = {
   },
   common: {
     black: '#123456',
-    // black: '#223354',
-    // black: '#000000',
     white: '#ffffff',
   },
   // ===== 独自のキーを追加 =====
@@ -97,6 +94,86 @@ export const colorData = {
     selected: '#e0e0e0',
     disabled: grey[300],
   },
+
+  // ===== Dark Theme Colors =====
+  dark: {
+    primary: {
+      main: indigo[500],
+      lighter: indigo[50],
+      dark: indigo[900],
+      light: indigo[300],
+    },
+    secondary: {
+      main: '#696881',
+      lighter: '#FAFAFA',
+      dark: '#424242',
+      light: '#757575',
+    },
+    success: {
+      main: '#4CAF50',
+      lighter: '#E8F5E9',
+      dark: '#388E3C',
+      light: '#81C784',
+    },
+    info: {
+      main: '#10c8e0',
+      lighter: '#e0f7fa',
+      dark: '#0d9cb7',
+      light: '#4dd0e1',
+    },
+    warning: {
+      main: '#F57C00',
+      lighter: '#FFF3E0',
+      dark: '#EF6C00',
+      light: '#FFB74D',
+    },
+    error: {
+      main: '#D32F2F',
+      lighter: '#FFEBEE',
+      dark: '#C62828',
+      light: '#E57373',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#cfcfcf',
+      disabled: '#9e9e9e',
+      white: '#ffffff',
+    },
+    action: {
+      hover: '#333333',
+      selected: '#444444',
+      disabled: grey[700],
+    },
+    divider: '#616161',
+    background: {
+      default: '#212121',
+      paper: '#333333',
+    },
+    grey: {
+      50: '#fafafa',
+      100: '#f5f5f5',
+      200: '#eeeeee',
+      300: '#e0e0e0',
+      400: '#bdbdbd',
+      500: '#9e9e9e',
+      600: '#757575',
+      700: '#4e4e4e',
+      800: '#3a3a3a',
+      900: '#292929',
+    },
+    common: {
+      black: '#000000',
+      white: '#ffffff',
+    },
+    surfaceBackground: '#121212',
+    surfaceBackgroundDark: '#1d1d1d',
+    surfaceBackgroundDisabled: '#616161',
+    iconWhite: '#ffffff',
+    iconLight: grey[300],
+    iconDark: grey[200],
+    iconAction: amber[400],
+    iconDisabled: grey[500],
+  },
 }
 
 /* ===== Examples =====
@@ -113,18 +190,25 @@ function SomeComponent() {
 */
 
 //  ===== CSS Variables =====
-/** CSS化する場合の生成コード
-let cssVars = ':root {\n';
+/** CSS化する場合の生成コード */
+/**
+let cssVars = ':root {\n'
 for (const [key, value] of Object.entries(colorData)) {
   if (typeof value === 'string') {
-    cssVars += `  --${key}: ${value};\n`;
+    cssVars += `  --${key}: ${value};\n`
   } else {
     for (const [subKey, subValue] of Object.entries(value)) {
-      cssVars += `  --${key}-${subKey}: ${subValue};\n`;
+      if (typeof subValue === 'string') {
+        cssVars += `  --${key}-${subKey}: ${subValue};\n`
+      } else {
+        for (const [nestedKey, nestedValue] of Object.entries(subValue)) {
+          cssVars += `  --${key}-${subKey}-${nestedKey}: ${nestedValue};\n`
+        }
+      }
     }
   }
 }
-cssVars += '}';
+cssVars += '}'
 
-console.log(cssVars);
+console.log(cssVars)
 */

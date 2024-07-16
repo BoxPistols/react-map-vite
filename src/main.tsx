@@ -1,12 +1,12 @@
-import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
+// main.tsx
 
-import { theme } from '@/lib/themes/theme'
+import App from '@/App'
+import { darkTheme, theme as lightTheme } from '@/lib/themes/theme'
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-
-import App from '@/App'
+import { StrictMode, useEffect, useState } from 'react'
+import ReactDOM from 'react-dom/client'
 import './index.css'
 
 const cache = createCache({
@@ -15,14 +15,35 @@ const cache = createCache({
   stylisPlugins: [],
 })
 
+const Root = () => {
+  const [theme, setTheme] = useState(lightTheme)
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === lightTheme ? darkTheme : lightTheme))
+  }
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'dark') {
+      setTheme(darkTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme === lightTheme ? 'light' : 'dark')
+  }, [theme])
+
+  return (
+    <StrictMode>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <CacheProvider value={cache}>
+          <App currentTheme={theme} toggleTheme={toggleTheme} />
+        </CacheProvider>
+      </ThemeProvider>
+    </StrictMode>
+  )
+}
+
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <CacheProvider value={cache}>
-        <App />
-      </CacheProvider>
-    </ThemeProvider>
-  </StrictMode>
-)
+ReactDOM.createRoot(document.getElementById('root')!).render(<Root />)

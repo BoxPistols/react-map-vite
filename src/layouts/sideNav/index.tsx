@@ -32,9 +32,10 @@ export const SideNav = ({ open }: SideNavProps) => {
       sx={{
         '& .MuiDrawer-paper': {
           width: open ? '210px' : '64px',
-          backgroundColor: colorData.grey[800],
-          color: colorData.grey[200],
-          overflowX: 'auto',
+          backgroundColor: theme.palette.grey[900],
+          color: theme.palette.grey[200],
+          overflowX: 'hidden',
+          overflowY: 'auto',
           transition: 'width 0.3s',
           border: 'none',
         },
@@ -67,7 +68,7 @@ export const SideNav = ({ open }: SideNavProps) => {
                 marginLeft: '8px',
                 '& .MuiListItemText-primary': {
                   fontSize: '0.8rem',
-                  textAlign: 'center',
+                  textAlign: 'left',
                   fontWeight: theme.typography.fontWeightBold,
                 },
               }}
