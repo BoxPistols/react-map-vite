@@ -1,7 +1,7 @@
-import { Meta } from '@storybook/blocks';
-import { Container, Button, Box, Typography } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '@/lib/themes/theme';
+import {Meta} from "@storybook/blocks";
+import {Container, Button, Box, Typography} from "@mui/material";
+import {ThemeProvider} from "@mui/material/styles";
+import {theme} from "@/lib/themes/theme";
 
 <Meta title="Tokens/Color/Info" />
 
@@ -12,53 +12,79 @@ import { theme } from '@/lib/themes/theme';
 
 ## About
 
-Mui のカラーはマテリアルデザインのカラースキームを採用していますそのため、Mui のカラーを理解するには、マテリアルデザインのカラースキームを理解する必要があります
-
-以下のリンクを参照してください<br/>
+Muiのカラーはマテリアルデザインのカラースキームを採用しています。<br/>
+Muiのテーマカラーは、主にprimary、secondary、error、warning、success、infoなどのカラーを持っています。<br/>
+これらのカラースキームの深い理解には、以下のリンクを参照ください<br/>
 
 - [Material Design Color](https://material.io/design/color/the-color-system.html#color-theme-creation)
 - [Material Design Color Tool](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FFC107&secondary.color=FFC107)
 
-このプロダクトで theme で保持しているカラーの一覧を[Colors](/story/tokens-color--color-map)にまとめています。
+このプロダクトのカラートークン、themeファイルで保持しているカラーの一覧を[Colors](/story/tokens-color--color-map)にまとめています。
 
 ## 主なテーマカラー
 
-プロダクトにおいて特に活用するカラーは、主に以下の 3 つのカラーです
+プロダクトにおいて特に活用するカラーは、主に以下の3つのカラーです
 
-- <Typography variant='lg' color={theme.palette.primary.main}>primary</Typography>
-  - プロダクトのメインカラーで、ボタンやリンクなどに使用します
-- <Typography variant='lg' color={theme.palette.secondary.main}>secondary</Typography>
-  - primary とのコントラストを考慮したカラーで、primary を補助するようなキャンセルボタンや目立たないリンクなどに使用します
-- <Typography variant='lg' color={theme.palette.error.main}>error</Typography>
-  - 主にエラーメッセージやエラーを表すテキスト、アラート、削除箇所などに使用します
-- <Typography variant='lg' color={theme.palette.warning.main}>warning</Typography>
+- <Typography variant="lg" style={{color: theme.palette.primary.main}}>
+    {"primary"}
+  </Typography>
+  - プロダクトのメインカラーで、ボタンやリンク、アクセントカラーなどに使用します
+- <Typography variant="lg" color={theme.palette.secondary.main}>
+    {"secondary"}
+  </Typography>
+  - primary とのコントラストを考慮したカラーで、primary
+  を補助するようなキャンセルボタンや目立たないリンクなどに使用します
+- <Typography variant="lg" color={theme.palette.error.main}>
+    {"error"}
+  </Typography>
+  -
+  主にエラーメッセージやエラーを表すテキスト、アラート、削除箇所などに使用します
+- <Typography variant="lg" color={theme.palette.warning.main}>
+    {"warning"}
+  </Typography>
   - 主に警告、より注意する箇所に使用します
-- <Typography variant='lg' color={theme.palette.success.main}>success</Typography>
+- <Typography variant="lg" color={theme.palette.success.main}>
+    {"success"}
+  </Typography>
   - 主に成功メッセージやポジティブなメッセージに使用します
-- <Typography variant='lg' color={theme.palette.info.main}>info</Typography>
+- <Typography variant="lg" color={theme.palette.info.main}>
+    {"info"}
+  </Typography>
   - 主に情報やガイダンスメッセージに使用します
 
-## カラーテーマ設定
+## カラーテーマ明度パターン
 
-- Mui の theme の特性で、明るさの展開として main カラーの他にも `light` `lighter` `dark` カラーが存在します
-  - lighter は Mui のデフォルトにはありませんが、後から拡張追加したバリエーションです
+- Muiのthemeの特性で、明るさの展開としてmain カラーの他にも `light` `lighter` `dark` カラーが存在します
+  - ※`lighter`はMuiのデフォルトにはありませんが、後から拡張追加したバリエーションです
 - これらのカラーは、`theme.palette.primary.light`、`theme.palette.secondary.dark`のように指定することができます
-- また、`theme.palette.primary.contrastText`のように、最もコントラスト比率の高い、ハイライトのような用途の contrastText カラーも指定することができます
-- `theme`ファイルで`main`カラーを設定すると、light カラー、dark カラー、contrastText カラーは未指定であっても自動で展開設定されますが、今回は個別詳細に設定しています
+- また、`theme.palette.primary.contrastText`のように、最もコントラスト比率の高い、ハイライトのような用途のcontrastTextカラーも指定することができます
+- `theme`ファイルで`main`カラーを設定すると、lightカラー、darkカラー、contrastTextカラーは未指定であっても自動で展開設定されますが、適時は個別に設定します
 
 ### contrastText
 
-- `primary.contrastText`は、Mui のテーマカラーの primary の contrastText カラーを指定しています
+- `primary.contrastText`は、MuiのテーマカラーのprimaryのcontrastTextカラーを指定しています
 - `contrastText`とは、端的には最も明るい色を指し、背景とのコントラストを確保しながら、同じグループのテキストカラーとして使用することができます
 - `white`などを直接指定することもできますが`contrastText`を使用することで、テーマカラーの変更に柔軟に対応することができます
 
-<Box bgcolor={theme.palette.primary.main} color={theme.palette.primary.contrastText} width="fit-content" p={1}>
-  {'box'}
+{" "}
+
+<Box
+  bgcolor={theme.palette.primary.main}
+  color={theme.palette.primary.contrastText}
+  width="fit-content"
+  p={1}
+>
+  {"box"}
 </Box>
 
 ```tsx
-<Box bgcolor={theme.palette.primary.main} color={theme.palette.primary.contrastText} width="fit-content" p={1}>
-  {'box'}
+<Box
+  bgcolor={theme.palette.primary.main}
+  color={theme.palette.primary.contrastText}
+  width="fit-content"
+  p={1}
+>
+  {"box"}
 </Box>
 ```
 
@@ -77,15 +103,17 @@ Mui のカラーはマテリアルデザインのカラースキームを採用�
 
 ### 例コード
 
+{" "}
+
 <Box
   backgroundColor="grey.200"
   px={2}
   sx={{
     border: `1px solid ${theme.palette.grey[700]}`,
-    width: 'fit-content',
+    width: "fit-content",
   }}
 >
-  {'greyBox'}
+  {"greyBox"}
 </Box>
 
 ```tsx
@@ -94,14 +122,14 @@ Mui のカラーはマテリアルデザインのカラースキームを採用�
   px={2}
   sx={{
     border: `1px solid ${theme.palette.grey[700]}`,
-    width: 'fit-content',
+    width: "fit-content",
   }}
 >
-  {'greyBox'}
+  {"greyBox"}
 </Box>
 ```
 
-{/*About Tailwind*/}
+{/* About Tailwind */}
 
 ## Tailwind CSS の利用
 
@@ -136,16 +164,16 @@ MUI は優れたコンポーネントライブラリですが、細かいカス�
        extend: {
          colors: {
            primary: {
-             main: '#0e0d6a',
-             dark: '#0d0d37',
-             light: '#21208a',
-             lighter: '#6867dc',
+             main: "#0e0d6a",
+             dark: "#0d0d37",
+             light: "#21208a",
+             lighter: "#6867dc",
            },
            // 他のMUIカラーも同様に追加
-         }
-       }
-     }
-   }
+         },
+       },
+     },
+   };
    ```
 
 3. **レスポンシブデザイン**:
