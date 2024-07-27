@@ -1,4 +1,3 @@
-// base https://mui.com/material-ui/customization/color/
 import { amber, blue, grey, pink } from '@mui/material/colors'
 
 export const colorData = {
@@ -28,9 +27,9 @@ export const colorData = {
   // Mui テーマカラー
   primary: {
     main: '#0e0d6a',
-    dark: '#0d0d37',
-    light: '#21208a',
-    lighter: '#6867dc',
+    dark: '#0a094a',
+    light: '#7373a9',
+    lighter: '#e7e7f0',
   },
   secondary: {
     main: '#696881',
@@ -97,6 +96,77 @@ export const colorData = {
     selected: '#e0e0e0',
     disabled: grey[300],
   },
+  // ===== Dark Theme =====
+  dark: {
+    primary: {
+      main: '#0e0d6a',
+      dark: '#0a094a',
+      light: '#7373a9',
+      lighter: '#e7e7f0',
+    },
+    secondary: {
+      main: '#696881',
+      dark: '#424242',
+      light: '#757575',
+      lighter: '#FAFAFA',
+    },
+    error: {
+      main: '#D32F2F',
+      dark: '#C62828',
+      light: '#E57373',
+      lighter: '#FFEBEE',
+    },
+    success: {
+      main: '#4CAF50',
+      dark: '#388E3C',
+      light: '#81C784',
+      lighter: '#E8F5E9',
+    },
+    warning: {
+      main: '#F57C00',
+      dark: '#EF6C00',
+      light: '#FFB74D',
+      lighter: '#FFF3E0',
+    },
+    info: {
+      main: '#10c8e0',
+      dark: '#0d9cb7',
+      light: '#4dd0e1',
+      lighter: '#e0f7fa',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#cfcfcf',
+      disabled: '#9e9e9e',
+      white: '#ffffff', // option
+    },
+    divider: '#616161',
+    background: {
+      default: '#121212',
+      paper: '#1d1d1d',
+    },
+    common: {
+      black: '#000000',
+      white: '#ffffff',
+    },
+    surface: {
+      background: '#121212',
+      backgroundDark: '#1d1d1d',
+      backgroundDisabled: '#616161',
+    },
+    icon: {
+      white: '#ffffff',
+      light: grey[300],
+      dark: grey[200],
+      action: amber[400],
+      disabled: grey[500],
+    },
+    action: {
+      hover: '#333333',
+      selected: '#444444',
+      disabled: grey[700],
+    },
+  },
 }
 
 /* ===== Examples =====
@@ -113,18 +183,25 @@ function SomeComponent() {
 */
 
 //  ===== CSS Variables =====
-/** CSS化する場合の生成コード
-let cssVars = ':root {\n';
+/** CSS化する場合の生成コード */
+/**
+let cssVars = ':root {\n'
 for (const [key, value] of Object.entries(colorData)) {
   if (typeof value === 'string') {
-    cssVars += `  --${key}: ${value};\n`;
+    cssVars += `  --${key}: ${value};\n`
   } else {
     for (const [subKey, subValue] of Object.entries(value)) {
-      cssVars += `  --${key}-${subKey}: ${subValue};\n`;
+      if (typeof subValue === 'string') {
+        cssVars += `  --${key}-${subKey}: ${subValue};\n`
+      } else {
+        for (const [nestedKey, nestedValue] of Object.entries(subValue)) {
+          cssVars += `  --${key}-${subKey}-${nestedKey}: ${nestedValue};\n`
+        }
+      }
     }
   }
 }
-cssVars += '}';
+cssVars += '}'
 
-console.log(cssVars);
+console.log(cssVars)
 */
