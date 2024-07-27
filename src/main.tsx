@@ -1,3 +1,5 @@
+// main.tsx
+
 import App from '@/App'
 import { darkTheme, theme as lightTheme } from '@/lib/themes/theme'
 import createCache from '@emotion/cache'
@@ -36,7 +38,7 @@ const Root = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <CacheProvider value={cache}>
-          <App toggleTheme={toggleTheme} />
+          <App currentTheme={theme} toggleTheme={toggleTheme} />
         </CacheProvider>
       </ThemeProvider>
     </StrictMode>

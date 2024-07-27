@@ -1,3 +1,5 @@
+// App.tsx
+
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
 import DashboardPage from '@/pages/DashboardPage'
@@ -5,17 +7,20 @@ import InboxPage from '@/pages/InboxPage'
 import MapPage from '@/pages/MapPage'
 import NaviPage from '@/pages/NaviPage'
 import WifiPage from '@/pages/WifiPage'
-import { Box, Button, Typography } from '@mui/material'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
+import { Box, IconButton, type Theme, Typography } from '@mui/material'
+import type React from 'react'
 import { useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { theme } from './lib/themes/theme'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 interface AppProps {
+  currentTheme: Theme
   toggleTheme: () => void
 }
 
-const App = ({ toggleTheme }: AppProps) => {
+const App: React.FC<AppProps> = ({ currentTheme, toggleTheme }) => {
   const [open, setOpen] = useState<boolean>(true)
 
   const toggleDrawer = () => {
@@ -25,27 +30,47 @@ const App = ({ toggleTheme }: AppProps) => {
   const InnerWidth = open ? '240px' : '96px'
 
   return (
-    <>
-      <Router>
-        <SideNav open={open} />
-        <Header toggleDrawer={toggleDrawer} />
-        <Box
-          sx={{
-            paddingLeft: InnerWidth,
-            marginTop: 20,
-          }}>
-          <main>
-            <Button onClick={toggleTheme}>Toggle Theme</Button>
-            <Routes>
-              <Route path='/' element={<DashboardPage />} />
-              <Route path='/map' element={<MapPage />} />
-              <Route path='/navi' element={<NaviPage />} />
-              <Route path='/wifi' element={<WifiPage />} />
-              <Route path='/inbox' element={<InboxPage />} />
-            </Routes>
-          </main>
-        </Box>
-      </Router>
+    <Router>
+      <SideNav open={open} />
+      <Header toggleDrawer={toggleDrawer} />
+      <Box
+        sx={{
+          paddingLeft: InnerWidth,
+          marginTop: 20,
+        }}>
+        <main>
+          <IconButton
+            onClick={toggleTheme}
+            color='inherit'
+            sx={{
+              position: 'fixed',
+              top: 10,
+              right: 10,
+              zIndex: 10000,
+            }}>
+            {currentTheme.palette.mode === 'dark' ? (
+              <Brightness7Icon
+                sx={{
+                  color: currentTheme.palette.common.white,
+                }}
+              />
+            ) : (
+              <Brightness4Icon
+                sx={{
+                  color: currentTheme.palette.common.white,
+                }}
+              />
+            )}
+          </IconButton>
+          <Routes>
+            <Route path='/' element={<DashboardPage />} />
+            <Route path='/map' element={<MapPage />} />
+            <Route path='/navi' element={<NaviPage />} />
+            <Route path='/wifi' element={<WifiPage />} />
+            <Route path='/inbox' element={<InboxPage />} />
+          </Routes>
+        </main>
+      </Box>
       <Box
         sx={{
           position: 'fixed',
@@ -53,15 +78,15 @@ const App = ({ toggleTheme }: AppProps) => {
           bottom: 0,
           width: '100%',
           textAlign: 'center',
-          backgroundColor: theme.palette.grey[900],
-          color: theme.palette.grey[500],
+          backgroundColor: currentTheme.palette.grey[900],
+          color: currentTheme.palette.grey[500],
           p: 0.5,
         }}>
         <footer>
           <Typography variant='xxs'>Copy right 2024 by Map App</Typography>
         </footer>
       </Box>
-    </>
+    </Router>
   )
 }
 

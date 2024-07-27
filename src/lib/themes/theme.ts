@@ -44,6 +44,102 @@ const commonPalette = {
   iconDisabled: colorData.icon.disabled,
 }
 
+const commonComponentStyles = {
+  MuiCssBaseline: {
+    styleOverrides: {
+      body: {
+        // 色以外の共通スタイル
+      },
+    },
+  },
+  MuiAppBar: {
+    styleOverrides: {
+      root: {
+        boxShadow: 'none',
+      },
+    },
+  },
+  MuiToolbar: {
+    styleOverrides: {
+      root: {
+        '@media (min-width:0px)': {
+          minHeight: 56,
+          maxHeight: 56,
+        },
+        '@media (min-width:480px)': {
+          minHeight: 56,
+          maxHeight: 56,
+        },
+        '@media (min-width:600px)': {
+          minHeight: 56,
+          maxHeight: 56,
+        },
+      },
+    },
+  },
+  MuiDrawer: {
+    styleOverrides: {
+      paper: {
+        width: 180,
+        top: 0,
+        '.MuiListItemText-root .MuiListItemText-primary': {
+          textAlign: 'left',
+        },
+      },
+    },
+  },
+  MuiButton: {
+    defaultProps: {
+      variant: 'contained',
+      disableElevation: true,
+      disableRipple: true,
+      size: 'small',
+    },
+    styleOverrides: {
+      sizeSmall: {
+        padding: '0.25em 0.875em',
+      },
+    },
+  },
+  MuiSvgIcon: {
+    styleOverrides: {
+      root: {
+        '& path': {
+          fill: 'currentColor',
+        },
+      },
+      fontSizeSmall: {
+        fontSize: '1rem',
+      },
+      fontSizeMedium: {
+        fontSize: '1.5rem',
+      },
+      fontSizeLarge: {
+        fontSize: '2rem',
+      },
+    },
+  },
+  MuiTableRow: {
+    styleOverrides: {
+      root: {
+        transition: 'background-color .2s',
+      },
+    },
+  },
+  MuiTableCell: {
+    styleOverrides: {
+      root: {
+        fontSize: '1rem',
+        padding: '0.75rem 1rem',
+      },
+      head: {
+        fontSize: '0.8125rem',
+        fontWeight: '700',
+      },
+    },
+  },
+}
+
 export const theme = createTheme({
   typography: typographyOptions,
   palette: {
@@ -105,6 +201,8 @@ export const theme = createTheme({
   },
   components: {
     ...typographyComponentsOverrides,
+    ...commonComponentStyles,
+    // ライトテーマ固有の色スタイル
     MuiCssBaseline: {
       styleOverrides: {
         body: {
@@ -116,7 +214,6 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
           backgroundColor: colorData.grey[900],
           color: colorData.grey[200],
         },
@@ -128,44 +225,18 @@ export const theme = createTheme({
           '& .MuiTypography-root': {
             color: colorData.common.white,
           },
-          '@media (min-width:0px)': {
-            minHeight: 56,
-            maxHeight: 56,
-          },
-          '@media (min-width:480px)': {
-            minHeight: 56,
-            maxHeight: 56,
-          },
-          '@media (min-width:600px)': {
-            minHeight: 56,
-            maxHeight: 56,
-          },
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          width: 180,
-          top: 0,
           backgroundColor: colorData.grey[900],
-          '.MuiListItemText-root .MuiListItemText-primary': {
-            textAlign: 'left',
-          },
         },
       },
     },
     MuiButton: {
-      defaultProps: {
-        variant: 'contained',
-        disableElevation: true,
-        disableRipple: true,
-        size: 'small',
-      },
       styleOverrides: {
-        sizeSmall: {
-          padding: '0.25em 0.875em',
-        },
         contained: {
           '&.MuiButton-contained.MuiButton-root': {
             color: colorData.text.white,
@@ -176,46 +247,15 @@ export const theme = createTheme({
         },
       },
     },
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          '& path': {
-            fill: 'currentColor',
-          },
-        },
-        fontSizeSmall: {
-          fontSize: '1rem',
-        },
-        fontSizeMedium: {
-          fontSize: '1.5rem',
-        },
-        fontSizeLarge: {
-          fontSize: '2rem',
-        },
-      },
-    },
     MuiTableRow: {
       styleOverrides: {
         head: {
           background: colorData.grey[300],
         },
         root: {
-          transition: 'background-color .2s',
           '&.MuiTableRow-hover:hover': {
             backgroundColor: colorData.grey[300],
           },
-        },
-      },
-    },
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          fontSize: '1rem',
-          padding: '0.75rem 1rem',
-        },
-        head: {
-          fontSize: '0.8125rem',
-          fontWeight: '700',
         },
       },
     },
@@ -297,5 +337,83 @@ export const darkTheme = createTheme({
     grey: colorData.dark.grey,
     common: colorData.dark.common,
     ...commonPalette,
+  },
+  components: {
+    ...typographyComponentsOverrides,
+    ...commonComponentStyles,
+    // ダークテーマ固有の色スタイル
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: colorData.dark.background.default,
+          color: colorData.dark.text.primary,
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colorData.dark.grey[900],
+          color: colorData.dark.grey[200],
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          '& .MuiTypography-root': {
+            color: colorData.dark.common.white,
+          },
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: colorData.dark.grey[900],
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          '&.MuiButton-contained.MuiButton-root': {
+            color: colorData.dark.text.white,
+          },
+          '&.MuiButton-contained.MuiButton-root.MuiButton-containedInherit': {
+            color: colorData.dark.text.primary,
+          },
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        head: {
+          background: colorData.dark.grey[800],
+        },
+        root: {
+          '&.MuiTableRow-hover:hover': {
+            backgroundColor: colorData.dark.grey[700],
+          },
+        },
+      },
+    },
+  },
+  shape: {
+    borderRadius: 2,
+  },
+  transitions: {
+    easing: {
+      sharp: 'cubic-bezier(0.4, 0, 0.6, 1)',
+    },
+    duration: {
+      leavingScreen: 100,
+      enteringScreen: 100,
+    },
+  },
+  spacing: 4,
+  zIndex: {
+    appBar: 1100,
+    drawer: 1000,
   },
 })
