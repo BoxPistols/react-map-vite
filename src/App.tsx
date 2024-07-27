@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
 import DashboardPage from '@/pages/DashboardPage'
@@ -8,14 +5,17 @@ import InboxPage from '@/pages/InboxPage'
 import MapPage from '@/pages/MapPage'
 import NaviPage from '@/pages/NaviPage'
 import WifiPage from '@/pages/WifiPage'
-
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
+import { useState } from 'react'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { theme } from './lib/themes/theme'
-
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-const App = () => {
-  // TODO: LocalStorageで永続化
+interface AppProps {
+  toggleTheme: () => void
+}
+
+const App = ({ toggleTheme }: AppProps) => {
   const [open, setOpen] = useState<boolean>(true)
 
   const toggleDrawer = () => {
@@ -35,6 +35,7 @@ const App = () => {
             marginTop: 20,
           }}>
           <main>
+            <Button onClick={toggleTheme}>Toggle Theme</Button>
             <Routes>
               <Route path='/' element={<DashboardPage />} />
               <Route path='/map' element={<MapPage />} />

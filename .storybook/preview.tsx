@@ -1,11 +1,46 @@
-import React from 'react'
-
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
+import { Button, CssBaseline, ThemeProvider } from '@mui/material'
 import type { Preview } from '@storybook/react'
-import { theme } from '../src/lib/themes/theme'
+import React, { useState, useEffect } from 'react'
+import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 
-import '../src/index.css'
-import 'maplibre-gl/dist/maplibre-gl.css'
+const ThemeSwitcherDecorator = (Story, context) => {
+  const [theme, setTheme] = useState(lightTheme)
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('sb-addon-themes')
+    if (savedTheme) {
+      setTheme(savedTheme === 'dark' ? darkTheme : lightTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(
+      'sb-addon-themes',
+      theme === lightTheme ? 'light' : 'dark'
+    )
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === lightTheme ? darkTheme : lightTheme))
+  }
+
+  return (
+    <EmotionThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Button
+          size='medium'
+          variant='contained'
+          onClick={toggleTheme}
+          style={{ position: 'fixed', top: 10, right: 10 }}>
+          Toggle Theme
+        </Button>
+        <Story {...context} />
+      </ThemeProvider>
+    </EmotionThemeProvider>
+  )
+}
 
 const preview: Preview = {
   parameters: {
@@ -20,16 +55,13 @@ const preview: Preview = {
     },
     backgrounds: {
       default: 'light',
+      values: [
+        { name: 'light', value: '#ffffff' },
+        { name: 'dark', value: '#333333' },
+      ],
     },
   },
-  decorators: [
-    (Story, context) => (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Story {...context} />
-      </ThemeProvider>
-    ),
-  ],
+  decorators: [ThemeSwitcherDecorator],
 }
 
 export default preview
