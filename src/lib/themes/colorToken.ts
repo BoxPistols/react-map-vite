@@ -99,9 +99,9 @@ export const colorData = {
   dark: {
     primary: {
       main: indigo[500],
-      lighter: '#e7e7f0',
-      dark: '#0a094a',
-      light: '#7373a9',
+      lighter: indigo[50],
+      dark: indigo[900],
+      light: indigo[300],
     },
     secondary: {
       main: '#696881',
@@ -146,8 +146,8 @@ export const colorData = {
     },
     divider: '#616161',
     background: {
-      default: '#333333',
-      paper: '#424242',
+      default: '#212121',
+      paper: '#333333',
     },
     grey: {
       50: '#fafafa',

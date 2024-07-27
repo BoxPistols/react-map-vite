@@ -44,6 +44,7 @@ const commonPalette = {
   iconDisabled: colorData.icon.disabled,
 }
 
+// ===== 共有スタイル =====
 const commonComponentStyles = {
   MuiCssBaseline: {
     styleOverrides: {
@@ -54,9 +55,7 @@ const commonComponentStyles = {
   },
   MuiAppBar: {
     styleOverrides: {
-      root: {
-        boxShadow: 'none',
-      },
+      root: {},
     },
   },
   MuiToolbar: {
@@ -140,6 +139,7 @@ const commonComponentStyles = {
   },
 }
 
+// ===== ライトテーマ =====
 export const theme = createTheme({
   typography: typographyOptions,
   palette: {
@@ -213,6 +213,7 @@ export const theme = createTheme({
     },
     MuiAppBar: {
       styleOverrides: {
+        // backgroundColor: theme.palette.grey[900],
         root: {
           backgroundColor: colorData.grey[900],
           color: colorData.grey[200],
@@ -279,6 +280,7 @@ export const theme = createTheme({
   },
 })
 
+// ===== ダークテーマ =====
 export const darkTheme = createTheme({
   typography: typographyOptions,
   palette: {
@@ -352,25 +354,22 @@ export const darkTheme = createTheme({
     },
     MuiAppBar: {
       styleOverrides: {
-        root: {
-          backgroundColor: colorData.dark.grey[900],
-          color: colorData.dark.grey[200],
-        },
+        root: {},
       },
     },
     MuiToolbar: {
       styleOverrides: {
         root: {
-          '& .MuiTypography-root': {
-            color: colorData.dark.common.white,
-          },
+          // '& .MuiTypography-root': {
+          //   color: colorData.dark.common.white,
+          // },
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: colorData.dark.grey[900],
+          // backgroundColor: colorData.dark.grey[900],
         },
       },
     },
@@ -400,7 +399,7 @@ export const darkTheme = createTheme({
     },
   },
   shape: {
-    borderRadius: 2,
+    borderRadius: 4,
   },
   transitions: {
     easing: {
