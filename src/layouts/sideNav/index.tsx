@@ -68,7 +68,7 @@ export const SideNav = ({ open }: SideNavProps) => {
                 marginLeft: '8px',
                 '& .MuiListItemText-primary': {
                   fontSize: '0.8rem',
-                  textAlign: 'center',
+                  textAlign: 'left',
                   fontWeight: theme.typography.fontWeightBold,
                 },
               }}
