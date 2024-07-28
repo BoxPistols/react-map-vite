@@ -118,14 +118,13 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
 
 ### 例コード
 
-{" "}
-
 <Box
   backgroundColor="grey.200"
   px={2}
   sx={{
-    border: `1px solid ${theme.palette.grey[700]}`,
+    border: `1px solid ${theme.palette.grey[400]}`,
     width: "fit-content",
+    color: theme.palette.grey[700],
   }}
 >
   {"greyBox"}
@@ -136,8 +135,9 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
   backgroundColor="grey.200"
   px={2}
   sx={{
-    border: `1px solid ${theme.palette.grey[700]}`,
+    border: `1px solid ${theme.palette.grey[400]}`,
     width: "fit-content",
+    color: theme.palette.grey[700],
   }}
 >
   {"greyBox"}
@@ -148,9 +148,9 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
 
 ## Tailwind CSS の利用
 
-このプロジェクトでは、MUI と Tailwind CSS を併用しています。Tailwind CSS は、ユーティリティファーストの CSS フレームワークで、迅速なスタイリングを可能にします。
+このプロジェクトでは、MUIとTailwindCSSを併用しています。TailwindCSSは、ユーティリティファーストのCSSフレームワークで、迅速なスタイリングを可能にします。
 
-### なぜ MUI に Tailwind CSS を合わせるのか
+### なぜMUIにTailwind CSSを合わせるのか
 
 MUI は優れたコンポーネントライブラリですが、細かいカスタマイズや迅速なスタイリングにおいては制限があることがあります。Tailwind CSS を組み合わせることで、以下のメリットが得られます：
 
@@ -161,14 +161,17 @@ MUI は優れたコンポーネントライブラリですが、細かいカス�
 
 ### Tailwind CSS と MUI の併用方法
 
-1. **基本的な使用方法**:
-   MUI コンポーネントに Tailwind のクラスを直接適用できます。
+#### 基本的な使用方法
 
-   ```jsx
-   <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-     Click me
-   </Button>
-   ```
+MUI コンポーネントに Tailwind のクラスを直接適用できます。ただし競合も考慮して、適切に使用してください。
+
+```jsx
+<Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  Click me
+</Button>
+```
+
+MUIが比較的難解であるレイアウトや部分最適化のスタイリングにTailwindを活用することで、開発効率を向上させることが期待出来ます
 
 2. **カスタムテーマとの統合**:
    Tailwind の設定ファイル（`tailwind.config.js`）で、MUI のテーマカラーを Tailwind のカラーパレットに追加できます。
@@ -179,12 +182,11 @@ MUI は優れたコンポーネントライブラリですが、細かいカス�
        extend: {
          colors: {
            primary: {
-             main: "#0e0d6a",
-             dark: "#0d0d37",
-             light: "#21208a",
-             lighter: "#6867dc",
+             main: "#num",
+             dark: "#num",
+             ...
            },
-           // 他のMUIカラーも同様に追加
+           // Other colors
          },
        },
      },
@@ -192,13 +194,14 @@ MUI は優れたコンポーネントライブラリですが、細かいカス�
    ```
 
 3. **レスポンシブデザイン**:
-   Tailwind の便利なレスポンシブユーティリティを活用できます。
 
-   ```jsx
-   <Box className="md:flex md:items-center md:justify-between">
-     {/* コンテンツ */}
-   </Box>
-   ```
+Tailwind の便利なレスポンシブユーティリティを活用できます。
+
+```jsx
+<Box className="md:flex md:items-center md:justify-between">
+  {"Hello Tailwind on MUI"}
+</Box>
+```
 
 ### メリット
 
@@ -209,12 +212,11 @@ MUI は優れたコンポーネントライブラリですが、細かいカス�
 
 ### 注意点
 
-- **スタイルの競合**: MUI のスタイルと Tailwind のスタイルが競合する可能性があります。優先順位に注意し、必要に応じて `!important` フラグを使用してください。
+- **スタイルの競合**: MUI のスタイルと Tailwind のスタイルが競合する可能性があります。優先順位に注意してください。
 - **学習曲線**: 両方のフレームワークを効果的に使用するには、それぞれの特性を理解する必要があります。
-- **ファイルサイズ**: 両方のフレームワークを使用することで、初期のバンドルサイズが大きくなる可能性があります。
 - **メンテナンス**: 二つのシステムを維持することになるため、長期的なメンテナンスが複雑になる可能性があります。
 
-Tailwind CSS を効果的に使用することで、MUI**コンポーネントのカスタマイズと迅速なスタイリングが可能になり、開発効率が向上します。ただし、上記の注意点に留意しながら、プロジェクトのニーズに合わせて適切に使用することが重要です。**
+Tailwind CSS を効果的に使用することで、MUIコンポーネントのカスタマイズと迅速なスタイリングが可能になり、開発効率が向上します。ただし、上記の注意点に留意しながら、プロジェクトのニーズに合わせて適切に使用することが重要です。
 
 </Container>
 </ThemeProvider>

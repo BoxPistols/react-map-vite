@@ -34,6 +34,7 @@ declare module '@mui/material/styles' {
 }
 
 const commonPalette = {
+  // これは、拡張したパレットの定義
   surfaceBackground: colorData.surface.background,
   surfaceBackgroundDark: colorData.surface.backgroundDark,
   surfaceBackgroundDisabled: colorData.surface.backgroundDisabled,

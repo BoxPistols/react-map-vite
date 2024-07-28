@@ -5,6 +5,7 @@ import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
 import type { Preview } from '@storybook/react'
 import React, { useState, useEffect, useCallback } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
+import '../src/index.css' // Tailwind CSSのインポート
 
 // グローバルタイプを拡張
 declare global {
@@ -101,7 +102,7 @@ const preview: Preview = {
       toc: { headingSelector: 'h2, h3' },
     },
     backgrounds: {
-      default: 'light',
+      default: null,
       values: [
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#333333' },

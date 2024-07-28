@@ -1,5 +1,4 @@
 import { Box, Container, Grid, Typography } from '@mui/material'
-import Link from '@mui/material/Link'
 import { styled, useTheme } from '@mui/material/styles'
 import type { PaletteColor, Theme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
@@ -159,7 +158,6 @@ export const Color = () => {
 
   return (
     <Container maxWidth='lg'>
-      <Link href='/docs/tokens-color-info--docs'>Color Info</Link>
       {mainColors.map((color) => {
         const colorGroup = getColorGroup(color)
         return (
