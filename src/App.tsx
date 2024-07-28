@@ -9,7 +9,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { Box, IconButton, type Theme, Typography } from '@mui/material'
 import type React from 'react'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
 

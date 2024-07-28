@@ -6,16 +6,19 @@ import type { Preview } from '@storybook/react'
 import React, { useState, useEffect, useCallback } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 
-// グローバルタイプを拡張して、showThemeSwitcher パラメータを追加
+// グローバルタイプを拡張
 declare global {
   interface StorybookParameters {
     showThemeSwitcher?: boolean
+    themeSwitcherIconColor?: 'white' | 'black' | 'auto'
   }
 }
 
 const ThemeSwitcherDecorator = (Story, context) => {
   const [theme, setTheme] = useState(lightTheme)
   const showThemeSwitcher = context.parameters.showThemeSwitcher ?? false
+  const themeSwitcherIconColor =
+    context.parameters.themeSwitcherIconColor ?? 'auto'
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('sb-addon-themes')
@@ -37,7 +40,18 @@ const ThemeSwitcherDecorator = (Story, context) => {
     )
   }, [])
 
-  const SetIconColor = theme.palette.mode === 'dark' ? '#ffffff' : '#000000'
+  const getIconColor = () => {
+    switch (themeSwitcherIconColor) {
+      case 'white':
+        return '#ffffff'
+      case 'black':
+        return '#000000'
+      default:
+        return theme.palette.mode === 'dark' ? '#ffffff' : '#000000'
+    }
+  }
+
+  const iconColor = getIconColor()
 
   return (
     <EmotionThemeProvider theme={theme}>
@@ -63,9 +77,9 @@ const ThemeSwitcherDecorator = (Story, context) => {
               },
             }}>
             {theme.palette.mode === 'dark' ? (
-              <Brightness7Icon sx={{ color: SetIconColor }} />
+              <Brightness7Icon sx={{ color: iconColor }} />
             ) : (
-              <Brightness4Icon sx={{ color: SetIconColor }} />
+              <Brightness4Icon sx={{ color: iconColor }} />
             )}
           </IconButton>
         )}
@@ -93,8 +107,9 @@ const preview: Preview = {
         { name: 'dark', value: '#333333' },
       ],
     },
-    // デフォルトでは テーマ切り替えアイコンを表示しない
+    // デフォルトのテーマ切り替えアイコン設定
     showThemeSwitcher: false,
+    themeSwitcherIconColor: 'default',
   },
   decorators: [ThemeSwitcherDecorator],
 }

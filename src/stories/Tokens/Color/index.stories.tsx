@@ -6,6 +6,7 @@ const ColorStory: Meta = {
   component: Color,
   parameters: {
     showThemeSwitcher: true,
+    themeSwitcherIconColor: 'default',
   },
 }
 
