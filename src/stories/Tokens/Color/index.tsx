@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from '@mui/material'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import type { PaletteColor, Theme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
@@ -193,6 +193,22 @@ export const Color = () => {
       {/* <ColorGroup title='palette others' colors={otherColors} />
       <ColorGroup title='palette surfaceBackground' colors={surfaceColors} />
       <ColorGroup title='icon palette' colors={iconColors} /> */}
+
+      {/* <Box ml={2} mt={3} width={'fit-content'}>
+        <Typography fontWeight={'bold'}>example</Typography>
+        <Typography
+          color={theme.palette.primary.contrastText}
+          px={4}
+          py={1.5}
+          mt={1}
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: 2,
+          }}>
+          backgroundColor: primary.main <br />
+          color: primary.contrastText
+        </Typography>
+      </Box> */}
     </Container>
   )
 }
