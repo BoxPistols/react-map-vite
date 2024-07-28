@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Typography } from '@mui/material'
+import Link from '@mui/material/Link'
 import { styled, useTheme } from '@mui/material/styles'
 import type { PaletteColor, Theme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
@@ -158,6 +159,7 @@ export const Color = () => {
 
   return (
     <Container maxWidth='lg'>
+      <Link href='/docs/tokens-color-info--docs'>Color Info</Link>
       {mainColors.map((color) => {
         const colorGroup = getColorGroup(color)
         return (
@@ -176,7 +178,6 @@ export const Color = () => {
         )
       })}
       <ColorGroup title='text' colors={textColors} />
-
       <Box sx={{ display: 'flex' }}>
         <TextColors color={theme.palette.text.primary}>text.primary</TextColors>
         <TextColors color={theme.palette.text.secondary}>
@@ -186,14 +187,12 @@ export const Color = () => {
           text.disabled
         </TextColors>
       </Box>
-
       <ColorGroup title='common' colors={commonColors} />
       <ColorGroup title='paper' colors={paperColors} />
       <ColorGroup title='grey' colors={greyColors} />
       {/* <ColorGroup title='palette others' colors={otherColors} />
       <ColorGroup title='palette surfaceBackground' colors={surfaceColors} />
       <ColorGroup title='icon palette' colors={iconColors} /> */}
-
       {/* <Box ml={2} mt={3} width={'fit-content'}>
         <Typography fontWeight={'bold'}>example</Typography>
         <Typography
