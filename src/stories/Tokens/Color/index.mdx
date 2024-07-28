@@ -23,7 +23,8 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
 
 ## 主なテーマカラー
 
-プロダクトにおいて特に活用するカラーは、主に以下の3つのカラーです
+プロダクトにおいて特に活用するカラーは、主に以下のカラーです。<br/>
+意味や用途に合わせて適切なカラーを使用しします。
 
 - <Typography variant="lg" style={{ color: theme.palette.primary.main }}>
     {"primary"}
@@ -55,26 +56,25 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
 ## カラーテーマ明度パターン
 
 - Muiのthemeの特性で、明るさの展開としてmain カラーの他にも `light` `lighter` `dark` カラーが存在します
-  - ※`lighter`はMuiのデフォルトにはありませんが、後から拡張追加したバリエーションです
+  - `lighter`はMuiのデフォルトにはありませんが、背景専門色の用途として後から拡張追加したバリエーションです
 - これらのカラーは、`theme.palette.primary.light`、`theme.palette.secondary.dark`のように指定することができます
-- また、`theme.palette.primary.contrastText`のように、最もコントラスト比率の高い、ハイライトのような用途のcontrastTextカラーも指定することができます
-- `theme`ファイルで`main`カラーを設定すると、lightカラー、darkカラー、contrastTextカラーは未指定であっても自動で展開設定されますが、適時は個別に設定します
+- MUIのコンポーネント全体、また`theme`ファイルで各`main`カラーを設定すると、lightカラー、darkカラー、contrastTextカラーは未指定であっても自動で展開設定され、適時個別に設定していきます
 
 ### contrastText
 
+- `theme.palette.primary.contrastText`のように、最もコントラスト比率が高いカラーも指定することができ、背景色を有したUIの文字カラーに対して`color: #fff`のようなハードコーディングを避けることができます
 - `primary.contrastText`は、MuiのテーマカラーのprimaryのcontrastTextカラーを指定しています
 - `contrastText`とは、端的には最も明るい色を指し、背景とのコントラストを確保しながら、同じグループのテキストカラーとして使用することができます
-- `white`などを直接指定することもできますが`contrastText`を使用することで、テーマカラーの変更に柔軟に対応することができます
-
-{" "}
+- `white`などを直接指定することもできますが`contrastText`を使用することで、テーマカラーの変更に柔軟に対応することができるため、やはりハードコードは避けるべきです
 
 <Box
   bgcolor={theme.palette.primary.main}
   color={theme.palette.primary.contrastText}
   width="fit-content"
   p={1}
+  px={2}
 >
-  {"box"}
+  {"Example"}
 </Box>
 
 ```tsx
@@ -82,7 +82,8 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
   bgcolor={theme.palette.primary.main}
   color={theme.palette.primary.contrastText}
   width="fit-content"
-  p={1}
+  py={1}
+  px={2}
 >
   {"box"}
 </Box>
@@ -92,7 +93,7 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
 
 ## グレーカラー
 
-表示は**gray**でなく**grey**ですので注意してください
+グレーの表記文字は**gray**でなく**grey**(イギリス英語？)ですので注意してください
 
 - Mui では、グレーカラーのテーマを設定することができます
 - グレーはマテリアルデザインのカラーパレットに含まれているため、グレーカラーのテーマを設定することで、グレーカラーを統一することができます
@@ -100,6 +101,7 @@ Muiのテーマカラーは、主にprimary、secondary、error、warning、succ
 - `grey.100`や`theme.palette.grey[50]`のように数字を指定することで、グレーカラーの濃さを指定することができます
 - 実装方法は実装箇所によって替わってきますので、すでに実装済みのコンポーネントを参考にしてください
   - 基本的には useTheme を使用する方法と、useTheme を使用せずに theme を直接指定する方法があります
+- グレーの段階設計は精密であり、デザインとしても有効なため、今後追加していくことも考えられます
 
 ### 例コード
 
