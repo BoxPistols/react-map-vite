@@ -1,11 +1,21 @@
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
-import { Button, CssBaseline, ThemeProvider } from '@mui/material'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
+import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
 import type { Preview } from '@storybook/react'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
+
+// グローバルタイプを拡張して、showThemeSwitcher パラメータを追加
+declare global {
+  interface StorybookParameters {
+    showThemeSwitcher?: boolean
+  }
+}
 
 const ThemeSwitcherDecorator = (Story, context) => {
   const [theme, setTheme] = useState(lightTheme)
+  const showThemeSwitcher = context.parameters.showThemeSwitcher ?? false
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('sb-addon-themes')
@@ -17,25 +27,48 @@ const ThemeSwitcherDecorator = (Story, context) => {
   useEffect(() => {
     localStorage.setItem(
       'sb-addon-themes',
-      theme === lightTheme ? 'light' : 'dark'
+      theme.palette.mode === 'dark' ? 'dark' : 'light'
     )
   }, [theme])
 
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === lightTheme ? darkTheme : lightTheme))
-  }
+  const toggleTheme = useCallback(() => {
+    setTheme((prevTheme) =>
+      prevTheme.palette.mode === 'light' ? darkTheme : lightTheme
+    )
+  }, [])
+
+  const SetIconColor = theme.palette.mode === 'dark' ? '#ffffff' : '#000000'
 
   return (
     <EmotionThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Button
-          size='medium'
-          variant='contained'
-          onClick={toggleTheme}
-          style={{ position: 'fixed', top: 10, right: 10 }}>
-          Toggle Theme
-        </Button>
+        {showThemeSwitcher && (
+          <IconButton
+            onClick={toggleTheme}
+            sx={{
+              position: 'fixed',
+              top: 10,
+              right: 10,
+              zIndex: 10000,
+              bgcolor:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.1)'
+                  : 'rgba(0,0,0,0.1)',
+              '&:hover': {
+                bgcolor:
+                  theme.palette.mode === 'dark'
+                    ? 'rgba(255,255,255,0.2)'
+                    : 'rgba(0,0,0,0.2)',
+              },
+            }}>
+            {theme.palette.mode === 'dark' ? (
+              <Brightness7Icon sx={{ color: SetIconColor }} />
+            ) : (
+              <Brightness4Icon sx={{ color: SetIconColor }} />
+            )}
+          </IconButton>
+        )}
         <Story {...context} />
       </ThemeProvider>
     </EmotionThemeProvider>
@@ -60,6 +93,8 @@ const preview: Preview = {
         { name: 'dark', value: '#333333' },
       ],
     },
+    // デフォルトでは テーマ切り替えアイコンを表示しない
+    showThemeSwitcher: false,
   },
   decorators: [ThemeSwitcherDecorator],
 }

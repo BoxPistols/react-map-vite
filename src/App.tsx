@@ -1,5 +1,3 @@
-// App.tsx
-
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
 import DashboardPage from '@/pages/DashboardPage'
@@ -11,7 +9,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { Box, IconButton, type Theme, Typography } from '@mui/material'
 import type React from 'react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
@@ -41,24 +39,29 @@ const App: React.FC<AppProps> = ({ currentTheme, toggleTheme }) => {
         <main>
           <IconButton
             onClick={toggleTheme}
-            color='inherit'
             sx={{
               position: 'fixed',
               top: 10,
               right: 10,
               zIndex: 10000,
+              bgcolor:
+                currentTheme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.1)'
+                  : 'rgba(0,0,0,0.1)',
+              '&:hover': {
+                bgcolor:
+                  currentTheme.palette.mode === 'dark'
+                    ? 'rgba(255,255,255,0.2)'
+                    : 'rgba(0,0,0,0.2)',
+              },
             }}>
             {currentTheme.palette.mode === 'dark' ? (
               <Brightness7Icon
-                sx={{
-                  color: currentTheme.palette.common.white,
-                }}
+                sx={{ color: currentTheme.palette.common.white }}
               />
             ) : (
               <Brightness4Icon
-                sx={{
-                  color: currentTheme.palette.common.white,
-                }}
+                sx={{ color: currentTheme.palette.common.white }}
               />
             )}
           </IconButton>
