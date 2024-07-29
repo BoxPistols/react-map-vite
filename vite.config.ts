@@ -28,8 +28,9 @@ export default defineConfig({
     outDir: 'dist',
   },
   css: {
-    postcss: {
-      plugins: [tailwindcss, autoprefixer],
-    },
+    // postcss: {
+    //   plugins: [tailwindcss, autoprefixer],
+    // },
+    postcss: './postcss.config.js',
   },
 })
