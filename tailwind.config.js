@@ -9,6 +9,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'Inter',
+          'Noto Sans JP',
+          'sans-serif',
+          ...defaultTheme.fontFamily.sans,
+        ],
+      },
       colors: {
         // TODO: 後で設置
         primary: {
@@ -23,9 +31,6 @@ module.exports = {
           light: '#757575',
           lighter: '#FAFAFA',
         },
-      },
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       typography: (theme) => ({
         DEFAULT: {

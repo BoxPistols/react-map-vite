@@ -1,8 +1,8 @@
 import path from 'node:path'
 import react from '@vitejs/plugin-react'
-import autoprefixer from 'autoprefixer'
-import tailwindcss from 'tailwindcss'
 import { defineConfig } from 'vite'
+// import autoprefixer from 'autoprefixer'
+// import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
   plugins: [
@@ -28,9 +28,7 @@ export default defineConfig({
     outDir: 'dist',
   },
   css: {
-    // postcss: {
-    //   plugins: [tailwindcss, autoprefixer],
-    // },
+    // postcss: { plugins: [tailwindcss, autoprefixer] },
     postcss: './postcss.config.js',
   },
 })

@@ -1,8 +1,8 @@
-import { Meta } from "@storybook/blocks"
+import { Meta } from "@storybook/blocks";
 // import Colors from '@/stories/assets/colors.svg';
-import { Container, Button, Box, Typography } from "@mui/material"
-import { ThemeProvider } from "@mui/material/styles"
-import { theme } from "@/lib/themes/theme"
+import { Container, Button, Box, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "@/lib/themes/theme";
 
 <Meta title="Tokens/Typography/Info" />
 
@@ -52,7 +52,8 @@ padding も m→p で同様の作用
 
 - <code>noWrap</code>: 改行防止
 - <code>align</code>: textAlign です。"center"や"left/right"などが使えます
-- <code>gutterBottom</code> Typography コンポーネントの直下が狭い場合、下部に一定の余白を付けます
+- <code>gutterBottom</code> Typography
+  コンポーネントの直下が狭い場合、下部に一定の余白を付けます
 
 ## variant
 
@@ -80,8 +81,6 @@ Mui Typography コンポーネントは、以下のような主要なバリア�
 
 <Box mt={3}>
 
-{' '}
-
 <Typography variant="h2">{"h2 見出しテキスト"}</Typography>
 <Typography variant="subtitle1">
   {"subtitle1 サブタイトル、説明文を書く"}
@@ -93,18 +92,18 @@ Mui Typography コンポーネントは、以下のような主要なバリア�
 </Typography>
 ```
 
-<Typography variant="h3">h3 見出しテキスト</Typography>
+<Typography variant="displayMedium">displayMedium 見出しテキスト</Typography>
 <Typography variant="subtitle2">
   {"subtitle2 サブタイトル、説明文を書く"}
 </Typography>
 ```tsx
-<Typography variant="h3">{"h3 見出しテキスト"}</Typography>
+<Typography variant="displayMedium">
+  {"displayMedium 見出しテキスト"}
+</Typography>
 <Typography variant="subtitle2">
   {"subtitle2 サブタイトル、説明文を書く"}
 </Typography>
 ```
-
-{' '}
 
 <Typography variant="lg">{"lg拡張variant"}</Typography>
 <Typography variant="sm">{"sm拡張variant"}</Typography>
@@ -112,8 +111,6 @@ Mui Typography コンポーネントは、以下のような主要なバリア�
 <Typography variant="lg">{"lg拡張variant"}</Typography>
 <Typography variant="sm">{"sm拡張variant"}</Typography>
 ```
-
-{' '}
 
 <Typography
   variant="ml"
