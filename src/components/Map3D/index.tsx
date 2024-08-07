@@ -20,6 +20,8 @@ export const Map3D: React.FC<Map3DProps> = ({
     lng: longitude,
     lat: latitude,
     zoom: zoom,
+    pitch: 60,
+    bearing: -20,
   })
 
   useEffect(() => {
@@ -73,7 +75,13 @@ export const Map3D: React.FC<Map3DProps> = ({
         antialias: true,
       })
 
-      map.addControl(new maplibregl.NavigationControl())
+      map.addControl(
+        new maplibregl.NavigationControl({
+          visualizePitch: true,
+          showZoom: true,
+          showCompass: true,
+        })
+      )
 
       map.addControl(
         new maplibregl.TerrainControl({
@@ -95,8 +103,13 @@ export const Map3D: React.FC<Map3DProps> = ({
           lng: Number(center.lng.toFixed(4)),
           lat: Number(center.lat.toFixed(4)),
           zoom: Number(map.getZoom().toFixed(2)),
+          pitch: Number(map.getPitch().toFixed(2)),
+          bearing: Number(map.getBearing().toFixed(2)),
         })
       })
+
+      // マウスでの回転を有効にする
+      map.dragRotate.enable()
 
       mapInstance.current = map
     }
@@ -132,7 +145,7 @@ export const Map3D: React.FC<Map3DProps> = ({
           zIndex: 1,
         }}>
         Longitude: {mapInfo.lng} | Latitude: {mapInfo.lat} | Zoom:{' '}
-        {mapInfo.zoom}
+        {mapInfo.zoom} | Pitch: {mapInfo.pitch} | Bearing: {mapInfo.bearing}
       </div>
     </div>
   )
