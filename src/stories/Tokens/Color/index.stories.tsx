@@ -4,6 +4,7 @@ import { Color } from '.'
 const ColorStory: Meta = {
   title: 'Tokens/Color',
   component: Color,
+  tags: ['!autodocs'],
   parameters: {
     showThemeSwitcher: true,
     themeSwitcherIconColor: 'default',

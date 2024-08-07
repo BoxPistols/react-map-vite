@@ -2,7 +2,14 @@ import type { StorybookConfig } from '@storybook/react-vite'
 import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx|mdx)'],
+  stories: [
+    '../src/**/*.mdx',
+    '../src/**/*.@(mdx|stories.@(js|jsx|mjs|ts|tsx))',
+  ],
+  docs: {
+    autodocs: true,
+    defaultName: 'AutoDocs',
+  },
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
@@ -16,32 +23,21 @@ const config: StorybookConfig = {
         postCss: true,
       },
     },
+    '@storybook/addon-mdx-gfm',
   ],
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
-  // async viteFinal(config) {
-  //   return mergeConfig(config, {
-  //     plugins: [require('autoprefixer'), require('tailwindcss')],
-  //   })
-  // },
+
   async viteFinal(config) {
     return mergeConfig(config, {
       plugins: [require('autoprefixer'), require('tailwindcss')],
-      resolve: {
-        alias: {
-          ...config.resolve?.alias,
-          'maplibre-gl': 'maplibre-gl/dist/maplibre-gl.js',
-        },
-      },
-      optimizeDeps: {
-        include: ['maplibre-gl'],
-      },
     })
+  },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
   },
 }
 

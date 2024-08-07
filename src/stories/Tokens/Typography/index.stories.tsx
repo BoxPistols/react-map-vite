@@ -5,6 +5,7 @@ import Typography from '.'
 const TypographyStory: Meta = {
   title: 'Tokens/Typography',
   component: Typography,
+  tags: ['!autodocs'],
   parameters: {
     showThemeSwitcher: true,
     themeSwitcherIconColor: 'default',
