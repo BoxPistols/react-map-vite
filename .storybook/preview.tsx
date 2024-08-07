@@ -6,6 +6,7 @@ import type { Preview } from '@storybook/react'
 import React, { useState, useEffect, useCallback } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 import '../src/index.css' // Tailwind CSSのインポート
+import 'maplibre-gl/dist/maplibre-gl.css'
 
 // グローバルタイプを拡張
 declare global {

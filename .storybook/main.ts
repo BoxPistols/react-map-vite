@@ -24,9 +24,23 @@ const config: StorybookConfig = {
   core: {
     builder: '@storybook/builder-vite',
   },
+  // async viteFinal(config) {
+  //   return mergeConfig(config, {
+  //     plugins: [require('autoprefixer'), require('tailwindcss')],
+  //   })
+  // },
   async viteFinal(config) {
     return mergeConfig(config, {
       plugins: [require('autoprefixer'), require('tailwindcss')],
+      resolve: {
+        alias: {
+          ...config.resolve?.alias,
+          'maplibre-gl': 'maplibre-gl/dist/maplibre-gl.js',
+        },
+      },
+      optimizeDeps: {
+        include: ['maplibre-gl'],
+      },
     })
   },
 }
