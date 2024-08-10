@@ -231,10 +231,15 @@ const Typographies = () => {
           ExtendedDisplay
         </Button>
 
+        {/* Heading */}
         <>
           <TextStyledDisplay id='heading' mt={2}>
             Heading
+            <Typography variant='body2' mb={2}>
+              MUI Default Variants
+            </Typography>
           </TextStyledDisplay>
+
           <Typography variant='body2' mb={2}>
             Mui 見出し / h1以外は <code>{"variant='h(x)'"}</code>
             で見出しデザインを持った<code>div</code>
@@ -256,9 +261,15 @@ const Typographies = () => {
           ))}
         </>
         <Divider sx={{ my: 8 }} />
+
         {/* 本文 */}
         <>
-          <TextStyledDisplay id='util'>body + util</TextStyledDisplay>
+          <TextStyledDisplay id='util'>
+            body + util
+            <Typography variant='body2' mb={2}>
+              MUI Default Variants
+            </Typography>
+          </TextStyledDisplay>
           <Typography variant='body2'>
             Mui 本文 / 見出しの下に使うサブタイトル / ユーティリティテキスト
             <br />
@@ -290,9 +301,15 @@ const Typographies = () => {
           ))}
           <Divider sx={{ my: 8 }} />
         </>
+
         {/* 拡張variant */}
         <>
-          <TextStyledDisplay id='extended'>Extended variant</TextStyledDisplay>
+          <TextStyledDisplay id='extended'>
+            Extended variant
+            <Typography variant='body2' mb={2}>
+              MUI拡張 Variants
+            </Typography>
+          </TextStyledDisplay>
           <Typography variant='body2'>
             これはMuiから拡張した独自variantです。
             <br />
@@ -322,6 +339,9 @@ const Typographies = () => {
         <>
           <TextStyledDisplay id='extendedDisplay'>
             Extended variant Display
+            <Typography variant='body2' mb={2}>
+              MUI拡張 Variants
+            </Typography>
           </TextStyledDisplay>
           <Typography variant='body2'>
             これはMuiから拡張した独自variantで、特別に大きな見出し用途です。

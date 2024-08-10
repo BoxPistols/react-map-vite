@@ -38,5 +38,9 @@
 	},
 	"[css]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+	// MDXをmarkdownとして扱い一時的にPreview
+	// "files.associations": {
+	// 	"*.mdx": "markdown"
+	// },
 }

@@ -23,11 +23,13 @@ Typography コンポーネントは、テキストのスタイルやフォーマ
 - [Typography Variants](/story/tokens-typography--vatiants)
 - これは、MUIのデフォルトの Typographyをベースにしていますが、より柔軟な対応ができるように拡張カスタマイズも実装しています
 
-<Typography color={theme.palette.secondary.main} variant="xs">
+<Typography variant="sm" color="text.secondary">
   {
     "＊近日、MUIのアップデートに伴いMaterial Design2から3ベースへのアップデートが予定されており、その際にはTypographyのスタイルも変更される可能性があります"
   }
 </Typography>
+
+[https://m3.material.io/styles/typography/type-scale-tokens](https://m3.material.io/styles/typography/type-scale-tokens)
 
 ## WebFont
 
@@ -77,14 +79,16 @@ Typography コンポーネントは、テキストのスタイルやフォーマ
 </Typography>
 ```
 
-### 主要なプロパティ
+### 主要なAPI
 
-Typographyコンポーネントには、頻出する以下のような主要なプロパティがあります:
+Typographyコンポーネントには、頻出する以下のような主要なAPIがあります:
 
 - <code>noWrap</code>: 改行防止
 - <code>align</code>: textAlign です。"center"や"left/right"などが使えます
 - <code>gutterBottom</code> Typography
   コンポーネントの直下が狭い場合、下部に一定の余白を付けます
+
+詳細 [https://mui.com/material-ui/api/typography/](https://next.mui.com/material-ui/api/typography/)
 
 ## Variant
 
@@ -165,20 +169,22 @@ Typographyコンポーネントには、頻出する以下のような主要な�
 
 </Box>
 
-## 余白/サイズ指定
+{/* TODO: 別ページで設置 */}
 
-Typographyに限らず、全てのコンポーネントには余白やサイズ指定ができます。<br/>
-余白やサイズはMUIデフォルトは8ですが、このプロダクトでは`4`を基本としています
+// ## 余白/サイズ指定
 
-- mt: maginTop
-- mr: maginRight
-- mb: maginBottom
-- ml: maginLeft
-- m: 全４方向一括指定
-- mx: 左右 2 方向一括指定
-- my: 上下 2 方向一括指
+// Typographyに限らず、全てのコンポーネントには余白やサイズ指定ができます。<br/>
+// 余白やサイズはMUIデフォルトは8ですが、このプロダクトでは`4`を基本としています
 
-padding も m→p で同様の作用
+// - mt: maginTop
+// - mr: maginRight
+// - mb: maginBottom
+// - ml: maginLeft
+// - m: 全４方向一括指定
+// - mx: 左右 2 方向一括指定
+// - my: 上下 2 方向一括指
+
+// padding も m→p で同様の作用 \*/}
 
 ## Links
 
@@ -186,6 +192,7 @@ Mui Reference
 
 - [Typography](https://mui.com/components/typography/)
 - [Typography API](https://mui.com/api/typography/)
+- [Material Design / The type system](https://material.io/design/typography/the-type-system.html)
 
 </Container>
 </ThemeProvider>
