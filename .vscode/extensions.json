@@ -6,7 +6,8 @@
     "wayou.vscode-todo-highlight",
     "gruntfuggly.todo-tree",
     "figma.figma-vscode-extension",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "unifiedjs.vscode-mdx",
   ]
   // VsCode拡張ツールの入力欄に@recommendedと入力すると、このリストが表示される
 }

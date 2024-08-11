@@ -1,7 +1,7 @@
-import { Meta } from "@storybook/blocks";
-import { Container, Button, Box, Typography } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/lib/themes/theme";
+import { Box, Button, Container, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Tokens/Typography/Info" />
 
@@ -169,22 +169,26 @@ Typographyコンポーネントには、頻出する以下のような主要なA
 
 </Box>
 
-{/* TODO: 別ページで設置 */}
+## Tailwindとの併用
 
-// ## 余白/サイズ指定
+- MUIのTypographyコンポーネントは、Tailwind CSSとの併用も可能です
+- Tailwind CSSのクラスを直接適用することで、MUIのTypographyコンポーネントにもスタイルを適用できます
+- 以下は、MUIのTypographyコンポーネントにTailwind CSSのクラスを適用した例です
 
-// Typographyに限らず、全てのコンポーネントには余白やサイズ指定ができます。<br/>
-// 余白やサイズはMUIデフォルトは8ですが、このプロダクトでは`4`を基本としています
+<Typography className="text-center text-2xl font-bold py-2 bg-gray-200">
+  {"Example: オプション指定"}
+</Typography>
 
-// - mt: maginTop
-// - mr: maginRight
-// - mb: maginBottom
-// - ml: maginLeft
-// - m: 全４方向一括指定
-// - mx: 左右 2 方向一括指定
-// - my: 上下 2 方向一括指
+```tsx
+<Typography className="text-center text-2xl font-bold py-2 bg-gray-200">
+  {"Example: オプション指定"}
+</Typography>
+```
 
-// padding も m→p で同様の作用 \*/}
+- MUIのデフォルトのスタイルとTailwind CSSのスタイルが競合する場合があるので、適用する際は注意が必要です
+- また、デザイントークンはMUIのTypographyコンポーネントのスタイルを優先するため、Tailwind CSSのスタイルを適用する際は別途カスタムスタイルを定義することをお勧めします
+
+Tailwind URL [https://tailwindcss.com/docs](https://tailwindcss.com/docs)
 
 ## Links
 
