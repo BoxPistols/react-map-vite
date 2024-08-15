@@ -1,50 +1,61 @@
-import { Box, Button, Container, Divider, Typography } from '@mui/material'
-import { indigo } from '@mui/material/colors'
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
-
-const display = indigo[200]
-const noteText = indigo[600]
-const displayTitle = indigo[900]
 
 const sampleText = '日本語ひらがなカタカナ123abcABC@*^¥'
 
-const TextStyledDisplay = styled(Typography)`
+const Typographies = () => {
+  const theme = useTheme()
+
+  const displayColor =
+    theme.palette.mode === 'light'
+      ? theme.palette.info.dark
+      : theme.palette.info.light
+
+  const display = displayColor
+  const noteText = theme.palette.text.secondary
+  const displayTitle = theme.palette.text.primary
+
+  const TextStyledDisplay = styled(Typography)`
   font-weight: bold;
   color: ${display};
   font-size: 24px;
   margin-bottom: 16px;
+  font-weight: bold;
 `
 
-const TextStyledVariant = styled(Typography)`
+  const TextStyledVariant = styled(Typography)`
   font-size: 16px;
   font-weight: bold;
   color: ${displayTitle};
 `
 
-const TextStyledSmall = styled(Typography)`
+  const TextStyledSmall = styled(Typography)`
   font-size: 12px;
   font-weight: bold;
   color: ${noteText};
   margin: 2px 4px 2px 10px;
 `
 
-const TextStyledSample = styled(Typography)`
+  const TextStyledSample = styled(Typography)`
   margin-bottom: 2px;
   border-left: 2px solid ${display};
   padding: 2px 8px;
   margin: 4px 4px 4px 10px;
 `
 
-const TextStyledNote = styled(Typography)`
+  const TextStyledNote = styled(Typography)`
   font-size: 14px;
   color: ${noteText};
   margin-bottom: 16px;
   margin: 8px 4px 4px 10px;
 `
-
-const Typographies = () => {
-  const theme = useTheme()
-
   const typographyVariantsHeading = [
     {
       variant: 'h1',
@@ -204,33 +215,59 @@ const Typographies = () => {
           <b style={{ color: 'tomato' }}>{theme.typography.fontSize}px</b>
         </Typography>
         {/* // 各TextStyledDisplayにパージ内リンクを設定 */}
-        <Button
-          variant='outlined'
-          size='small'
-          onClick={handleClick('heading')}>
-          Heading
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          sx={{ m: 1 }}
-          onClick={handleClick('util')}>
-          body + util
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          sx={{ m: 1 }}
-          onClick={handleClick('extended')}>
-          Extended
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          onClick={handleClick('extendedDisplay')}>
-          ExtendedDisplay
-        </Button>
+        <Stack spacing={3} direction='row' my={3}>
+          <Typography variant='sm'>Jump to:</Typography>
+          <Button onClick={handleClick('heading')}>Heading</Button>
+          <Button onClick={handleClick('util')}>body + util</Button>
+          <Button color='info' onClick={handleClick('extended')}>
+            Extended
+          </Button>
+          <Button color='info' onClick={handleClick('extendedDisplay')}>
+            ExtendedDisplay
+          </Button>
+        </Stack>
 
+        {/* INFO */}
+        <>
+          <Stack
+            py={3}
+            px={4}
+            mt={2}
+            sx={{
+              backgroundColor:
+                theme.palette.mode === 'light' ? 'grey.200' : 'grey.800',
+            }}>
+            <Typography>
+              MuiのTypographyコンポーネントは一通りThemeにて定義していますが、以下の点の考慮が必要です。
+            </Typography>
+            <Typography>
+              近日MUIのメジャーアップデートが予定されており、現行の
+              <a href='https://material.io/design/typography/the-type-system.html#type-scale'>
+                Material Design2の設計思想
+              </a>
+              から、
+              <a href='https://m3.material.io/styles/typography/type-scale-tokens'>
+                Material Design3の設計思想
+              </a>
+              に変更される可能性があります。
+              <br />
+            </Typography>
+            <Typography>
+              基本的にマークアップ構造としてのセマンティクス性を確保出来ないテキスト構造のUI箇所では、抽象度の高い
+              <Typography
+                color='info.main'
+                component={'span'}
+                onClick={handleClick('extended')}
+                sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                カスタム拡張Variant
+              </Typography>
+              を使用することを推奨します。
+            </Typography>
+            <Typography>
+              用途が明確なTypographyパターンがあれば、さらに拡張Variantを追加することも推奨します。
+            </Typography>
+          </Stack>
+        </>
         {/* Heading */}
         <>
           <TextStyledDisplay id='heading' mt={2}>
@@ -367,7 +404,6 @@ const Typographies = () => {
           ))}
         </>
         <Button
-          variant='outlined'
           size='small'
           onClick={handleClick('top')}
           sx={{ position: 'fixed', bottom: 10, right: 10 }}>
