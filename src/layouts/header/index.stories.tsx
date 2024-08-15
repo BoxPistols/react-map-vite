@@ -4,7 +4,12 @@ import { Header } from '.'
 const meta: Meta<typeof Header> = {
   title: 'Layouts/Header',
   component: Header,
-  tags: ['layout', 'header'],
+  tags: ['!autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+    themeSwitcherPosition: 'top-right',
+    themeSwitcherIconColor: 'white',
+  },
 } satisfies Meta<typeof Header>
 
 export default meta
