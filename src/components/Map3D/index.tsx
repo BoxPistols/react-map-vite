@@ -124,26 +124,8 @@ export const Map3D: React.FC<Map3DProps> = ({
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <div
-        ref={mapContainer}
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '72px',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
-          padding: '5px',
-          fontSize: '12px',
-          zIndex: 1,
-        }}>
+      <div ref={mapContainer} className='absolute inset-0' />
+      <div className='absolute top-4 right-16 bg-white text-gray-700 bg-opacity-70 p-2 text-sm z-10 dark:bg-gray-700 dark:text-white'>
         Longitude: {mapInfo.lng} | Latitude: {mapInfo.lat} | Zoom:{' '}
         {mapInfo.zoom} | Pitch: {mapInfo.pitch} | Bearing: {mapInfo.bearing}
       </div>
