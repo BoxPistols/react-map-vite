@@ -8,11 +8,15 @@ import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 import '../src/index.css' // Tailwind CSSのインポート
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-// グローバルタイプを拡張
 declare global {
   interface StorybookParameters {
     showThemeSwitcher?: boolean
     themeSwitcherIconColor?: 'white' | 'black' | 'auto'
+    themeSwitcherPosition?:
+      | 'top-right'
+      | 'top-left'
+      | 'bottom-right'
+      | 'bottom-left'
   }
 }
 
@@ -21,6 +25,8 @@ const ThemeSwitcherDecorator = (Story, context) => {
   const showThemeSwitcher = context.parameters.showThemeSwitcher ?? false
   const themeSwitcherIconColor =
     context.parameters.themeSwitcherIconColor ?? 'auto'
+  const themeSwitcherPosition =
+    context.parameters.themeSwitcherPosition ?? 'top-right'
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('sb-addon-themes')
@@ -30,10 +36,19 @@ const ThemeSwitcherDecorator = (Story, context) => {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem(
-      'sb-addon-themes',
-      theme.palette.mode === 'dark' ? 'dark' : 'light'
-    )
+    const isDark = theme.palette.mode === 'dark'
+    localStorage.setItem('sb-addon-themes', isDark ? 'dark' : 'light')
+
+    if (isDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
+    const root = document.getElementById('root')
+    if (root) {
+      root.style.backgroundColor = isDark ? '#333333' : '#ffffff'
+    }
   }, [theme])
 
   const toggleTheme = useCallback(() => {
@@ -55,8 +70,22 @@ const ThemeSwitcherDecorator = (Story, context) => {
 
   const iconColor = getIconColor()
 
+  const getPositionStyle = () => {
+    switch (themeSwitcherPosition) {
+      case 'top-left':
+        return { top: 10, left: 10 }
+      case 'top-right':
+        return { top: 10, right: 10 }
+      case 'bottom-left':
+        return { bottom: 10, left: 10 }
+      case 'bottom-right':
+        return { bottom: 10, right: 10 }
+      default:
+        return { top: 10, right: 10 }
+    }
+  }
+
   return (
-    // @ts-ignore
     <EmotionThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -65,8 +94,6 @@ const ThemeSwitcherDecorator = (Story, context) => {
             onClick={toggleTheme}
             sx={{
               position: 'fixed',
-              top: 10,
-              right: 10,
               zIndex: 10000,
               bgcolor:
                 theme.palette.mode === 'dark'
@@ -78,6 +105,7 @@ const ThemeSwitcherDecorator = (Story, context) => {
                     ? 'rgba(255,255,255,0.2)'
                     : 'rgba(0,0,0,0.2)',
               },
+              ...getPositionStyle(),
             }}>
             {theme.palette.mode === 'dark' ? (
               <Brightness7Icon sx={{ color: iconColor }} />
@@ -104,15 +132,11 @@ const preview: Preview = {
       toc: { headingSelector: 'h2, h3' },
     },
     backgrounds: {
-      default: null,
-      values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#333333' },
-      ],
+      disable: true,
     },
-    // デフォルトのテーマ切り替えアイコン設定
-    showThemeSwitcher: false,
-    themeSwitcherIconColor: 'default',
+    showThemeSwitcher: true,
+    themeSwitcherIconColor: 'auto',
+    themeSwitcherPosition: 'top-right', // デフォルト位置
   },
   decorators: [ThemeSwitcherDecorator],
 }

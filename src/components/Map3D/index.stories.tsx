@@ -5,7 +5,12 @@ const meta: Meta<typeof Map3D> = {
   title: 'Components/Map/MapLibre/Map3D',
   component: Map3D,
   parameters: {
+    // document 非表示
+    docs: { disable: true },
     layout: 'fullscreen',
+    showThemeSwitcher: true,
+    themeSwitcherIconColor: 'black',
+    themeSwitcherPosition: 'bottom-left',
   },
   decorators: [
     (Story) => (
@@ -28,6 +33,14 @@ const meta: Meta<typeof Map3D> = {
       control: { type: 'number', min: 0, max: 22, step: 0.1 },
       description: 'ズームレベル',
     },
+    pitch: {
+      control: { type: 'number', min: 0, max: 60, step: 1 },
+      description: 'ピッチ',
+    },
+    bearing: {
+      control: { type: 'number', min: -180, max: 180, step: 1 },
+      description: 'ベアリング',
+    },
   },
 }
 
@@ -40,6 +53,8 @@ export const Default: Story = {
     latitude: 35.6809591,
     longitude: 139.7673068,
     zoom: 9,
+    pitch: 60,
+    bearing: -20,
   },
 }
 
@@ -48,6 +63,8 @@ export const LowZoom: Story = {
     latitude: 35.6809591,
     longitude: 139.7673068,
     zoom: 4,
+    pitch: 60,
+    bearing: -20,
   },
 }
 
@@ -56,5 +73,7 @@ export const NewYork: Story = {
     latitude: 40.7128,
     longitude: -74.006,
     zoom: 12,
+    pitch: 60,
+    bearing: -20,
   },
 }

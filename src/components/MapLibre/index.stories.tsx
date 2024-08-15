@@ -5,6 +5,7 @@ const meta: Meta<typeof MapLibre> = {
   title: 'Components/Map/MapLibre/Normal',
   component: MapLibre,
   parameters: {
+    docs: { disable: true },
     layout: 'fullscreen',
   },
   tags: ['map', 'geolocation', 'interactive'],

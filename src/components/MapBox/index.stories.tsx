@@ -6,7 +6,9 @@ const meta: Meta<typeof Mapbox> = {
   title: 'Components/Map/Mapbox',
   component: Mapbox,
   parameters: {
+    docs: { disable: true },
     layout: 'fullscreen',
+    showThemeSwitcher: false,
   },
   tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
@@ -36,12 +38,6 @@ const meta: Meta<typeof Mapbox> = {
 export default meta
 
 type Story = StoryObj<typeof meta>
-
-// export const Default: Story = {
-//   args: {
-//     // 既定値をここに設定、必要に応じて上記で定義したデフォルト値を使用
-//   },
-// }
 
 // stylingを適用するために、MapboxコンポーネントをBoxコンポーネントでラップします
 export const Default: Story = {

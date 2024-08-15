@@ -7,18 +7,15 @@ import NaviPage from '@/pages/NaviPage'
 import WifiPage from '@/pages/WifiPage'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import { Box, IconButton, type Theme, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import type React from 'react'
 import { useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { useTheme } from '@/components/ThemeProvider'
 
-interface AppProps {
-  currentTheme: Theme
-  toggleTheme: () => void
-}
-
-const App: React.FC<AppProps> = ({ currentTheme, toggleTheme }) => {
+const App: React.FC = () => {
+  const { theme: currentTheme, toggleTheme, isDarkMode } = useTheme()
   const [open, setOpen] = useState<boolean>(true)
 
   const toggleDrawer = () => {
@@ -44,18 +41,14 @@ const App: React.FC<AppProps> = ({ currentTheme, toggleTheme }) => {
               top: 10,
               right: 10,
               zIndex: 10000,
-              bgcolor:
-                currentTheme.palette.mode === 'dark'
-                  ? 'rgba(255,255,255,0.1)'
-                  : 'rgba(0,0,0,0.1)',
+              bgcolor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
               '&:hover': {
-                bgcolor:
-                  currentTheme.palette.mode === 'dark'
-                    ? 'rgba(255,255,255,0.2)'
-                    : 'rgba(0,0,0,0.2)',
+                bgcolor: isDarkMode
+                  ? 'rgba(255,255,255,0.2)'
+                  : 'rgba(0,0,0,0.2)',
               },
             }}>
-            {currentTheme.palette.mode === 'dark' ? (
+            {isDarkMode ? (
               <Brightness7Icon
                 sx={{ color: currentTheme.palette.common.white }}
               />

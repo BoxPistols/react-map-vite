@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 import { colorData } from './src/lib/themes/colorToken'
 
 module.exports = {
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,jsx,ts,tsx,mdx}',

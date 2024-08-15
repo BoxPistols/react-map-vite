@@ -7,7 +7,12 @@ import Layout from '.'
 const meta: Meta<typeof Layout> = {
   title: 'Layouts/Layout',
   component: Layout,
-  tags: ['autodocs', 'layout', 'header', 'sidenav'],
+  tags: ['!autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+    themeSwitcherPosition: 'top-right',
+    themeSwitcherIconColor: 'default',
+  },
   decorators: [
     (Story) => (
       <BrowserRouter>
@@ -17,9 +22,6 @@ const meta: Meta<typeof Layout> = {
       </BrowserRouter>
     ),
   ],
-  parameters: {
-    layout: 'fullscreen',
-  },
   argTypes: {
     open: {
       control: 'boolean',
