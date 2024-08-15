@@ -1,7 +1,7 @@
 import { Box, Button, Container, Divider, Typography } from '@mui/material'
 import { indigo } from '@mui/material/colors'
-// src/stories/Tokens/Typography/index.tsx
 import { styled, useTheme } from '@mui/material/styles'
+
 const display = indigo[200]
 const noteText = indigo[600]
 const displayTitle = indigo[900]
@@ -147,6 +147,21 @@ const Typographies = () => {
     },
   ]
 
+  const typographyVariantsDisplayExtended = [
+    {
+      variant: 'displayLarge',
+      note: '最大のディスプレイサイズ。大きな見出しや特殊な表示に使用',
+    },
+    {
+      variant: 'displayMedium',
+      note: '中間のディスプレイサイズ。重要な見出しに使用',
+    },
+    {
+      variant: 'displaySmall',
+      note: '小さめのディスプレイサイズ。セクションの見出しなどに使用',
+    },
+  ]
+
   type TypographyVariant = keyof typeof theme.typography
 
   type TypographyStyle = {
@@ -205,14 +220,26 @@ const Typographies = () => {
         <Button
           variant='outlined'
           size='small'
+          sx={{ m: 1 }}
           onClick={handleClick('extended')}>
           Extended
         </Button>
+        <Button
+          variant='outlined'
+          size='small'
+          onClick={handleClick('extendedDisplay')}>
+          ExtendedDisplay
+        </Button>
 
+        {/* Heading */}
         <>
           <TextStyledDisplay id='heading' mt={2}>
             Heading
+            <Typography variant='body2' mb={2}>
+              MUI Default Variants
+            </Typography>
           </TextStyledDisplay>
+
           <Typography variant='body2' mb={2}>
             Mui 見出し / h1以外は <code>{"variant='h(x)'"}</code>
             で見出しデザインを持った<code>div</code>
@@ -233,13 +260,16 @@ const Typographies = () => {
             </Box>
           ))}
         </>
-        <Button variant='outlined' size='small' onClick={handleClick('top')}>
-          To Top
-        </Button>
-        <Divider sx={{ my: 3 }} />
+        <Divider sx={{ my: 8 }} />
+
         {/* 本文 */}
         <>
-          <TextStyledDisplay id='util'>body + util</TextStyledDisplay>
+          <TextStyledDisplay id='util'>
+            body + util
+            <Typography variant='body2' mb={2}>
+              MUI Default Variants
+            </Typography>
+          </TextStyledDisplay>
           <Typography variant='body2'>
             Mui 本文 / 見出しの下に使うサブタイトル / ユーティリティテキスト
             <br />
@@ -269,14 +299,17 @@ const Typographies = () => {
               <TextStyledNote>{note}</TextStyledNote>
             </Box>
           ))}
+          <Divider sx={{ my: 8 }} />
         </>
-        <Button variant='outlined' size='small' onClick={handleClick('top')}>
-          To Top
-        </Button>
-        <Divider sx={{ my: 3 }} />
+
         {/* 拡張variant */}
         <>
-          <TextStyledDisplay id='extended'>Extended variant</TextStyledDisplay>
+          <TextStyledDisplay id='extended'>
+            Extended variant
+            <Typography variant='body2' mb={2}>
+              MUI拡張 Variants
+            </Typography>
+          </TextStyledDisplay>
           <Typography variant='body2'>
             これはMuiから拡張した独自variantです。
             <br />
@@ -299,11 +332,47 @@ const Typographies = () => {
               <TextStyledNote>{note}</TextStyledNote>
             </Box>
           ))}
+          <Divider sx={{ my: 8 }} />
         </>
-        <Button variant='outlined' size='small' onClick={handleClick('top')}>
+
+        {/* 拡張variant Display */}
+        <>
+          <TextStyledDisplay id='extendedDisplay'>
+            Extended variant Display
+            <Typography variant='body2' mb={2}>
+              MUI拡張 Variants
+            </Typography>
+          </TextStyledDisplay>
+          <Typography variant='body2'>
+            これはMuiから拡張した独自variantで、特別に大きな見出し用途です。
+            <br />
+            MaterialDesignの設計思想に準じた抽象名になっています
+          </Typography>
+          <Typography variant='body2' mb={2}>
+            要素対応リスト:
+            <code>{`displayLarge: 'div', displayMedium: 'div', displaySmall: 'div'`}</code>
+          </Typography>
+
+          {typographyVariantsDisplayExtended.map(({ variant, note }) => (
+            <Box key={variant} sx={{ marginBottom: 2 }}>
+              <TextStyledVariant>{variant}</TextStyledVariant>
+              <TextStyledSmall>
+                {getTypographyStyle(variant as never)}
+              </TextStyledSmall>
+              <TextStyledSample variant={variant as never}>
+                SampleText: {sampleText}
+              </TextStyledSample>
+              <TextStyledNote>{note}</TextStyledNote>
+            </Box>
+          ))}
+        </>
+        <Button
+          variant='outlined'
+          size='small'
+          onClick={handleClick('top')}
+          sx={{ position: 'fixed', bottom: 10, right: 10 }}>
           To Top
         </Button>
-        <Divider sx={{ my: 3 }} />
       </Container>
     </>
   )

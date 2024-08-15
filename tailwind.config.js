@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+import { colorData } from './src/lib/themes/colorToken'
 
 module.exports = {
   content: [
@@ -9,23 +10,73 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'Inter',
+          'Noto Sans JP',
+          'sans-serif',
+          ...defaultTheme.fontFamily.sans,
+        ],
+      },
       colors: {
-        // TODO: 後で設置
         primary: {
-          main: '#0e0d6a',
-          dark: '#0a094a',
-          light: '#7373a9',
-          lighter: '#e7e7f0',
+          main: colorData.primary.main,
+          dark: colorData.primary.dark,
+          light: colorData.primary.light,
+          lighter: colorData.primary.lighter,
         },
         secondary: {
-          main: '#696881',
-          dark: '#424242',
-          light: '#757575',
-          lighter: '#FAFAFA',
+          main: colorData.secondary.main,
+          dark: colorData.secondary.dark,
+          light: colorData.secondary.light,
+          lighter: colorData.secondary.lighter,
         },
-      },
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        error: {
+          main: colorData.error.main,
+          dark: colorData.error.dark,
+          light: colorData.error.light,
+          lighter: colorData.error.lighter,
+        },
+        warning: {
+          main: colorData.warning.main,
+          dark: colorData.warning.dark,
+          light: colorData.warning.light,
+          lighter: colorData.warning.lighter,
+        },
+        info: {
+          main: colorData.info.main,
+          dark: colorData.info.dark,
+          light: colorData.info.light,
+          lighter: colorData.info.lighter,
+        },
+        success: {
+          main: colorData.success.main,
+          dark: colorData.success.dark,
+          light: colorData.success.light,
+          lighter: colorData.success.lighter,
+        },
+        text: {
+          primary: colorData.text.primary,
+          secondary: colorData.text.secondary,
+          disabled: colorData.text.disabled,
+          hint: colorData.text.hint,
+        },
+        background: {
+          paper: colorData.background.paper,
+          default: colorData.background.default,
+        },
+        divider: colorData.divider,
+        action: {
+          active: colorData.action.active,
+          hover: colorData.action.hover,
+          selected: colorData.action.selected,
+          disabled: colorData.action.disabled,
+          disabledBackground: colorData.action.disabledBackground,
+        },
+        common: {
+          black: colorData.common.black,
+          white: colorData.common.white,
+        },
       },
       typography: (theme) => ({
         DEFAULT: {

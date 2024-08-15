@@ -7,6 +7,9 @@ import type React from 'react'
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
+    displayLarge: React.CSSProperties
+    displayMedium: React.CSSProperties
+    displaySmall: React.CSSProperties
     xxl: React.CSSProperties
     xl: React.CSSProperties
     lg: React.CSSProperties
@@ -19,6 +22,9 @@ declare module '@mui/material/styles' {
   }
 
   interface TypographyVariantsOptions {
+    displayLarge: React.CSSProperties
+    displayMedium: React.CSSProperties
+    displaySmall: React.CSSProperties
     xxl?: React.CSSProperties
     xl?: React.CSSProperties
     lg?: React.CSSProperties
@@ -34,8 +40,9 @@ declare module '@mui/material/styles' {
 // Existing type declarations
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
-    display1: true
-    display2: true
+    displayLarge: true
+    displayMedium: true
+    displaySmall: true
     xxl: true
     xl: true
     lg: true
@@ -50,6 +57,9 @@ declare module '@mui/material/Typography' {
 
 declare module '@mui/material/styles' {
   interface Typography {
+    displayLarge: CSSProperties
+    displayMedium: CSSProperties
+    displaySmall: CSSProperties
     xxl?: CSSProperties
     xl?: CSSProperties
     lg?: CSSProperties
@@ -71,6 +81,9 @@ const pxToRem = (px: number) => {
 }
 
 const fontSizesVariant = {
+  displayLarge: pxToRem(32),
+  displayMedium: pxToRem(28),
+  displaySmall: pxToRem(24),
   xxl: pxToRem(22),
   xl: pxToRem(20),
   lg: pxToRem(18),
@@ -84,6 +97,7 @@ const fontSizesVariant = {
 
 const fontWeight = {
   bold: 700,
+  medium: 500,
   normal: 400,
 }
 
@@ -167,6 +181,18 @@ export const typographyOptions: TypographyOptions = {
     lineHeight: lineHeight.medium,
     textTransform: 'none',
   },
+  displayLarge: {
+    fontSize: fontSizesVariant.displayLarge,
+    ...heading,
+  },
+  displayMedium: {
+    fontSize: fontSizesVariant.displayMedium,
+    ...heading,
+  },
+  displaySmall: {
+    fontSize: fontSizesVariant.displaySmall,
+    ...heading,
+  },
   xxl: {
     fontSize: fontSizesVariant.xxl,
     ...heading,
@@ -222,6 +248,9 @@ export const typographyComponentsOverrides = {
         overline: 'span',
         caption: 'span',
         button: 'p',
+        displayLarge: 'div',
+        displayMedium: 'div',
+        displaySmall: 'div',
         xxl: 'div',
         xl: 'div',
         lg: 'div',

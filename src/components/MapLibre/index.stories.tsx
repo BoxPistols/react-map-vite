@@ -32,7 +32,7 @@ export const Default: Story = {
   args: {
     latitude: 35.6809591,
     longitude: 139.7673068,
-    zoom: 9,
+    zoom: 6,
   },
 }
 
@@ -48,6 +48,6 @@ export const NewYork: Story = {
   args: {
     latitude: 40.7128,
     longitude: -74.006,
-    zoom: 12,
+    zoom: 3.5,
   },
 }

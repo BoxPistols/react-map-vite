@@ -1,11 +1,31 @@
 import maplibregl from 'maplibre-gl'
-import { useEffect, useRef } from 'react'
+import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
+import 'maplibre-gl/dist/maplibre-gl.css'
 
-export const Map3D = () => {
+interface Map3DProps {
+  latitude: number
+  longitude: number
+  zoom: number
+}
+
+export const Map3D: React.FC<Map3DProps> = ({
+  latitude = 35.6809591,
+  longitude = 139.7673068,
+  zoom = 9,
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null)
+  const mapInstance = useRef<maplibregl.Map | null>(null)
+  const [mapInfo, setMapInfo] = useState({
+    lng: longitude,
+    lat: latitude,
+    zoom: zoom,
+    pitch: 60,
+    bearing: -20,
+  })
 
   useEffect(() => {
-    if (mapContainer.current) {
+    if (mapContainer.current && !mapInstance.current) {
       const map = new maplibregl.Map({
         container: mapContainer.current,
         style: {
@@ -45,16 +65,14 @@ export const Map3D = () => {
           ],
           terrain: {
             source: 'terrainSource',
-            exaggeration: 1,
+            exaggeration: 1.5,
           },
-          sky: {},
         },
-        center: [11.39085, 47.27574],
-        zoom: 12,
-        pitch: 70,
-        hash: true,
-        maxZoom: 18,
-        maxPitch: 85,
+        center: [longitude, latitude],
+        zoom: zoom,
+        pitch: 60,
+        bearing: -20,
+        antialias: true,
       })
 
       map.addControl(
@@ -68,23 +86,49 @@ export const Map3D = () => {
       map.addControl(
         new maplibregl.TerrainControl({
           source: 'terrainSource',
-          exaggeration: 1,
+          exaggeration: 1.5,
         })
       )
 
-      return () => {
-        map.remove()
+      map.on('style.load', () => {
+        map.setTerrain({
+          source: 'terrainSource',
+          exaggeration: 1.5,
+        })
+      })
+
+      map.on('move', () => {
+        const center = map.getCenter()
+        setMapInfo({
+          lng: Number(center.lng.toFixed(4)),
+          lat: Number(center.lat.toFixed(4)),
+          zoom: Number(map.getZoom().toFixed(2)),
+          pitch: Number(map.getPitch().toFixed(2)),
+          bearing: Number(map.getBearing().toFixed(2)),
+        })
+      })
+
+      // マウスでの回転を有効にする
+      map.dragRotate.enable()
+
+      mapInstance.current = map
+    }
+
+    return () => {
+      if (mapInstance.current) {
+        mapInstance.current.remove()
+        mapInstance.current = null
       }
     }
-  }, [])
+  }, [latitude, longitude, zoom])
 
   return (
-    <div
-      ref={mapContainer}
-      style={{
-        width: '100%',
-        height: '100vh',
-      }}
-    />
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <div ref={mapContainer} className='absolute inset-0' />
+      <div className='absolute top-4 right-16 bg-white text-gray-700 bg-opacity-70 p-2 text-sm z-10 dark:bg-gray-700 dark:text-white'>
+        Longitude: {mapInfo.lng} | Latitude: {mapInfo.lat} | Zoom:{' '}
+        {mapInfo.zoom} | Pitch: {mapInfo.pitch} | Bearing: {mapInfo.bearing}
+      </div>
+    </div>
   )
 }

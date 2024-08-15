@@ -7,6 +7,13 @@ const meta: Meta<typeof Map3D> = {
   parameters: {
     layout: 'fullscreen',
   },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '100vw', height: '100vh' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
     latitude: {
