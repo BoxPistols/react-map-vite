@@ -52,20 +52,9 @@ const MapLibre: React.FC<MapLibreProps> = ({
   }, [latitude, longitude, zoom]) // propsの変更を監視
 
   return (
-    <div>
-      <div ref={mapContainer} style={{ width: '100%', height: '100vh' }} />
-      <div
-        style={{
-          position: 'absolute',
-          top: 10,
-          left: 10,
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
-          padding: '10px',
-          borderRadius: '4px',
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '14px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        }}>
+    <div style={{ position: 'relative' }}>
+      <div ref={mapContainer} className='absolute inset-0' />
+      <div className='absolute top-10 right-10 bg-white bg-opacity-70 p-2 rounded-md font-sans text-sm shadow-md text-gray-700 dark:bg-gray-700 dark:text-white'>
         Longitude: {lng.toFixed(4)} | Latitude: {lat.toFixed(4)} | Zoom:{' '}
         {zoomLevel.toFixed(2)}
       </div>

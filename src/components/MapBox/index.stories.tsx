@@ -8,6 +8,7 @@ const meta: Meta<typeof Mapbox> = {
   parameters: {
     docs: { disable: true },
     layout: 'fullscreen',
+    showThemeSwitcher: false,
   },
   tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
