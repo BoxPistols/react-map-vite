@@ -13,7 +13,13 @@ const MapPage = () => {
         height: '100vh',
         width: '100vw',
       }}>
-      <Map3D latitude={35.6809591} longitude={139.7673068} zoom={9} />
+      <Map3D
+        latitude={35.6809591}
+        longitude={139.7673068}
+        zoom={9}
+        pitch={60}
+        bearing={-20}
+      />
     </Box>
   )
 }

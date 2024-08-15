@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
-import type { PaletteColor, Theme } from '@mui/material/styles'
+import type { Theme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
 
 // styled-components
@@ -28,6 +28,15 @@ const TextColors = styled(Box)(() => ({
   fontSize: 16,
   fontWeight: 700,
 }))
+
+// カスタムPaletteColor型の定義
+interface CustomPaletteColor {
+  main: string
+  dark: string
+  light: string
+  contrastText: string
+  lighter?: string // オプショナルプロパティとして追加
+}
 
 // Types
 interface ColorGroupProps {
@@ -94,10 +103,10 @@ export const Color = () => {
   const getColorGroup = (colorName: string) => {
     const color = theme.palette[
       colorName as keyof typeof theme.palette
-    ] as PaletteColor
+    ] as CustomPaletteColor
     return {
       main: color.main,
-      lighter: color.lighter,
+      lighter: color.lighter ?? color.light, // lighter がない場合は light を使用
       dark: color.dark,
       light: color.light,
       contrastText: color.contrastText,

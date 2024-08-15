@@ -1,50 +1,61 @@
-import { Box, Button, Container, Divider, Typography } from '@mui/material'
-import { indigo } from '@mui/material/colors'
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
-
-const display = indigo[200]
-const noteText = indigo[600]
-const displayTitle = indigo[900]
 
 const sampleText = '日本語ひらがなカタカナ123abcABC@*^¥'
 
-const TextStyledDisplay = styled(Typography)`
+const Typographies = () => {
+  const theme = useTheme()
+
+  const displayColor =
+    theme.palette.mode === 'light'
+      ? theme.palette.info.dark
+      : theme.palette.info.light
+
+  const display = displayColor
+  const noteText = theme.palette.text.secondary
+  const displayTitle = theme.palette.text.primary
+
+  const TextStyledDisplay = styled(Typography)`
   font-weight: bold;
   color: ${display};
   font-size: 24px;
   margin-bottom: 16px;
+  font-weight: bold;
 `
 
-const TextStyledVariant = styled(Typography)`
+  const TextStyledVariant = styled(Typography)`
   font-size: 16px;
   font-weight: bold;
   color: ${displayTitle};
 `
 
-const TextStyledSmall = styled(Typography)`
+  const TextStyledSmall = styled(Typography)`
   font-size: 12px;
   font-weight: bold;
   color: ${noteText};
   margin: 2px 4px 2px 10px;
 `
 
-const TextStyledSample = styled(Typography)`
+  const TextStyledSample = styled(Typography)`
   margin-bottom: 2px;
   border-left: 2px solid ${display};
   padding: 2px 8px;
   margin: 4px 4px 4px 10px;
 `
 
-const TextStyledNote = styled(Typography)`
+  const TextStyledNote = styled(Typography)`
   font-size: 14px;
   color: ${noteText};
   margin-bottom: 16px;
   margin: 8px 4px 4px 10px;
 `
-
-const Typographies = () => {
-  const theme = useTheme()
-
   const typographyVariantsHeading = [
     {
       variant: 'h1',
@@ -204,33 +215,60 @@ const Typographies = () => {
           <b style={{ color: 'tomato' }}>{theme.typography.fontSize}px</b>
         </Typography>
         {/* // 各TextStyledDisplayにパージ内リンクを設定 */}
-        <Button
-          variant='outlined'
-          size='small'
-          onClick={handleClick('heading')}>
-          Heading
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          sx={{ m: 1 }}
-          onClick={handleClick('util')}>
-          body + util
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          sx={{ m: 1 }}
-          onClick={handleClick('extended')}>
-          Extended
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          onClick={handleClick('extendedDisplay')}>
-          ExtendedDisplay
-        </Button>
+        <Stack spacing={3} direction='row' my={3}>
+          <Typography variant='sm'>Jump to:</Typography>
+          <Button
+            size='small'
+            variant='outlined'
+            onClick={handleClick('heading')}>
+            Heading
+          </Button>
+          <Button size='small' variant='outlined' onClick={handleClick('util')}>
+            body + util
+          </Button>
+          <Button
+            size='small'
+            variant='outlined'
+            onClick={handleClick('extended')}>
+            Extended
+          </Button>
+          <Button
+            size='small'
+            variant='outlined'
+            onClick={handleClick('extendedDisplay')}>
+            ExtendedDisplay
+          </Button>
+        </Stack>
 
+        {/* INFO */}
+        <>
+          <Box
+            sx={{
+              backgroundColor: 'info.lighter',
+              pt: 1,
+              pb: 2,
+              px: 4,
+              mt: 2,
+            }}>
+            <Typography variant='body2' mt={2} color='info.dark'>
+              <ul>
+                <li>
+                  このページは、動的に取得されたMUIのTypographyの一覧です。
+                </li>
+                <li>
+                  MuiのTypographyコンポーネントは定義していますが、以下の点の考慮が必要です。
+                </li>
+                <li>
+                  近日MUIのメジャーアップデートが予定されており、定義の変更が予想されます。
+                </li>
+                <li>
+                  基本的にはセマンティクス性を確保出来ないTypographyのUI箇所では、拡張されたUtility
+                  Variantを使用することを推奨します。
+                </li>
+              </ul>
+            </Typography>
+          </Box>
+        </>
         {/* Heading */}
         <>
           <TextStyledDisplay id='heading' mt={2}>
@@ -367,7 +405,6 @@ const Typographies = () => {
           ))}
         </>
         <Button
-          variant='outlined'
           size='small'
           onClick={handleClick('top')}
           sx={{ position: 'fixed', bottom: 10, right: 10 }}>

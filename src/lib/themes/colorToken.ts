@@ -1,10 +1,11 @@
-import { amber, blue, indigo, pink, teal } from '@mui/material/colors'
+import { amber, blue, pink } from '@mui/material/colors'
 
 type ColorSet = {
   main: string
-  dark: string
-  light: string
-  lighter: string
+  dark?: string
+  light?: string
+  lighter?: string
+  textContrast?: string
 }
 
 type GreyShades = {
@@ -47,7 +48,6 @@ type ThemeColors = {
     action: string
     disabled: string
   }
-  incomeColor: ColorSet
   divider: string
   common: {
     black: string
@@ -57,14 +57,16 @@ type ThemeColors = {
 
 const createColorSet = (
   main: string,
-  dark: string,
-  light: string,
-  lighter: string
+  dark?: string,
+  light?: string,
+  lighter?: string,
+  textContrast?: string
 ): ColorSet => ({
   main,
   dark,
   light,
   lighter,
+  textContrast,
 })
 
 const greyShades: GreyShades = {
@@ -83,10 +85,10 @@ const greyShades: GreyShades = {
 
 const createThemeColors = (isLight: boolean): ThemeColors => ({
   primary: createColorSet(
-    isLight ? '#2862d0' : indigo[500],
-    isLight ? '#1b5e98' : indigo[900],
-    isLight ? '#428ac2' : indigo[300],
-    isLight ? '#e7e7f0' : indigo[50]
+    isLight ? '#0e0d6a' : '#302eb4',
+    isLight ? '#11114a' : '#1f1d7e',
+    isLight ? '#5451d6' : '#5c5ad4',
+    isLight ? '#b5b4ee' : '#b9b8f4'
   ),
   secondary: createColorSet(
     isLight ? '#696881' : '#8c8da3',
@@ -95,16 +97,16 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
     isLight ? '#FAFAFA' : '#f0f0f0'
   ),
   success: createColorSet(
-    isLight ? '#4dbf51' : '#66BB6A',
-    isLight ? '#388E3C' : '#2E7D32',
-    isLight ? '#57b35b' : '#56c65a',
-    isLight ? '#E8F5E9' : '#C8E6C9'
+    isLight ? '#46ab4a' : '#66BB6A',
+    isLight ? '#3f7f42' : '#388E3C',
+    isLight ? '#6db770' : '#81C784',
+    isLight ? '#d4e9d4' : '#E8F5E9'
   ),
   info: createColorSet(
-    isLight ? '#10c8e0' : '#26C6DA',
-    isLight ? '#0d9cb7' : '#0097A7',
-    isLight ? '#4dd0e1' : '#4DD0E1',
-    isLight ? '#e0f7fa' : '#B2EBF2'
+    isLight ? '#1dafc2' : '#00ACC1',
+    isLight ? '#277781' : '#05747e',
+    isLight ? '#43bfcf' : '#4DD0E1',
+    isLight ? '#bde8ee' : '#B2EBF2'
   ),
   warning: createColorSet(
     isLight ? '#eb8117' : '#FFA726',
@@ -147,12 +149,6 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
     action: amber[400],
     disabled: isLight ? '#e0e0e0' : '#616161',
   },
-  incomeColor: createColorSet(
-    isLight ? teal[700] : teal[400],
-    '#388E3C',
-    '#81C784',
-    '#E8F5E9'
-  ),
   divider: isLight ? '#E0E0E0' : '#616161',
   common: {
     black: isLight ? '#123456' : '#000000',
@@ -160,6 +156,7 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
   },
 })
 
+// これは、後にチャートなどの色を設計する時の参考
 export const colorData = {
   chart: {
     blue: { 50: blue[50], 200: blue[200] },
