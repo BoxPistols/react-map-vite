@@ -7,12 +7,16 @@ interface Map3DProps {
   latitude: number
   longitude: number
   zoom: number
+  pitch: number
+  bearing: number
 }
 
 export const Map3D: React.FC<Map3DProps> = ({
   latitude = 35.6809591,
   longitude = 139.7673068,
   zoom = 9,
+  pitch = 60,
+  bearing = -20,
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapInstance = useRef<maplibregl.Map | null>(null)
@@ -24,6 +28,7 @@ export const Map3D: React.FC<Map3DProps> = ({
     bearing: -20,
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (mapContainer.current && !mapInstance.current) {
       const map = new maplibregl.Map({
@@ -120,10 +125,10 @@ export const Map3D: React.FC<Map3DProps> = ({
         mapInstance.current = null
       }
     }
-  }, [latitude, longitude, zoom])
+  }, [latitude, longitude, zoom, pitch, bearing])
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={{ position: 'relative' }}>
       <div ref={mapContainer} className='absolute inset-0' />
       <div className='absolute top-4 right-16 bg-white text-gray-700 bg-opacity-70 p-2 text-sm z-10 dark:bg-gray-700 dark:text-white'>
         Longitude: {mapInfo.lng} | Latitude: {mapInfo.lat} | Zoom:{' '}

@@ -17,3 +17,9 @@
 main > main {
   inset: 0;
 }
+
+.maplibregl-map {
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+}

@@ -8,7 +8,7 @@ import { SideNav } from '.'
 const meta: Meta<typeof SideNav> = {
   title: 'Layouts/SideNav',
   component: SideNav,
-  tags: ['sidenav', 'navigation'],
+  tags: ['!autodocs'],
   decorators: [
     (Story) => (
       <BrowserRouter>
