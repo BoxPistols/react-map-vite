@@ -1,11 +1,8 @@
-// main.tsx
-
 import App from '@/App'
-import { darkTheme, theme as lightTheme } from '@/lib/themes/theme'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
-import { CssBaseline, ThemeProvider } from '@mui/material'
-import { StrictMode, useEffect, useState } from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
@@ -16,29 +13,11 @@ const cache = createCache({
 })
 
 const Root = () => {
-  const [theme, setTheme] = useState(lightTheme)
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === lightTheme ? darkTheme : lightTheme))
-  }
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'dark') {
-      setTheme(darkTheme)
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme === lightTheme ? 'light' : 'dark')
-  }, [theme])
-
   return (
     <StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <ThemeProvider>
         <CacheProvider value={cache}>
-          <App currentTheme={theme} toggleTheme={toggleTheme} />
+          <App />
         </CacheProvider>
       </ThemeProvider>
     </StrictMode>
