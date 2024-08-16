@@ -1,5 +1,11 @@
-import { Box, Button, Container, Divider, Typography } from '@mui/material'
-import { indigo } from '@mui/material/colors'
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 
 const sampleText = '日本語ひらがなカタカナ123abcABC@*^¥'
@@ -7,15 +13,21 @@ const sampleText = '日本語ひらがなカタカナ123abcABC@*^¥'
 const Typographies = () => {
   const theme = useTheme()
 
-  const display = theme.palette.primary.main
+  const displayColor =
+    theme.palette.mode === 'light'
+      ? theme.palette.info.dark
+      : theme.palette.info.light
+
+  const display = displayColor
   const noteText = theme.palette.text.secondary
-  const displayTitle = indigo[700]
+  const displayTitle = theme.palette.text.primary
 
   const TextStyledDisplay = styled(Typography)`
   font-weight: bold;
   color: ${display};
   font-size: 24px;
   margin-bottom: 16px;
+  font-weight: bold;
 `
 
   const TextStyledVariant = styled(Typography)`
@@ -203,33 +215,60 @@ const Typographies = () => {
           <b style={{ color: 'tomato' }}>{theme.typography.fontSize}px</b>
         </Typography>
         {/* // 各TextStyledDisplayにパージ内リンクを設定 */}
-        <Button
-          variant='outlined'
-          size='small'
-          onClick={handleClick('heading')}>
-          Heading
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          sx={{ m: 1 }}
-          onClick={handleClick('util')}>
-          body + util
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          sx={{ m: 1 }}
-          onClick={handleClick('extended')}>
-          Extended
-        </Button>
-        <Button
-          variant='outlined'
-          size='small'
-          onClick={handleClick('extendedDisplay')}>
-          ExtendedDisplay
-        </Button>
+        <Stack spacing={3} direction='row' my={3}>
+          <Typography variant='sm'>Jump to:</Typography>
+          <Button
+            size='small'
+            variant='outlined'
+            onClick={handleClick('heading')}>
+            Heading
+          </Button>
+          <Button size='small' variant='outlined' onClick={handleClick('util')}>
+            body + util
+          </Button>
+          <Button
+            size='small'
+            variant='outlined'
+            onClick={handleClick('extended')}>
+            Extended
+          </Button>
+          <Button
+            size='small'
+            variant='outlined'
+            onClick={handleClick('extendedDisplay')}>
+            ExtendedDisplay
+          </Button>
+        </Stack>
 
+        {/* INFO */}
+        <>
+          <Box
+            sx={{
+              backgroundColor: 'info.lighter',
+              pt: 1,
+              pb: 2,
+              px: 4,
+              mt: 2,
+            }}>
+            <Typography variant='body2' mt={2} color='info.dark'>
+              <ul>
+                <li>
+                  このページは、動的に取得されたMUIのTypographyの一覧です。
+                </li>
+                <li>
+                  MuiのTypographyコンポーネントは定義していますが、以下の点の考慮が必要です。
+                </li>
+                <li>
+                  近日MUIのメジャーアップデートが予定されており、定義の変更が予想されます。
+                </li>
+                <li>
+                  基本的にはセマンティクス性を確保出来ないTypographyのUI箇所では、拡張されたUtility
+                  Variantを使用することを推奨します。
+                </li>
+              </ul>
+            </Typography>
+          </Box>
+        </>
         {/* Heading */}
         <>
           <TextStyledDisplay id='heading' mt={2}>
@@ -366,7 +405,6 @@ const Typographies = () => {
           ))}
         </>
         <Button
-          variant='outlined'
           size='small'
           onClick={handleClick('top')}
           sx={{ position: 'fixed', bottom: 10, right: 10 }}>

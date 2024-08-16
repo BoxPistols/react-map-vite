@@ -1,10 +1,11 @@
-import { amber, blue, indigo, pink } from '@mui/material/colors'
+import { amber, blue, pink } from '@mui/material/colors'
 
 type ColorSet = {
   main: string
   dark?: string
   light?: string
   lighter?: string
+  textContrast?: string
 }
 
 type GreyShades = {
@@ -58,12 +59,14 @@ const createColorSet = (
   main: string,
   dark?: string,
   light?: string,
-  lighter?: string
+  lighter?: string,
+  textContrast?: string
 ): ColorSet => ({
   main,
   dark,
   light,
   lighter,
+  textContrast,
 })
 
 const greyShades: GreyShades = {
@@ -101,7 +104,7 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
   ),
   info: createColorSet(
     isLight ? '#1dafc2' : '#00ACC1',
-    isLight ? '#237d89' : '#00838F',
+    isLight ? '#277781' : '#05747e',
     isLight ? '#43bfcf' : '#4DD0E1',
     isLight ? '#bde8ee' : '#B2EBF2'
   ),
