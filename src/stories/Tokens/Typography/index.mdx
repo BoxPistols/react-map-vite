@@ -175,18 +175,25 @@ Typographyコンポーネントには、頻出する以下のような主要なA
 - Tailwind CSSのクラスを直接適用することで、MUIのTypographyコンポーネントにもスタイルを適用できます
 - 以下は、MUIのTypographyコンポーネントにTailwind CSSのクラスを適用した例です
 
-<Typography className="text-center text-2xl font-bold py-2 bg-gray-200">
+<Typography className="text-center text-2xl font-bold py-2 bg-gray-200 bg- bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer">
   {"Example: オプション指定"}
 </Typography>
 
 ```tsx
-<Typography className="text-center text-2xl font-bold py-2 bg-gray-200">
+<Typography className="text-center text-2xl font-bold py-2 bg-gray-200 bg- bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer">
   {"Example: オプション指定"}
 </Typography>
 ```
 
+上記のように、Tailwindのクラス設計は意味的な責務を持たない利便性の反面、クラスが増えることでスタイルの一元的な管理が難しくなることがあります。
+
 - MUIのデフォルトのスタイルとTailwind CSSのスタイルが競合する場合があるので、適用する際は注意が必要です
 - また、デザイントークンはMUIのTypographyコンポーネントのスタイルを優先するため、Tailwind CSSのスタイルを適用する際は別途カスタムスタイルを定義することをお勧めします
+
+### Tailwind CSSの採択
+
+- Tailwindはエンジニアにとって常に賛否両論の意見があり、プロジェクトの要件、開発者の意向やスキルによって異なりますので、適切な選択を行ってください
+- 今回のプロダクトではMUIのデザイントークンを優先していますが、必要に応じてTailwindを併用することで、MUIの煩雑性の弱点を補い、より柔軟なスタイリングを実現する事を目指しています
 
 Tailwind URL [https://tailwindcss.com/docs](https://tailwindcss.com/docs)
 

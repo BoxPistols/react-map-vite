@@ -1,4 +1,6 @@
+import createCache from '@emotion/cache'
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
+import { CacheProvider } from '@emotion/react'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
@@ -85,36 +87,44 @@ const ThemeSwitcherDecorator = (Story, context) => {
     }
   }
 
+  const cache = createCache({
+    key: 'css',
+    prepend: true,
+    stylisPlugins: [],
+  })
+
   return (
     <EmotionThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {showThemeSwitcher && (
-          <IconButton
-            onClick={toggleTheme}
-            sx={{
-              position: 'fixed',
-              zIndex: 10000,
-              bgcolor:
-                theme.palette.mode === 'dark'
-                  ? 'rgba(255,255,255,0.1)'
-                  : 'rgba(0,0,0,0.1)',
-              '&:hover': {
+        <CacheProvider value={cache}>
+          <CssBaseline />
+          {showThemeSwitcher && (
+            <IconButton
+              onClick={toggleTheme}
+              sx={{
+                position: 'fixed',
+                zIndex: 10000,
                 bgcolor:
                   theme.palette.mode === 'dark'
-                    ? 'rgba(255,255,255,0.2)'
-                    : 'rgba(0,0,0,0.2)',
-              },
-              ...getPositionStyle(),
-            }}>
-            {theme.palette.mode === 'dark' ? (
-              <Brightness7Icon sx={{ color: iconColor }} />
-            ) : (
-              <Brightness4Icon sx={{ color: iconColor }} />
-            )}
-          </IconButton>
-        )}
-        <Story {...context} />
+                    ? 'rgba(255,255,255,0.1)'
+                    : 'rgba(0,0,0,0.1)',
+                '&:hover': {
+                  bgcolor:
+                    theme.palette.mode === 'dark'
+                      ? 'rgba(255,255,255,0.2)'
+                      : 'rgba(0,0,0,0.2)',
+                },
+                ...getPositionStyle(),
+              }}>
+              {theme.palette.mode === 'dark' ? (
+                <Brightness7Icon sx={{ color: iconColor }} />
+              ) : (
+                <Brightness4Icon sx={{ color: iconColor }} />
+              )}
+            </IconButton>
+          )}
+          <Story {...context} />
+        </CacheProvider>
       </ThemeProvider>
     </EmotionThemeProvider>
   )
