@@ -85,10 +85,10 @@ const greyShades: GreyShades = {
 
 const createThemeColors = (isLight: boolean): ThemeColors => ({
   primary: createColorSet(
-    isLight ? '#0e0d6a' : '#302eb4',
-    isLight ? '#11114a' : '#1f1d7e',
-    isLight ? '#5451d6' : '#5c5ad4',
-    isLight ? '#b5b4ee' : '#b9b8f4'
+    isLight ? '#0e0d6a' : '#4f4ea7',
+    isLight ? '#11114a' : '#272675',
+    isLight ? '#5451d6' : '#5a58b4',
+    isLight ? '#b5b4ee' : '#b1b0e9'
   ),
   secondary: createColorSet(
     isLight ? '#696881' : '#8c8da3',
@@ -128,8 +128,8 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
     white: '#ffffff',
   },
   background: {
-    default: isLight ? '#FFFFFF' : '#212121',
-    paper: isLight ? '#FFFFFF' : '#333333',
+    default: isLight ? '#FFFFFF' : '#313035',
+    paper: isLight ? '#FFFFFF' : '#3b3b3d',
   },
   action: {
     hover: isLight ? '#f5f5f5' : '#333333',

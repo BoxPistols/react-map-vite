@@ -217,57 +217,56 @@ const Typographies = () => {
         {/* // 各TextStyledDisplayにパージ内リンクを設定 */}
         <Stack spacing={3} direction='row' my={3}>
           <Typography variant='sm'>Jump to:</Typography>
-          <Button
-            size='small'
-            variant='outlined'
-            onClick={handleClick('heading')}>
-            Heading
-          </Button>
-          <Button size='small' variant='outlined' onClick={handleClick('util')}>
-            body + util
-          </Button>
-          <Button
-            size='small'
-            variant='outlined'
-            onClick={handleClick('extended')}>
+          <Button onClick={handleClick('heading')}>Heading</Button>
+          <Button onClick={handleClick('util')}>body + util</Button>
+          <Button color='info' onClick={handleClick('extended')}>
             Extended
           </Button>
-          <Button
-            size='small'
-            variant='outlined'
-            onClick={handleClick('extendedDisplay')}>
+          <Button color='info' onClick={handleClick('extendedDisplay')}>
             ExtendedDisplay
           </Button>
         </Stack>
 
         {/* INFO */}
         <>
-          <Box
+          <Stack
+            py={3}
+            px={4}
+            mt={2}
             sx={{
-              backgroundColor: 'info.lighter',
-              pt: 1,
-              pb: 2,
-              px: 4,
-              mt: 2,
+              backgroundColor:
+                theme.palette.mode === 'light' ? 'grey.200' : 'grey.800',
             }}>
-            <Typography variant='body2' mt={2} color='info.dark'>
-              <ul>
-                <li>
-                  このページは、動的に取得されたMUIのTypographyの一覧です。
-                </li>
-                <li>
-                  MuiのTypographyコンポーネントは定義していますが、以下の点の考慮が必要です。
-                </li>
-                <li>
-                  近日MUIのメジャーアップデートが予定されており、定義の変更が予想されます。
-                </li>
-                <li>
-                  基本的にはセマンティクス性を確保出来ないTypographyのUI箇所では、拡張されたUtility
-                  Variantを使用することを推奨します。
-                </li>
-              </ul>
+            <Typography>
+              MuiのTypographyコンポーネントは一通りThemeにて定義していますが、以下の点の考慮が必要です。
             </Typography>
-          </Box>
+            <Typography>
+              近日MUIのメジャーアップデートが予定されており、現行の
+              <a href='https://material.io/design/typography/the-type-system.html#type-scale'>
+                Material Design2の設計思想
+              </a>
+              から、
+              <a href='https://m3.material.io/styles/typography/type-scale-tokens'>
+                Material Design3の設計思想
+              </a>
+              に変更される可能性があります。
+              <br />
+            </Typography>
+            <Typography>
+              基本的にマークアップ構造としてのセマンティクス性を確保出来ないテキスト構造のUI箇所では、抽象度の高い
+              <Typography
+                color='info.main'
+                component={'span'}
+                onClick={handleClick('extended')}
+                sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                カスタム拡張Variant
+              </Typography>
+              を使用することを推奨します。
+            </Typography>
+            <Typography>
+              用途が明確なTypographyパターンがあれば、さらに拡張Variantを追加することも推奨します。
+            </Typography>
+          </Stack>
         </>
         {/* Heading */}
         <>
