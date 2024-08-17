@@ -35,6 +35,54 @@ const createComponentStyles = (
         },
       },
     },
+    // TextField 関連のコンポーネントのスタイルを調整する
+    MuiInputLabel: {
+      styleOverrides: {
+        formControl: {
+          // 移動をクリック時に動かないように固定
+          position: 'static',
+          transform: 'none',
+          transition: 'none',
+          pointerEvents: 'auto',
+          cursor: 'pointer',
+          display: 'inline',
+          alignSelf: 'start',
+          fontWeight: 'bold',
+          fontSize: '0.875rem',
+          lineHeight: 1.75,
+          color: colors.text.primary,
+          '&.Mui-focused': {
+            color: colors.text.primary,
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          marginTop: 0,
+        },
+        input: {
+          paddingTop: '10px',
+          paddingBottom: '8px',
+          height: 'auto',
+        },
+        notchedOutline: {
+          top: 0,
+          legend: {
+            // 内包された legend 要素によって、四角の左側の切り欠きが実現されているので、表示されないようにする
+            display: 'none',
+          },
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          marginLeft: 0,
+        },
+      },
+    },
     MuiAppBar: {
       styleOverrides: {
         root:

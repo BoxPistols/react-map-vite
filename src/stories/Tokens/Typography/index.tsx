@@ -8,6 +8,8 @@ import {
 } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 
+import type { MouseEvent } from 'react'
+
 const sampleText = '日本語ひらがなカタカナ123abcABC@*^¥'
 
 const Typographies = () => {
@@ -196,8 +198,7 @@ const Typographies = () => {
 
   //ページ内リンク用
   function handleClick(id: string) {
-    // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
-    return (event: React.MouseEvent<HTMLButtonElement>) => {
+    return (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
       const element = document.getElementById(id)
       if (element) {
