@@ -11,7 +11,7 @@ const meta: Meta<typeof Layout> = {
   parameters: {
     layout: 'fullscreen',
     themeSwitcherPosition: 'top-right',
-    themeSwitcherIconColor: 'default',
+    themeSwitcherIconColor: 'white',
   },
   decorators: [
     (Story) => (

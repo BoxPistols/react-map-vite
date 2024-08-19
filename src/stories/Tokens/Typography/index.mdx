@@ -13,15 +13,16 @@ import { Meta } from "@storybook/blocks";
 
 ## About
 
-Typography コンポーネントは、テキストのスタイルやフォーマットを指定するために使用され、MUIではマテリアルデザインのテキストスタイルを提供しています。
+Typographyコンポーネントは、テキストのスタイルやフォーマットを指定するために使用され、MUIではマテリアルデザインのテキストスタイルを提供しています。
+
+関連Link
 
 - [Mui Typography](https://mui.com/material-ui/react-typography/)
 - [Material Design Typography](https://material.io/design/typography/the-type-system.html)
 
 このプロダクトのテキストトークン、themeファイルで保持している一覧を以下にまとめています
 
-- [Typography Variants](/story/tokens-typography--vatiants)
-- これは、MUIのデフォルトの Typographyをベースにしていますが、より柔軟な対応ができるように拡張カスタマイズも実装しています
+- [Typography Variants](/story/tokens-typography--vatiants) これは、MUIのデフォルトの Typographyをベースにしていますが、より柔軟な対応ができるように拡張カスタマイズも実装しています
 
 <Typography variant="sm" color="text.secondary">
   {
@@ -56,24 +57,28 @@ Typography コンポーネントは、テキストのスタイルやフォーマ
 ### Options
 
 <Typography
-  variant="h2"
+  variant="h4"
   color="primary.main"
   align="center"
   fontWeight="bold"
   display="block"
+  backgroundColor="grey.100"
   mt={2}
+  py={2}
 >
   {"Example: オプション指定"}
 </Typography>
 
 ```tsx
 <Typography
-  variant="h2"
+  variant="h4"
   color="primary.main"
   align="center"
   fontWeight="bold"
   display="block"
+  backgroundColor="grey.100"
   mt={2}
+  py={2}
 >
   {"Example: オプション指定"}
 </Typography>
@@ -112,8 +117,6 @@ Typographyコンポーネントには、頻出する以下のような主要なA
 
 ### Use Case
 
-<Box mt={3}>
-
 <Typography variant="h2">{"h2 見出しテキスト"}</Typography>
 <Typography variant="subtitle1">
   {"subtitle1 サブタイトル、説明文を書く"}
@@ -124,50 +127,6 @@ Typographyコンポーネントには、頻出する以下のような主要なA
   {"subtitle1 サブタイトル、説明文を書く"}
 </Typography>
 ```
-
-<Typography variant="displayMedium">displayMedium 見出しテキスト</Typography>
-<Typography variant="subtitle2">
-  {"subtitle2 サブタイトル、説明文を書く"}
-</Typography>
-```tsx
-<Typography variant="displayMedium">
-  {"displayMedium 見出しテキスト"}
-</Typography>
-<Typography variant="subtitle2">
-  {"subtitle2 サブタイトル、説明文を書く"}
-</Typography>
-```
-
-<Typography variant="lg">{"lg拡張variant"}</Typography>
-<Typography variant="sm">{"sm拡張variant"}</Typography>
-```tsx
-<Typography variant="lg">{"lg拡張variant"}</Typography>
-<Typography variant="sm">{"sm拡張variant"}</Typography>
-```
-
-<Typography
-  variant="ml"
-  color="warning.main"
-  align="center"
-  fontWeight="bold"
-  display="block"
-  mt={2}
->
-  {"オプション指定"}
-</Typography>
-```tsx
-<Typography
-  color="warning.main"
-  align="center"
-  fontWeight="bold"
-  display="block"
-  mt={2}
->
-  {"オプション指定"}
-</Typography>
-```
-
-</Box>
 
 ## Tailwindとの併用
 

@@ -1,3 +1,4 @@
+import { colorData } from '@/lib/themes/colorToken'
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import type { Theme } from '@mui/material/styles'
@@ -125,6 +126,7 @@ export const Color = () => {
   }
 
   const paperColors = {
+    default: theme.palette.background.default,
     paper: theme.palette.background.paper,
   }
 
@@ -148,22 +150,7 @@ export const Color = () => {
   //   iconDisabled: theme.palette.iconDisabled,
   // }
 
-  const greyColors = {
-    '50': theme.palette.grey[50],
-    '100': theme.palette.grey[100],
-    '200': theme.palette.grey[200],
-    '300': theme.palette.grey[300],
-    '400': theme.palette.grey[400],
-    '500': theme.palette.grey[500],
-    '600': theme.palette.grey[600],
-    '700': theme.palette.grey[700],
-    '800': theme.palette.grey[800],
-    '900': theme.palette.grey[900],
-    A100: theme.palette.grey.A100,
-    A200: theme.palette.grey.A200,
-    A400: theme.palette.grey.A400,
-    A700: theme.palette.grey.A700,
-  }
+  const greyColors = colorData.grey
 
   return (
     <Container maxWidth='lg'>
@@ -195,26 +182,8 @@ export const Color = () => {
         </TextColors>
       </Box>
       <ColorGroup title='common' colors={commonColors} />
-      <ColorGroup title='paper' colors={paperColors} />
+      <ColorGroup title='background' colors={paperColors} />
       <ColorGroup title='grey' colors={greyColors} />
-      {/* <ColorGroup title='palette others' colors={otherColors} />
-      <ColorGroup title='palette surfaceBackground' colors={surfaceColors} />
-      <ColorGroup title='icon palette' colors={iconColors} /> */}
-      {/* <Box ml={2} mt={3} width={'fit-content'}>
-        <Typography fontWeight={'bold'}>example</Typography>
-        <Typography
-          color={theme.palette.primary.contrastText}
-          px={4}
-          py={1.5}
-          mt={1}
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            borderRadius: 2,
-          }}>
-          backgroundColor: primary.main <br />
-          color: primary.contrastText
-        </Typography>
-      </Box> */}
     </Container>
   )
 }
