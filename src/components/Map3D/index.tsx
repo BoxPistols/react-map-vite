@@ -128,7 +128,7 @@ export const Map3D: React.FC<Map3DProps> = ({
   }, [latitude, longitude, zoom, pitch, bearing])
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={{ position: 'relative' }}>
       <div ref={mapContainer} className='absolute inset-0' />
       <div className='absolute top-4 right-16 bg-white text-gray-700 bg-opacity-70 p-2 text-sm z-10 dark:bg-gray-700 dark:text-white'>
         Longitude: {mapInfo.lng} | Latitude: {mapInfo.lat} | Zoom:{' '}
