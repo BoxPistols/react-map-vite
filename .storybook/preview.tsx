@@ -148,7 +148,9 @@ const preview: Preview = {
     themeSwitcherIconColor: 'auto',
     themeSwitcherPosition: 'top-right', // デフォルト位置
   },
+
   decorators: [ThemeSwitcherDecorator],
+  tags: ['autodocs'],
 }
 
 export default preview
