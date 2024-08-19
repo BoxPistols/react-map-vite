@@ -1,34 +1,44 @@
-import path from 'node:path'
+import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-// import autoprefixer from 'autoprefixer'
-// import tailwindcss from 'tailwindcss'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
-    react({
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin'],
-      },
+    react(),
+    dts({
+      insertTypesEntry: true,
     }),
   ],
-  esbuild: {
-    jsxInject: `import React from 'react'`,
-  },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': resolve(__dirname, './src'),
     },
   },
-  server: {
-    open: true,
-  },
   build: {
-    outDir: 'dist',
-  },
-  css: {
-    // postcss: { plugins: [tailwindcss, autoprefixer] },
-    postcss: './postcss.config.js',
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'TwMui',
+      formats: ['es', 'umd'],
+      fileName: (format) => `tw-mui.${format}.js`,
+    },
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        '@mui/material',
+        '@emotion/react',
+        '@emotion/styled',
+      ],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          '@mui/material': 'MaterialUI',
+          '@emotion/react': 'emotionReact',
+          '@emotion/styled': 'emotionStyled',
+        },
+      },
+    },
   },
 })

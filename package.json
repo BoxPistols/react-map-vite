@@ -1,14 +1,15 @@
 {
-  "name": "react-drone-vite",
-  "version": "0.0.1",
-  "repository": "git@github.com:BoxPistols/react-drone-vite.git",
-  "author": "BoxPistols",
-  "license": "UNLICENSED",
-  "private": true,
-  "type": "module",
+  "name": "@asagiri-design/tw-mui",
+  "types": "types.d.ts",
+  "description": "A simple React component library with Material-UI and TailwindCSS",
+  "main": "dist/tw-mui.umd.js",
+  "module": "dist/tw-mui.es.js",
+  "files": ["dist"],
+  "private": false,
   "scripts": {
+    "prepublishOnly": "npm run build",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "format": "yarn biome format --write .",
     "lint": "yarn biome lint --write ./src",
     "fix": "yarn run lint && yarn run format",
@@ -17,6 +18,13 @@
     "sb-build": "storybook build",
     "prepare": "husky install",
     "build-all": "yarn run build && yarn run sb-build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@mui/material": "^5.15.18",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -80,5 +88,7 @@
   "volta": {
     "node": "20.13.1",
     "yarn": "1.22.22"
-  }
+  },
+  "author": "",
+  "license": "ISC"
 }
