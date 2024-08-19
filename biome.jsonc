@@ -24,7 +24,8 @@
       "**/yarn.lock",
       "**/package-lock.json",
       "**/yarn-error.log",
-      "**/storybook-static/**"
+      "**/storybook-static/**",
+      "**/*.d.ts"
     ]
   },
   "javascript": {
@@ -122,8 +123,7 @@
       "**/node_modules/",
       "**/tailwind.config.js",
       "**/postcss.config.js",
-      "**/storybook-static",
-      "**/*.d.ts"
+      "**/storybook-static"
     ]
   },
   "overrides": [
@@ -132,7 +132,6 @@
         "*.stories.@(ts|tsx|js|jsx|mjs|cjs)",
         "*.story.@(ts|tsx|js|jsx|mjs|cjs)"
       ],
-      "ignore": ["*.d.ts"],
       "linter": {
         "rules": {
           "correctness": {
