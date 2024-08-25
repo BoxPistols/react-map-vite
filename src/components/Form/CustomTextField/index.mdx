@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/blocks"
+import { Meta } from "@storybook/blocks";
 import {
   Container,
   Typography,
@@ -7,9 +7,9 @@ import {
   FormControl,
   TextField,
   InputLabel,
-} from "@mui/material"
-import { ThemeProvider } from "@mui/material/styles"
-import { theme } from "@/lib/themes/theme"
+} from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "@/lib/themes/theme";
 
 <Meta title="Mui/Form/TextField/Info" />
 
@@ -18,121 +18,9 @@ import { theme } from "@/lib/themes/theme"
   <Container>
     # TextField
 
-    ## Links
-
-    - [About](#about)
-    - [Variants](#variants)
-    - [Example](#example)
-      - [送信フォーム](#送信フォーム)
-      - [Labelの分離](#labelの分離)
-    - [API](#api-props一覧)
-    - [Form API Links](#form-api-links)
-    - [Link](#link)
-
     ## About
 
     テキストフィールドは、ユーザーがテキストを入力できるようにするための基本的な入力コンポーネントです。
-
-    ## Variants
-
-    最も使う想定である`outlined`を中心に紹介します。
-
-    ### Outlined
-
-    TextfieltのOutlined Optionは、`TextField`、`OutlinedInput`、`InputLabel`、`FormHelperText`、`InputAdornment`の5つのコンポーネントで構成されています。
-
-    以下にサンプルを示します。サイズを一律に`small`にしています。
-
-    <Box display="flex" gap={1} flexWrap="wrap">
-      <TextField
-        label="Outlined"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-      />
-      <TextField
-        label="Outlined"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        disabled
-      />
-      <TextField
-        label="Outlined"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        error
-      />
-      <TextField
-        label="Outlined"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        helperText="Helper text"
-      />
-      <TextField
-        label="Outlined"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        helperText="Helper text"
-        error
-      />
-      <TextField
-        label="Outlined"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        helperText="Helper text"
-        disabled
-      />
-    </Box>
-
-    <details>
-    <summary>Code</summary>
-    ```tsx
-    <TextField
-      label="Outlined"
-      variant="outlined"
-      placeholder="Placeholder"
-    />
-    <TextField
-      label="Outlined"
-      variant="outlined"
-      placeholder="Placeholder"
-      disabled
-    />
-    <TextField
-      label="Outlined"
-      variant="outlined"
-      placeholder="Placeholder"
-      error
-    />
-    <TextField
-      label="Outlined"
-      variant="outlined"
-      placeholder="Placeholder"
-      helperText="Helper text"
-    />
-    <TextField
-      label="Outlined"
-      variant="outlined"
-      placeholder="Placeholder"
-      helperText="Helper text"
-      error
-    />
-    <TextField
-      label="Outlined"
-      variant="outlined"
-      placeholder="Placeholder"
-      helperText="Helper text"
-      disabled
-    />
-    ```
-    </details>
-
-    その他のvariantsとして、`filled`と`standard`がありますが、今回は省略します。
 
     ## Example
 
@@ -140,7 +28,7 @@ import { theme } from "@/lib/themes/theme"
 
     ### 送信フォーム
 
-    <Box display="flex" flexDirection="column" gap={1} maxWidth={480} mb={3}>
+    <Box display="flex" flexDirection="column" gap={4} maxWidth={480} mb={3}>
       <TextField
         label="Name"
         variant="outlined"
