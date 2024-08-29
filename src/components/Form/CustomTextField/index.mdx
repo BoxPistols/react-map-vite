@@ -10,303 +10,214 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/lib/themes/theme";
+import CustomTextField from ".";
 
-<Meta title="Mui/Form/TextField/Info" />
+<Meta title="Components/CustomTextField/Info" />
 
 <ThemeProvider theme={theme}>
 
-  <Container>
-    # TextField
+<Container>
+# TextField
 
-    ## About
+## About
 
-    テキストフィールドは、ユーザーがテキストを入力できるようにするための基本的な入力コンポーネントです。
+テキストフィールドは、ユーザーがテキストを入力できるようにするための基本的な入力コンポーネントです。
 
-    ## Example
+### カスタムテキストフィールド
 
-    参考に、実践的な例を示します。
+今回はカスタムテキストフィールドを作成し、デザインをカスタマイズしています。
 
-    ### 送信フォーム
+カスタム後、主に使うPropsは以下の通りです。
 
-    <Box display="flex" flexDirection="column" gap={4} maxWidth={480} mb={3}>
-      <TextField
-        label="Name"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-      />
-      <TextField
-        label="Email"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-      />
-      <TextField
-        label="Message"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        multiline
-        rows={3}
-      />
-      <Button variant="contained">Submit</Button>
-    </Box>
+- `label`: ラベル
+- `placeholder`: プレースホルダー
+- `helperText`: ヘルパーテキスト
+- `error`: エラー
+- `disabled`: 無効化
+- `fullWidth`: 幅100%
+- `required`: 必須
+- `tooltip`: ツールチップ
 
+## Example
 
-    <details>
-    <summary>Code</summary>
-    ```tsx
-    <TextField
-      label="Name"
-      variant="outlined"
-      placeholder="Placeholder"
-      size="small"
-    />
-    <TextField
-      label="Email"
-      variant="outlined"
-      placeholder="Placeholder"
-      size="small"
-    />
-    <TextField
-      label="Message"
-      variant="outlined"
-      placeholder="Placeholder"
-      size="small"
-      multiline
-      rows={3}
-    />
-    <Button variant="contained">Submit</Button>
-    ```
-    </details>
+参考に、実践的な例を示します。
 
-    ## Labelの分離
+### 送信フォーム
 
-    Labelを分離することもできます。その際は、`InputLabel`を使用し、`shrink`を指定します。
+{/* TODO:Field化 */}
 
-    <Box display="flex" flexDirection="column" gap={4} maxWidth={480} mt={4} mb={3}>
-      <FormControl variant="standard" shrink>
-        <InputLabel shrink htmlFor="name" sx={{ mt: -2}}>Name</InputLabel>
-        <TextField
-          id="name"
-          variant="outlined"
-          placeholder="Placeholder"
-          size="small"
-          />
-      </FormControl>
+<Box display="flex" flexDirection="column" gap={4} maxWidth={480} mb={3}>
+  <CustomTextField label="Name" placeholder="Placeholder" required />
+  <CustomTextField label="Email" placeholder="Placeholder" required />
+  <CustomTextField
+    label="Message"
+    placeholder="Placeholder"
+    multiline
+    rows={3}
+  />
+  <Button variant="contained">Submit</Button>
+</Box>
 
-      <FormControl variant="standard" shrink>
-        <InputLabel shrink htmlFor="email" sx={{ mt: -2}}>Email</InputLabel>
-        <TextField
-          id="email"
-          variant="outlined"
-          placeholder="Placeholder"
-          size="small"
-          />
-      </FormControl>
+```tsx
+<Box display="flex" flexDirection="column" gap={4} maxWidth={480} mb={3}>
+  <CustomTextField label="Name" placeholder="Placeholder" required />
+  <CustomTextField label="Email" placeholder="Placeholder" required />
+  <CustomTextField
+    label="Message"
+    placeholder="Placeholder"
+    multiline
+    rows={3}
+  />
+  <Button variant="contained">Submit</Button>
+</Box>
+```
 
-      <FormControl variant="standard" shrink>
-        <InputLabel shrink htmlFor="message" sx={{ mt: -2}}>Message</InputLabel>
-        <TextField
-          id="message"
-          variant="outlined"
-          placeholder="Placeholder"
-          size="small"
-          multiline
-          rows={3}
-          />
-      </FormControl>
+その他UIのカスタマイズは、[公式ドキュメント](https://mui.com/components/text-fields/#customized-inputs)を参照してください。
 
-      <Button variant="contained" sx={{ mt: -2}}>Submit</Button>
-    </Box>
+特にMuiを業務システムで開発する場合は、細かなUIカスタマイズのニーズが出てくると思います。その際は、[公式ドキュメント](https://mui.com/customization/how-to-customize/)を参照し、細かなアップデートを繰り返し、自社のデザインシステムに近づけていくことをおすすめします。
 
-    <details>
-    <summary>Code</summary>
-    ```tsx
-    <FormControl variant="standard" shrink>
-      <InputLabel shrink htmlFor="name" sx={{ mt: -2}}>Name</InputLabel>
-      <TextField
-        id="name"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        />
-    </FormControl>
+## API Props一覧
 
-    <FormControl variant="standard" shrink>
-      <InputLabel shrink htmlFor="email" sx={{ mt: -2}}>Email</InputLabel>
-      <TextField
-        id="email"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        />
-    </FormControl>
+TextFieldのオプションは、以下の通りです。詳細なAPIは[公式ドキュメント](https://mui.com/api/text-field/)も参照してください
 
-    <FormControl variant="standard" shrink>
-      <InputLabel shrink htmlFor="message" sx={{ mt: -2}}>Message</InputLabel>
-      <TextField
-        id="message"
-        variant="outlined"
-        placeholder="Placeholder"
-        size="small"
-        multiline
-        rows={3}
-        />
-    </FormControl>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>label</td>
+    <td>node</td>
+    <td></td>
+    <td>ラベル</td>
+  </tr>
+  <tr>
+    <td>placeholder</td>
+    <td>string</td>
+    <td></td>
+    <td>プレースホルダー</td>
+  </tr>
+  <tr>
+    <td>helperText</td>
+    <td>node</td>
+    <td></td>
+    <td>ヘルパーテキスト</td>
+  </tr>
+  <tr>
+    <td>error</td>
+    <td>bool</td>
+    <td>false</td>
+    <td>エラー</td>
+  </tr>
+  <tr>
+    <td>disabled</td>
+    <td>bool</td>
+    <td>false</td>
+    <td>無効化</td>
+  </tr>
+  <tr>
+    <td>fullWidth</td>
+    <td>bool</td>
+    <td>false</td>
+    <td>幅100%</td>
+  </tr>
+  <tr>
+    <td>multiline</td>
+    <td>bool</td>
+    <td>false</td>
+    <td>複数行</td>
+  </tr>
+  <tr>
+    <td>rows</td>
+    <td>number</td>
+    <td>1</td>
+    <td>行数</td>
+  </tr>
+  <tr>
+    <td>rowsMax</td>
+    <td>number</td>
+    <td></td>
+    <td>最大行数</td>
+  </tr>
+  <tr>
+    <td>inputProps</td>
+    <td>object</td>
+    <td></td>
+    <td>input要素のprops</td>
+  </tr>
+  <tr>
+    <td>InputProps</td>
+    <td>object</td>
+    <td></td>
+    <td>Input要素のprops</td>
+  </tr>
+  <tr>
+    <td>InputLabelProps</td>
+    <td>object</td>
+    <td></td>
+    <td>InputLabel要素のprops</td>
+  </tr>
+  <tr>
+    <td>FormHelperTextProps</td>
+    <td>object</td>
+    <td></td>
+    <td>FormHelperText要素のprops</td>
+  </tr>
+  <tr>
+    <td>variant</td>
+    <td>'standard' \| 'outlined' \| 'filled'</td>
+    <td>'standard'</td>
+    <td>バリエーション</td>
+  </tr>
+  <tr>
+    <td>color</td>
+    <td>'primary' \| 'secondary'</td>
+    <td>'primary'</td>
+    <td>色</td>
+  </tr>
+  <tr>
+    <td>size</td>
+    <td>'small' \| 'medium'</td>
+    <td>'medium'</td>
+    <td>サイズ</td>
+  </tr>
+  <tr>
+    <td>select</td>
+    <td>bool</td>
+    <td>false</td>
+    <td>セレクトボックス</td>
+  </tr>
+</table>
 
-    <Button variant="contained" sx={{ mt: -2}}>Submit</Button>
-    ```
-    </details>
+## Form API Links
 
+- [TextField](https://mui.com/api/text-field/)
+- [OutlinedInput](https://mui.com/api/outlined-input/)
+- [FilledInput](https://mui.com/api/filled-input/)
+- [Input](https://mui.com/api/input/)
+- [InputBase](https://mui.com/api/input-base/)
+- [InputAdornment](https://mui.com/api/input-adornment/)
+- [InputLabel](https://mui.com/api/input-label/)
+- [FormHelperText](https://mui.com/api/form-helper-text/)
+- [Select](https://mui.com/api/select/)
+- [TextareaAutosize](https://mui.com/api/textarea-autosize/)
 
-    その他UIのカスタマイズは、[公式ドキュメント](https://mui.com/components/text-fields/#customized-inputs)を参照してください。
+## Link
 
-    特にMuiを業務システムで開発する場合は、細かなUIカスタマイズのニーズが出てくると思います。その際は、[公式ドキュメント](https://mui.com/customization/how-to-customize/)を参照し、細かなアップデートを繰り返し、自社のデザインシステムに近づけていくことをおすすめします。
+<div className="link-list">
+  <a
+    className="link-item"
+    href="https://mui.com/components/text-fields/"
+    target="_blank"
+  >
+    <span>
+      <strong>MUI</strong>
+      TextField
+    </span>
+  </a>
+</div>
 
-    ## API Props一覧
-
-    TextFieldのオプションは、以下の通りです。詳細なAPIは[公式ドキュメント](https://mui.com/api/text-field/)も参照してください
-
-    <table>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>label</td>
-        <td>node</td>
-        <td></td>
-        <td>ラベル</td>
-    </tr>
-    <tr>
-        <td>placeholder</td>
-        <td>string</td>
-        <td></td>
-        <td>プレースホルダー</td>
-    </tr>
-    <tr>
-        <td>helperText</td>
-        <td>node</td>
-        <td></td>
-        <td>ヘルパーテキスト</td>
-    </tr>
-    <tr>
-        <td>error</td>
-        <td>bool</td>
-        <td>false</td>
-        <td>エラー</td>
-    </tr>
-    <tr>
-        <td>disabled</td>
-        <td>bool</td>
-        <td>false</td>
-        <td>無効化</td>
-    </tr>
-    <tr>
-        <td>fullWidth</td>
-        <td>bool</td>
-        <td>false</td>
-        <td>幅100%</td>
-    </tr>
-    <tr>
-        <td>multiline</td>
-        <td>bool</td>
-        <td>false</td>
-        <td>複数行</td>
-    </tr>
-    <tr>
-        <td>rows</td>
-        <td>number</td>
-        <td>1</td>
-        <td>行数</td>
-    </tr>
-    <tr>
-        <td>rowsMax</td>
-        <td>number</td>
-        <td></td>
-        <td>最大行数</td>
-    </tr>
-    <tr>
-        <td>inputProps</td>
-        <td>object</td>
-        <td></td>
-        <td>input要素のprops</td>
-    </tr>
-    <tr>
-        <td>InputProps</td>
-        <td>object</td>
-        <td></td>
-        <td>Input要素のprops</td>
-    </tr>
-    <tr>
-        <td>InputLabelProps</td>
-        <td>object</td>
-        <td></td>
-        <td>InputLabel要素のprops</td>
-    </tr>
-    <tr>
-        <td>FormHelperTextProps</td>
-        <td>object</td>
-        <td></td>
-        <td>FormHelperText要素のprops</td>
-    </tr>
-    <tr>
-        <td>variant</td>
-        <td>'standard' \| 'outlined' \| 'filled'</td>
-        <td>'standard'</td>
-        <td>バリエーション</td>
-    </tr>
-    <tr>
-        <td>color</td>
-        <td>'primary' \| 'secondary'</td>
-        <td>'primary'</td>
-        <td>色</td>
-    </tr>
-    <tr>
-        <td>size</td>
-        <td>'small' \| 'medium'</td>
-        <td>'medium'</td>
-        <td>サイズ</td>
-    </tr>
-    <tr>
-        <td>select</td>
-        <td>bool</td>
-        <td>false</td>
-        <td>セレクトボックス</td>
-    </tr>
-    </table>
-
-
-    ## Form API Links
-
-    - [TextField](https://mui.com/api/text-field/)
-    - [OutlinedInput](https://mui.com/api/outlined-input/)
-    - [FilledInput](https://mui.com/api/filled-input/)
-    - [Input](https://mui.com/api/input/)
-    - [InputBase](https://mui.com/api/input-base/)
-    - [InputAdornment](https://mui.com/api/input-adornment/)
-    - [InputLabel](https://mui.com/api/input-label/)
-    - [FormHelperText](https://mui.com/api/form-helper-text/)
-    - [Select](https://mui.com/api/select/)
-    - [TextareaAutosize](https://mui.com/api/textarea-autosize/)
-
-    ## Link
-
-    <div className="link-list">
-      <a
-        className="link-item"
-        href="https://mui.com/components/text-fields/"
-        target="_blank"
-      >
-        <span>
-          <strong>MUI</strong>
-          TextField
-        </span>
-      </a>
-    </div>
-
-  </Container>
+</Container>
 </ThemeProvider>

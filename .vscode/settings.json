@@ -45,6 +45,7 @@
 		"yarn.lock": true,
 		"package-lock.json": true
 	},
+	"DockerRun.DisableDockerrc": true,
 	// MDXをmarkdownとして扱い一時的にPreview
 	// "files.associations": {
 	// 	"*.mdx": "markdown"
