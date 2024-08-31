@@ -39,6 +39,12 @@
 	"[css]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	// eclude node_modules from search
+	"search.exclude": {
+		"**/node_modules": true,
+		"yarn.lock": true,
+		"package-lock.json": true
+	},
 	// MDXをmarkdownとして扱い一時的にPreview
 	// "files.associations": {
 	// 	"*.mdx": "markdown"
