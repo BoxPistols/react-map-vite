@@ -130,7 +130,7 @@ const createComponentStyles = (
         variant: 'contained',
         disableElevation: true,
         disableRipple: true,
-        size: 'small',
+        size: 'medium',
       },
       styleOverrides: {
         sizeSmall: {
@@ -178,6 +178,29 @@ const createComponentStyles = (
         head: {
           fontSize: '0.8125rem',
           fontWeight: 700,
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 16,
+          padding: 8,
+        },
+        root: {
+          '& .MuiDialogTitle-root': {
+            padding: '16px 24px',
+          },
+          '& .MuiDialogContent-root': {
+            padding: '16px 24px',
+          },
+          '& .MuiDialogActions-root': {
+            padding: '8px 16px',
+          },
+          '& .MuiTypography-h6': {
+            fontSize: '1.25rem',
+            fontWeight: 700,
+          },
         },
       },
     },

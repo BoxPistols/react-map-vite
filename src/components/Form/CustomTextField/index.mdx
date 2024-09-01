@@ -1,76 +1,483 @@
-import { Meta } from "@storybook/blocks";
+import { theme } from "@/lib/themes/theme";
 import {
-  Container,
-  Typography,
-  Button,
   Box,
+  Button,
+  Container,
   FormControl,
-  TextField,
   InputLabel,
+  TextField,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "@/lib/themes/theme";
+import { Meta } from "@storybook/blocks";
+import { useState } from "react";
 import CustomTextField from ".";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 <Meta title="Components/CustomTextField/Info" />
 
 <ThemeProvider theme={theme}>
 
 <Container>
-# TextField
+# CustomTextField
 
-## About
+## 概要
 
-テキストフィールドは、ユーザーがテキストを入力できるようにするための基本的な入力コンポーネントです。
+- CustomTextFieldは、Material-UIのTextFieldをベースにカスタマイズされた入力コンポーネントです。
+- MUIの機能性を活かしながら、マテリアルデザイン固有のクセを廃し、よりシンプルで使いやすいUIを提供します。
 
-### カスタムテキストフィールド
-
-今回はカスタムテキストフィールドを作成し、デザインをカスタマイズしています。
-
-カスタム後、主に使うPropsは以下の通りです。
+### 主要なProps
 
 - `label`: ラベル
 - `placeholder`: プレースホルダー
 - `helperText`: ヘルパーテキスト
-- `error`: エラー
+- `error`: エラー状態
 - `disabled`: 無効化
-- `fullWidth`: 幅100%
 - `required`: 必須
 - `tooltip`: ツールチップ
+- `size`: サイズ（'small' | 'medium'）
+- `fullWidth`: 幅100%
+- `multiline`: 複数行
+- `rows`: 行数
+- `rowsMax`: 最大行数
+- `aria-label`: アクセシビリティラベル
+- `aria-describedby`: アクセシビリティ説明
+- `inputProps`: input要素のprops
 
-## Example
+この中でTooltipは独自にラベルに組み込んでします。ユーザーに入力フォームの使い方を説明するための補助的な情報を提供します。
 
-参考に、実践的な例を示します。
+その他のpropsについては、[MUI TextField API](https://mui.com/api/text-field/)を参照してください。
 
-### 送信フォーム
+## 使用例
 
-{/* TODO:Field化 */}
+### 基本的な使用方法
 
-<Box display="flex" flexDirection="column" gap={4} maxWidth={480} mb={3}>
-  <CustomTextField label="Name" placeholder="Placeholder" required />
-  <CustomTextField label="Email" placeholder="Placeholder" required />
-  <CustomTextField
-    label="Message"
-    placeholder="Placeholder"
-    multiline
-    rows={3}
-  />
-  <Button variant="contained">Submit</Button>
-</Box>
+<CustomTextField
+  label="ユーザー名"
+  placeholder="ユーザー名を入力してください"
+  required
+/>
 
 ```tsx
-<Box display="flex" flexDirection="column" gap={4} maxWidth={480} mb={3}>
-  <CustomTextField label="Name" placeholder="Placeholder" required />
-  <CustomTextField label="Email" placeholder="Placeholder" required />
-  <CustomTextField
-    label="Message"
-    placeholder="Placeholder"
-    multiline
-    rows={3}
-  />
-  <Button variant="contained">Submit</Button>
-</Box>
+<CustomTextField
+  label="ユーザー名"
+  placeholder="ユーザー名を入力してください"
+  required
+/>
 ```
+
+### ツールチップ付きの例
+
+<CustomTextField
+  label="メールアドレス"
+  placeholder="example@example.com"
+  tooltip="有効なメールアドレスを入力してください"
+/>
+
+```tsx
+<CustomTextField
+  label="メールアドレス"
+  placeholder="example@example.com"
+  tooltip="有効なメールアドレスを入力してください"
+/>
+```
+
+### エラー状態の例
+
+<CustomTextField
+  label="パスワード"
+  type="password"
+  error
+  helperText="パスワードは8文字以上である必要があります"
+/>
+
+```tsx
+<CustomTextField
+  label="パスワード"
+  type="password"
+  error
+  helperText="パスワードは8文字以上である必要があります"
+/>
+```
+
+## 実践的な例: グループ化されたフォーム
+
+以下は、FormControlを使用してフィールドをグループ化した、より複雑なフォームの例です。この例では、個人情報と住所情報を別々のグループに分けています。
+
+export const GroupedForm = () => {
+  const [formData, setFormData] = useState({
+    lastName: '',
+    firstName: '',
+    email: '',
+    postalCode: '',
+    city: '',
+    streetAddress: '',
+  })
+  const [errors, setErrors] = useState({})
+  const [openDialog, setOpenDialog] = useState(false)
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
+
+const requiredFields = ['lastName', 'email'] // 必須フィールドのリスト
+
+const handleChange = (e) => {
+const { name, value } = e.target
+setFormData((prevData) => ({
+...prevData,
+[name]: value,
+}))
+}
+
+const handleSubmit = (e) => {
+e.preventDefault()
+const newErrors = {}
+
+    // 必須フィールドのみをチェック
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        newErrors[field] = 'このフィールドは必須です'
+      }
+    })
+
+    if (Object.keys(newErrors).length === 0) {
+      setOpenDialog(true)
+    } else {
+      setErrors(newErrors)
+    }
+
+}
+
+const handleCloseDialog = () => {
+setOpenDialog(false)
+}
+
+return (
+
+<>
+<Box
+component='form'
+onSubmit={handleSubmit}
+sx={{
+          maxWidth: 600,
+          margin: 'auto',
+          border: `1px solid ${theme.palette.divider}`,
+          p: 8,
+          borderRadius: 2,
+        }}>
+<FormControl component='fieldset' sx={{ width: '100%', mb: 2 }}>
+<Typography variant='h6' component='legend' sx={{ mb: 2 }}>
+個人情報
+</Typography>
+
+<Box sx={{ display: 'flex', gap: 2, mb: 4, flexDirection: { xs: 'column', sm: 'row' } }}>
+
+<CustomTextField
+              label='姓'
+              name='lastName'
+              value={formData.lastName}
+              onChange={handleChange}
+              error={!!errors.lastName}
+              helperText={errors.lastName}
+              required
+            />
+<CustomTextField
+              label='名'
+              name='firstName'
+              value={formData.firstName}
+              onChange={handleChange}
+              error={!!errors.firstName}
+              helperText={errors.firstName}
+            />
+</Box>
+<CustomTextField
+            label='メールアドレス'
+            name='email'
+            type='email'
+            value={formData.email}
+            onChange={handleChange}
+            error={!!errors.email}
+            helperText={errors.email}
+            required
+            tooltip='有効なメールアドレスを入力してください'
+          />
+</FormControl>
+
+        <FormControl component='fieldset' sx={{ width: '100%', mb: 2, mt: 4 }}>
+          <Typography variant='h6' component='legend' sx={{ mb: 2 }}>
+            住所情報
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+            <CustomTextField
+              label='郵便番号'
+              name='postalCode'
+              value={formData.postalCode}
+              onChange={handleChange}
+              error={!!errors.postalCode}
+              helperText={errors.postalCode}
+            />
+            <CustomTextField
+              label='市区町村'
+              name='city'
+              value={formData.city}
+              onChange={handleChange}
+              error={!!errors.city}
+              helperText={errors.city}
+            />
+          </Box>
+          <CustomTextField
+            label='住所'
+            name='streetAddress'
+            value={formData.streetAddress}
+            onChange={handleChange}
+            error={!!errors.streetAddress}
+            helperText={errors.streetAddress}
+          />
+        </FormControl>
+
+        <Button
+          type='submit'
+          variant='contained'
+          color='primary'
+          sx={{ mt: 2 }}>
+          送信内容の確認
+        </Button>
+      </Box>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        sx={{ p: 8 }}
+        fullWidth={true}
+        maxWidth='sm'>
+        <DialogTitle>送信内容の確認</DialogTitle>
+        <DialogContent>
+          <Typography
+            component='pre'
+            sx={{ whiteSpace: 'pre-wrap' }}>
+            {JSON.stringify(formData, null, 2)}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Box sx={{ flexGrow: 1 }}/>
+          <Button
+            onClick={handleCloseDialog}
+            variant='outlined'
+            color='secondary'>
+            閉じる
+          </Button>
+          <Button>送信</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+
+)
+}
+
+// フォームの表示
+
+<GroupedForm />
+
+<details>
+<summary>コードを表示</summary>
+```tsx
+export const GroupedForm = () => {
+  const [formData, setFormData] = useState({
+    lastName: '',
+    firstName: '',
+    email: '',
+    postalCode: '',
+    city: '',
+    streetAddress: '',
+  })
+  const [errors, setErrors] = useState({})
+  const [openDialog, setOpenDialog] = useState(false)
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
+
+const requiredFields = ['lastName', 'email'] // 必須フィールドのリスト
+
+const handleChange = (e) => {
+const { name, value } = e.target
+setFormData((prevData) => ({
+...prevData,
+[name]: value,
+}))
+}
+
+const handleSubmit = (e) => {
+e.preventDefault()
+const newErrors = {}
+
+    // 必須フィールドのみをチェック
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        newErrors[field] = 'このフィールドは必須です'
+      }
+    })
+
+    if (Object.keys(newErrors).length === 0) {
+      setOpenDialog(true)
+    } else {
+      setErrors(newErrors)
+    }
+
+}
+
+const handleCloseDialog = () => {
+setOpenDialog(false)
+}
+
+return (
+
+<>
+<Box
+component='form'
+onSubmit={handleSubmit}
+sx={{
+          maxWidth: 600,
+          margin: 'auto',
+          border: `1px solid ${theme.palette.divider}`,
+          p: 8,
+          borderRadius: 2,
+        }}>
+<FormControl component='fieldset' sx={{ width: '100%', mb: 2 }}>
+
+<Typography variant="h6" component="legend" sx={{ mb: 2 }}>
+  個人情報
+</Typography>
+
+<Box sx={{ display: 'flex', gap: 2, mb: 4, flexDirection: { xs: 'column', sm: 'row' } }}>
+
+<CustomTextField
+              label='姓'
+              name='lastName'
+              value={formData.lastName}
+              onChange={handleChange}
+              error={!!errors.lastName}
+              helperText={errors.lastName}
+              required
+            />
+<CustomTextField
+              label='名'
+              name='firstName'
+              value={formData.firstName}
+              onChange={handleChange}
+              error={!!errors.firstName}
+              helperText={errors.firstName}
+            />
+</Box>
+<CustomTextField
+            label='メールアドレス'
+            name='email'
+            type='email'
+            value={formData.email}
+            onChange={handleChange}
+            error={!!errors.email}
+            helperText={errors.email}
+            required
+            tooltip='有効なメールアドレスを入力してください'
+          />
+</FormControl>
+
+        <FormControl component='fieldset' sx={{ width: '100%', mb: 2, mt: 4 }}>
+          <Typography variant='h6' component='legend' sx={{ mb: 2 }}>
+            住所情報
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+            <CustomTextField
+              label='郵便番号'
+              name='postalCode'
+              value={formData.postalCode}
+              onChange={handleChange}
+              error={!!errors.postalCode}
+              helperText={errors.postalCode}
+            />
+            <CustomTextField
+              label='市区町村'
+              name='city'
+              value={formData.city}
+              onChange={handleChange}
+              error={!!errors.city}
+              helperText={errors.city}
+            />
+          </Box>
+          <CustomTextField
+            label='住所'
+            name='streetAddress'
+            value={formData.streetAddress}
+            onChange={handleChange}
+            error={!!errors.streetAddress}
+            helperText={errors.streetAddress}
+          />
+        </FormControl>
+
+        <Button
+          type='submit'
+          variant='contained'
+          color='primary'
+          sx={{ mt: 2 }}>
+          送信内容の確認
+        </Button>
+      </Box>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        sx={{ p: 8 }}
+        fullWidth={true}
+        maxWidth='sm'>
+        <DialogTitle>送信内容の確認</DialogTitle>
+        <DialogContent>
+          <Typography
+            component='pre'
+            sx={{ whiteSpace: 'pre-wrap' }}>
+            {JSON.stringify(formData, null, 2)}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Box sx={{ flexGrow: 1 }}/>
+          <Button
+            onClick={handleCloseDialog}
+            variant='outlined'
+            color='secondary'>
+            閉じる
+          </Button>
+          <Button>送信</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+
+)
+}
+
+```
+</details>
+
+この例では、`FormControl`コンポーネントを使用して、関連するフィールドをグループ化しています。主な特徴は以下の通りです：
+
+1. `FormControl`を使用して、個人情報と住所情報を別々のセクションに分けています
+1. フォーム特有のやや」複雑なレイアウトを実現しています
+1. 所定のフィールドに対して、バリデーションとエラー表示を実装しています
+5. レスポンシブなレイアウトを実現しています
+
+このようなグループ化されたフォームレイアウトは、ユーザーにとって情報を整理しやすく、入力しやすいインターフェースを提供します。また、開発者にとっても、関連するフィールドを論理的にグループ化できるため、コードの管理が容易になります。
+
+この例では、フォームの状態管理、バリデーション、エラー表示、そしてSubmit時の値の確認を表示するためのダイアログを実装しています。
+
+## カスタマイズ
+
+CustomTextFieldのさらなるカスタマイズが必要な場合は、[MUIカスタマイズガイド](https://mui.com/customization/how-to-customize/)を参照し、プロジェクトの要件に合わせて調整してください。
+
+## 関連リンク
+
+- [MUI TextField](https://mui.com/components/text-fields/)
+- [MUI Form API](https://mui.com/api/form-control/)
+- [MUI Input API](https://mui.com/api/input/)
 
 その他UIのカスタマイズは、[公式ドキュメント](https://mui.com/components/text-fields/#customized-inputs)を参照してください。
 
@@ -211,6 +618,7 @@ TextFieldのオプションは、以下の通りです。詳細なAPIは[公式�
     className="link-item"
     href="https://mui.com/components/text-fields/"
     target="_blank"
+    rel="noreferrer"
   >
     <span>
       <strong>MUI</strong>
@@ -221,3 +629,4 @@ TextFieldのオプションは、以下の通りです。詳細なAPIは[公式�
 
 </Container>
 </ThemeProvider>
+```
