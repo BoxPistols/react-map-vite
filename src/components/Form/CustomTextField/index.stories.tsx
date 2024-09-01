@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { type ChangeEvent, useState } from 'react'
 import CustomTextField from '.'
@@ -7,10 +8,9 @@ const meta: Meta<typeof CustomTextField> = {
   component: CustomTextField,
   tags: ['!autodocs', 'text', 'input', 'form'],
   parameters: {
-    // docs: { disable: true },
     showThemeSwitcher: true,
     themeSwitcherIconColor: 'black',
-    themeSwitcherPosition: 'rigt-top',
+    themeSwitcherPosition: 'right-top',
   },
   argTypes: {
     label: { control: 'text' },
@@ -20,6 +20,11 @@ const meta: Meta<typeof CustomTextField> = {
     tooltip: { control: 'text' },
     disabled: { control: 'boolean' },
     helperText: { control: 'text' },
+    size: {
+      control: 'radio',
+      options: ['small', 'medium'],
+      defaultValue: 'medium',
+    },
   },
   decorators: [
     (Story) => (
@@ -35,15 +40,23 @@ type Story = StoryObj<typeof CustomTextField>
 
 export const Default: Story = {
   args: {
-    label: 'Default TextField',
-    placeholder: 'Enter text here',
+    label: 'デフォルトのテキストフィールド',
+    placeholder: 'ここにテキストを入力',
+  },
+}
+
+export const Small: Story = {
+  args: {
+    ...Default.args,
+    label: '小さいサイズのテキストフィールド',
+    size: 'small',
   },
 }
 
 export const Required: Story = {
   args: {
     ...Default.args,
-    label: 'Required TextField',
+    label: '必須のテキストフィールド',
     required: true,
   },
 }
@@ -51,24 +64,24 @@ export const Required: Story = {
 export const WithTooltip: Story = {
   args: {
     ...Default.args,
-    label: 'TextField with Tooltip',
-    tooltip: 'This is a helpful tooltip',
+    label: 'ツールチップ付きテキストフィールド',
+    tooltip: 'これは役立つツールチップです',
   },
 }
 
 export const WithError: Story = {
   args: {
     ...Default.args,
-    label: 'TextField with Error',
+    label: 'エラー状態のテキストフィールド',
     error: true,
-    helperText: 'This field has an error',
+    helperText: 'このフィールドにはエラーがあります',
   },
 }
 
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    label: 'Disabled TextField',
+    label: '無効化されたテキストフィールド',
     disabled: true,
   },
 }
@@ -76,28 +89,37 @@ export const Disabled: Story = {
 export const WithHelperText: Story = {
   args: {
     ...Default.args,
-    label: 'TextField with Helper Text',
-    helperText: 'This is some helper text',
+    label: 'ヘルパーテキスト付きテキストフィールド',
+    helperText: 'これはヘルパーテキストです',
   },
 }
 
-export const AllFeatures: Story = {
+export const AllFeaturesMedium: Story = {
   args: {
-    label: 'All Features TextField',
-    placeholder: 'Enter text here',
+    label: '全機能テキストフィールド (通常サイズ)',
+    placeholder: 'ここにテキストを入力',
     required: true,
-    tooltip: 'This field demonstrates all features',
+    tooltip: 'このフィールドは全機能を示しています',
     error: false,
-    helperText: 'This field has all features enabled',
+    helperText: 'このフィールドには全ての機能が有効です',
+    size: 'medium',
+  },
+}
+
+export const AllFeaturesSmall: Story = {
+  args: {
+    ...AllFeaturesMedium.args,
+    label: '全機能テキストフィールド (小さいサイズ)',
+    size: 'small',
   },
 }
 
 export const InteractiveExample: Story = {
   args: {
-    label: 'Interactive TextField',
-    placeholder: 'Input must be between 3 and 20 characters',
+    label: 'インタラクティブなテキストフィールド',
+    placeholder: '3文字以上20文字以下で入力してください',
     required: true,
-    tooltip: 'Input must be between 3 and 20 characters',
+    tooltip: '入力は3文字以上20文字以下である必要があります',
   },
   render: (args) => {
     const [value, setValue] = useState('')
@@ -115,8 +137,27 @@ export const InteractiveExample: Story = {
         value={value}
         onChange={handleChange}
         error={hasError}
-        helperText={hasError ? 'Input must be between 3 and 20 characters' : ''}
+        helperText={
+          hasError ? '入力は3文字以上20文字以下である必要があります' : ''
+        }
       />
     )
   },
+}
+
+export const SizeComparison: Story = {
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <CustomTextField
+        label='通常サイズのテキストフィールド'
+        placeholder='ここにテキストを入力'
+        size='medium'
+      />
+      <CustomTextField
+        label='小さいサイズのテキストフィールド'
+        placeholder='ここにテキストを入力'
+        size='small'
+      />
+    </Box>
+  ),
 }

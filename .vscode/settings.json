@@ -30,7 +30,6 @@
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.tabSize": 2
 	},
-	"trailing-spaces.trimOnSave": true,
 	"files.trimTrailingWhitespace": true,
 	"files.insertFinalNewline": true,
 	"[mdx]": {
@@ -45,7 +44,16 @@
 		"yarn.lock": true,
 		"package-lock.json": true
 	},
-	"DockerRun.DisableDockerrc": true,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"**/node_modules": true,
+		"**/*.d.ts": true
+	},
 	// MDXをmarkdownとして扱い一時的にPreview
 	// "files.associations": {
 	// 	"*.mdx": "markdown"

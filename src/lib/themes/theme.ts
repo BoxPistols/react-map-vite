@@ -22,6 +22,7 @@ const createPalette = (mode: 'light' | 'dark') => {
   }
 }
 
+// theme.ts
 const createComponentStyles = (
   mode: 'light' | 'dark'
 ): ThemeOptions['components'] => {
@@ -35,11 +36,9 @@ const createComponentStyles = (
         },
       },
     },
-    // TextField 関連のコンポーネントのスタイルを調整する
     MuiInputLabel: {
       styleOverrides: {
         formControl: {
-          // 移動をクリック時に動かないように固定
           position: 'static',
           transform: 'none',
           transition: 'none',
@@ -54,6 +53,10 @@ const createComponentStyles = (
           '&.Mui-focused': {
             color: colors.text.primary,
           },
+          '&.MuiInputLabel-sizeSmall': {
+            fontSize: '0.75rem',
+            lineHeight: 1.5,
+          },
         },
       },
     },
@@ -61,16 +64,22 @@ const createComponentStyles = (
       styleOverrides: {
         root: {
           marginTop: 0,
+          '&.MuiInputBase-sizeSmall': {
+            fontSize: '0.875rem',
+          },
         },
         input: {
           paddingTop: '10px',
           paddingBottom: '8px',
           height: 'auto',
+          '&.MuiInputBase-inputSizeSmall': {
+            paddingTop: '8px',
+            paddingBottom: '6px',
+          },
         },
         notchedOutline: {
           top: 0,
           legend: {
-            // 内包された legend 要素によって、四角の左側の切り欠きが実現されているので、表示されないようにする
             display: 'none',
           },
         },
@@ -80,6 +89,9 @@ const createComponentStyles = (
       styleOverrides: {
         root: {
           marginLeft: 0,
+          '&.MuiFormHelperText-sizeSmall': {
+            fontSize: '0.6875rem',
+          },
         },
       },
     },
