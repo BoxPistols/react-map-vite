@@ -40,7 +40,7 @@
     "string-width": "^4.2.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.0",
+    "@biomejs/biome": "^1.8.3",
     "@chromatic-com/storybook": "^1.6.1",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "@storybook/addon-a11y": "^8.2.9",
