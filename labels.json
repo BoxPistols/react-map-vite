@@ -58,5 +58,10 @@
     "name": "Draft",
     "color": "cfd3d7",
     "description": "進行中"
+  },
+  {
+    "name": "Test",
+    "color": "f7c6c7",
+    "description": "テスト"
   }
 ]

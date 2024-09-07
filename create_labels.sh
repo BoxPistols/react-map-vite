@@ -1,6 +1,7 @@
 #!/bin/bash
+MyRepo="BoxPistols/react-drone-vite"
 
-REPO="BoxPistols/react-drone-vite"
+REPO=${1:-$MyRepo}
 
 for row in $(jq -r '.[] | @base64' labels.json); do
   _jq() {
