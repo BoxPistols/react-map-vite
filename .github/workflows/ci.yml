@@ -84,8 +84,14 @@ jobs:
                 "**/*.d.ts",
                 "**/*.local",
                 "**/*.log",
-                "**/.env"
+                "**/.env",
+                "**/.vscode/**"
               ]
+            },
+            "json": {
+              "parser": {
+                "allowComments": true
+              }
             }
           }
           EOF

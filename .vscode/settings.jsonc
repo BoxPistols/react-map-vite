@@ -53,7 +53,7 @@
 		"**/Thumbs.db": true,
 		"**/node_modules": true,
 		"**/*.d.ts": true
-	},
+	}
 	// MDXをmarkdownとして扱い一時的にPreview
 	// "files.associations": {
 	// 	"*.mdx": "markdown"
