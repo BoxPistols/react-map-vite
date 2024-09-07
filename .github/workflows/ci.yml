@@ -30,5 +30,65 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Create Biome configuration
+        run: |
+          cat << EOF > biome.json
+          {
+            "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
+            "organizeImports": {
+              "enabled": true,
+              "ignore": ["**/dist", "**/node_modules/", "**/*.d.ts"]
+            },
+            "formatter": {
+              "enabled": true,
+              "formatWithErrors": true,
+              "indentStyle": "space",
+              "indentWidth": 2,
+              "lineEnding": "lf",
+              "lineWidth": 80,
+              "attributePosition": "auto",
+              "ignore": [
+                "**/node_modules/**",
+                "**/dist/**",
+                "**/dist-ssr/**",
+                "**/build/**",
+                "**/coverage/**",
+                "**/.git/**",
+                "**/.vscode/**",
+                "**/.idea/**",
+                "**/.DS_Store",
+                "**/yarn.lock",
+                "**/package-lock.json",
+                "**/yarn-error.log",
+                "**/storybook-static/**",
+                "**/*.d.ts",
+                "**/*.local",
+                "**/*.log",
+                "**/tailwind.config.js",
+                "**/postcss.config.cjs",
+                "**/.env"
+              ]
+            },
+            "linter": {
+              "enabled": true,
+              "rules": {
+                "recommended": true
+              },
+              "ignore": [
+                "**/dist/**",
+                "**/dist-ssr/**",
+                "**/node_modules/**",
+                "**/tailwind.config.js",
+                "**/postcss.config.cjs",
+                "**/storybook-static/**",
+                "**/*.d.ts",
+                "**/*.local",
+                "**/*.log",
+                "**/.env"
+              ]
+            }
+          }
+          EOF
+
       - name: Run Biome Lint
-        run: bunx @biomejs/biome lint .
+        run: bunx @biomejs/biome lint --config-path=biome.json .
