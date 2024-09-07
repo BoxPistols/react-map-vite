@@ -85,12 +85,20 @@ jobs:
                 "**/*.local",
                 "**/*.log",
                 "**/.env",
-                "**/.vscode/**"
+                "**/.vscode/settings.json"
               ]
+            },
+            "javascript": {
+              "formatter": {
+                "quoteStyle": "single"
+              }
             },
             "json": {
               "parser": {
                 "allowComments": true
+              },
+              "formatter": {
+                "enabled": false
               }
             }
           }
@@ -98,3 +106,19 @@ jobs:
 
       - name: Run Biome Lint
         run: bunx @biomejs/biome lint --config-path=biome.json .
+
+      - name: Cleanup before caching
+        run: |
+          rm -rf node_modules/.cache
+          rm -rf node_modules/.vite
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-
+            ${{ runner.os }}-bun-
