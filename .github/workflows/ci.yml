@@ -7,26 +7,118 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "20.13.1"
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+          bun-version: latest
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-bun-
+
       - name: Install dependencies
-        run: yarn install
+        run: bun install --frozen-lockfile
+
+      - name: Create Biome configuration
+        run: |
+          cat << 'EOF' > biome.json
+          {
+            "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
+            "organizeImports": {
+              "enabled": true,
+              "ignore": ["**/dist", "**/node_modules/", "**/*.d.ts"]
+            },
+            "formatter": {
+              "enabled": true,
+              "formatWithErrors": true,
+              "indentStyle": "space",
+              "indentWidth": 2,
+              "lineEnding": "lf",
+              "lineWidth": 80,
+              "attributePosition": "auto",
+              "ignore": [
+                "**/node_modules/**",
+                "**/dist/**",
+                "**/dist-ssr/**",
+                "**/build/**",
+                "**/coverage/**",
+                "**/.git/**",
+                "**/.vscode/**",
+                "**/.idea/**",
+                "**/.DS_Store",
+                "**/yarn.lock",
+                "**/package-lock.json",
+                "**/yarn-error.log",
+                "**/storybook-static/**",
+                "**/*.d.ts",
+                "**/*.local",
+                "**/*.log",
+                "**/tailwind.config.js",
+                "**/postcss.config.cjs",
+                "**/.env"
+              ]
+            },
+            "linter": {
+              "enabled": true,
+              "rules": {
+                "recommended": true
+              },
+              "ignore": [
+                "**/dist/**",
+                "**/dist-ssr/**",
+                "**/node_modules/**",
+                "**/tailwind.config.js",
+                "**/postcss.config.cjs",
+                "**/storybook-static/**",
+                "**/*.d.ts",
+                "**/*.local",
+                "**/*.log",
+                "**/.env",
+                "**/.vscode/settings.json"
+              ]
+            },
+            "javascript": {
+              "formatter": {
+                "quoteStyle": "single"
+              }
+            },
+            "json": {
+              "parser": {
+                "allowComments": true
+              },
+              "formatter": {
+                "enabled": false
+              }
+            }
+          }
+          EOF
+
       - name: Run Biome Lint
-        run: yarn lint
+        run: bunx @biomejs/biome lint --config-path=biome.json .
+
+      - name: Cleanup before caching
+        run: |
+          rm -rf node_modules/.cache
+          rm -rf node_modules/.vite
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-
+            ${{ runner.os }}-bun-

@@ -9,14 +9,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "format": "yarn biome format --write .",
-    "lint": "yarn biome lint --write ./src",
-    "fix": "yarn run lint && yarn run format",
+    "format": "bun biome format --write .",
+    "lint": "bun biome lint --write ./src",
+    "fix": "bun run lint && bun run format",
     "preview": "vite preview",
     "sb": "storybook dev -p 6006",
     "sb-build": "storybook build",
     "prepare": "husky install",
-    "build-all": "yarn run build && yarn run sb-build"
+    "build-all": "bun run build && bun run sb-build"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -40,7 +40,7 @@
     "string-width": "^4.2.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.0",
+    "@biomejs/biome": "^1.8.3",
     "@chromatic-com/storybook": "^1.6.1",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "@storybook/addon-a11y": "^8.2.9",
@@ -69,16 +69,15 @@
     "vite": "^5.2.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["yarn run fix"]
+    "*.{js,jsx,ts,tsx}": ["bun run fix"]
   },
   "husky": {
     "hooks": {
-      "post-checkout": "chmod +x .husky/pre-commit && yarn run prepare",
-      "post-merge": "chmod +x .husky/pre-commit && yarn run prepare"
+      "post-checkout": "chmod +x .husky/pre-commit && bun run prepare",
+      "post-merge": "chmod +x .husky/pre-commit && bun run prepare"
     }
   },
   "volta": {
-    "node": "20.13.1",
-    "yarn": "1.22.22"
+    "node": "20.13.1"
   }
 }

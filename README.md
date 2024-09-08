@@ -10,22 +10,36 @@
 cp -p .env.example .env
 ```
 
+### Bun
+
+```sh
+curl -fsSL https://bun.sh/install | bash
+```
+
+### Biome のインストール
+
+```sh
+yarn global add @biome/cli
+# or
+npm install -g @biome/cli
+```
+
 ### 依存パッケージのインストール
 
 ```sh
-yarn install
+bun install
 ```
 
 ### ローカル開発サーバを起動
 
 ```sh
-yarn dev
+bun dev
 ```
 
 ### プロダクション用ビルド
 
 ```sh
-yarn build
+bun build
 ```
 
 ### Node 管理
@@ -58,7 +72,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 - Biome <https://marketplace.visualstudio.com/items?itemName=biomejs.biome>
 - ErrorLens <https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens>
 - MarkdownLint <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
-    
+
 VSCode拡張検索枠に @recommended を入力すると、この開発環境に必要な拡張機能が表示されます
 
 ![Code 2024-07-10 20 59 57](https://github.com/BoxPistols/react-drone-vite/assets/10333049/518a259e-09eb-43cc-8e3b-9b841226fcaa)
@@ -77,25 +91,25 @@ VSCode拡張検索枠に @recommended を入力すると、この開発環境�
 
 #### コミット・プッシュ前に
 
-- `yarn fix`で全ファイル一括整形+自動改善可能なものは自動改善
+- `bun fix`で全ファイル一括整形+自動改善可能なものは自動改善
 - この操作を習慣づけることで個々の書式による差分がなくなり、エラー検知も常時行える
-- 動的な箇所の変更などで挙動やデプロイの懸念がある場合は`yarn build`を実行し、エラーが無いか確認する
+- 動的な箇所の変更などで挙動やデプロイの懸念がある場合は`bun build`を実行し、エラーが無いか確認する
 
 ↑
 
 ##### husky にて自動化
 
-もし`git commit`を実行した時に自動で`yarn fix`が走らなければ Local に husky が入っていません。その時は以下の操作をして husky を入れてください
+もし`git commit`を実行した時に自動で`bun fix`が走らなければ Local に husky が入っていません。その時は以下の操作をして husky を入れてください
 
 ```sh
-yarn prepare
+bun prepare
 # or
-yarn add husky --dev
+bun add husky --dev
 npx husky install
 chmod -R +x .husky
 ```
 
-その後、`git commit`を実行して`yarn fix`が走っているか確認してください
+その後、`git commit`を実行して`bun fix`が走っているか確認してください
 
 ## React + TypeScript + Vite + Biome
 
