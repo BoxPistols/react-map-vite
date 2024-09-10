@@ -15,10 +15,9 @@
     "preview": "vite preview",
     "sb": "storybook dev -p 6006",
     "sb-build": "storybook build",
-    "prepare": "husky install",
-    "build-all": "bun run build && bun run sb-build"
+    "build-all": "bun run build && bun run sb-build",
+    "prepare": "husky"
   },
-
   "dependencies": {
     "@mui/material": "^6.0.2",
     "@mui/system": "^6.0.2",
@@ -26,7 +25,6 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.0.2",
-    "@mui/material-nextjs": "^6.0.2",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.13",
     "@types/maplibre-gl": "^1.14.0",
@@ -62,7 +60,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "globals": "^15.1.0",
-    "husky": "^9.0.11",
+    "husky": "^9.1.5",
     "lint-staged": "^15.2.4",
     "postcss": "^8.4.38",
     "react-map-gl": "^7.1.7",
@@ -76,6 +74,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "bun run lint && bun run format",
       "post-checkout": "chmod +x .husky/pre-commit && bun run prepare",
       "post-merge": "chmod +x .husky/pre-commit && bun run prepare"
     }
