@@ -1,6 +1,6 @@
 # Dev Docs
 
-このドキュメントは柔軟に適時に更新される想定です
+このドキュメントは柔軟に適時更新していきます
 
 ## 基本環境構築
 
@@ -16,12 +16,15 @@ cp -p .env.example .env
 curl -fsSL https://bun.sh/install | bash
 ```
 
+#### Bun Docs
+
+- [Bun Official](https://bun.sh/)
+- [Bun Installation](https://bun.sh/docs/installation)
+
 ### Biome のインストール
 
 ```sh
-yarn global add @biome/cli
-# or
-npm install -g @biome/cli
+bun add -g @biome/cli
 ```
 
 ### 依存パッケージのインストール
@@ -30,21 +33,58 @@ npm install -g @biome/cli
 bun install
 ```
 
-### ローカル開発サーバを起動
+## Scripts
+
+```json
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "format": "bun biome format --write .",
+    "lint": "bun biome lint --write ./src",
+    "fix": "bun run lint && bun run format",
+    "preview": "vite preview",
+    "sb": "storybook dev -p 6006",
+    "sb-build": "storybook build",
+    "build-all": "bun run build && bun run sb-build",
+    "prepare": "husky"
+  },
+```
+
+### 主なターミナル実行コマンド
+
+#### ローカル開発サーバを起動
 
 ```sh
 bun dev
 ```
 
-### プロダクション用ビルド
+#### Lintチェック
+
+```sh
+bun lint
+```
+
+#### ファイルの整形と自動改善
+
+```sh
+bun fix
+```
+
+#### プロダクション用ビルド
 
 ```sh
 bun build
 ```
 
+#### Storybook
+
+```sh
+bun sb
+```
+
 ### Node 管理
 
-Volta 推奨(任意)
+Bun は Node.js の代替として機能しますが、Node.js 互換性のために別途 Node.js をインストールする場合は Volta を推奨します（任意）
 
 ```sh
 # install Volta
@@ -73,7 +113,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 - ErrorLens <https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens>
 - MarkdownLint <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
 
-VSCode拡張検索枠に @recommended を入力すると、この開発環境に必要な拡張機能が表示されます
+VSCode 拡張検索枠に @recommended を入力すると、この開発環境に必要な拡張機能が表示されます
 
 ![Code 2024-07-10 20 59 57](https://github.com/BoxPistols/react-drone-vite/assets/10333049/518a259e-09eb-43cc-8e3b-9b841226fcaa)
 
@@ -91,29 +131,29 @@ VSCode拡張検索枠に @recommended を入力すると、この開発環境�
 
 #### コミット・プッシュ前に
 
-- `bun fix`で全ファイル一括整形+自動改善可能なものは自動改善
+- `bun run fix`で全ファイル一括整形+自動改善可能なものは自動改善
 - この操作を習慣づけることで個々の書式による差分がなくなり、エラー検知も常時行える
-- 動的な箇所の変更などで挙動やデプロイの懸念がある場合は`bun build`を実行し、エラーが無いか確認する
+- 動的な箇所の変更などで挙動やデプロイの懸念がある場合は`bun run build`を実行し、エラーが無いか確認する
 
 ↑
 
 ##### husky にて自動化
 
-もし`git commit`を実行した時に自動で`bun fix`が走らなければ Local に husky が入っていません。その時は以下の操作をして husky を入れてください
+もし`git commit`を実行した時に自動で`bun run fix`が走らなければ Local に husky が入っていません。その時は以下の操作をして husky を入れてください
 
 ```sh
-bun prepare
+bun run prepare
 # or
-bun add husky --dev
-npx husky install
+bun add -d husky
+bunx husky install
 chmod -R +x .husky
 ```
 
-その後、`git commit`を実行して`bun fix`が走っているか確認してください
+その後、`git commit`を実行して`bun run fix`が走っているか確認してください
 
 ## React + TypeScript + Vite + Biome
 
-- [React公式ドキュメント](https://ja.react.dev/blog/2023/03/16/introducing-react-dev/)：Reactの基本概念、チュートリアル、APIリファレンスなど
-- [TypeScriptハンドブック](https://www.typescriptlang.org/)：TypeScriptの言語機能、ベストプラクティス、サンプルコードなど
-- [Vite公式ドキュメント](https://ja.vitejs.dev/)：Viteの設定、プラグイン、ビルドオプションなど
-- [Biome公式ドキュメント](https://biomejs.dev/ja)：Biomeの設定、ルール、オプション設定など
+- [React 公式ドキュメント](https://ja.react.dev/blog/2023/03/16/introducing-react-dev/)：React の基本概念、チュートリアル、API リファレンスなど
+- [TypeScript ハンドブック](https://www.typescriptlang.org/)：TypeScript の言語機能、ベストプラクティス、サンプルコードなど
+- [Vite 公式ドキュメント](https://ja.vitejs.dev/)：Vite の設定、プラグイン、ビルドオプションなど
+- [Biome 公式ドキュメント](https://biomejs.dev/ja)：Biome の設定、ルール、オプション設定など

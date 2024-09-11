@@ -53,6 +53,9 @@
 		"**/Thumbs.db": true,
 		"**/node_modules": true,
 		"**/*.d.ts": true
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
 	}
 	// MDXをmarkdownとして扱い一時的にPreview
 	// "files.associations": {
