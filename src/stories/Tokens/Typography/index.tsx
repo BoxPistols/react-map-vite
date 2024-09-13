@@ -229,46 +229,46 @@ const Typographies = () => {
         </Stack>
 
         {/* INFO */}
-        <>
-          <Stack
-            py={3}
-            px={4}
-            mt={2}
-            sx={{
-              backgroundColor:
-                theme.palette.mode === 'light' ? 'grey.200' : 'grey.800',
-            }}>
-            <Typography>
-              MuiのTypographyコンポーネントは一通りThemeにて定義していますが、以下の点の考慮が必要です。
+
+        <Stack
+          py={3}
+          px={4}
+          mt={2}
+          sx={{
+            backgroundColor:
+              theme.palette.mode === 'light' ? 'grey.200' : 'grey.800',
+          }}>
+          <Typography>
+            MuiのTypographyコンポーネントは一通りThemeにて定義していますが、以下の点の考慮が必要です。
+          </Typography>
+          <Typography>
+            近日MUIのメジャーアップデートが予定されており、現行の
+            <a href='https://material.io/design/typography/the-type-system.html#type-scale'>
+              Material Design2の設計思想
+            </a>
+            から、
+            <a href='https://m3.material.io/styles/typography/type-scale-tokens'>
+              Material Design3の設計思想
+            </a>
+            に変更される可能性があります。
+            <br />
+          </Typography>
+          <Typography>
+            基本的にマークアップ構造としてのセマンティクス性を確保出来ないテキスト構造のUI箇所では、抽象度の高い
+            <Typography
+              color='info.main'
+              component={'span'}
+              onClick={handleClick('extended')}
+              sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
+              カスタム拡張Variant
             </Typography>
-            <Typography>
-              近日MUIのメジャーアップデートが予定されており、現行の
-              <a href='https://material.io/design/typography/the-type-system.html#type-scale'>
-                Material Design2の設計思想
-              </a>
-              から、
-              <a href='https://m3.material.io/styles/typography/type-scale-tokens'>
-                Material Design3の設計思想
-              </a>
-              に変更される可能性があります。
-              <br />
-            </Typography>
-            <Typography>
-              基本的にマークアップ構造としてのセマンティクス性を確保出来ないテキスト構造のUI箇所では、抽象度の高い
-              <Typography
-                color='info.main'
-                component={'span'}
-                onClick={handleClick('extended')}
-                sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                カスタム拡張Variant
-              </Typography>
-              を使用することを推奨します。
-            </Typography>
-            <Typography>
-              用途が明確なTypographyパターンがあれば、さらに拡張Variantを追加することも推奨します。
-            </Typography>
-          </Stack>
-        </>
+            を使用することを推奨します。
+          </Typography>
+          <Typography>
+            用途が明確なTypographyパターンがあれば、さらに拡張Variantを追加することも推奨します。
+          </Typography>
+        </Stack>
+
         {/* Heading */}
         <>
           <TextStyledDisplay id='heading' mt={2}>
@@ -374,36 +374,36 @@ const Typographies = () => {
         </>
 
         {/* 拡張variant Display */}
-        <>
-          <TextStyledDisplay id='extendedDisplay'>
-            Extended variant Display
-            <Typography variant='body2' mb={2}>
-              MUI拡張 Variants
-            </Typography>
-          </TextStyledDisplay>
-          <Typography variant='body2'>
-            これはMuiから拡張した独自variantで、特別に大きな見出し用途です。
-            <br />
-            MaterialDesignの設計思想に準じた抽象名になっています
-          </Typography>
-          <Typography variant='body2' mb={2}>
-            要素対応リスト:
-            <code>{`displayLarge: 'div', displayMedium: 'div', displaySmall: 'div'`}</code>
-          </Typography>
 
-          {typographyVariantsDisplayExtended.map(({ variant, note }) => (
-            <Box key={variant} sx={{ marginBottom: 2 }}>
-              <TextStyledVariant>{variant}</TextStyledVariant>
-              <TextStyledSmall>
-                {getTypographyStyle(variant as never)}
-              </TextStyledSmall>
-              <TextStyledSample variant={variant as never}>
-                SampleText: {sampleText}
-              </TextStyledSample>
-              <TextStyledNote>{note}</TextStyledNote>
-            </Box>
-          ))}
-        </>
+        <TextStyledDisplay id='extendedDisplay'>
+          Extended variant Display
+          <Typography variant='body2' mb={2}>
+            MUI拡張 Variants
+          </Typography>
+        </TextStyledDisplay>
+        <Typography variant='body2'>
+          これはMuiから拡張した独自variantで、特別に大きな見出し用途です。
+          <br />
+          MaterialDesignの設計思想に準じた抽象名になっています
+        </Typography>
+        <Typography variant='body2' mb={2}>
+          要素対応リスト:
+          <code>{`displayLarge: 'div', displayMedium: 'div', displaySmall: 'div'`}</code>
+        </Typography>
+
+        {typographyVariantsDisplayExtended.map(({ variant, note }) => (
+          <Box key={variant} sx={{ marginBottom: 2 }}>
+            <TextStyledVariant>{variant}</TextStyledVariant>
+            <TextStyledSmall>
+              {getTypographyStyle(variant as never)}
+            </TextStyledSmall>
+            <TextStyledSample variant={variant as never}>
+              SampleText: {sampleText}
+            </TextStyledSample>
+            <TextStyledNote>{note}</TextStyledNote>
+          </Box>
+        ))}
+
         <Button
           size='small'
           onClick={handleClick('top')}
