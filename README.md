@@ -73,7 +73,7 @@ bun fix
 #### プロダクション用ビルド
 
 ```sh
-bun build
+bun run build
 ```
 
 #### Storybook
