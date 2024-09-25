@@ -26,7 +26,8 @@
     "**/dist",
     "**/node_modules/",
     "**/tailwind.config.js",
-    "**/postcss.config.cjs"
+    "**/postcss.config.cjs",
+    "**/*.d.ts"
   ],
   "references": [
     {
