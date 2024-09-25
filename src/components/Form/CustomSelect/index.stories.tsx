@@ -1,12 +1,14 @@
 import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
-import { type ChangeEvent, useState } from 'react'
-import CustomTextField from '.'
+import { useState } from 'react'
+import type { ReactNode } from 'react'
+import { CustomSelect } from '.'
+import type { SelectChangeEvent } from '@mui/material'
 
-const meta: Meta<typeof CustomTextField> = {
-  title: 'Components/CustomTextField',
-  component: CustomTextField,
-  tags: ['!autodocs', 'text', 'input', 'form'],
+const meta: Meta<typeof CustomSelect> = {
+  title: 'Components/CustomSelect',
+  component: CustomSelect,
+  tags: ['!autodocs', 'select', 'input', 'form'],
   parameters: {
     showThemeSwitcher: true,
     // themeSwitcherIconColor: 'black',
@@ -14,17 +16,18 @@ const meta: Meta<typeof CustomTextField> = {
   },
   argTypes: {
     label: { control: 'text' },
-    placeholder: { control: 'text' },
     required: { control: 'boolean' },
     error: { control: 'boolean' },
     tooltip: { control: 'text' },
     disabled: { control: 'boolean' },
     helperText: { control: 'text' },
+    placeholder: { control: 'text' },
     size: {
       control: 'radio',
       options: ['small', 'medium'],
       defaultValue: 'medium',
     },
+    options: { control: 'object' },
   },
   decorators: [
     (Story) => (
@@ -36,19 +39,26 @@ const meta: Meta<typeof CustomTextField> = {
 }
 
 export default meta
-type Story = StoryObj<typeof CustomTextField>
+type Story = StoryObj<typeof CustomSelect>
+
+const defaultOptions = [
+  { value: 'option1', label: 'オプション1' },
+  { value: 'option2', label: 'オプション2' },
+  { value: 'option3', label: 'オプション3' },
+]
 
 export const Default: Story = {
   args: {
-    label: 'デフォルトのテキストフィールド',
-    placeholder: 'ここにテキストを入力',
+    label: 'デフォルトのセレクト',
+    options: defaultOptions,
+    placeholder: '選択してください',
   },
 }
 
 export const Small: Story = {
   args: {
     ...Default.args,
-    label: '小さいサイズのテキストフィールド',
+    label: '小さいサイズのセレクト',
     size: 'small',
   },
 }
@@ -56,7 +66,7 @@ export const Small: Story = {
 export const Required: Story = {
   args: {
     ...Default.args,
-    label: '必須のテキストフィールド',
+    label: '必須のセレクト',
     required: true,
   },
 }
@@ -64,7 +74,7 @@ export const Required: Story = {
 export const WithTooltip: Story = {
   args: {
     ...Default.args,
-    label: 'ツールチップ付きテキストフィールド',
+    label: 'ツールチップ付きセレクト',
     tooltip: 'これは役立つツールチップです',
   },
 }
@@ -72,7 +82,7 @@ export const WithTooltip: Story = {
 export const WithError: Story = {
   args: {
     ...Default.args,
-    label: 'エラー状態のテキストフィールド',
+    label: 'エラー状態のセレクト',
     error: true,
     helperText: 'このフィールドにはエラーがあります',
   },
@@ -81,7 +91,7 @@ export const WithError: Story = {
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    label: '無効化されたテキストフィールド',
+    label: '無効化されたセレクト',
     disabled: true,
   },
 }
@@ -89,19 +99,28 @@ export const Disabled: Story = {
 export const WithHelperText: Story = {
   args: {
     ...Default.args,
-    label: 'ヘルパーテキスト付きテキストフィールド',
+    label: 'ヘルパーテキスト付きセレクト',
     helperText: 'これはヘルパーテキストです',
+  },
+}
+
+export const WithPlaceholder: Story = {
+  args: {
+    ...Default.args,
+    label: 'プレースホルダー付きセレクト',
+    placeholder: 'オプションを選択してください',
   },
 }
 
 export const AllFeaturesMedium: Story = {
   args: {
-    label: '全機能テキストフィールド (通常サイズ)',
-    placeholder: 'ここにテキストを入力',
+    label: '全機能セレクト (通常サイズ)',
+    options: defaultOptions,
     required: true,
     tooltip: 'このフィールドは全機能を示しています',
     error: false,
     helperText: 'このフィールドには全ての機能が有効です',
+    placeholder: '選択してください',
     size: 'medium',
   },
 }
@@ -109,37 +128,39 @@ export const AllFeaturesMedium: Story = {
 export const AllFeaturesSmall: Story = {
   args: {
     ...AllFeaturesMedium.args,
-    label: '全機能テキストフィールド (小さいサイズ)',
+    label: '全機能セレクト (小さいサイズ)',
     size: 'small',
   },
 }
 
 export const InteractiveExample: Story = {
   args: {
-    label: 'インタラクティブなテキストフィールド',
-    placeholder: '3文字以上20文字以下で入力してください',
+    label: 'オプション2 or 3を選択するとエラーになります',
     required: true,
-    tooltip: '入力は3文字以上20文字以下である必要があります',
+    tooltip: '選択肢を変更すると状態が更新されます',
+    options: defaultOptions,
+    placeholder: '選択してください',
   },
   render: (args) => {
     const [value, setValue] = useState('')
     const [hasError, setHasError] = useState(false)
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value
+    const handleChange = (
+      event: SelectChangeEvent<unknown>,
+      _child: ReactNode
+    ) => {
+      const newValue = event.target.value as string
       setValue(newValue)
-      setHasError(newValue.length < 3 || newValue.length > 20)
+      setHasError(newValue === 'option2' || newValue === 'option3')
     }
 
     return (
-      <CustomTextField
+      <CustomSelect
         {...args}
         value={value}
         onChange={handleChange}
         error={hasError}
-        helperText={
-          hasError ? '入力は3文字以上20文字以下である必要があります' : ''
-        }
+        helperText={hasError ? 'この選択をするとエラーになります' : ''}
       />
     )
   },
@@ -148,15 +169,17 @@ export const InteractiveExample: Story = {
 export const SizeComparison: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-      <CustomTextField
-        label='通常サイズのテキストフィールド'
-        placeholder='ここにテキストを入力'
+      <CustomSelect
+        label='通常サイズのセレクト'
+        options={defaultOptions}
         size='medium'
+        placeholder='選択してください'
       />
-      <CustomTextField
-        label='小さいサイズのテキストフィールド'
-        placeholder='ここにテキストを入力'
+      <CustomSelect
+        label='小さいサイズのセレクト'
+        options={defaultOptions}
         size='small'
+        placeholder='選択してください'
       />
     </Box>
   ),
