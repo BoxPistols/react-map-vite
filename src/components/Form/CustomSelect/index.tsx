@@ -1,25 +1,21 @@
-// CustomTextField
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
 import {
-  TextField,
-  type TextFieldProps,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
   Tooltip,
+  FormHelperText,
   useTheme,
 } from '@mui/material'
-import { FormControl, InputLabel } from '@mui/material'
-import type { CSSProperties } from '@mui/material/styles/createTypography'
+import type { SelectProps } from '@mui/material'
 import styled from '@mui/material/styles/styled'
 
-type CustomTextFieldProps = TextFieldProps & {
+type CustomSelectProps = Omit<SelectProps, 'label'> & {
   label: string
   tooltip?: string
   helperText?: string
-  required?: boolean
-  error?: boolean
-  size?: 'small' | 'medium'
-  fullWidth?: boolean
-  id?: string
-  name?: string
+  options: Array<{ value: string | number; label: string }>
   placeholder?: string
 }
 
@@ -62,26 +58,29 @@ const TooltipIcon = styled(HelpOutlineOutlinedIcon)<{
   color: 'inherit',
 }))
 
-const CustomTextField = ({
+export const CustomSelect = ({
   label,
-  InputProps,
-  inputProps,
-  required,
   tooltip,
+  helperText,
+  options,
+  required,
   error,
-  name,
   size = 'medium',
   fullWidth = false,
-  placeholder = '入力してください',
+  id,
+  name,
+  inputProps,
+  placeholder = '選択してください',
+  value,
   ...props
-}: CustomTextFieldProps) => {
+}: CustomSelectProps) => {
   const theme = useTheme()
   const inputId =
-    props.id || `custom-textfield-${label.replace(/\s+/g, '-').toLowerCase()}`
+    id || `custom-select-${label.replace(/\s+/g, '-').toLowerCase()}`
   const inputName = name || inputId
 
   return (
-    <StyledFormControl>
+    <StyledFormControl fullWidth={fullWidth} error={error} size={size}>
       <StyledInputLabel
         shrink
         htmlFor={inputId}
@@ -112,43 +111,61 @@ const CustomTextField = ({
             arrow
             sx={{
               fontSize: size === 'small' ? '1.3em' : '1.5em',
-              // color: theme.palette.text.secondary,
             }}>
             <TooltipIcon aria-label={`${label}についてのヘルプ`} size={size} />
           </Tooltip>
         )}
       </StyledInputLabel>
-      <TextField
+      <Select
         {...props}
-        name={inputName}
         id={inputId}
-        fullWidth={fullWidth}
-        error={error}
+        name={inputName}
+        label=''
         required={required}
+        error={error}
         size={size}
-        placeholder={placeholder}
+        value={value}
+        displayEmpty
         aria-required={required ? 'true' : 'false'}
         aria-invalid={error ? 'true' : 'false'}
-        aria-describedby={tooltip ? `${inputId}-tooltip` : undefined}
-        InputLabelProps={{ shrink: true }}
-        InputProps={{
-          ...InputProps,
-          style: {
-            ...(InputProps?.style as CSSProperties),
-            marginTop: 0,
-          },
-        }}
+        aria-describedby={
+          tooltip ? `${inputId}-tooltip` : `${inputId}-helper-text`
+        }
         inputProps={{
           ...inputProps,
           'aria-label': `${label}${required ? '（必須）' : ''}`,
-          style: {
-            ...(inputProps?.style as CSSProperties),
+        }}
+        sx={{
+          '& .MuiSelect-icon': {
+            color: theme.palette.text.secondary,
+          },
+          '& .MuiSelect-select': {
             paddingTop: size === 'small' ? '8px' : '10px',
             paddingBottom: size === 'small' ? '6px' : '8px',
             height: 'auto',
           },
-        }}
-      />
+          '& .MuiSelect-select.MuiSelect-select': {
+            color: value
+              ? theme.palette.text.primary
+              : theme.palette.text.secondary,
+          },
+        }}>
+        {placeholder && (
+          <MenuItem value='' disabled>
+            <em>{placeholder}</em>
+          </MenuItem>
+        )}
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+      {helperText && (
+        <FormHelperText id={`${inputId}-helper-text`}>
+          {helperText}
+        </FormHelperText>
+      )}
       {tooltip && (
         <span id={`${inputId}-tooltip`} style={{ display: 'none' }}>
           {tooltip}
@@ -158,4 +175,4 @@ const CustomTextField = ({
   )
 }
 
-export default CustomTextField
+export default CustomSelect

@@ -1,3 +1,4 @@
+// src/lib/themes/theme.ts
 import {
   type Theme,
   type ThemeOptions,
@@ -28,6 +29,7 @@ const createComponentStyles = (
 ): ThemeOptions['components'] => {
   const colors = mode === 'light' ? colorData : colorData.dark
   return {
+    // CssBaselineのカスタムスタイル
     MuiCssBaseline: {
       styleOverrides: {
         body: {
@@ -36,6 +38,7 @@ const createComponentStyles = (
         },
       },
     },
+    // Inputのカスタムスタイル
     MuiInputLabel: {
       styleOverrides: {
         formControl: {
@@ -85,6 +88,7 @@ const createComponentStyles = (
         },
       },
     },
+    // FormHelperTextのカスタムスタイル
     MuiFormHelperText: {
       styleOverrides: {
         root: {
@@ -95,6 +99,65 @@ const createComponentStyles = (
         },
       },
     },
+    // FormLabelのカスタムスタイル
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          '&.MuiFormLabel-sizeSmall': {
+            fontSize: '0.75rem',
+          },
+        },
+      },
+    },
+    // Tooltipのカスタムスタイル
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: '0.875rem',
+        },
+      },
+    },
+    // Select用のカスタムスタイル
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          paddingTop: '10px',
+          paddingBottom: '8px',
+          '&.MuiInputBase-inputSizeSmall': {
+            paddingTop: '8px',
+            paddingBottom: '6px',
+          },
+        },
+        icon: {
+          top: 'calc(50% - 0.5em)',
+          color: 'inherit', // テーマのカラーを継承
+        },
+      },
+    },
+    // MenuItemのカスタムスタイル
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.875rem',
+          '&.Mui-selected': {
+            backgroundColor: colors.action.selected,
+          },
+          '&.Mui-selected:hover': {
+            backgroundColor: colors.action.hover,
+          },
+        },
+      },
+    },
+    // Selectのドロップダウンメニューのカスタムスタイル
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          boxShadow:
+            '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)',
+        },
+      },
+    },
+    // header
     MuiAppBar: {
       styleOverrides: {
         root:
