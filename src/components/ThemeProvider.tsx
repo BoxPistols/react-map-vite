@@ -1,5 +1,3 @@
-// src/components/ThemeProvider.tsx
-
 import { darkTheme, theme as lightTheme } from '@/lib/themes/theme'
 import { ThemeProvider as MuiThemeProvider, type Theme } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
