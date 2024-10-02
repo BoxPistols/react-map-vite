@@ -1,26 +1,9 @@
-import {
-  type Theme,
-  type ThemeOptions,
-  createTheme,
-} from '@mui/material/styles'
+import { type Theme, createTheme } from '@mui/material/styles'
 import type { TypographyOptions } from '@mui/material/styles/createTypography'
 import { colorData } from './colorToken'
 import { typographyComponentsOverrides, typographyOptions } from './typography'
 
-const createPalette = (mode: 'light' | 'dark') => {
-  const colors = mode === 'light' ? colorData : colorData.dark
-  return {
-    mode,
-    ...colors,
-    background: {
-      ...colors.background,
-      default: colors.background.default,
-      paper: colors.background.paper,
-    },
-  }
-}
-
-const commonThemeOptions: Omit<ThemeOptions, 'palette' | 'components'> = {
+const commonThemeOptions = {
   typography: typographyOptions as TypographyOptions,
   shape: { borderRadius: 2 },
   transitions: {
@@ -31,30 +14,45 @@ const commonThemeOptions: Omit<ThemeOptions, 'palette' | 'components'> = {
   zIndex: { appBar: 1100, drawer: 1000 },
 }
 
-const createComponentStyles = (mode: 'light' | 'dark') => {
-  const colors = mode === 'light' ? colorData : colorData.dark
-  return {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: colors.background.default,
-          color: colors.text.primary,
+// カラースキームを統合
+const theme = createTheme({
+  ...commonThemeOptions,
+  colorSchemes: {
+    light: {
+      palette: {
+        mode: 'light',
+        ...colorData,
+        background: {
+          ...colorData.background,
+          default: colorData.background.default,
+          paper: colorData.background.paper,
         },
       },
     },
-    // Add other component styles
-  }
-}
-
-const createAppTheme = (mode: 'light' | 'dark'): Theme =>
-  createTheme({
-    ...commonThemeOptions,
-    palette: createPalette(mode),
-    components: {
-      ...typographyComponentsOverrides,
-      ...createComponentStyles(mode),
+    dark: {
+      palette: {
+        mode: 'dark',
+        ...colorData.dark,
+        background: {
+          ...colorData.dark.background,
+          default: colorData.dark.background.default,
+          paper: colorData.dark.background.paper,
+        },
+      },
     },
-  })
+  },
+  components: {
+    ...typographyComponentsOverrides,
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: ({ theme }: { theme: Theme }) => ({
+          backgroundColor: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        }),
+      },
+    },
+  },
+})
 
-export const theme = createAppTheme('light')
-export const darkTheme = createAppTheme('dark')
+// エクスポート
+export { theme }

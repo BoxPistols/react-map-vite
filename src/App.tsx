@@ -1,25 +1,30 @@
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
-import DashboardPage from '@/pages/DashboardPage'
-import InboxPage from '@/pages/InboxPage'
-import MapPage from '@/pages/MapPage'
-import NaviPage from '@/pages/NaviPage'
-import WifiPage from '@/pages/WifiPage'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import { Box, IconButton, Typography } from '@mui/material'
-import type React from 'react'
-import { useState } from 'react'
+import { Box, IconButton, MenuItem, Select } from '@mui/material' // Select, MenuItemを追加
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { useTheme } from '@/components/ThemeProvider'
+import { useColorScheme } from '@mui/material/styles' // useColorSchemeをインポート
+import { useRef, useState } from 'react' // useRef と useState を使用
+import DashboardPage from './pages/DashboardPage'
+import InboxPage from './pages/InboxPage'
+import MapPage from './pages/MapPage'
+import NaviPage from './pages/NaviPage'
+import WifiPage from './pages/WifiPage'
 
-const App: React.FC = () => {
-  const { theme: currentTheme, toggleTheme, isDarkMode } = useTheme()
+const App = () => {
+  const { mode, setMode } = useColorScheme()
   const [open, setOpen] = useState<boolean>(true)
+  const [selectOpen, setSelectOpen] = useState(false) // Select の開閉状態を管理
+  const iconButtonRef = useRef<HTMLButtonElement>(null) // IconButton の位置を参照するための useRef
 
   const toggleDrawer = () => {
     setOpen((prevOpen) => !prevOpen)
+  }
+
+  const toggleSelect = () => {
+    setSelectOpen((prev) => !prev) // Select の開閉状態をトグル
   }
 
   const InnerWidth = open ? '240px' : '96px'
@@ -31,56 +36,68 @@ const App: React.FC = () => {
       <Box
         sx={{
           paddingLeft: InnerWidth,
-          marginTop: 20,
+          marginTop: 12,
+          transition: 'padding 0.3s',
         }}>
-        <main>
+        {/* テーマモードの選択UI */}
+        <Box>
+          {/* アイコンもテーマに応じて変更 */}
           <IconButton
-            onClick={toggleTheme}
+            ref={iconButtonRef} // IconButton の位置を参照
+            onClick={toggleSelect}
             sx={{
               position: 'fixed',
               top: 10,
               right: 10,
               zIndex: 10000,
-              bgcolor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+
+              bgcolor:
+                mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
               '&:hover': {
-                bgcolor: isDarkMode
-                  ? 'rgba(255,255,255,0.2)'
-                  : 'rgba(0,0,0,0.2)',
+                bgcolor:
+                  mode === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
               },
             }}>
-            {isDarkMode ? (
-              <Brightness7Icon
-                sx={{ color: currentTheme.palette.common.white }}
-              />
+            {mode === 'dark' ? (
+              <Brightness7Icon sx={{ color: 'white' }} />
             ) : (
-              <Brightness4Icon
-                sx={{ color: currentTheme.palette.common.white }}
-              />
+              <Brightness4Icon sx={{ color: 'white' }} />
             )}
+
+            <Select
+              open={selectOpen} // open 状態を制御
+              onClose={() => setSelectOpen(false)} // 選択後に閉じる
+              value={mode}
+              onChange={(event) => {
+                setMode(event.target.value as 'system' | 'light' | 'dark')
+                setSelectOpen(false) // 選択後にメニューを閉じる
+              }}
+              sx={{ display: 'none' }} // 表示はさせないがプログラム的に開く
+              MenuProps={{
+                anchorEl: iconButtonRef.current, // IconButton をアンカーとして指定
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                },
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'right',
+                },
+              }}>
+              <MenuItem value='system'>System</MenuItem>
+              <MenuItem value='light'>Light</MenuItem>
+              <MenuItem value='dark'>Dark</MenuItem>
+            </Select>
           </IconButton>
-          <Routes>
-            <Route path='/' element={<DashboardPage />} />
-            <Route path='/map' element={<MapPage />} />
-            <Route path='/navi' element={<NaviPage />} />
-            <Route path='/wifi' element={<WifiPage />} />
-            <Route path='/inbox' element={<InboxPage />} />
-          </Routes>
-        </main>
-      </Box>
-      <Box
-        sx={{
-          position: 'fixed',
-          overflowY: 'hidden',
-          bottom: 0,
-          width: '100%',
-          textAlign: 'center',
-          backgroundColor: currentTheme.palette.grey[900],
-          color: currentTheme.palette.grey[500],
-          p: 0.5,
-        }}>
-        <footer>
-          <Typography variant='xxs'>Copy right 2024 by Map App</Typography>
-        </footer>
+        </Box>
+        {/* Routes */}
+        <Routes>
+          <Route path='/' element={<DashboardPage />} />
+          <Route path='/map' element={<MapPage />} />
+          <Route path='/navi' element={<NaviPage />} />
+          <Route path='/wifi' element={<WifiPage />} />
+          <Route path='/inbox' element={<InboxPage />} />
+        </Routes>
       </Box>
     </Router>
   )
