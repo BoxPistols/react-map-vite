@@ -2,6 +2,7 @@ import maplibregl from 'maplibre-gl'
 import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { useSynchronizedTheme } from '@/hooks/useTheme'
 
 interface Map3DProps {
   latitude: number
@@ -27,6 +28,7 @@ export const Map3D: React.FC<Map3DProps> = ({
     pitch: 60,
     bearing: -20,
   })
+  const { effectiveMode } = useSynchronizedTheme()
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -130,7 +132,13 @@ export const Map3D: React.FC<Map3DProps> = ({
   return (
     <div style={{ position: 'relative' }}>
       <div ref={mapContainer} className='absolute inset-0' />
-      <div className='absolute top-4 right-16 bg-white text-gray-700 bg-opacity-70 p-2 text-sm z-10 dark:bg-gray-700 dark:text-white'>
+
+      <div
+        className={`absolute top-4 right-16 p-2 text-sm z-10 ${
+          effectiveMode === 'dark'
+            ? 'bg-gray-700 text-white bg-opacity-70'
+            : 'bg-white text-gray-700 bg-opacity-70'
+        }`}>
         Longitude: {mapInfo.lng} | Latitude: {mapInfo.lat} | Zoom:{' '}
         {mapInfo.zoom} | Pitch: {mapInfo.pitch} | Bearing: {mapInfo.bearing}
       </div>

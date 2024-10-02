@@ -14,7 +14,7 @@ export const Header = ({ toggleDrawer }: HeaderProps) => {
       position='fixed'
       sx={{
         backgroundColor: theme.palette.grey[800],
-        zIndex: theme.zIndex.drawer + 100,
+        zIndex: theme.zIndex.drawer,
       }}>
       <Toolbar sx={{ ml: -0.5 }}>
         <IconButton
