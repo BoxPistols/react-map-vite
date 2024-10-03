@@ -10,7 +10,6 @@ const config: StorybookConfig = {
     defaultName: 'AutoDocs',
   },
   addons: [
-    '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
@@ -22,6 +21,7 @@ const config: StorybookConfig = {
         postCss: true,
       },
     },
+    '@storybook/addon-mdx-gfm',
   ],
 
   framework: {

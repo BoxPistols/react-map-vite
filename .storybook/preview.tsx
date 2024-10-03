@@ -1,29 +1,49 @@
 import createCache from '@emotion/cache'
-import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
-import { CacheProvider } from '@emotion/react'
+import {
+  CacheProvider,
+  ThemeProvider as EmotionThemeProvider,
+} from '@emotion/react'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
+import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
 import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
+import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
-import React, { useState, useEffect, useCallback } from 'react'
-import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
-import '../src/index.css' // Tailwind CSSのインポート
+import React, { useEffect, useMemo, useState } from 'react'
+import { darkTheme, theme as lightTheme } from '../src/theme/theme'
+import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-declare global {
-  interface StorybookParameters {
-    showThemeSwitcher?: boolean
-    themeSwitcherIconColor?: 'white' | 'black' | 'auto'
-    themeSwitcherPosition?:
-      | 'top-right'
-      | 'top-left'
-      | 'bottom-right'
-      | 'bottom-left'
-  }
+const updateLocalStorage = (theme) => {
+  localStorage.setItem('mui-mode', theme === 'dark' ? 'dark' : 'light')
 }
 
 const ThemeSwitcherDecorator = (Story, context) => {
-  const [theme, setTheme] = useState(lightTheme)
+  const [globals, updateGlobals] = useGlobals()
+  const [isDocsPage, setIsDocsPage] = useState(false)
+
+  useEffect(() => {
+    const checkIfDocsPage = () => {
+      const isDocs = window.location.pathname.includes('/docs/')
+      setIsDocsPage(isDocs)
+
+      if (isDocs) {
+        updateLocalStorage('light')
+        updateGlobals({ theme: 'light' })
+      }
+    }
+
+    checkIfDocsPage()
+    window.addEventListener('popstate', checkIfDocsPage)
+    return () => window.removeEventListener('popstate', checkIfDocsPage)
+  }, [updateGlobals])
+
+  const currentTheme = isDocsPage ? 'light' : globals.theme || 'light'
+
+  const muiTheme = useMemo(() => {
+    return currentTheme === 'dark' ? darkTheme : lightTheme
+  }, [currentTheme])
+
   const showThemeSwitcher = context.parameters.showThemeSwitcher ?? false
   const themeSwitcherIconColor =
     context.parameters.themeSwitcherIconColor ?? 'auto'
@@ -31,17 +51,13 @@ const ThemeSwitcherDecorator = (Story, context) => {
     context.parameters.themeSwitcherPosition ?? 'top-right'
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('sb-addon-themes')
-    if (savedTheme) {
-      setTheme(savedTheme === 'dark' ? darkTheme : lightTheme)
-    }
-  }, [])
+    console.log('isDocsPage:', isDocsPage)
+    console.log('currentTheme:', currentTheme)
+    console.log('globals.theme:', globals.theme)
 
-  useEffect(() => {
-    const isDark = theme.palette.mode === 'dark'
-    localStorage.setItem('sb-addon-themes', isDark ? 'dark' : 'light')
+    updateLocalStorage(currentTheme)
 
-    if (isDark) {
+    if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
@@ -49,15 +65,16 @@ const ThemeSwitcherDecorator = (Story, context) => {
 
     const root = document.getElementById('root')
     if (root) {
-      root.style.backgroundColor = isDark ? '#333333' : '#ffffff'
+      root.style.backgroundColor = muiTheme.palette.background.default
     }
-  }, [theme])
+  }, [currentTheme, muiTheme, isDocsPage, globals.theme])
 
-  const toggleTheme = useCallback(() => {
-    setTheme((prevTheme) =>
-      prevTheme.palette.mode === 'light' ? darkTheme : lightTheme
-    )
-  }, [])
+  const toggleTheme = () => {
+    if (!isDocsPage) {
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+      updateGlobals({ theme: newTheme })
+    }
+  }
 
   const getIconColor = () => {
     switch (themeSwitcherIconColor) {
@@ -66,7 +83,7 @@ const ThemeSwitcherDecorator = (Story, context) => {
       case 'black':
         return '#000000'
       default:
-        return theme.palette.mode === 'dark' ? '#ffffff' : '#000000'
+        return muiTheme.palette.text.primary
     }
   }
 
@@ -87,6 +104,17 @@ const ThemeSwitcherDecorator = (Story, context) => {
     }
   }
 
+  const getThemeIcon = () => {
+    switch (currentTheme) {
+      case 'light':
+        return <Brightness7Icon sx={{ color: iconColor }} />
+      case 'dark':
+        return <Brightness4Icon sx={{ color: iconColor }} />
+      default:
+        return <SettingsBrightnessIcon sx={{ color: iconColor }} />
+    }
+  }
+
   const cache = createCache({
     key: 'css',
     prepend: true,
@@ -94,33 +122,29 @@ const ThemeSwitcherDecorator = (Story, context) => {
   })
 
   return (
-    <EmotionThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
+    <EmotionThemeProvider theme={muiTheme}>
+      <ThemeProvider theme={muiTheme}>
         <CacheProvider value={cache}>
           <CssBaseline />
-          {showThemeSwitcher && (
+          {showThemeSwitcher && !isDocsPage && (
             <IconButton
               onClick={toggleTheme}
               sx={{
                 position: 'fixed',
                 zIndex: 10000,
                 bgcolor:
-                  theme.palette.mode === 'dark'
+                  muiTheme.palette.mode === 'dark'
                     ? 'rgba(255,255,255,0.1)'
                     : 'rgba(0,0,0,0.1)',
                 '&:hover': {
                   bgcolor:
-                    theme.palette.mode === 'dark'
+                    muiTheme.palette.mode === 'dark'
                       ? 'rgba(255,255,255,0.2)'
                       : 'rgba(0,0,0,0.2)',
                 },
                 ...getPositionStyle(),
               }}>
-              {theme.palette.mode === 'dark' ? (
-                <Brightness7Icon sx={{ color: iconColor }} />
-              ) : (
-                <Brightness4Icon sx={{ color: iconColor }} />
-              )}
+              {getThemeIcon()}
             </IconButton>
           )}
           <Story {...context} />
@@ -146,23 +170,23 @@ const preview: Preview = {
     },
     showThemeSwitcher: true,
     themeSwitcherIconColor: 'auto',
-    themeSwitcherPosition: 'top-right', // デフォルト位置
+    themeSwitcherPosition: 'top-right',
   },
-
   decorators: [ThemeSwitcherDecorator],
-  tags: ['autodocs'],
-}
-
-export default preview
-
-export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Global theme for components',
-    defaultValue: 'light',
-    toolbar: {
-      icon: 'circlehollow',
-      items: ['light', 'dark'],
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      defaultValue: 'light',
+      toolbar: {
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', title: 'Light' },
+          { value: 'dark', title: 'Dark' },
+        ],
+      },
     },
   },
 }
+
+export default preview

@@ -1,4 +1,5 @@
-import { ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
+
 import CssBaseline from '@mui/material/CssBaseline'
 import {
   Experimental_CssVarsProvider as CssVarsProvider,

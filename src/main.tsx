@@ -1,5 +1,5 @@
 import App from '@/App'
-import { ThemeProvider } from '@/components/ThemeProvider'
+import { ThemeProvide } from '@/components/ThemeProvider'
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 import { StrictMode } from 'react'
@@ -15,11 +15,11 @@ const cache = createCache({
 const Root = () => {
   return (
     <StrictMode>
-      <ThemeProvider>
+      <ThemeProvide>
         <CacheProvider value={cache}>
           <App />
         </CacheProvider>
-      </ThemeProvider>
+      </ThemeProvide>
     </StrictMode>
   )
 }
