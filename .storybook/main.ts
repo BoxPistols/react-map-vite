@@ -22,6 +22,7 @@ const config: StorybookConfig = {
         postCss: true,
       },
     },
+    '@storybook/addon-mdx-gfm',
   ],
 
   framework: {

@@ -150,7 +150,7 @@ const preview: Preview = {
   },
 
   decorators: [ThemeSwitcherDecorator],
-  tags: ['autodocs'],
+  tags: ['autodocs', 'autodocs'],
 }
 
 export default preview

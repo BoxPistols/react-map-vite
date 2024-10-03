@@ -1,7 +1,10 @@
+import { colorData } from '@/theme/colorToken'
+import {
+  typographyComponentsOverrides,
+  typographyOptions,
+} from '@/theme/typography'
 import { type Theme, createTheme } from '@mui/material/styles'
 import type { TypographyOptions } from '@mui/material/styles/createTypography'
-import { colorData } from './colorToken'
-import { typographyComponentsOverrides, typographyOptions } from './typography'
 
 const commonThemeOptions = {
   typography: typographyOptions as TypographyOptions,
