@@ -15,7 +15,7 @@ const getInitialConfig = (): ThemeConfig => {
   return savedConfig ? JSON.parse(savedConfig) : defaultConfig
 }
 
-export const useTheme = () => {
+export const hookUseTheme = () => {
   const { mode, setMode } = useColorScheme()
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const [config, setConfig] = useState<ThemeConfig>(getInitialConfig)

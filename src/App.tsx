@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { useTheme as hookUseTheme } from '@/hooks/useTheme'
+import { hookUseTheme } from '@/hooks/useTheme'
 import { useEffect, useRef, useState } from 'react'
 import DashboardPage from './pages/DashboardPage'
 import InboxPage from './pages/InboxPage'
