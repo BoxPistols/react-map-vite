@@ -1,12 +1,70 @@
 import { colorData } from '@/theme/colorToken'
 import {
-  typographyComponentsOverrides,
-  typographyOptions,
-} from '@/theme/typography'
-import { type Theme, createTheme } from '@mui/material/styles'
+  type Theme,
+  type ThemeOptions,
+  createTheme,
+} from '@mui/material/styles'
 import type { TypographyOptions } from '@mui/material/styles/createTypography'
+import { typographyComponentsOverrides, typographyOptions } from './typography'
 
-const commonThemeOptions = {
+const createPalette = (mode: 'light' | 'dark') => {
+  const colors = mode === 'light' ? colorData : colorData.dark
+  return {
+    mode,
+    ...colors,
+    background: {
+      ...colors.background,
+      default: colors.background.default,
+      paper: colors.background.paper,
+    },
+  }
+}
+
+const createComponentStyles = (
+  mode: 'light' | 'dark'
+): ThemeOptions['components'] => {
+  const colors = mode === 'light' ? colorData : colorData.dark
+  return {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: colors.background.default,
+          color: colors.text.primary,
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+        },
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: 'contained',
+        // disableElevation: true,
+        // disableRipple: true,
+        size: 'medium',
+      },
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: 4,
+        },
+        sizeSmall: {
+          padding: '0.25em 0.875em',
+        },
+        contained: {
+          '&.MuiButton-contained.MuiButton-root': {
+            color: colors.text.white,
+          },
+          '&.MuiButton-contained.MuiButton-root.MuiButton-containedInherit': {
+            color: colors.text.primary,
+          },
+        },
+      },
+    },
+    // ... (他のコンポーネントのスタイル設定)
+  }
+}
+
+const commonThemeOptions: Omit<ThemeOptions, 'palette' | 'components'> = {
   typography: typographyOptions as TypographyOptions,
   shape: { borderRadius: 2 },
   transitions: {
@@ -17,45 +75,15 @@ const commonThemeOptions = {
   zIndex: { appBar: 1100, drawer: 1000 },
 }
 
-// カラースキームを統合
-const theme = createTheme({
-  ...commonThemeOptions,
-  colorSchemes: {
-    light: {
-      palette: {
-        mode: 'light',
-        ...colorData,
-        background: {
-          ...colorData.background,
-          default: colorData.background.default,
-          paper: colorData.background.paper,
-        },
-      },
+const createAppTheme = (mode: 'light' | 'dark'): Theme =>
+  createTheme({
+    ...commonThemeOptions,
+    palette: createPalette(mode),
+    components: {
+      ...typographyComponentsOverrides,
+      ...createComponentStyles(mode),
     },
-    dark: {
-      palette: {
-        mode: 'dark',
-        ...colorData.dark,
-        background: {
-          ...colorData.dark.background,
-          default: colorData.dark.background.default,
-          paper: colorData.dark.background.paper,
-        },
-      },
-    },
-  },
-  components: {
-    ...typographyComponentsOverrides,
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: ({ theme }: { theme: Theme }) => ({
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary,
-        }),
-      },
-    },
-  },
-})
+  })
 
-// エクスポート
-export { theme }
+export const theme = createAppTheme('light')
+export const darkTheme = createAppTheme('dark')

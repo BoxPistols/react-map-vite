@@ -16,7 +16,7 @@ export const Header = ({ toggleDrawer }: HeaderProps) => {
         backgroundColor: theme.palette.grey[800],
         zIndex: theme.zIndex.drawer,
       }}>
-      <Toolbar sx={{ ml: -0.5 }}>
+      <Toolbar sx={{ ml: 2 }}>
         <IconButton
           edge='start'
           color='inherit'

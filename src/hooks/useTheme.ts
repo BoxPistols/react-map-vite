@@ -1,4 +1,4 @@
-// src/hooks/useTheme.ts
+import { darkTheme, theme as lightTheme } from '@/theme/theme'
 import { useColorScheme, useMediaQuery } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -26,19 +26,18 @@ export const hookUseTheme = () => {
     return mode
   }, [mode, prefersDarkMode, config.allowDarkMode])
 
+  const theme = useMemo(() => {
+    return effectiveMode === 'dark' ? darkTheme : lightTheme
+  }, [effectiveMode])
+
   useEffect(() => {
     localStorage.setItem('themeConfig', JSON.stringify(config))
-    if (effectiveMode === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    document.documentElement.classList.toggle('dark', effectiveMode === 'dark')
   }, [effectiveMode, config])
 
   const setThemeConfig = (newConfig: Partial<ThemeConfig>) => {
     setConfig((prev) => {
       const updatedConfig = { ...prev, ...newConfig }
-      localStorage.setItem('themeConfig', JSON.stringify(updatedConfig))
       if (!updatedConfig.allowDarkMode && mode !== 'light') {
         setMode('light')
       }
@@ -46,5 +45,5 @@ export const hookUseTheme = () => {
     })
   }
 
-  return { mode, setMode, effectiveMode, config, setThemeConfig }
+  return { mode, setMode, effectiveMode, config, setThemeConfig, theme }
 }
