@@ -1,69 +1,50 @@
+// src/hooks/useTheme.ts
 import { useColorScheme, useMediaQuery } from '@mui/material'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
-export const useSynchronizedTheme = () => {
+type ThemeConfig = {
+  allowDarkMode: boolean
+}
+
+const defaultConfig: ThemeConfig = {
+  allowDarkMode: false,
+}
+
+const getInitialConfig = (): ThemeConfig => {
+  const savedConfig = localStorage.getItem('themeConfig')
+  return savedConfig ? JSON.parse(savedConfig) : defaultConfig
+}
+
+export const useTheme = () => {
   const { mode, setMode } = useColorScheme()
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const [config, setConfig] = useState<ThemeConfig>(getInitialConfig)
 
   const effectiveMode = useMemo(() => {
-    if (mode === 'system') {
-      return prefersDarkMode ? 'dark' : 'light'
-    }
+    if (!config.allowDarkMode) return 'light'
+    if (mode === 'system') return prefersDarkMode ? 'dark' : 'light'
     return mode
-  }, [mode, prefersDarkMode])
+  }, [mode, prefersDarkMode, config.allowDarkMode])
 
   useEffect(() => {
+    localStorage.setItem('themeConfig', JSON.stringify(config))
     if (effectiveMode === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
-  }, [effectiveMode])
+  }, [effectiveMode, config])
 
-  return { mode, setMode, effectiveMode }
+  const setThemeConfig = (newConfig: Partial<ThemeConfig>) => {
+    setConfig((prev) => {
+      const updatedConfig = { ...prev, ...newConfig }
+      localStorage.setItem('themeConfig', JSON.stringify(updatedConfig))
+      if (!updatedConfig.allowDarkMode && mode !== 'light') {
+        setMode('light')
+      }
+      return updatedConfig
+    })
+  }
+
+  return { mode, setMode, effectiveMode, config, setThemeConfig }
 }
-
-// import { useColorScheme, useMediaQuery } from '@mui/material'
-// import { useEffect, useMemo, useState } from 'react'
-
-// type ThemeMode = 'light' | 'dark' | 'system'
-// type ThemeConfig = {
-//   allowDarkMode: boolean
-//   forcedMode: ThemeMode | null
-// }
-
-// const defaultConfig: ThemeConfig = {
-//   allowDarkMode: true,
-//   forcedMode: null,
-// }
-
-// export const useTheme = () => {
-//   const { mode, setMode } = useColorScheme()
-//   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-//   const [config, setConfig] = useState<ThemeConfig>(() => {
-//     const savedConfig = localStorage.getItem('themeConfig')
-//     return savedConfig ? JSON.parse(savedConfig) : defaultConfig
-//   })
-
-//   const effectiveMode = useMemo(() => {
-//     if (config.forcedMode) return config.forcedMode
-//     if (!config.allowDarkMode) return 'light'
-//     if (mode === 'system') return prefersDarkMode ? 'dark' : 'light'
-//     return mode
-//   }, [mode, prefersDarkMode, config])
-
-//   useEffect(() => {
-//     localStorage.setItem('themeConfig', JSON.stringify(config))
-//     if (effectiveMode === 'dark') {
-//       document.documentElement.classList.add('dark')
-//     } else {
-//       document.documentElement.classList.remove('dark')
-//     }
-//   }, [effectiveMode, config])
-
-//   const setThemeConfig = (newConfig: Partial<ThemeConfig>) => {
-//     setConfig((prev) => ({ ...prev, ...newConfig }))
-//   }
-
-//   return { mode, setMode, effectiveMode, config, setThemeConfig }
-// }

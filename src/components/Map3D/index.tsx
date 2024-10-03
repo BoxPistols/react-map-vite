@@ -2,7 +2,7 @@ import maplibregl from 'maplibre-gl'
 import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { useSynchronizedTheme } from '@/hooks/useTheme'
+import { useTheme } from '@/hooks/useTheme'
 
 interface Map3DProps {
   latitude: number
@@ -28,7 +28,7 @@ export const Map3D: React.FC<Map3DProps> = ({
     pitch: 60,
     bearing: -20,
   })
-  const { effectiveMode } = useSynchronizedTheme()
+  const { effectiveMode } = useTheme()
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
