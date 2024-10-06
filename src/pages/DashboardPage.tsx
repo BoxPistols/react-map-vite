@@ -1,15 +1,20 @@
-import { Button } from '@mui/material'
+import MainGrid from '@/components/MainGrid'
+import { Button, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 const DashboardPage = () => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>This is the Dashboard page.</p>
-      <Button>Click me</Button>
-      <Button variant='contained' color='secondary'>
-        Click me
-      </Button>
-    </div>
+    <>
+      <MainGrid overview='Dashboard'>
+        <Typography>This is Dashboard Page</Typography>
+        <Box display={{ xs: 'block', sm: 'flex' }} gap={4}>
+          <Button>Click me</Button>
+          <Button variant='contained' color='secondary'>
+            Click me
+          </Button>
+        </Box>
+      </MainGrid>
+    </>
   )
 }
 

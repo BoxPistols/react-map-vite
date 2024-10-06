@@ -95,7 +95,7 @@ const App = () => {
         <Box
           sx={{
             paddingLeft: InnerWidth,
-            marginTop: 24,
+            // marginTop: 24,
             transition: 'padding 0.3s',
             backgroundColor: theme.palette.background.default,
             color: theme.palette.text.primary,
@@ -163,6 +163,7 @@ const App = () => {
                             setMode('light')
                           }
                         }}
+                        color='secondary'
                         sx={{
                           '& .MuiSwitch-thumb': {
                             color: theme.palette.common.white,
@@ -176,6 +177,7 @@ const App = () => {
               </Select>
             </Box>
           </ClickAwayListener>
+
           <Routes>
             <Route path='/' element={<DashboardPage />} />
             <Route path='/map' element={<MapPage />} />
