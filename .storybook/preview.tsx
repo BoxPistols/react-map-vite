@@ -11,6 +11,7 @@ import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
 import React, { useEffect, useMemo } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/theme/theme'
+import { theme } from '../src/theme/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
@@ -122,6 +123,11 @@ const ThemeSwitcherDecorator = (Story, context) => {
       </ThemeProvider>
     </EmotionThemeProvider>
   )
+}
+
+// Storybookの起動時にlocalStorageを初期化
+if (!localStorage.getItem('mui-mode')) {
+  localStorage.setItem('mui-mode', 'light')
 }
 
 const preview: Preview = {

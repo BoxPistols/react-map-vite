@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { Box, Grid, minHeight } from '@mui/system'
+import { Box, Grid } from '@mui/system'
 import type { ReactNode } from 'react'
 
 interface MainGridProps {
