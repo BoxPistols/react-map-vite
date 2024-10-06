@@ -11,9 +11,16 @@ import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
 import React, { useEffect, useMemo } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/theme/theme'
-import { theme } from '../src/theme/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
+
+// Storybookの起動時とテーマ切り替え時にlocalStorageを更新する関数
+const updateLocalStorage = (theme) => {
+  localStorage.setItem('mui-mode', theme === 'dark' ? 'dark' : 'light')
+}
+
+// 初期化時にlocalStorageを'light'に設定
+updateLocalStorage('light')
 
 const ThemeSwitcherDecorator = (Story, context) => {
   const [globals, updateGlobals] = useGlobals()
@@ -30,6 +37,7 @@ const ThemeSwitcherDecorator = (Story, context) => {
     context.parameters.themeSwitcherPosition ?? 'top-right'
 
   useEffect(() => {
+    updateLocalStorage(currentTheme)
     if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
@@ -123,11 +131,6 @@ const ThemeSwitcherDecorator = (Story, context) => {
       </ThemeProvider>
     </EmotionThemeProvider>
   )
-}
-
-// Storybookの起動時にlocalStorageを初期化
-if (!localStorage.getItem('mui-mode')) {
-  localStorage.setItem('mui-mode', 'light')
 }
 
 const preview: Preview = {
