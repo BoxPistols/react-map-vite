@@ -10,7 +10,6 @@ const config: StorybookConfig = {
     defaultName: 'AutoDocs',
   },
   addons: [
-    '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',

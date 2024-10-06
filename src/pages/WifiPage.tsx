@@ -1,9 +1,11 @@
+import MainGrid from '@/components/MainGrid'
+import { Typography } from '@mui/material'
+
 const WifiPage = () => {
   return (
-    <div>
-      <h1>Wifi</h1>
-      <p>This is the Wifi page.</p>
-    </div>
+    <MainGrid overview='Wifi'>
+      <Typography>This is Wifi Page</Typography>
+    </MainGrid>
   )
 }
 

@@ -9,22 +9,36 @@ import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
 import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
 import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/theme/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-// Storybookの起動時とテーマ切り替え時にlocalStorageを更新する関数
 const updateLocalStorage = (theme) => {
   localStorage.setItem('mui-mode', theme === 'dark' ? 'dark' : 'light')
 }
 
-// 初期化時にlocalStorageを'light'に設定
-updateLocalStorage('light')
-
 const ThemeSwitcherDecorator = (Story, context) => {
   const [globals, updateGlobals] = useGlobals()
-  const currentTheme = globals.theme || 'light'
+  const [isDocsPage, setIsDocsPage] = useState(false)
+
+  useEffect(() => {
+    const checkIfDocsPage = () => {
+      const isDocs = window.location.pathname.includes('/docs/')
+      setIsDocsPage(isDocs)
+
+      if (isDocs) {
+        updateLocalStorage('light')
+        updateGlobals({ theme: 'light' })
+      }
+    }
+
+    checkIfDocsPage()
+    window.addEventListener('popstate', checkIfDocsPage)
+    return () => window.removeEventListener('popstate', checkIfDocsPage)
+  }, [updateGlobals])
+
+  const currentTheme = isDocsPage ? 'light' : globals.theme || 'light'
 
   const muiTheme = useMemo(() => {
     return currentTheme === 'dark' ? darkTheme : lightTheme
@@ -37,7 +51,12 @@ const ThemeSwitcherDecorator = (Story, context) => {
     context.parameters.themeSwitcherPosition ?? 'top-right'
 
   useEffect(() => {
+    console.log('isDocsPage:', isDocsPage)
+    console.log('currentTheme:', currentTheme)
+    console.log('globals.theme:', globals.theme)
+
     updateLocalStorage(currentTheme)
+
     if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
@@ -48,11 +67,13 @@ const ThemeSwitcherDecorator = (Story, context) => {
     if (root) {
       root.style.backgroundColor = muiTheme.palette.background.default
     }
-  }, [currentTheme, muiTheme])
+  }, [currentTheme, muiTheme, isDocsPage, globals.theme])
 
   const toggleTheme = () => {
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light'
-    updateGlobals({ theme: newTheme })
+    if (!isDocsPage) {
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+      updateGlobals({ theme: newTheme })
+    }
   }
 
   const getIconColor = () => {
@@ -105,7 +126,7 @@ const ThemeSwitcherDecorator = (Story, context) => {
       <ThemeProvider theme={muiTheme}>
         <CacheProvider value={cache}>
           <CssBaseline />
-          {showThemeSwitcher && (
+          {showThemeSwitcher && !isDocsPage && (
             <IconButton
               onClick={toggleTheme}
               sx={{

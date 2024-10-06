@@ -73,6 +73,7 @@ const CustomTextField = ({
   size = 'medium',
   fullWidth = false,
   placeholder = '入力してください',
+  value = '',
   ...props
 }: CustomTextFieldProps) => {
   const theme = useTheme()

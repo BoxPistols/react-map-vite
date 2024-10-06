@@ -1,15 +1,16 @@
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
 import {
   FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Tooltip,
   FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  Tooltip,
   useTheme,
 } from '@mui/material'
 import type { SelectProps } from '@mui/material'
 import styled from '@mui/material/styles/styled'
+import { type ChangeEvent, useState } from 'react'
 
 type CustomSelectProps = Omit<SelectProps, 'label'> & {
   label: string
@@ -71,13 +72,26 @@ export const CustomSelect = ({
   name,
   inputProps,
   placeholder = '選択してください',
-  value,
+  value: propValue = '', // 外部からのvalueを受け取る
+  onChange, // 外部のonChangeを受け取る
   ...props
 }: CustomSelectProps) => {
   const theme = useTheme()
   const inputId =
     id || `custom-select-${label.replace(/\s+/g, '-').toLowerCase()}`
   const inputName = name || inputId
+
+  // valueの初期化。undefinedではなく明示的な空文字やnullで初期化する
+  const [value, setValue] = useState<string | number>(
+    (propValue as string | number) || ''
+  )
+
+  const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+    setValue(event.target.value as string | number) // 状態を更新
+    if (onChange) {
+      onChange(event, event.target.value as string | number) // 親コンポーネントのonChangeを呼び出す
+    }
+  }
 
   return (
     <StyledFormControl fullWidth={fullWidth} error={error} size={size}>
@@ -124,7 +138,8 @@ export const CustomSelect = ({
         required={required}
         error={error}
         size={size}
-        value={value}
+        value={value} // stateからのvalueを使う
+        onChange={handleChange} // 自作のhandleChangeを使う
         displayEmpty
         aria-required={required ? 'true' : 'false'}
         aria-invalid={error ? 'true' : 'false'}

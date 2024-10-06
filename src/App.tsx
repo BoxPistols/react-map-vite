@@ -127,7 +127,7 @@ const App = () => {
               <Select
                 open={selectOpen}
                 onClose={() => setSelectOpen(false)}
-                value={mode}
+                value={mode || 'light'}
                 onChange={(event) => {
                   setMode(event.target.value as 'system' | 'light' | 'dark')
                   setSelectOpen(false)

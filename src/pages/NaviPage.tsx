@@ -1,9 +1,11 @@
+import MainGrid from '@/components/MainGrid'
+import { Typography } from '@mui/material'
+
 const NaviPage = () => {
   return (
-    <div>
-      <h1>Navi</h1>
-      <p>This is the Navi page.</p>
-    </div>
+    <MainGrid overview='Navi'>
+      <Typography>This is Navi Page</Typography>
+    </MainGrid>
   )
 }
 
