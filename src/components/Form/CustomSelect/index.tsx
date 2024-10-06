@@ -9,8 +9,9 @@ import {
   useTheme,
 } from '@mui/material'
 import type { SelectProps } from '@mui/material'
+import type { SelectChangeEvent } from '@mui/material'
 import styled from '@mui/material/styles/styled'
-import { type ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 type CustomSelectProps = Omit<SelectProps, 'label'> & {
   label: string
@@ -86,7 +87,7 @@ export const CustomSelect = ({
     (propValue as string | number) || ''
   )
 
-  const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<unknown>) => {
     setValue(event.target.value as string | number) // 状態を更新
     if (onChange) {
       onChange(event, event.target.value as string | number) // 親コンポーネントのonChangeを呼び出す

@@ -7,11 +7,11 @@ import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
 import {
   Box,
   ClickAwayListener,
-  FormControlLabel,
   IconButton,
   MenuItem,
   Select,
-  Switch,
+  // Switch,
+  // FormControlLabel,
   useMediaQuery,
 } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -26,7 +26,8 @@ import WifiPage from './pages/WifiPage'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const App = () => {
-  const { mode, setMode, config, setThemeConfig, theme } = hookUseTheme()
+  // const { mode, setMode, config, setThemeConfig, theme } = hookUseTheme()
+  const { mode, setMode, config, theme } = hookUseTheme()
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const [open, setOpen] = useState<boolean>(true)
@@ -152,28 +153,30 @@ const App = () => {
                   {theme.palette.mode === 'dark' ? 'Dark' : 'Light'} / OS
                   Setting
                 </MenuItem>
-                <MenuItem>
+                {/* <MenuItem>
                   <FormControlLabel
                     control={
-                      <Switch
-                        checked={config.allowDarkMode}
-                        onChange={(e) => {
-                          setThemeConfig({ allowDarkMode: e.target.checked })
-                          if (!e.target.checked && mode !== 'light') {
-                            setMode('light')
-                          }
-                        }}
-                        color='secondary'
-                        sx={{
-                          '& .MuiSwitch-thumb': {
-                            color: theme.palette.common.white,
-                          },
-                        }}
-                      />
+                      <div aria-hidden='true'>
+                        <Switch
+                          checked={config.allowDarkMode}
+                          onChange={(e) => {
+                            setThemeConfig({ allowDarkMode: e.target.checked })
+                            if (!e.target.checked && mode !== 'light') {
+                              setMode('light')
+                            }
+                          }}
+                          color='secondary'
+                          sx={{
+                            '& .MuiSwitch-thumb': {
+                              color: theme.palette.common.white,
+                            },
+                          }}
+                        />
+                      </div>
                     }
                     label='Dark Modeの許可'
                   />
-                </MenuItem>
+                </MenuItem> */}
               </Select>
             </Box>
           </ClickAwayListener>
