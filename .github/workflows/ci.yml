@@ -1,42 +1,47 @@
 name: CI
 
+# CIワークフローの名前を定義します
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
+# mainブランチへのプッシュまたはプルリクエストでワークフローをトリガーします
+
 jobs:
   lint:
     runs-on: ubuntu-latest
+    # lintジョブを定義し、最新のUbuntu環境で実行します
+
     steps:
       - uses: actions/checkout@v3
+      # リポジトリのコードをチェックアウトします
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: 1.1.30
+      # Bunランタイムをセットアップします（バージョン1.1.30を指定）
 
-      - name: Cache Bun dependencies
+      - name: Cache dependencies
         uses: actions/cache@v3
+        id: cache-deps
         with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-bun-
-
-      - name: Cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-modules-
+      # Bunの依存関係とnode_modulesを一緒にキャッシュします
+      # キャッシュキーはOSとbun.lockbファイルのハッシュに基づいています
 
       - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
+      # キャッシュヒットがない場合のみ依存関係をインストールします
 
       - name: Create Biome configuration
         run: |
@@ -111,28 +116,25 @@ jobs:
             }
           }
           EOF
+      # Biome（コードフォーマッタとリンター）の設定ファイルを作成します
 
       - name: Run Biome Lint
         run: bunx @biomejs/biome lint --config-path=biome.json .
+      # Biomeを使用してリントを実行します
 
       - name: Cleanup before caching
         run: |
           rm -rf node_modules/.cache
           rm -rf node_modules/.vite
-          npm prune --production
+      # キャッシュ前に不要なファイルを削除します
+      # 注：npm prune --productionは削除しました。Bunプロジェクトでは不要な場合があります
 
-      - name: Compress node_modules
-        run: tar -czf node_modules.tar.gz node_modules
-
-      - name: Cache compressed node_modules
+      - name: Update cache if needed
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         with:
-          path: node_modules.tar.gz
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lockb') }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lockb') }}-
-            ${{ runner.os }}-node-modules-
-
-      - name: Extract node_modules if cached
-        if: steps.cache-compressed-node-modules.outputs.cache-hit == 'true'
-        run: tar -xzf node_modules.tar.gz
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+      # 依存関係に変更があった場合のみ、キャッシュを更新します
