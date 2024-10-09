@@ -24,8 +24,7 @@ jobs:
             ~/.bun/install/cache
             node_modules
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
+          restore-keys: ${{ runner.os }}-bun-
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -112,13 +111,12 @@ jobs:
           rm -rf node_modules/.cache
           rm -rf node_modules/.vite
 
-      - name: Cache Bun dependencies
+      - name: Cache Bun dependencies again
         uses: actions/cache@v3
         with:
           path: |
             ~/.bun/install/cache
             node_modules
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-
+          restore-keys: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-
             ${{ runner.os }}-bun-
