@@ -35,6 +35,14 @@ const createComponentStyles = (
         },
       },
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.background.paper,
+          color: colors.text.primary,
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: 'contained',

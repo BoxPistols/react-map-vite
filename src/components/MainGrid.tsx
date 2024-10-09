@@ -1,5 +1,6 @@
-import { Typography } from '@mui/material'
-import { Box, Grid } from '@mui/system'
+// MainGrid.tsx
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
+import { Box, Container, Typography } from '@mui/material'
 import type { ReactNode } from 'react'
 
 interface MainGridProps {
@@ -9,25 +10,20 @@ interface MainGridProps {
 
 export default function MainGrid({ children, overview }: MainGridProps) {
   return (
-    <Box
+    <Container
       sx={{
-        width: '100%',
-        paddingTop: 24,
-        paddingLeft: 4,
-        maxWidth: { sm: '100%', md: '1700px' },
-        minHeight: 'calc(100vh)',
-        overflow: 'hidden',
+        width: 'auto',
+        marginTop: `${LAYOUT_CONSTANTS.HEADER.HEIGHT}px`,
+        paddingTop: 4,
+        transition: 'padding 0.3s ease-in-out',
+        minHeight: 'calc(100vh - 64px)',
       }}>
-      <Typography variant='h2' sx={{ mb: 2 }}>
-        {overview}
-      </Typography>
-      <Grid
-        container
-        spacing={2}
-        columns={12}
-        sx={{ mb: (theme) => theme.spacing(2) }}>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>{children}</Grid>
-      </Grid>
-    </Box>
+      <Box sx={{ position: 'relative', p: 4 }}>
+        <Box>
+          <Typography variant='h2'>{overview}</Typography>
+        </Box>
+        <Box sx={{ position: 'relative' }}>{children}</Box>
+      </Box>
+    </Container>
   )
 }

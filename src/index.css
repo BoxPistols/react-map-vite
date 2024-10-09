@@ -14,6 +14,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+    overscroll-behavior: none;
+}
+
 main > main {
   inset: 0;
 }

@@ -29,7 +29,7 @@ export const Map3D: React.FC<Map3DProps> = ({
     pitch: 60,
     bearing: -20,
   })
-  const { effectiveMode } = hookUseTheme()
+  const { mode } = hookUseTheme()
   const theme = useTheme()
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
@@ -139,7 +139,7 @@ export const Map3D: React.FC<Map3DProps> = ({
         className={`
           absolute top-4 right-16 p-2 text-sm z-10
           ${
-            effectiveMode === 'dark'
+            mode === 'dark'
               ? 'dark:bg-gray-700 dark:text-white dark:bg-opacity-70'
               : 'bg-white text-gray-700 bg-opacity-70'
           }

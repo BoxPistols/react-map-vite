@@ -1,30 +1,41 @@
-// import { useTheme } from '@emotion/react'
-import { theme } from '@/lib/themes/theme'
-import MenuIcon from '@mui/icons-material/Menu'
+// src/layouts/header/index.tsx
+import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 
-type HeaderProps = {
-  toggleDrawer?: () => void
+interface HeaderProps {
+  toggleDrawer: () => void
+  open: boolean
 }
 
-export const Header = ({ toggleDrawer }: HeaderProps) => {
-  // const theme = useTheme()
+export const Header = ({ toggleDrawer, open }: HeaderProps) => {
   return (
     <AppBar
       position='fixed'
       sx={{
-        backgroundColor: theme.palette.grey[800],
-        zIndex: theme.zIndex.drawer,
+        zIndex: (theme) => theme.zIndex.drawer + 100,
       }}>
-      <Toolbar sx={{ ml: 2 }}>
+      <Toolbar>
         <IconButton
-          edge='start'
           color='inherit'
-          aria-label='menu'
-          onClick={toggleDrawer}>
-          <MenuIcon />
+          aria-label={open ? 'close drawer' : 'open drawer'}
+          onClick={toggleDrawer}
+          edge='start'
+          sx={{
+            marginRight: 2,
+            marginLeft: -1,
+            transition: 'transform 0.2s ease-in-out',
+            transform: open ? 'rotate(0deg)' : 'rotate(-180deg)', // 矢印の向きを調整
+          }}>
+          <MenuOpenIcon />
         </IconButton>
-        <Typography variant='lg' ml={2} noWrap>
+        <Typography
+          variant='h1'
+          noWrap
+          component='div'
+          sx={{
+            flexGrow: 1,
+            fontWeight: 500,
+          }}>
           Map App
         </Typography>
       </Toolbar>
