@@ -15,18 +15,27 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest
+          bun-version: 1.1.30
 
       - name: Cache Bun dependencies
         uses: actions/cache@v3
         with:
-          path: |
-            ~/.bun/install/cache
-            node_modules
+          path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: ${{ runner.os }}-bun-
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
 
       - name: Create Biome configuration
@@ -110,13 +119,20 @@ jobs:
         run: |
           rm -rf node_modules/.cache
           rm -rf node_modules/.vite
+          npm prune --production
 
-      - name: Cache Bun dependencies again
+      - name: Compress node_modules
+        run: tar -czf node_modules.tar.gz node_modules
+
+      - name: Cache compressed node_modules
         uses: actions/cache@v3
         with:
-          path: |
-            ~/.bun/install/cache
-            node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-
-            ${{ runner.os }}-bun-
+          path: node_modules.tar.gz
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lockb') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lockb') }}-
+            ${{ runner.os }}-node-modules-
+
+      - name: Extract node_modules if cached
+        if: steps.cache-compressed-node-modules.outputs.cache-hit == 'true'
+        run: tar -xzf node_modules.tar.gz
