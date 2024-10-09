@@ -25,23 +25,35 @@ jobs:
           bun-version: 1.1.30
       # Bunランタイムをセットアップします（バージョン1.1.30を指定）
 
-      - name: Cache dependencies
+      - name: Cache Bun dependencies
         uses: actions/cache@v3
-        id: cache-deps
+        id: cache-bun
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      # Bunの依存関係をキャッシュします
+      # キャッシュキーはOSとbun.lockbファイルのハッシュに基づいています
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: cache-modules
         with:
           path: |
-            ~/.bun/install/cache
             node_modules
+            !node_modules/.cache
+            !node_modules/.vite
           key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
             ${{ runner.os }}-modules-
-      # Bunの依存関係とnode_modulesを一緒にキャッシュします
+      # node_modulesをキャッシュします（.cacheと.viteディレクトリを除外）
       # キャッシュキーはOSとbun.lockbファイルのハッシュに基づいています
 
       - name: Install dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
+        if: steps.cache-bun.outputs.cache-hit != 'true' || steps.cache-modules.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
-      # キャッシュヒットがない場合のみ依存関係をインストールします
+      # Bunのキャッシュまたはnode_modulesのキャッシュがヒットしなかった場合のみ依存関係をインストールします
 
       - name: Create Biome configuration
         run: |
@@ -121,20 +133,3 @@ jobs:
       - name: Run Biome Lint
         run: bunx @biomejs/biome lint --config-path=biome.json .
       # Biomeを使用してリントを実行します
-
-      - name: Cleanup before caching
-        run: |
-          rm -rf node_modules/.cache
-          rm -rf node_modules/.vite
-      # キャッシュ前に不要なファイルを削除します
-      # 注：npm prune --productionは削除しました。Bunプロジェクトでは不要な場合があります
-
-      - name: Update cache if needed
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.bun/install/cache
-            node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
-      # 依存関係に変更があった場合のみ、キャッシュを更新します
