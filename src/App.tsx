@@ -1,6 +1,6 @@
 import { hookUseTheme } from '@/hooks/useTheme'
 import { Header } from '@/layouts/header'
-import { SideNav } from '@/layouts/sideNav'
+import { LeftMenu } from '@/layouts/leftMenu'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
@@ -81,7 +81,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <SideNav open={open} />
+        <LeftMenu open={open} />
         <Header toggleDrawer={toggleDrawer} />
         <Box
           sx={{
