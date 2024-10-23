@@ -1,15 +1,13 @@
+// src/layouts/sideNav/index.tsx
 import { Drawer, DrawerHeader } from '@/layouts/util'
-
 import { colorData } from '@/lib/themes/colorToken'
 import { theme } from '@/lib/themes/theme'
-
 import { MoveToInbox as InboxIcon } from '@mui/icons-material'
 import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-
 import { Link } from 'react-router-dom'
 
 type SideNavProps = {

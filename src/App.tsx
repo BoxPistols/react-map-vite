@@ -1,3 +1,4 @@
+import { useSidebarState } from '@/hooks/useSidebarState' // 新しく追加
 import { hookUseTheme } from '@/hooks/useTheme'
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
@@ -24,17 +25,12 @@ import WifiPage from './pages/WifiPage'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const App = () => {
-  // const { mode, setMode, config, setThemeConfig, theme } = hookUseTheme()
   const { mode, setMode, theme } = hookUseTheme()
+  const { open, toggleDrawer } = useSidebarState(true) // カスタムフックを使用
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
-  const [open, setOpen] = useState<boolean>(true)
   const [selectOpen, setSelectOpen] = useState(false)
   const iconButtonRef = useRef<HTMLButtonElement>(null)
-
-  const toggleDrawer = () => {
-    setOpen((prevOpen) => !prevOpen)
-  }
 
   const toggleSelect = () => {
     setSelectOpen((prev) => !prev)
@@ -82,11 +78,10 @@ const App = () => {
       <CssBaseline />
       <Router>
         <SideNav open={open} />
-        <Header toggleDrawer={toggleDrawer} />
+        <Header toggleDrawer={toggleDrawer} open={open} />
         <Box
           sx={{
             paddingLeft: InnerWidth,
-            // marginTop: 24,
             transition: 'padding 0.3s',
             backgroundColor: theme.palette.background.default,
             color: theme.palette.text.primary,
