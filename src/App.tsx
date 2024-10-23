@@ -11,7 +11,7 @@ import {
   IconButton,
   MenuItem,
   Select,
-  useMediaQuery,
+  // useMediaQuery,
 } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
@@ -23,11 +23,12 @@ import MapPage from './pages/MapPage'
 import NaviPage from './pages/NaviPage'
 import WifiPage from './pages/WifiPage'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 
 const App = () => {
   const { mode, setMode, theme } = hookUseTheme()
   const { open, toggleDrawer } = useSidebarState(true) // カスタムフックを使用
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const [selectOpen, setSelectOpen] = useState(false)
   const iconButtonRef = useRef<HTMLButtonElement>(null)
@@ -40,33 +41,35 @@ const App = () => {
     setSelectOpen(false)
   }
 
-  const InnerWidth = open ? '240px' : '96px'
+  const InnerWidth = open
+    ? getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
+    : 0
 
-  const commonClassName =
-    'text-white ml-2 text-xs font-semibold hidden sm:inline-block'
+  const commonClassName = 'ml-2 text-xs font-semibold hidden sm:inline-block'
 
   const getThemeIcon = () => {
     switch (mode) {
       case 'light':
         return (
           <>
-            <Brightness7Icon className='text-white' fontSize='small' />
+            <Brightness7Icon fontSize='small' />
             <div className={commonClassName}>Light</div>
           </>
         )
       case 'dark':
         return (
           <>
-            <Brightness4Icon className='text-white' fontSize='small' />
+            <Brightness4Icon fontSize='small' />
             <div className={commonClassName}>Dark</div>
           </>
         )
       case 'system':
         return (
           <>
-            <SettingsBrightnessIcon className='text-white' fontSize='small' />
+            <SettingsBrightnessIcon fontSize='small' />
             <div className={`${commonClassName} whitespace-nowrap`}>
-              OS / {prefersDarkMode ? 'Dark' : 'Light'}
+              {/* OS / {prefersDarkMode ? 'Dark' : 'Light'} */}
+              OS
             </div>
           </>
         )
@@ -95,17 +98,15 @@ const App = () => {
                 sx={{
                   zIndex: theme.zIndex.appBar,
                   border: '1px solid',
-                  borderColor: theme.palette.grey[600],
+                  // borderColor: theme.palette.grey[600],
+                  borderColor: theme.palette.text.primary,
                   width: '100px',
-                  backgroundColor:
-                    theme.palette.mode === 'dark'
-                      ? 'rgba(255,255,255,0.1)'
-                      : 'rgba(0,0,0,0.1)',
+                  color: theme.palette.text.primary,
+                  backgroundColor: theme.palette.background.paper,
+                  // hover
                   '&:hover': {
-                    backgroundColor:
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255,255,255,0.2)'
-                        : 'rgba(0,0,0,0.2)',
+                    opacity: 0.8,
+                    transition: '0.3s',
                   },
                 }}>
                 {getThemeIcon()}
@@ -133,8 +134,9 @@ const App = () => {
                 <MenuItem value='light'>Light</MenuItem>
                 <MenuItem value='dark'>Dark</MenuItem>
                 <MenuItem value='system'>
-                  {theme.palette.mode === 'dark' ? 'Dark' : 'Light'} / OS
-                  Setting
+                  {/* {theme.palette.mode === 'dark' ? 'Dark' : 'Light'} / OS
+                  Setting */}
+                  OS System
                 </MenuItem>
               </Select>
             </Box>
