@@ -1,3 +1,4 @@
+import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 // src/layouts/sideNav/index.tsx
 import { Drawer, DrawerHeader } from '@/layouts/util'
 import { colorData } from '@/lib/themes/colorToken'
@@ -29,7 +30,9 @@ export const SideNav = ({ open }: SideNavProps) => {
       open={open}
       sx={{
         '& .MuiDrawer-paper': {
-          width: open ? '210px' : '64px',
+          width: open
+            ? getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
+            : getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED),
           backgroundColor: theme.palette.grey[900],
           color: theme.palette.grey[200],
           overflowX: 'hidden',

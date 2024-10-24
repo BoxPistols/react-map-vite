@@ -5,8 +5,8 @@
  */
 export const LAYOUT_CONSTANTS = {
   SIDEBAR: {
-    WIDTH_OPENED: 240, // サイドバーが開いているときの幅
-    WIDTH_CLOSED: 96, // サイドバーが閉じているときの幅
+    WIDTH_OPENED: 210, // サイドバーが開いているときの幅
+    WIDTH_CLOSED: 72, // サイドバーが閉じているときの幅
   },
   RIGHT_DRAWER: {
     WIDTH: 320, // 右ドロワーの幅
