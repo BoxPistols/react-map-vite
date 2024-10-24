@@ -43,7 +43,7 @@ const App = () => {
 
   const InnerWidth = open
     ? getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
-    : 0
+    : 20
 
   const commonClassName = 'ml-2 text-xs font-semibold hidden sm:inline-block'
 

@@ -5,6 +5,7 @@ import ViewSidebarIcon from '@mui/icons-material/ViewSidebar'
 import {
   Box,
   Button,
+  Container,
   Drawer,
   Tooltip,
   Typography,
@@ -15,7 +16,7 @@ import { type ReactNode, useMemo, useState } from 'react'
 
 const WorkDrawer = styled(Drawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
-    width: getLayoutValue(LAYOUT_CONSTANTS.RIGHT_DRAWER.WIDTH),
+    width: getLayoutValue(LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH),
     // height: `calc(100% - ${getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT)})`,
     top: getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT),
     left: getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED) ? '240px' : '0',
@@ -57,7 +58,7 @@ export default function MainGrid({
   console.log(drawerLeft)
 
   return (
-    <Box
+    <Container
       sx={{
         width: 'auto',
         height: `calc(100vh - ${getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT)})`,
@@ -115,11 +116,10 @@ export default function MainGrid({
                   '& .MuiDrawer-paper': {
                     position: 'fixed',
                     left: `${LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED}px`,
-                    width: `${LAYOUT_CONSTANTS.RIGHT_DRAWER.WIDTH}px`,
+                    width: `${LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH}px`,
                     top: `${LAYOUT_CONSTANTS.HEADER.HEIGHT}px`,
-                    pt: 14,
-                    px: 3,
-                    pb: 4,
+                    py: 8,
+                    px: 4,
                     boxShadow: theme.shadows[4],
                   },
                 }}>
@@ -129,6 +129,6 @@ export default function MainGrid({
           )}
         </Box>
       </Box>
-    </Box>
+    </Container>
   )
 }
