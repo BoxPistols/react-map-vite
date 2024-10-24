@@ -4,9 +4,8 @@ import { useSidebarState } from '@/hooks/useSidebarState'
 import ViewSidebarIcon from '@mui/icons-material/ViewSidebar'
 import {
   Box,
+  Button,
   Drawer,
-  // Grid,
-  IconButton,
   Tooltip,
   Typography,
   useTheme,
@@ -21,11 +20,11 @@ const WorkDrawer = styled(Drawer)(({ theme }) => ({
     top: getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT),
     left: getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED) ? '240px' : '0',
     borderLeft: `1px solid ${theme.palette.divider}`,
-    backdropFilter: 'blur(8px)',
+    backdropFilter: 'blur(6px)',
     backgroundColor:
       theme.palette.mode === 'dark'
-        ? 'rgba(18, 18, 18, 0.75)'
-        : 'rgba(255, 255, 255, 0.7)',
+        ? 'rgba(18, 18, 18, 0.7)'
+        : 'rgba(255, 255, 255, 0.6)',
     transition: 'all 0.3s ease-in-out',
   },
 }))
@@ -83,27 +82,29 @@ export default function MainGrid({
 
           {drawerContent && (
             <>
-              <Tooltip title={drawerOpen ? 'Setting Close' : 'Setting Open'}>
-                <IconButton
-                  onClick={toggleDrawer}
+              <Tooltip title={drawerOpen ? 'SettingClose' : 'Setting Open'}>
+                <Box
                   sx={{
-                    position: 'fixed',
-                    // top: getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT),
-                    bottom: 12,
-                    left: 12,
-                    // bottom: theme.spacing(3),
                     zIndex: theme.zIndex.drawer + 1,
-                    backgroundColor: theme.palette.background.paper,
-                    color: theme.palette.text.primary,
-                    transform: drawerOpen ? 'rotate(-180deg)' : 'rotate(0deg)',
-                    transition: 'all 0.3s ease-in-out',
-                    '&:hover': {
-                      backgroundColor: theme.palette.action.hover,
-                    },
-                    boxShadow: theme.shadows[2],
+                    pb: 2,
                   }}>
-                  <ViewSidebarIcon />
-                </IconButton>
+                  <Button
+                    variant='contained'
+                    onClick={toggleDrawer}
+                    sx={{
+                      position: 'fixed',
+                      top: 12,
+                      left: getLayoutValue(
+                        LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED + 120
+                      ),
+                      zIndex: theme.zIndex.drawer + 1,
+                    }}>
+                    <Typography variant='caption' color='white' pr={2}>
+                      {overview} Setting
+                    </Typography>
+                    <ViewSidebarIcon />
+                  </Button>
+                </Box>
               </Tooltip>
 
               <WorkDrawer
@@ -116,10 +117,10 @@ export default function MainGrid({
                     left: `${LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED}px`,
                     width: `${LAYOUT_CONSTANTS.RIGHT_DRAWER.WIDTH}px`,
                     top: `${LAYOUT_CONSTANTS.HEADER.HEIGHT}px`,
+                    pt: 14,
+                    px: 3,
+                    pb: 4,
                     boxShadow: theme.shadows[4],
-                    p: 4,
-                    pt: 12,
-                    // backgroundColor: 'teal',
                   },
                 }}>
                 <Box sx={{ p: 3 }}>{drawerContent}</Box>
