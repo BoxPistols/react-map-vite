@@ -1,17 +1,64 @@
+import CustomTextField from '@/components/Form/CustomTextField'
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
 import { Box } from '@mui/material'
 import { Button, TextField, Typography } from '@mui/material'
+
 const MapPage = () => {
   // ドロワーに表示するフォームコンテンツ
+
   const formContent = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant='h6'>Add New Item</Typography>
-      <TextField label='Name' fullWidth />
-      <TextField label='Description' fullWidth multiline rows={4} />
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        padding: 2,
+        pb: 20,
+      }}>
+      <Typography variant='xl'>Add New Item</Typography>
+      <Typography variant='sm'>Please fill out the form below</Typography>
+
+      <Typography variant='xl'>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
+        tempore deserunt esse mollitia eos ipsam, temporibus quia illum nesciunt
+        excepturi quis suscipit autem quae voluptates dolorum, odio eaque.
+        Consequuntur placeat cum eius nostrum eligendi vitae perspiciatis odit
+        tempora. Cumque qui tenetur dicta dolore quis? Aliquam eveniet earum id
+      </Typography>
+
+      <Typography variant='sm'>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
+        tempore deserunt esse mollitia eos ipsam, temporibus quia illum nesciunt
+        excepturi quis suscipit autem quae voluptates dolorum, odio eaque.
+        quibusdam facilis sed veritatis molestiae laboriosam aut, illo sit!
+        Laudantium, voluptates impedit voluptatem amet ipsam ab cum tempora
+        nulla quis? Odit error dolorum totam? A eveniet modi soluta ea sunt.
+      </Typography>
+
+      <CustomTextField
+        label='ユーザー名'
+        placeholder='ユーザー名を入力してください'
+      />
+      <TextField
+        label='Description...'
+        fullWidth
+        multiline
+        rows={4}
+        sx={{
+          mb: 4,
+        }}
+      />
+
+      <CustomTextField
+        label='ユーザー名'
+        placeholder='ユーザー名を入力してください'
+      />
+      <TextField label='Description...' fullWidth multiline rows={4} />
       <Button variant='contained' color='primary'>
         Submit
       </Button>
+      {/*  */}
     </Box>
   )
 
