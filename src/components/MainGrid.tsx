@@ -83,19 +83,20 @@ export default function MainGrid({
 
           {drawerContent && (
             <>
-              <Tooltip title={drawerOpen ? 'Close drawer' : 'Open drawer'}>
+              <Tooltip title={drawerOpen ? 'Setting Close' : 'Setting Open'}>
                 <IconButton
                   onClick={toggleDrawer}
-                  size='large'
                   sx={{
                     position: 'fixed',
-                    left: 4,
-                    bottom: theme.spacing(3),
+                    // top: getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT),
+                    bottom: 12,
+                    left: 12,
+                    // bottom: theme.spacing(3),
                     zIndex: theme.zIndex.drawer + 1,
                     backgroundColor: theme.palette.background.paper,
                     color: theme.palette.text.primary,
+                    transform: drawerOpen ? 'rotate(-180deg)' : 'rotate(0deg)',
                     transition: 'all 0.3s ease-in-out',
-                    transform: drawerOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                     '&:hover': {
                       backgroundColor: theme.palette.action.hover,
                     },
@@ -112,12 +113,12 @@ export default function MainGrid({
                 sx={{
                   '& .MuiDrawer-paper': {
                     position: 'fixed',
-                    // left: `${drawerLeft}px`,
                     left: `${LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED}px`,
                     width: `${LAYOUT_CONSTANTS.RIGHT_DRAWER.WIDTH}px`,
                     top: `${LAYOUT_CONSTANTS.HEADER.HEIGHT}px`,
                     boxShadow: theme.shadows[4],
                     p: 4,
+                    pt: 12,
                     // backgroundColor: 'teal',
                   },
                 }}>

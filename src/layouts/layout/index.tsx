@@ -12,7 +12,7 @@ const Layout = ({ open = false, onToggle }: LayoutProps) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header toggleDrawer={handleToggle} />
+      <Header toggleDrawer={handleToggle} open={false} />
       <SideNav open={open} />
       <Box
         component='main'
