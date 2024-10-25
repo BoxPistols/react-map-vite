@@ -1,3 +1,4 @@
+// SettingDrawer.tsx
 import { Box, Drawer } from '@mui/material'
 import type { ReactNode } from 'react'
 
@@ -13,7 +14,7 @@ export const SettingDrawer = ({
   drawerOpen,
   children,
   width = 300,
-  left,
+  left = 0,
   top = 64,
 }: SettingDrawerProps) => {
   return (
@@ -30,6 +31,7 @@ export const SettingDrawer = ({
           left: left,
           top: top,
           opacity: 0.9,
+          transition: 'left 0.3s',
         },
       }}>
       <Box sx={{ p: 3 }}>{children}</Box>

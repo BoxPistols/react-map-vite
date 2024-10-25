@@ -9,7 +9,6 @@ import Brightness7Icon from '@mui/icons-material/Brightness7'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
 import {
   Box,
-  Button,
   ClickAwayListener,
   IconButton,
   MenuItem,
@@ -28,23 +27,17 @@ import NaviPage from './pages/NaviPage'
 import WifiPage from './pages/WifiPage'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { SettingDrawer } from './components/SettingDrawer'
 
 const App = () => {
   const { mode, setMode, theme } = hookUseTheme()
-  const { open, toggleDrawer } = useSidebarState(true) // カスタムフック
-  const [isSettingDrawerOpen, setIsSettingDrawerOpen] = useState(false) // SettingDrawer の開閉状態
+  const { open: sideNavOpen, toggleDrawer } = useSidebarState(true)
+  const [isSettingDrawerOpen, setIsSettingDrawerOpen] = useState(false)
 
   const [selectOpen, setSelectOpen] = useState(false)
   const iconButtonRef = useRef<HTMLButtonElement>(null)
 
-  // トリガーボタンのクリックで SettingDrawer の開閉を切り替える
-  const toggleSettingDrawer = () => {
-    setIsSettingDrawerOpen(!isSettingDrawerOpen)
-  }
-
   // サイドナビの横幅を計算
-  const sideNavWidth = open
+  const sideNavWidth = sideNavOpen
     ? LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED
     : LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED
 
@@ -55,17 +48,14 @@ const App = () => {
   const totalDrawerWidth =
     sideNavWidth + (isSettingDrawerOpen ? settingDrawerWidth : 0)
 
-  const toggleSelect = () => {
-    setSelectOpen((prev) => !prev)
+  // SettingDrawer の開閉を切り替える関数
+  const toggleSettingDrawer = () => {
+    setIsSettingDrawerOpen(!isSettingDrawerOpen)
   }
 
   const handleClickAway = () => {
     setSelectOpen(false)
   }
-
-  const InnerWidth = open
-    ? getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
-    : 20
 
   const commonClassName = 'ml-2 text-xs font-semibold hidden sm:inline-block'
 
@@ -95,47 +85,28 @@ const App = () => {
     }
   }
 
+  // 各ページに必要な状態と関数を渡します
+  const sharedProps = {
+    sideNavWidth,
+    settingDrawerWidth,
+    isSettingDrawerOpen,
+    toggleSettingDrawer,
+    totalDrawerWidth,
+    sideNavOpen,
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <SideNav open={open} width={sideNavWidth} />
+        <SideNav open={sideNavOpen} width={sideNavWidth} />
 
-        <Header toggleDrawer={toggleDrawer} open={open} />
-
-        <SettingDrawer
-          drawerOpen={isSettingDrawerOpen}
-          width={settingDrawerWidth}
-          left={sideNavWidth}
-          top={LAYOUT_CONSTANTS.HEADER.HEIGHT}>
-          {/* SettingDrawer の内容 */}
-          <Box>
-            <h2>Setting Drawer Content</h2>
-            {/* 他のコンテンツ */}
-          </Box>
-        </SettingDrawer>
-
-        {/* トリガーボタン */}
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={toggleSettingDrawer}
-          size='small'
-          sx={{
-            position: 'fixed',
-            top: LAYOUT_CONSTANTS.HEADER.HEIGHT + 8,
-            left: totalDrawerWidth - 8,
-            zIndex: theme.zIndex.drawer + 1,
-            minWidth: '24px !important',
-            height: '44px !important',
-          }}>
-          {isSettingDrawerOpen ? '＜' : '＞'}
-        </Button>
+        <Header toggleDrawer={toggleDrawer} open={sideNavOpen} />
 
         <Box
           sx={{
-            paddingLeft: InnerWidth,
-            transition: 'padding 0.3s',
+            paddingLeft: getLayoutValue(totalDrawerWidth),
+            transition: 'padding-left 0.3s',
             backgroundColor: theme.palette.background.default,
             color: theme.palette.text.primary,
           }}>
@@ -144,7 +115,7 @@ const App = () => {
               <IconButton
                 className='fixed top-3 right-3 z-100 rounded-md'
                 ref={iconButtonRef}
-                onClick={toggleSelect}
+                onClick={() => setSelectOpen(!selectOpen)}
                 sx={{
                   zIndex: theme.zIndex.appBar,
                   border: '1px solid',
@@ -187,11 +158,11 @@ const App = () => {
           </ClickAwayListener>
 
           <Routes>
-            <Route path='/' element={<DashboardPage />} />
-            <Route path='/map' element={<MapPage />} />
-            <Route path='/navi' element={<NaviPage />} />
-            <Route path='/wifi' element={<WifiPage />} />
-            <Route path='/inbox' element={<InboxPage />} />
+            <Route path='/' element={<DashboardPage {...sharedProps} />} />
+            <Route path='/map' element={<MapPage {...sharedProps} />} />
+            <Route path='/navi' element={<NaviPage {...sharedProps} />} />
+            <Route path='/wifi' element={<WifiPage {...sharedProps} />} />
+            <Route path='/inbox' element={<InboxPage {...sharedProps} />} />
           </Routes>
         </Box>
       </Router>
