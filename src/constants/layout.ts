@@ -4,15 +4,15 @@
  * アプリケーション全体のレイアウトに関する定数を定義
  */
 export const LAYOUT_CONSTANTS = {
+  HEADER: {
+    HEIGHT: 64, // ヘッダーの高さ
+  },
   SIDEBAR: {
     WIDTH_OPENED: 160, // サイドバーが開いているときの幅
-    WIDTH_CLOSED: 72, // サイドバーが閉じているときの幅
+    WIDTH_CLOSED: 64, // サイドバーが閉じているときの幅
   },
   SETTING_DRAWER: {
     WIDTH: 420, // 左ドロワーの幅
-  },
-  HEADER: {
-    HEIGHT: 64, // ヘッダーの高さ
   },
 } as const
 

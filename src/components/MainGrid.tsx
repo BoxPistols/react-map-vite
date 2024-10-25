@@ -1,4 +1,5 @@
 // src/components/MainGrid.tsx
+import { SettingDrawer } from '@/components/SettingDrawer'
 import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 import { useSidebarState } from '@/hooks/useSidebarState'
 import ViewSidebarIcon from '@mui/icons-material/ViewSidebar'
@@ -6,29 +7,11 @@ import {
   Box,
   Button,
   Container,
-  Drawer,
   Tooltip,
   Typography,
   useTheme,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
 import { type ReactNode, useMemo, useState } from 'react'
-
-const WorkDrawer = styled(Drawer)(({ theme }) => ({
-  '& .MuiDrawer-paper': {
-    width: getLayoutValue(LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH),
-    // height: `calc(100% - ${getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT)})`,
-    top: getLayoutValue(LAYOUT_CONSTANTS.HEADER.HEIGHT),
-    left: getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED) ? '240px' : '0',
-    borderLeft: `1px solid ${theme.palette.divider}`,
-    backdropFilter: 'blur(6px)',
-    backgroundColor:
-      theme.palette.mode === 'dark'
-        ? 'rgba(18, 18, 18, 0.7)'
-        : 'rgba(255, 255, 255, 0.6)',
-    transition: 'all 0.3s ease-in-out',
-  },
-}))
 
 interface MainGridProps {
   children?: ReactNode
@@ -55,8 +38,6 @@ export default function MainGrid({
       : LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED
   }, [sidebarOpen])
 
-  console.log(drawerLeft)
-
   return (
     <Container
       sx={{
@@ -66,7 +47,6 @@ export default function MainGrid({
         paddingTop: 4,
         paddingLeft: drawerLeft ? 24 : 0,
         transition: 'padding 0.3s ease-in-out',
-        // left: getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED),
       }}>
       <Box
         sx={{
@@ -108,23 +88,13 @@ export default function MainGrid({
                 </Box>
               </Tooltip>
 
-              <WorkDrawer
-                variant='persistent'
-                anchor='left'
-                open={drawerOpen}
-                sx={{
-                  '& .MuiDrawer-paper': {
-                    position: 'fixed',
-                    left: `${LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED}px`,
-                    width: `${LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH}px`,
-                    top: `${LAYOUT_CONSTANTS.HEADER.HEIGHT}px`,
-                    py: 8,
-                    px: 4,
-                    boxShadow: theme.shadows[4],
-                  },
-                }}>
-                <Box sx={{ p: 3 }}>{drawerContent}</Box>
-              </WorkDrawer>
+              <SettingDrawer
+                drawerOpen={drawerOpen}
+                width={LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH}
+                left={drawerLeft}
+                top={LAYOUT_CONSTANTS.HEADER.HEIGHT}>
+                Hello!!
+              </SettingDrawer>
             </>
           )}
         </Box>

@@ -1,3 +1,4 @@
+import { getLayoutValue } from '@/constants/layout'
 import { styled } from '@mui/material'
 
 import {
@@ -9,7 +10,9 @@ import {
 } from '@mui/material'
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 
-const drawerWidth = 180
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
+
+const drawerWidth = getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean

@@ -1,4 +1,3 @@
-import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 // src/layouts/sideNav/index.tsx
 import { Drawer, DrawerHeader } from '@/layouts/util'
 import { colorData } from '@/lib/themes/colorToken'
@@ -9,13 +8,18 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { useRef } from 'react'
+
 import { Link } from 'react-router-dom'
 
 type SideNavProps = {
   open: boolean
+  width: number
 }
 
-export const SideNav = ({ open }: SideNavProps) => {
+export const SideNav = ({ open, width }: SideNavProps) => {
+  const sideNavRef = useRef<HTMLDivElement>(null)
+
   const navItems = [
     { to: '/', icon: <DashboardIcon />, text: 'Dashboard' },
     { to: '/map', icon: <RoomOutlinedIcon />, text: 'Map' },
@@ -28,11 +32,10 @@ export const SideNav = ({ open }: SideNavProps) => {
     <Drawer
       variant='permanent'
       open={open}
+      PaperProps={{ ref: sideNavRef }}
       sx={{
         '& .MuiDrawer-paper': {
-          width: open
-            ? getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
-            : getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED),
+          width: width,
           backgroundColor: theme.palette.grey[900],
           color: theme.palette.grey[200],
           overflowX: 'hidden',

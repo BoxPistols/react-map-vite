@@ -11,7 +11,6 @@ import {
   IconButton,
   MenuItem,
   Select,
-  // useMediaQuery,
 } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
@@ -27,8 +26,7 @@ import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 
 const App = () => {
   const { mode, setMode, theme } = hookUseTheme()
-  const { open, toggleDrawer } = useSidebarState(true) // カスタムフックを使用
-  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const { open, toggleDrawer } = useSidebarState(true) // カスタムフック
 
   const [selectOpen, setSelectOpen] = useState(false)
   const iconButtonRef = useRef<HTMLButtonElement>(null)
@@ -67,10 +65,7 @@ const App = () => {
         return (
           <>
             <SettingsBrightnessIcon fontSize='small' />
-            <div className={`${commonClassName} whitespace-nowrap`}>
-              {/* OS / {prefersDarkMode ? 'Dark' : 'Light'} */}
-              OS
-            </div>
+            <div className={`${commonClassName} whitespace-nowrap`}>OS</div>
           </>
         )
     }
@@ -80,7 +75,14 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <SideNav open={open} />
+        <SideNav
+          open={open}
+          width={
+            open
+              ? LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED
+              : LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED
+          }
+        />
         <Header toggleDrawer={toggleDrawer} open={open} />
         <Box
           sx={{
@@ -98,12 +100,10 @@ const App = () => {
                 sx={{
                   zIndex: theme.zIndex.appBar,
                   border: '1px solid',
-                  // borderColor: theme.palette.grey[600],
                   borderColor: theme.palette.text.primary,
                   width: '100px',
                   color: theme.palette.text.primary,
                   backgroundColor: theme.palette.background.paper,
-                  // hover
                   '&:hover': {
                     opacity: 0.8,
                     transition: '0.3s',
@@ -133,11 +133,7 @@ const App = () => {
                 }}>
                 <MenuItem value='light'>Light</MenuItem>
                 <MenuItem value='dark'>Dark</MenuItem>
-                <MenuItem value='system'>
-                  {/* {theme.palette.mode === 'dark' ? 'Dark' : 'Light'} / OS
-                  Setting */}
-                  OS System
-                </MenuItem>
+                <MenuItem value='system'>OS System</MenuItem>
               </Select>
             </Box>
           </ClickAwayListener>
