@@ -1,5 +1,5 @@
 // src/components/MainGrid.tsx
-import { SettingDrawer } from '@/components/SettingDrawer'
+// import { SettingDrawer } from '@/components/SettingDrawer'
 import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 import { useSidebarState } from '@/hooks/useSidebarState'
 import ViewSidebarIcon from '@mui/icons-material/ViewSidebar'
@@ -87,14 +87,6 @@ export default function MainGrid({
                   </Button>
                 </Box>
               </Tooltip>
-
-              <SettingDrawer
-                drawerOpen={drawerOpen}
-                width={LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH}
-                left={drawerLeft}
-                top={LAYOUT_CONSTANTS.HEADER.HEIGHT}>
-                Hello!!
-              </SettingDrawer>
             </>
           )}
         </Box>
