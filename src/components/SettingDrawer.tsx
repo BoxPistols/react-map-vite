@@ -7,6 +7,7 @@ interface SettingDrawerProps {
   width?: number
   left?: number
   top?: number
+  isOverlay?: boolean // 上から覆いかぶせるスタイルかどうか
   children: ReactNode
 }
 
@@ -16,6 +17,7 @@ export const SettingDrawer = ({
   width = 300,
   left = 0,
   top = 64,
+  isOverlay = false,
 }: SettingDrawerProps) => {
   return (
     <Drawer
@@ -24,7 +26,7 @@ export const SettingDrawer = ({
       open={drawerOpen}
       sx={{
         '& .MuiDrawer-paper': {
-          position: 'fixed',
+          position: isOverlay ? 'absolute' : 'fixed',
           py: 8,
           px: 4,
           width: width,
@@ -32,6 +34,7 @@ export const SettingDrawer = ({
           top: top,
           opacity: 0.9,
           transition: 'left 0.3s',
+          ...(isOverlay && { zIndex: 1200 }), // isOverlayの時のみzIndexを設定
         },
       }}>
       <Box sx={{ p: 3 }}>{children}</Box>

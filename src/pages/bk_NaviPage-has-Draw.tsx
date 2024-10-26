@@ -1,16 +1,18 @@
-// src/pages/MapPage.tsx
+// NaviPage.tsx
+
 import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone'
 import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone'
 
 import MainGrid from '@/components/MainGrid'
-import { Map3D } from '@/components/Map3D'
 import { SettingDrawer } from '@/components/SettingDrawer'
+// import { SettingDrawerWithTrigger } from '@/components/SettingDrawerWithTrigger'
+// import { useTotalDrawerWidth } from '@/components/SettingDrawerWithTrigger'
+// import { theme } from '@/theme/theme'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
+import type { PageProps } from '@/types/PageProps'
 import { Box, useTheme } from '@mui/material'
 
-import type { PageProps } from '@/types/PageProps'
-
-const MapPage = ({
+const NaviPage = ({
   sideNavWidth = 0,
   settingDrawerWidth = LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH,
   isSettingDrawerOpen = false,
@@ -19,17 +21,8 @@ const MapPage = ({
 }: PageProps) => {
   const theme = useTheme()
 
-  const iconStyle = {
-    backgroundColor: theme.palette.grey[900],
-    color: theme.palette.common.white,
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
-  }
-
   return (
     <div>
-      {/* SettingDrawer */}
       <SettingDrawer
         drawerOpen={isSettingDrawerOpen}
         width={settingDrawerWidth}
@@ -53,33 +46,20 @@ const MapPage = ({
           zIndex: theme.zIndex.drawer + 1,
         }}>
         {isSettingDrawerOpen ? (
-          <ArrowCircleLeftTwoToneIcon sx={iconStyle} />
+          <ArrowCircleLeftTwoToneIcon />
         ) : (
-          <ArrowCircleRightTwoToneIcon sx={iconStyle} />
+          <ArrowCircleRightTwoToneIcon />
         )}
       </Box>
 
       {/* メインコンテンツ */}
-      <MainGrid overview=''>
-        <Box
-          sx={{
-            position: 'fixed',
-            top: LAYOUT_CONSTANTS.HEADER.HEIGHT,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          }}>
-          <Map3D
-            latitude={35.6809591}
-            longitude={139.7673068}
-            zoom={9}
-            pitch={60}
-            bearing={-20}
-          />
+      <MainGrid overview='Navi'>
+        <Box>
+          <h1>This is Navi Page</h1>
         </Box>
       </MainGrid>
     </div>
   )
 }
 
-export default MapPage
+export default NaviPage
