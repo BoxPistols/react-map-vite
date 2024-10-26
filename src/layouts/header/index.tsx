@@ -12,7 +12,7 @@ export const Header = ({ toggleDrawer, open }: HeaderProps) => {
     <AppBar
       position='fixed'
       sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
+        zIndex: (theme) => theme.zIndex.drawer + 100,
       }}>
       <Toolbar>
         <IconButton

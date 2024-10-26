@@ -2,12 +2,27 @@
 import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone'
 import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone'
 
+import CustomTextField from '@/components/Form/CustomTextField'
+
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
 import { SettingDrawer } from '@/components/SettingDrawer'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
-import { Box, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  useTheme,
+} from '@mui/material'
 
+import CustomSelect from '@/components/Form/CustomSelect'
 import type { PageProps } from '@/types/PageProps'
 
 const MapPage = ({
@@ -36,21 +51,80 @@ const MapPage = ({
         left={sideNavWidth}
         top={LAYOUT_CONSTANTS.HEADER.HEIGHT}
         isOverlay={true}>
-        {' '}
-        // MapPageで上から覆いかぶせる
+        {/* Contents */}
         <Box>
-          <h2>Map Page Settings</h2>
+          <Typography variant='h2'>Map Page Settings</Typography>
+
+          <Typography>This is the setting drawer for the map page.</Typography>
+
+          <Box
+            display={{ xs: 'block', sm: 'flex' }}
+            flexDirection={'column'}
+            my={4}
+            gap={2}>
+            <form>
+              <Box
+                display={{ xs: 'block', sm: 'flex' }}
+                flexDirection={'column'}
+                gap={4}>
+                <CustomTextField label='Name' />
+                <CustomSelect
+                  label='Select'
+                  options={[
+                    { value: 'option1', label: 'Option 1' },
+                    { value: 'option2', label: 'Option 2' },
+                  ]}
+                />
+                <Box
+                  display={{ xs: 'block', sm: 'flex' }}
+                  flexDirection={'row'}
+                  my={4}
+                  gap={4}>
+                  <Button variant='contained' color='secondary'>
+                    Click me
+                  </Button>
+                  <Button>Click me</Button>
+                </Box>
+              </Box>
+            </form>
+          </Box>
+
+          <Typography variant='h3'>Table</Typography>
+          <TableContainer component={Paper} sx={{ mt: 2 }}>
+            <Table
+              sx={{ minWidth: 300 }}
+              size='small'
+              aria-label='a dense table'>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Dessert</TableCell>
+                  <TableCell>Calories</TableCell>
+                  <TableCell>Fat&nbsp;(g)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Setting 1</TableCell>
+                  <TableCell>Value 1</TableCell>
+                  <TableCell>Value 1</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Setting 2</TableCell>
+                  <TableCell>Value 2</TableCell>
+                  <TableCell>Value 2</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Box>
       </SettingDrawer>
-
-      {/* トリガーボタン */}
       <Box
         onClick={toggleSettingDrawer}
         sx={{
           position: 'fixed',
           top: LAYOUT_CONSTANTS.HEADER.HEIGHT + 8,
           left: totalDrawerWidth - 16,
-          zIndex: theme.zIndex.drawer + 1,
+          zIndex: theme.zIndex.drawer + 200,
         }}>
         {isSettingDrawerOpen ? (
           <ArrowCircleLeftTwoToneIcon sx={iconStyle} />
@@ -58,8 +132,6 @@ const MapPage = ({
           <ArrowCircleRightTwoToneIcon sx={iconStyle} />
         )}
       </Box>
-
-      {/* メインコンテンツ */}
       <MainGrid overview=''>
         <Box
           sx={{

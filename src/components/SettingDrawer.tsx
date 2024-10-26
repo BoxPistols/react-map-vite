@@ -27,14 +27,16 @@ export const SettingDrawer = ({
       sx={{
         '& .MuiDrawer-paper': {
           position: isOverlay ? 'absolute' : 'fixed',
-          py: 8,
-          px: 4,
           width: width,
+          height: 'auto',
+          minHeight: '-webkit-fill-available',
           left: left,
           top: top,
+          py: 8,
+          px: 4,
           opacity: 0.9,
           transition: 'left 0.3s',
-          ...(isOverlay && { zIndex: 1200 }), // isOverlayの時のみzIndexを設定
+          ...(isOverlay && { zIndex: 200 }), // isOverlayの時のみzIndexを設定
         },
       }}>
       <Box sx={{ p: 3 }}>{children}</Box>
