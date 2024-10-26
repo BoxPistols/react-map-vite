@@ -1,16 +1,14 @@
 // MapPage.tsx
-
 import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone'
 import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone'
 
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
 import { SettingDrawer } from '@/components/SettingDrawer'
-import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
 import { Box, useTheme } from '@mui/material'
 
 import type { PageProps } from '@/types/PageProps'
-import { color } from '@mui/system'
 import { useState } from 'react'
 
 const MapPage = ({ sideNavWidth }: PageProps) => {
