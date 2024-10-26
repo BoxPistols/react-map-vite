@@ -5,15 +5,20 @@ import { Box } from '@mui/material'
 type LayoutProps = {
   open?: boolean
   onToggle?: () => void
+  sideNavWidth?: number
 }
 
-const Layout = ({ open = false, onToggle }: LayoutProps) => {
+const Layout = ({
+  open = false,
+  onToggle,
+  sideNavWidth = 160,
+}: LayoutProps) => {
   const handleToggle = onToggle || (() => console.log('Drawer toggled'))
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header toggleDrawer={handleToggle} />
-      <SideNav open={open} />
+      <Header toggleDrawer={handleToggle} open={false} />
+      <SideNav open={open} width={sideNavWidth} />
       <Box
         component='main'
         sx={{

@@ -1,10 +1,11 @@
 import CustomSelect from '@/components/Form/CustomSelect'
 import CustomTextField from '@/components/Form/CustomTextField'
 import MainGrid from '@/components/MainGrid'
+import type { PageProps } from '@/types/PageProps'
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
-const DashboardPage = () => {
+const DashboardPage = (_props: PageProps) => {
   return (
     <>
       <MainGrid overview='Dashboard'>

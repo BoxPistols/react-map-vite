@@ -1,22 +1,25 @@
+// src/layouts/sideNav/index.tsx
 import { Drawer, DrawerHeader } from '@/layouts/util'
-
 import { colorData } from '@/lib/themes/colorToken'
 import { theme } from '@/lib/themes/theme'
-
 import { MoveToInbox as InboxIcon } from '@mui/icons-material'
 import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { useRef } from 'react'
 
 import { Link } from 'react-router-dom'
 
 type SideNavProps = {
   open: boolean
+  width: number
 }
 
-export const SideNav = ({ open }: SideNavProps) => {
+export const SideNav = ({ open, width }: SideNavProps) => {
+  const sideNavRef = useRef<HTMLDivElement>(null)
+
   const navItems = [
     { to: '/', icon: <DashboardIcon />, text: 'Dashboard' },
     { to: '/map', icon: <RoomOutlinedIcon />, text: 'Map' },
@@ -29,16 +32,18 @@ export const SideNav = ({ open }: SideNavProps) => {
     <Drawer
       variant='permanent'
       open={open}
+      PaperProps={{ ref: sideNavRef }}
       sx={{
         '& .MuiDrawer-paper': {
-          width: open ? '210px' : '64px',
+          width: width,
           backgroundColor: theme.palette.grey[900],
           color: theme.palette.grey[200],
           overflowX: 'hidden',
           overflowY: 'auto',
           transition: 'width 0.3s',
           border: 'none',
-          zIndex: 1,
+          zIndex: 1001,
+          opacity: open ? 0.92 : 1,
         },
       }}>
       <DrawerHeader />
