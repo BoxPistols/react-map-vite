@@ -43,7 +43,7 @@ export const SideNav = ({ open, width }: SideNavProps) => {
           transition: 'width 0.3s',
           border: 'none',
           zIndex: 1001,
-          opacity: open ? 0.8 : 0.9,
+          opacity: open ? 0.92 : 1,
         },
       }}>
       <DrawerHeader />

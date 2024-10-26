@@ -1,5 +1,7 @@
+// App.tsx
+
 import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
-import { useSidebarState } from '@/hooks/useSidebarState' // 新しく追加
+import { useSidebarState } from '@/hooks/useSidebarState'
 import { hookUseTheme } from '@/hooks/useTheme'
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
@@ -31,7 +33,6 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 const App = () => {
   const { mode, setMode, theme } = hookUseTheme()
   const { open: sideNavOpen, toggleDrawer } = useSidebarState(true)
-  const [isSettingDrawerOpen, setIsSettingDrawerOpen] = useState(false)
 
   const [selectOpen, setSelectOpen] = useState(false)
   const iconButtonRef = useRef<HTMLButtonElement>(null)
@@ -40,18 +41,6 @@ const App = () => {
   const sideNavWidth = sideNavOpen
     ? LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED
     : LAYOUT_CONSTANTS.SIDEBAR.WIDTH_CLOSED
-
-  // SettingDrawer の横幅
-  const settingDrawerWidth = LAYOUT_CONSTANTS.SETTING_DRAWER.WIDTH
-
-  // サイドナビと SettingDrawer の横幅の合計
-  const totalDrawerWidth =
-    sideNavWidth + (isSettingDrawerOpen ? settingDrawerWidth : 0)
-
-  // SettingDrawer の開閉を切り替える関数
-  const toggleSettingDrawer = () => {
-    setIsSettingDrawerOpen(!isSettingDrawerOpen)
-  }
 
   const handleClickAway = () => {
     setSelectOpen(false)
@@ -88,10 +77,6 @@ const App = () => {
   // 各ページに必要な状態と関数を渡します
   const sharedProps = {
     sideNavWidth,
-    settingDrawerWidth,
-    isSettingDrawerOpen,
-    toggleSettingDrawer,
-    totalDrawerWidth,
     sideNavOpen,
   }
 
@@ -105,7 +90,7 @@ const App = () => {
 
         <Box
           sx={{
-            paddingLeft: getLayoutValue(totalDrawerWidth),
+            paddingLeft: getLayoutValue(sideNavWidth),
             transition: 'padding-left 0.3s',
             backgroundColor: theme.palette.background.default,
             color: theme.palette.text.primary,
