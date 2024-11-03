@@ -1,5 +1,5 @@
 import MainGrid from '@/components/MainGrid'
-import type { PageProps } from '@/types/PageProps'
+import type { PageProps } from '@/types/type'
 import { Typography } from '@mui/material'
 
 const WifiPage = (_props: PageProps) => {

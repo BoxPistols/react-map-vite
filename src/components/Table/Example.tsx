@@ -1,13 +1,6 @@
+import type { User } from '@/types/type'
 import { CustomTable } from '.'
-
-// インターフェース定義
-interface User extends Record<string, string | number | boolean> {
-  id: number
-  name: string
-  email: string
-  role: string
-  status: boolean
-}
+import { dummyData } from './dummyData'
 
 export const CustomTableExample = () => {
   // カラム定義
@@ -20,29 +13,7 @@ export const CustomTableExample = () => {
   ]
 
   // サンプルデータ
-  const data: User[] = [
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john@example.com',
-      role: 'Admin',
-      status: true,
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      email: 'jane@example.com',
-      role: 'User',
-      status: false,
-    },
-    {
-      id: 3,
-      name: 'Bob Johnson',
-      email: 'bob@example.com',
-      role: 'Editor',
-      status: true,
-    },
-  ]
+  const data: User[] = dummyData
 
   // CRUD handlers
   const handleView = (row: Record<string, string | number | boolean>) => {
@@ -61,8 +32,8 @@ export const CustomTableExample = () => {
   }
 
   return (
-    <div className='p-4'>
-      <h1 className='text-2xl font-bold mb-4'>Users Table</h1>
+    <div className='p-5'>
+      <h3 className='text-xl font-bold mt-3 mb-1'>Users Table</h3>
       <CustomTable
         columns={columns}
         data={data}
