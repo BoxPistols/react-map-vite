@@ -1,3 +1,4 @@
+import { theme } from '@/theme/theme'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -133,7 +134,7 @@ const formatCellValue = (value: unknown): React.ReactNode => {
           fontSize: '0.75rem',
           fontWeight: 'medium',
           bgcolor: value ? 'success.lighter' : 'error.lighter',
-          color: value ? 'success.darker' : 'error.darker',
+          color: theme.palette.common.black,
         }}>
         {value ? 'Active' : 'Inactive'}
       </Box>
@@ -313,7 +314,7 @@ export const CustomTable = ({
       </Box>
     )
   }
-
+  // Loading...UI
   if (loading) {
     return (
       <Box sx={{ width: '100%' }}>
