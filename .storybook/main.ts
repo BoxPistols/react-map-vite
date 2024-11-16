@@ -1,27 +1,26 @@
+// .storybook/main.ts
+import path from 'node:path'
 import type { StorybookConfig } from '@storybook/react-vite'
-import { mergeConfig } from 'vite'
+import { defineConfig } from 'vite'
 
 const config: StorybookConfig = {
-  stories: [
-    '../src/**/*.mdx',
-    '../src/**/*.@(mdx|stories.@(js|jsx|mjs|ts|tsx))',
-  ],
-  docs: {
-    defaultName: 'AutoDocs',
-  },
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
     {
       name: '@storybook/addon-styling',
       options: {
-        postCss: true,
+        postCss: {
+          implementation: require('postcss'),
+        },
       },
     },
     '@storybook/addon-mdx-gfm',
+    '@chromatic-com/storybook',
   ],
 
   framework: {
@@ -30,13 +29,36 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
-    return mergeConfig(config, {
-      plugins: [require('autoprefixer'), require('tailwindcss')],
+    return defineConfig({
+      ...config,
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '../src'),
+        },
+      },
+      plugins: [...(config.plugins || [])],
+      css: {
+        postcss: {
+          plugins: [require('tailwindcss'), require('autoprefixer')],
+        },
+      },
     })
   },
+
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+      propFilter: {
+        skipPropsWithoutDoc: true,
+      },
+    },
   },
+
+  docs: {},
 }
 
 export default config

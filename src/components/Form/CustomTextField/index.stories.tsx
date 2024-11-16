@@ -4,13 +4,13 @@ import { type ChangeEvent, useState } from 'react'
 import CustomTextField from '.'
 
 const meta: Meta<typeof CustomTextField> = {
-  title: 'Components/CustomTextField',
+  title: 'Components/Form/CustomTextField',
   component: CustomTextField,
-  tags: ['!autodocs', 'text', 'input', 'form'],
+  tags: ['autodocs', 'text', 'input', 'form'],
   parameters: {
-    showThemeSwitcher: true,
     // themeSwitcherIconColor: 'black',
-    themeSwitcherPosition: 'right-top',
+    showThemeSwitcher: false,
+    // themeSwitcherPosition: 'right-top',
   },
   argTypes: {
     label: { control: 'text' },
