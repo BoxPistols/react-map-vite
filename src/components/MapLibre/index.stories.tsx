@@ -4,11 +4,11 @@ import MapLibre from '.'
 const meta: Meta<typeof MapLibre> = {
   title: 'Components/Map/MapLibre/Normal',
   component: MapLibre,
+  tags: ['!autodocs', 'map', 'geolocation', 'interactive'],
   parameters: {
     docs: { disable: true },
     layout: 'fullscreen',
   },
-  tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
     latitude: {
       control: { type: 'number', min: -90, max: 90, step: 0.000001 },

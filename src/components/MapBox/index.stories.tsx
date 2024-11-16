@@ -5,12 +5,12 @@ import Mapbox from '.' // Mapbox コンポーネントの正しいインポー�
 const meta: Meta<typeof Mapbox> = {
   title: 'Components/Map/Mapbox',
   component: Mapbox,
+  tags: ['!autodocs', 'map', 'geolocation', 'interactive'],
   parameters: {
     docs: { disable: true },
     layout: 'fullscreen',
     showThemeSwitcher: false,
   },
-  tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
     latitude: {
       control: 'number',

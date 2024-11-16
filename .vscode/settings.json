@@ -33,7 +33,7 @@
 	"files.trimTrailingWhitespace": true,
 	"files.insertFinalNewline": true,
 	"[mdx]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "unifiedjs.vscode-mdx"
 	},
 	"[css]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -56,7 +56,11 @@
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-	}
+	},
+	"[postcss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"typescript.tsdk": "node_modules/typescript/lib"
 	// MDXをmarkdownとして扱い一時的にPreview
 	// "files.associations": {
 	// 	"*.mdx": "markdown"
