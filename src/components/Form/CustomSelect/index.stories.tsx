@@ -1,17 +1,17 @@
 import { Box } from '@mui/material'
+import type { SelectChangeEvent } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { CustomSelect } from '.'
-import type { SelectChangeEvent } from '@mui/material'
 
 const meta: Meta<typeof CustomSelect> = {
-  title: 'Components/CustomSelect',
+  title: 'Components/Form/CustomSelect',
   component: CustomSelect,
-  tags: ['!autodocs', 'select', 'input', 'form'],
+  tags: ['autodocs', 'select', 'input', 'form'],
   parameters: {
-    showThemeSwitcher: true,
     // themeSwitcherIconColor: 'black',
+    showThemeSwitcher: false,
     themeSwitcherPosition: 'right-top',
   },
   argTypes: {
