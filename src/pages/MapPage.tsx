@@ -23,7 +23,7 @@ import {
 } from '@mui/material'
 
 import CustomSelect from '@/components/Form/CustomSelect'
-import type { PageProps } from '@/types/PageProps'
+import type { PageProps } from '@/types/type'
 
 const MapPage = ({
   sideNavWidth = 0,

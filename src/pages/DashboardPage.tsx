@@ -1,7 +1,7 @@
 import CustomSelect from '@/components/Form/CustomSelect'
 import CustomTextField from '@/components/Form/CustomTextField'
 import MainGrid from '@/components/MainGrid'
-import type { PageProps } from '@/types/PageProps'
+import type { PageProps } from '@/types/type'
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 

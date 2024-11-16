@@ -1,6 +1,7 @@
 // NaviPage.tsx
 import MainGrid from '@/components/MainGrid'
-import type { PageProps } from '@/types/PageProps'
+import { CustomTableExample } from '@/components/Table/Example'
+import type { PageProps } from '@/types/type'
 import { Box } from '@mui/material'
 
 const NaviPage = (_props: PageProps) => {
@@ -10,6 +11,7 @@ const NaviPage = (_props: PageProps) => {
         <Box>
           <h1>This is Navi Page</h1>
         </Box>
+        <CustomTableExample />
       </MainGrid>
     </div>
   )
