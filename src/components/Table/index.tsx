@@ -26,6 +26,7 @@ import {
   TableRow,
   TableSortLabel,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
@@ -112,9 +113,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         ? theme.palette.grey[700]
         : theme.palette.action.hover,
   },
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
+  // '&:last-child td, &:last-child th': {...
 }))
 
 // セルの値のフォーマット
@@ -176,30 +175,40 @@ const TableRows = ({
             </StyledTableCell>
           ))}
         {showCRUD && (
-          <StyledTableCell align='right'>
-            <IconButton
-              size='small'
-              onClick={() => onView(row)}
-              color='secondary'
-              title='View'
-              sx={{ mr: 1 }}>
-              <VisibilityIcon fontSize='small' />
-            </IconButton>
-            <IconButton
-              size='small'
-              onClick={() => onEdit(row)}
-              color='secondary'
-              title='Edit'
-              sx={{ mr: 1 }}>
-              <EditIcon fontSize='small' />
-            </IconButton>
-            <IconButton
-              size='small'
-              onClick={() => onDelete(row)}
-              color='error'
-              title='Delete'>
-              <DeleteIcon fontSize='small' />
-            </IconButton>
+          <StyledTableCell
+            align='right'
+            sx={{
+              whiteSpace: 'nowrap',
+            }}>
+            <Tooltip arrow title='View'>
+              <IconButton
+                size='small'
+                onClick={() => onView(row)}
+                color='secondary'
+                title='View'
+                sx={{ mr: 1 }}>
+                <VisibilityIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
+            <Tooltip arrow title='Edit'>
+              <IconButton
+                size='small'
+                onClick={() => onEdit(row)}
+                color='secondary'
+                title='Edit'
+                sx={{ mr: 1 }}>
+                <EditIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
+            <Tooltip arrow title='Delete'>
+              <IconButton
+                size='small'
+                onClick={() => onDelete(row)}
+                color='secondary'
+                title='Delete'>
+                <DeleteIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
           </StyledTableCell>
         )}
       </StyledTableRow>

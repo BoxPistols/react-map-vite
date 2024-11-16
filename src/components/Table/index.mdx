@@ -1,23 +1,114 @@
-import { CustomTable } from "./index";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { theme } from "@/lib/themes/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta, Canvas } from "@storybook/blocks";
+import { useState } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  InputLabel,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
+import { CustomTableExample } from "@/components/Table/Example";
 
-<Meta title="Components/CustomTable" component={CustomTable} />
+<Meta title="Components/CustomTable/Info" />
 
-# CustomTable コンポーネント
+<ThemeProvider theme={theme}>
 
-`CustomTable`コンポーネントは、データを表示するためのカスタマイズ可能なテーブルです。
+<Container>
 
-## 使用方法
+# CustomSelect
 
-```jsx
-import { CustomTable } from "./index";
-```
+## 概要
 
-```jsx
-<CustomTable />
-```
+CustomTableは、MUIのTableをベースにカスタマイズされたテーブルコンポーネントです。
+MUIの基本能性を活かしながら、より実践的なUIUXを提供するテーブルコンポーネントです。
 
-## Props
+### 参考テーブル
 
-- `data` : テーブルに表示するデータ
-- `columns` : テーブルのカラム情報
+これは CustomTable の一般的な使用例です
+
+MUIのデフォルトのテーブルをベースに、CustomTableはページネーションの制御、キーワード検索フォルター、表示カラムの選択、CRUD操作のハンドラアイコンなどを提供します。
+
+Exampleとして、何らかのステータスのbool状態を表示するカラムUIも表示させています
+
+<CustomTableExample defaultPageSize="5"/>
+
+### 主要な Props
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>columns</td>
+      <td>Column[]<br/>accessor: string<br/>header: string<br/>sortable?: boolean</td>
+        <td>カラム制御、Sortable</td>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>Array&lt;<br/>Record&lt;string, string | number | boolean&gt;&gt;</td>
+      <td>表示するデータ</td>
+    </tr>
+    <tr>
+      <td>showCRUD</td>
+      <td>boolean</td>
+      <td>CRUD操作アイコン</td>
+    </tr>
+    <tr>
+      <td>searchable</td>
+      <td>boolean</td>
+      <td>検索機能</td>
+    </tr>
+    <tr>
+      <td>defaultPageSize</td>
+      <td>number</td>
+      <td>デフォルトのページサイズ</td>
+    </tr>
+    <tr>
+      <td>pageSizeOptions</td>
+      <td>number[]</td>
+      <td>ページネーションの数</td>
+    </tr>
+    <tr>
+      <td>loading</td>
+      <td>boolean</td>
+      <td>ローディング状態</td>
+    </tr>
+    <tr>
+      <td>onView</td>
+      <td>(row: Record&lt;<br/>string, string | number | boolean&gt;) => void</td>
+      <td>行の表示アイコンのハンドラ</td>
+    </tr>
+    <tr>
+      <td>onEdit</td>
+      <td>(row: Record&lt;<br/>string, string | number | boolean&gt;) => void</td>
+      <td>行の編集アイコンのハンドラ</td>
+    </tr>
+    <tr>
+      <td>onDelete</td>
+      <td>(row: Record&lt;<br/>string, string | number | boolean&gt;) => void</td>
+      <td>行の削除アイコンのハンドラ</td>
+    </tr>
+  </tbody>
+</table>
+
+### MUI Table
+
+[MUI Table](https://mui.com/components/tables/)
+
+</Container>
+
+</ThemeProvider>
