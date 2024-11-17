@@ -73,9 +73,7 @@
     "vite": "^5.2.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "bun run fix"
-    ]
+    "*.{js,jsx,ts,tsx}": ["bun run fix"]
   },
   "husky": {
     "hooks": {
