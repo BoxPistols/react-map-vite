@@ -1,8 +1,9 @@
 // src/components/Table/hooks/useTableSearch.ts
 import { useEffect, useState } from 'react'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const useTableSearch = (data: Array<Record<string, any>>) => {
+export const useTableSearch = (
+  data: Array<Record<string, string | number | boolean>>
+) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredData, setFilteredData] = useState(data)
 

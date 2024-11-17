@@ -1,4 +1,17 @@
-import type { TableProps } from '@/types/types'
+// src/components/Table/TableComponents/CustomTable.tsx
+import type { TableProps } from '@/types/type'
+
+import type React from 'react'
+import { useState } from 'react'
+
+import {
+  TableHeader,
+  TableLoading,
+  TableRows,
+  TableToolbar,
+} from '@/components/Table/TableComponents'
+import { useTableSearch, useTableSort } from '@/components/Table/hooks'
+
 import {
   Box,
   Checkbox,
@@ -12,15 +25,6 @@ import {
   TablePagination,
   Typography,
 } from '@mui/material'
-// src/components/Table/CustomTable.tsx
-import type React from 'react'
-import { useState } from 'react'
-import { useTableSearch } from '../hooks/useTableSearch'
-import { useTableSort } from '../hooks/useTableSort'
-import { TableHeader } from './TableHeader'
-import { TableLoading } from './TableLoading'
-import { TableRows } from './TableRows'
-import { TableToolbar } from './TableToolbar'
 
 export const CustomTable = ({
   columns = [],

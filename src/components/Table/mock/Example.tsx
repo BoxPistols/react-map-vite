@@ -1,3 +1,4 @@
+// src/components/Table/mock/Example.tsx
 import { CustomTable } from '@/components/Table/TableComponents/CustomTable'
 import type { User } from '@/types/type'
 import { dummyData } from './dummyData'

@@ -1,8 +1,10 @@
-import type { SortConfig } from '@/types/types'
+// src/components/Table/hooks/useTableSort.ts
+import type { SortConfig } from '@/types/type'
 import { useMemo, useState } from 'react'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const useTableSort = (data: Array<Record<string, any>>) => {
+export const useTableSort = <T extends Record<string, unknown>>(
+  data: Array<T>
+) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: '',
     direction: 'asc',
@@ -17,9 +19,11 @@ export const useTableSort = (data: Array<Record<string, any>>) => {
 
       if (aValue === bValue) return 0
       if (sortConfig.direction === 'asc') {
-        return aValue < bValue ? -1 : 1
+        return (aValue as string | number) < (bValue as string | number)
+          ? -1
+          : 1
       }
-      return aValue > bValue ? -1 : 1
+      return (aValue as string | number) > (bValue as string | number) ? -1 : 1
     })
   }, [data, sortConfig])
 

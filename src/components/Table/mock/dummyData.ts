@@ -1,3 +1,4 @@
+// src/components/Table/mock/dummyData.ts
 import type { User } from '@/types/type'
 
 export const dummyData: User[] = [

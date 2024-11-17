@@ -25,6 +25,5 @@ export const formatCellValue = (value: unknown): React.ReactNode => {
       </Box>
     )
   }
-
   return String(value)
 }

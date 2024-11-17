@@ -1,4 +1,4 @@
-import type { Column, SortConfig } from '@/types/types'
+import type { Column, SortConfig } from '@/types/type'
 import { TableHead, TableRow, TableSortLabel } from '@mui/material'
 // src/components/Table/components/TableHeader.tsx
 import type React from 'react'
