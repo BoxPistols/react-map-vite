@@ -5,17 +5,16 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run build-all",
-        "outputDirectory": "dist"
+        "distDir": "dist",
+        "buildCommand": "npm run build"
       }
     },
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run sb-build",
-        "outputDirectory": "storybook-static",
-        "framework": "storybook"
+        "distDir": "storybook-static",
+        "buildCommand": "npm run sb-build"
       }
     }
   ],

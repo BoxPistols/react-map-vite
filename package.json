@@ -15,7 +15,7 @@
     "fix": "bun run lint && bun run format",
     "sb": "storybook dev -p 6006",
     "sb-build": "storybook build",
-    "build-all": "bun run build && bun run sb-build",
+    "build-all": "npm run build && npm run sb-build",
     "prepare": "husky"
   },
   "dependencies": {
