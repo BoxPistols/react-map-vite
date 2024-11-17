@@ -4,13 +4,13 @@ import { CustomTable } from '.'
 import { dummyData } from './dummyData'
 
 const meta = {
-  title: 'Components/CustomTable',
+  title: 'Components/Table/CustomTable',
   component: CustomTable,
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   parameters: {
     // layout: 'centered',
-    showThemeSwitcher: true,
-    themeSwitcherPosition: 'top-right',
+    showThemeSwitcher: false,
+    // themeSwitcherPosition: 'top-right',
   },
 } satisfies Meta<typeof CustomTable>
 
