@@ -47,6 +47,6 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
         : theme.palette.action.hover,
   },
   // '&:last-child td, &:last-child th': {
-  // border: 0,
+  //   border: 0,
   // },
 }))
