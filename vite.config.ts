@@ -1,8 +1,7 @@
+// vite.config.ts
 import path from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-// import autoprefixer from 'autoprefixer'
-// import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
   plugins: [
@@ -23,12 +22,22 @@ export default defineConfig({
   },
   server: {
     open: true,
+    historyApiFallback: true,
   },
   build: {
     outDir: 'dist',
+    sourcemap: true,
+    // chunkSizeWarningLimit: 1000,
+
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[ext]',
+      },
+    },
   },
   css: {
-    // postcss: { plugins: [tailwindcss, autoprefixer] },
     postcss: './postcss.config.js',
   },
+  base: '/',
+  mode: process.env.NODE_ENV || 'production',
 })

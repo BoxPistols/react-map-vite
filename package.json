@@ -9,20 +9,21 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "preview": "vite preview",
     "format": "bun biome format --write .",
     "lint": "bun biome lint --write ./src",
     "fix": "bun run lint && bun run format",
-    "preview": "vite preview",
     "sb": "storybook dev -p 6006",
-    "sb-build": "rm -rf storybook-static && storybook build",
-    "build-all": "rm -rf dist storybook-static && bun run build && bun run sb-build",
+    "build-dev": "bun run build",
+    "b-sb": "storybook build -o storybook-static",
+    "build-all": "bun run build-dev && bun run b-sb",
     "prepare": "husky"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.6",
+    "@mui/icons-material": "^6.1.7",
     "@mui/material": "^6.1.6",
     "@mui/system": "^6.1.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -39,12 +40,14 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "rollup": "^4.27.2",
-    "string-width": "^4.2.2"
+    "string-width": "^4.2.2",
+    "vercel": "^39.0.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@chromatic-com/storybook": "^3.2.2",
     "@fullhuman/postcss-purgecss": "^6.0.0",
+    "@storybook/addon-a11y": "^8.4.4",
     "@storybook/addon-essentials": "^8.4.4",
     "@storybook/addon-interactions": "^8.4.4",
     "@storybook/addon-links": "^8.4.4",
