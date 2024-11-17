@@ -162,6 +162,11 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    // アセットのベースパスを設定
+    staticDirs: ['../public'],
+    assets: {
+      prefix: '.',
+    },
     docs: {
       toc: { headingSelector: 'h2, h3' },
       autodocs: false,
