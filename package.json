@@ -9,13 +9,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "preview": "vite preview",
     "format": "bun biome format --write .",
     "lint": "bun biome lint --write ./src",
     "fix": "bun run lint && bun run format",
-    "preview": "vite preview",
     "sb": "storybook dev -p 6006",
     "sb-build": "rm -rf storybook-static && storybook build",
-    "build-all": "rm -rf dist storybook-static && bun run build && bun run sb-build",
+    "build-all": "bun run build",
     "prepare": "husky"
   },
   "dependencies": {
