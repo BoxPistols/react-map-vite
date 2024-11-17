@@ -276,9 +276,7 @@
     padding: 20px;
     border: 1px solid #00000010;
     border-radius: 5px;
-    transition:
-      background 150ms ease-out,
-      border 150ms ease-out,
+    transition: background 150ms ease-out, border 150ms ease-out,
       transform 150ms ease-out;
     color: #333333;
     align-items: flex-start;
@@ -334,4 +332,14 @@
     min-height: 100vh;
     overflow: hidden;
   }
+
+  /* ----- Info Table 対策 ----- */
+  :where(span:not(.sb-anchor, .sb-unstyled, .sb-unstyled span)) {
+    font-size: inherit !important;
+  }
+
+  /* .MuiTableRow-root:last-child th, */
+  /* .sbdocs.sbdocs-wrapper .MuiTableRow-root:last-child td {
+    border: 1px solid #cde !important;
+  } */
 </style>

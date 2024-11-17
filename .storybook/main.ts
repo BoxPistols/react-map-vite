@@ -5,6 +5,7 @@ import { defineConfig } from 'vite'
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -19,17 +20,14 @@ const config: StorybookConfig = {
       },
     },
     '@storybook/addon-mdx-gfm',
+    '@chromatic-com/storybook',
   ],
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
+
   async viteFinal(config) {
     return defineConfig({
       ...config,
@@ -46,6 +44,7 @@ const config: StorybookConfig = {
       },
     })
   },
+
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {

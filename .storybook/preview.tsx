@@ -164,6 +164,7 @@ const preview: Preview = {
     },
     docs: {
       toc: { headingSelector: 'h2, h3' },
+      autodocs: false,
     },
     backgrounds: {
       disable: true,
@@ -172,7 +173,9 @@ const preview: Preview = {
     themeSwitcherIconColor: 'auto',
     themeSwitcherPosition: 'top-right',
   },
+
   decorators: [ThemeSwitcherDecorator],
+
   globalTypes: {
     theme: {
       name: 'Theme',
@@ -187,6 +190,8 @@ const preview: Preview = {
       },
     },
   },
+
+  tags: ['autodocs'],
 }
 
 export default preview

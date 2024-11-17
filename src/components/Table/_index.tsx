@@ -1,3 +1,14 @@
+/**
+ * @fileoverview カスタマイズ可能なテーブルコンポーネント
+ * - ソート機能
+ * - 検索機能
+ * - ページネーション
+ * - カラムの表示/非表示切り替え
+ * - CRUD操作用のアクションボタン
+ * - ローディング状態の表示
+ * - レスポンシブデザイン
+ */
+
 import { theme } from '@/theme/theme'
 import {
   Delete as DeleteIcon,
@@ -26,18 +37,40 @@ import {
   TableRow,
   TableSortLabel,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
 
+/**
+ * テーブルのカラム定義インターフェース
+ * @interface Column
+ * @property {string} accessor - データのキー名
+ * @property {string} header - 表示するヘッダーテキスト
+ * @property {boolean} [sortable] - ソート可能かどうか
+ */
 interface Column {
   accessor: string
   header: string
   sortable?: boolean
 }
 
+/**
+ * テーブルコンポーネントのプロパティ定義
+ * @interface TableProps
+ * @property {Column[]} columns - カラム定義の配列
+ * @property {Array<Record<string, string | number | boolean>>} data - 表示するデータ
+ * @property {boolean} [showCRUD] - CRUD操作ボタンを表示するか
+ * @property {Function} [onView] - 表示ボタンクリック時のコールバック
+ * @property {Function} [onEdit] - 編集ボタンクリック時のコールバック
+ * @property {Function} [onDelete] - 削除ボタンクリック時のコールバック
+ * @property {boolean} [searchable] - 検索機能を有効にするか
+ * @property {number} [defaultPageSize] - デフォルトのページサイズ
+ * @property {number[]} [pageSizeOptions] - 選択可能なページサイズ
+ * @property {boolean} [loading] - ローディング状態
+ */
 interface TableProps {
   columns: Column[]
   data: Array<Record<string, string | number | boolean>>
@@ -51,13 +84,26 @@ interface TableProps {
   loading?: boolean
 }
 
+/**
+ * ソート順の型定義
+ * ascは昇順、descは降順を表す
+ */
 type Order = 'asc' | 'desc'
+
+/**
+ * ソート設定のインターフェース
+ * @property {string} key - ソート対象のカラム名
+ * @property {Order} direction - ソート方向
+ */
 interface SortConfig {
   key: string
   direction: Order
 }
 
-// スタイル付きコンポーネント
+/**
+ * スタイル付きTableCell
+ * ヘッダーとボディで異なるスタイルを適用し、ダークモードにも対応
+ */
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&
 .$
@@ -99,6 +145,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }))
 
+/**
+ * スタイル付きTableRow
+ * 奇数行の背景色変更とホバー効果を実装
+ * ダークモードにも対応
+ */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor:
@@ -117,7 +168,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }))
 
-// セルの値のフォーマット
+/**
+ * セルの値を適切な形式でフォーマットする関数
+ * nullやundefinedの場合は'-'を表示
+ * 真偽値の場合はActive/Inactiveのバッジを表示
+ * その他の値は文字列に変換して表示
+ * @param {unknown} value - フォーマットする値
+ * @returns {React.ReactNode} フォーマットされた値
+ */
 const formatCellValue = (value: unknown): React.ReactNode => {
   if (value === null || value === undefined) {
     return '-'
@@ -144,18 +202,32 @@ const formatCellValue = (value: unknown): React.ReactNode => {
   return String(value)
 }
 
-// テーブル行コンポーネント
+/**
+ * テーブル行を表示するコンポーネント
+ * データの各行をレンダリングし、CRUD操作ボタンを含む
+ * @param {Object} props
+ * @param {Array<Record<string, string | number | boolean>>} props.visibleData - 表示するデータ
+ * @param {Column[]} props.columns - カラム定義
+ * @param {Set<string>} props.visibleColumns - 表示するカラム
+ * @param {boolean} props.showCRUD - CRUD操作ボタンを表示するか
+ * @param {Function} props.onView - 表示ボタンのコールバック
+ * @param {Function} props.onEdit - 編集ボタンのコールバック
+ * @param {Function} props.onDelete - 削除ボタンのコールバック
+ */
 const TableRows = ({
   visibleData,
   columns,
   visibleColumns,
   showCRUD,
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
-  onView = () => {},
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
-  onEdit = () => {},
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
-  onDelete = () => {},
+  onView = () => {
+    /* no-op */
+  },
+  onEdit = () => {
+    /* no-op */
+  },
+  onDelete = () => {
+    /* no-op */
+  },
 }: {
   visibleData: Array<Record<string, string | number | boolean>>
   columns: Column[]
@@ -176,30 +248,40 @@ const TableRows = ({
             </StyledTableCell>
           ))}
         {showCRUD && (
-          <StyledTableCell align='right'>
-            <IconButton
-              size='small'
-              onClick={() => onView(row)}
-              color='secondary'
-              title='View'
-              sx={{ mr: 1 }}>
-              <VisibilityIcon fontSize='small' />
-            </IconButton>
-            <IconButton
-              size='small'
-              onClick={() => onEdit(row)}
-              color='secondary'
-              title='Edit'
-              sx={{ mr: 1 }}>
-              <EditIcon fontSize='small' />
-            </IconButton>
-            <IconButton
-              size='small'
-              onClick={() => onDelete(row)}
-              color='error'
-              title='Delete'>
-              <DeleteIcon fontSize='small' />
-            </IconButton>
+          <StyledTableCell
+            align='right'
+            sx={{
+              whiteSpace: 'nowrap',
+            }}>
+            <Tooltip arrow title='View'>
+              <IconButton
+                size='small'
+                onClick={() => onView(row)}
+                color='secondary'
+                title='View'
+                sx={{ mr: 1 }}>
+                <VisibilityIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
+            <Tooltip arrow title='Edit'>
+              <IconButton
+                size='small'
+                onClick={() => onEdit(row)}
+                color='secondary'
+                title='Edit'
+                sx={{ mr: 1 }}>
+                <EditIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
+            <Tooltip arrow title='Delete'>
+              <IconButton
+                size='small'
+                onClick={() => onDelete(row)}
+                color='secondary'
+                title='Delete'>
+                <DeleteIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
           </StyledTableCell>
         )}
       </StyledTableRow>
@@ -207,7 +289,11 @@ const TableRows = ({
   </>
 )
 
-// メインのテーブルコンポーネント
+/**
+ * メインのテーブルコンポーネント
+ * 検索、ソート、ページネーション、カラム表示制御などの機能を統合
+ * @param {TableProps} props - テーブルのプロパティ
+ */
 export const CustomTable = ({
   columns = [],
   data = [],
@@ -223,25 +309,37 @@ export const CustomTable = ({
   pageSizeOptions = [5, 10, 25, 50],
   loading = false,
 }: TableProps) => {
+  // 検索語句の状態管理
   const [searchTerm, setSearchTerm] = useState('')
+  // フィルタリングされたデータの状態管理
   const [filteredData, setFilteredData] = useState(data)
+  // ページネーションの状態管理
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(defaultPageSize)
+  // ソート設定の状態管理
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: '',
     direction: 'asc',
   })
+  // 表示カラムの状態管理
   const [visibleColumns, setVisibleColumns] = useState<Set<string>>(
     new Set(columns.map((col) => col.accessor))
   )
+  // カラムメニューの状態管理（表示/非表示の制御に使用）
   const [columnMenuAnchor, setColumnMenuAnchor] = useState<null | HTMLElement>(
     null
   )
 
+  // データ更新時のフィルタリングデータ初期化
   useEffect(() => {
     setFilteredData(data)
   }, [data])
 
+  /**
+   * 検索処理を実行する関数
+   * 検索文字列に基づいてデータをフィルタリング
+   * @param {string} value - 検索文字列
+   */
   const handleSearch = (value: string) => {
     setSearchTerm(value)
     setPage(0)
@@ -259,6 +357,11 @@ export const CustomTable = ({
     setFilteredData(filtered)
   }
 
+  /**
+   * ソート処理を実行する関数
+   * 同じカラムを再度クリックすると昇順/降順を切り替え
+   * @param {string} accessor - ソート対象のカラム
+   */
   const handleSort = (accessor: string) => {
     const newDirection: Order =
       sortConfig.key === accessor && sortConfig.direction === 'asc'
@@ -268,6 +371,10 @@ export const CustomTable = ({
     setSortConfig({ key: accessor, direction: newDirection })
   }
 
+  /**
+   * ソートされたデータの計算（メモ化）
+   * ソート設定に基づいてデータを並び替え
+   */
   const sortedData = useMemo(() => {
     if (!sortConfig.key) return filteredData
 
@@ -284,10 +391,19 @@ export const CustomTable = ({
     })
   }, [filteredData, sortConfig])
 
+  /**
+   * ページ変更ハンドラ
+   * @param {unknown} _event - イベントオブジェクト（未使用）
+   * @param {number} newPage - 新しいページ番号
+   */
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
   }
 
+  /**
+   * 1ページあたりの行数変更ハンドラ
+   * @param {React.ChangeEvent<HTMLInputElement>} event - イベントオブジェクト
+   */
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -295,6 +411,10 @@ export const CustomTable = ({
     setPage(0)
   }
 
+  /**
+   * カラム表示/非表示を切り替える関数
+   * @param {string} accessor - 対象のカラム
+   */
   const handleColumnVisibilityChange = (accessor: string) => {
     const newVisibleColumns = new Set(visibleColumns)
     if (newVisibleColumns.has(accessor)) {
@@ -305,6 +425,10 @@ export const CustomTable = ({
     setVisibleColumns(newVisibleColumns)
   }
 
+  /**
+   * データが存在しない場合の表示
+   * 中央寄せで「No data available」と表示
+   */
   if (!data || data.length === 0) {
     return (
       <Box sx={{ width: '100%', textAlign: 'center', py: 2 }}>
@@ -314,7 +438,11 @@ export const CustomTable = ({
       </Box>
     )
   }
-  // Loading...UI
+
+  /**
+   * ローディング状態の表示
+   * スケルトンUIを表示してローディング中であることを視覚的に表現
+   */
   if (loading) {
     return (
       <Box sx={{ width: '100%' }}>
@@ -362,11 +490,19 @@ export const CustomTable = ({
     )
   }
 
+  /**
+   * 現在のページに表示するデータを計算
+   * ソート済みデータからページネーションに応じた範囲を抽出
+   */
   const visibleData = sortedData.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   )
 
+  /**
+   * メインのレンダリング
+   * 検索ボックス、カラム表示制御、テーブル本体、ページネーションを含む
+   */
   return (
     <Box sx={{ width: '100%' }}>
       <Box

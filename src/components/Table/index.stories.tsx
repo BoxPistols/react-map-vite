@@ -1,17 +1,17 @@
 // src/components/Table/index.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react'
-import { CustomTable } from '.'
-import { dummyData } from './dummyData'
+import { CustomTable } from './TableComponents/CustomTable'
+import { dummyData } from './mock/dummyData'
 
 const meta = {
   title: 'Components/Table/CustomTable',
   component: CustomTable,
-  parameters: {
-    layout: 'centered',
-    showThemeSwitcher: true,
-    themeSwitcherPosition: 'top-right',
-  },
   tags: ['autodocs'],
+  parameters: {
+    // layout: 'centered',
+    showThemeSwitcher: false,
+    // themeSwitcherPosition: 'top-right',
+  },
 } satisfies Meta<typeof CustomTable>
 
 export default meta
