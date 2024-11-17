@@ -14,8 +14,8 @@
     "lint": "bun biome lint --write ./src",
     "fix": "bun run lint && bun run format",
     "sb": "storybook dev -p 6006",
-    "sb-build": "VITE_BASE_URL=/storybook/ storybook build -o dist/storybook",
-    "build-all": "rm -rf dist && bun run build && bun run sb-build",
+    "sb-build": "storybook build",
+    "build-all": "rm -rf dist storybook-static && bun run build && bun run sb-build",
     "prepare": "husky"
   },
   "dependencies": {

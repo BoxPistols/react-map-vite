@@ -9,21 +9,27 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
     '@storybook/addon-mdx-gfm',
+    '@chromatic-com/storybook',
   ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  viteFinal: async (config) => {
+  core: {
+    builder: '@storybook/builder-vite',
+  },
+  async viteFinal(config) {
     return {
       ...config,
-      base: process.env.STORYBOOK_BASE_PATH || '/storybook/',
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '../src'),
         },
       },
     }
+  },
+  docs: {
+    autodocs: true,
   },
   staticDirs: ['../public'],
 }
