@@ -39,7 +39,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "rollup": "^4.27.2",
-    "string-width": "^4.2.2"
+    "string-width": "^4.2.2",
+    "vercel": "^39.0.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
