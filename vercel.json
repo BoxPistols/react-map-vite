@@ -5,12 +5,25 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist",
-        "buildCommand": "npm run build"
+        "buildCommand": "npm run build-all",
+        "outputDirectory": "dist"
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run sb-build",
+        "outputDirectory": "storybook-static",
+        "framework": "storybook"
       }
     }
   ],
   "rewrites": [
+    {
+      "source": "/storybook/(.*)",
+      "destination": "/storybook-static/$1"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
