@@ -68,6 +68,25 @@ const createComponentStyles = (
         },
       },
     },
+    // Table
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: `1px solid ${colors.divider}`,
+        },
+        head: {
+          backgroundColor: colors.background.paper,
+          color: colors.text.primary,
+          fontWeight: 700,
+          letterSpacing: '0.05em',
+          padding: '0.5em 1.25em',
+        },
+        body: {
+          color: colors.text.secondary,
+          padding: '0.5em 1.25em',
+        },
+      },
+    },
     // ... (他のコンポーネントのスタイル設定)
   }
 }

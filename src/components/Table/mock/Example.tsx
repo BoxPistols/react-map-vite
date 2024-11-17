@@ -1,5 +1,5 @@
+import { CustomTable } from '@/components/Table/TableComponents/CustomTable'
 import type { User } from '@/types/type'
-import { CustomTable } from '.'
 import { dummyData } from './dummyData'
 
 export const CustomTableExample = ({ defaultPageSize = 10 }) => {
