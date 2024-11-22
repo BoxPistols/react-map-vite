@@ -3,6 +3,7 @@ import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -11,13 +12,16 @@ const config: StorybookConfig = {
     '@storybook/addon-mdx-gfm',
     '@chromatic-com/storybook',
   ],
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+
   core: {
     builder: '@storybook/builder-vite',
   },
+
   // viteの設定を上書きするが、
   async viteFinal(config) {
     return {
@@ -47,10 +51,14 @@ const config: StorybookConfig = {
       },
     }
   },
-  docs: {
-    autodocs: true,
-  },
+
+  docs: {},
+
   staticDirs: ['../public'],
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
 }
 
 export default config
