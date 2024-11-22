@@ -1,10 +1,18 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "Running lint"
+echo "Starting pre-commit hook"
+
 bun run lint
+if [ $? -ne 0 ]; then
+  echo "Linting failed"
+  exit 1
+fi
 
-echo "Running format"
 bun run format
+if [ $? -ne 0 ]; then
+  echo "Formatting failed"
+  exit 1
+fi
 
-echo "Pre-commit hook completed"
+echo "Pre-commit hook succeeded"
