@@ -15,9 +15,9 @@
     "fix": "pnpm run lint && pnpm run format",
     "sb": "storybook dev -p 6006",
     "build:dev": "pnpm run build",
-    "bduild:sb": "storybook build -o storybook-static",
-    "build-all": "pnpm run build-dev && pnpm run b-sb",
-    "prepare": "husky"
+    "build:sb": "storybook build --quiet -o storybook-static",
+    "build:all": "NODE_ENV=production pnpm run build && STORYBOOK_DISABLE_TELEMETRY=1 pnpm run build:sb --quiet",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.5",
@@ -74,13 +74,11 @@
     "vite": "^5.4.11"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "pnpm run fix"
-    ]
+    "*.{js,jsx,ts,tsx}": ["pnpm run fix"]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm run lint && pnpm run format",
+      "pre-commit": "pnpm run fix",
       "post-checkout": "chmod +x .husky/pre-commit && pnpm run prepare",
       "post-merge": "chmod +x .husky/pre-commit && pnpm run prepare"
     }

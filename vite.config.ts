@@ -28,11 +28,13 @@ export default defineConfig({
       '/*': {
         target: 'http://localhost:3000',
         changeOrigin: true,
-        rewrite: (path) => path.endsWith('.html') || path.match(/\.(js|css|ico|png|jpg|jpeg|gif|svg)$/)
-          ? path
-          : '/index.html'
-      }
-    }
+        rewrite: (path) =>
+          path.endsWith('.html') ||
+          path.match(/\.(js|css|ico|png|jpg|jpeg|gif|svg)$/)
+            ? path
+            : '/index.html',
+      },
+    },
   },
   build: {
     outDir: 'dist',
@@ -43,8 +45,8 @@ export default defineConfig({
         // コード分割の設定を追加
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          mui: ['@emotion/react', '@emotion/styled']
-        }
+          mui: ['@emotion/react', '@emotion/styled'],
+        },
       },
     },
   },

@@ -1,7 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-bun fix
-bun lint-staged
-
-
+pnpm run build
