@@ -1,135 +1,59 @@
 name: CI
 
-# CIワークフローの名前を定義します
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
-# mainブランチへのプッシュまたはプルリクエストでワークフローをトリガーします
-
 jobs:
-  lint:
+  check:
     runs-on: ubuntu-latest
-    # lintジョブを定義し、最新のUbuntu環境で実行します
+    env:
+      NODE_ENV: development
 
     steps:
       - uses: actions/checkout@v3
-      # リポジトリのコードをチェックアウトします
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
         with:
-          bun-version: 1.1.30
-      # Bunランタイムをセットアップします（バージョン1.1.30を指定）
+          fetch-depth: 1
 
-      - name: Cache Bun dependencies
-        uses: actions/cache@v3
-        id: cache-bun
+      - uses: pnpm/action-setup@v2
         with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-      # Bunの依存関係をキャッシュします
-      # キャッシュキーはOSとbun.lockbファイルのハッシュに基づいています
+          version: 8
 
-      - name: Cache node_modules
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.13.1'
+          cache: 'pnpm'
+
+      # 最適化されたキャッシュ設定
+      - name: Cache dependencies
         uses: actions/cache@v3
-        id: cache-modules
+        id: cache
         with:
           path: |
-            node_modules
-            !node_modules/.cache
-            !node_modules/.vite
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+            **/node_modules
+            !**/node_modules/.cache
+            !**/node_modules/.vite
+            !**/node_modules/.rollup.cache
+            !**/*.log
+          key: ${{ runner.os }}-deps-${{ hashFiles('pnpm-lock.yaml') }}-v1
           restore-keys: |
-            ${{ runner.os }}-modules-
-      # node_modulesをキャッシュします（.cacheと.viteディレクトリを除外）
-      # キャッシュキーはOSとbun.lockbファイルのハッシュに基づいています
+            ${{ runner.os }}-deps-
 
       - name: Install dependencies
-        if: steps.cache-bun.outputs.cache-hit != 'true' || steps.cache-modules.outputs.cache-hit != 'true'
-        run: bun install --frozen-lockfile
-      # Bunのキャッシュまたはnode_modulesのキャッシュがヒットしなかった場合のみ依存関係をインストールします
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Create Biome configuration
+      - name: Lint and Format
+        run: pnpm run fix
+
+      # クリーンアップとビルド
+      - name: Build
         run: |
-          cat << 'EOF' > biome.json
-          {
-            "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
-            "organizeImports": {
-              "enabled": true,
-              "ignore": ["**/dist", "**/node_modules/", "**/*.d.ts"]
-            },
-            "formatter": {
-              "enabled": true,
-              "formatWithErrors": true,
-              "indentStyle": "space",
-              "indentWidth": 2,
-              "lineEnding": "lf",
-              "lineWidth": 80,
-              "attributePosition": "auto",
-              "ignore": [
-                "**/node_modules/**",
-                "**/dist/**",
-                "**/dist-ssr/**",
-                "**/build/**",
-                "**/coverage/**",
-                "**/.git/**",
-                "**/.vscode/**",
-                "**/.idea/**",
-                "**/.DS_Store",
-                "**/yarn.lock",
-                "**/package-lock.json",
-                "**/yarn-error.log",
-                "**/storybook-static/**",
-                "**/*.d.ts",
-                "**/*.local",
-                "**/*.log",
-                "**/tailwind.config.js",
-                "**/postcss.config.cjs",
-                "**/.env"
-              ]
-            },
-            "linter": {
-              "enabled": true,
-              "rules": {
-                "recommended": true
-              },
-              "ignore": [
-                "**/dist/**",
-                "**/dist-ssr/**",
-                "**/node_modules/**",
-                "**/tailwind.config.js",
-                "**/postcss.config.cjs",
-                "**/storybook-static/**",
-                "**/*.d.ts",
-                "**/*.local",
-                "**/*.log",
-                "**/.env",
-                "**/.vscode/settings.json"
-              ]
-            },
-            "javascript": {
-              "formatter": {
-                "quoteStyle": "single"
-              }
-            },
-            "json": {
-              "parser": {
-                "allowComments": true
-              },
-              "formatter": {
-                "enabled": false
-              }
-            }
-          }
-          EOF
-      # Biome（コードフォーマッタとリンター）の設定ファイルを作成します
-
-      - name: Run Biome Lint
-        run: bunx @biomejs/biome lint --config-path=biome.json .
-      # Biomeを使用してリントを実行します
+          # キャッシュのクリーンアップ
+          find . -type d -name ".cache" -exec rm -rf {} +
+          find . -type d -name ".vite" -exec rm -rf {} +
+          # ビルド実行
+          pnpm run build
+          pnpm run build:sb
