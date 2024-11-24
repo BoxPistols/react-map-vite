@@ -1,28 +1,25 @@
 {
   "name": "@boxpistols/react-map-vite",
   "version": "0.0.1",
-  "private": false,
   "type": "module",
-  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "author": "BoxPistols",
-  "license": "UNLICENSED",
-  "files": ["dist"],
   "exports": {
     ".": {
       "import": "./dist/react-map-vite.es.js",
-      "require": "./dist/react-map-vite.umd.js"
+      "require": "./dist/react-map-vite.umd.js",
+      "types": "./dist/index.d.ts"
     },
-    "./style.css": "./dist/style.css"
+    "./style": "./dist/style.css"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BoxPistols/react-map-vite.git"
-  },
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc --emitDeclarationOnly",
     "preview": "vite preview",
     "format": "pnpm biome format --write .",
     "lint": "pnpm biome lint --write ./src",
@@ -88,7 +85,9 @@
     "vite": "^5.4.11"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["pnpm run fix"]
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm run fix"
+    ]
   },
   "husky": {
     "hooks": {

@@ -1,5 +1,7 @@
-import path from 'node:path'
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
+import { resolve } from 'path'
 import react from '@vitejs/plugin-react'
+// vite.config.ts
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -11,48 +13,42 @@ export default defineConfig({
       },
     }),
   ],
-  esbuild: {
-    jsxInject: `import React from 'react'`,
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'ReactMapVite',
+      fileName: (format) => `react-map-vite.${format}.js`,
+      formats: ['es', 'umd']
+    },
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        '@mui/material',
+        '@mui/icons-material',
+        '@emotion/react',
+        '@emotion/styled',
+        '@emotion/cache'
+      ],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          '@mui/material': 'MaterialUI',
+          '@emotion/react': 'emotionReact',
+          '@emotion/styled': 'emotionStyled',
+          '@emotion/cache': 'emotionCache'
+        },
+        // ライブラリ配信用のアセット設定
+        assetFileNames: 'assets/[name].[ext]'
+      }
+    },
+    sourcemap: true,
+    outDir: 'dist'
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': resolve(__dirname, 'src'),
     },
-  },
-  server: {
-    open: true,
-    port: 3000,
-    // SPAフォールバックの代替手段
-    proxy: {
-      // 静的ファイル以外のリクエストをindex.htmlにリダイレクト
-      '/*': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        rewrite: (path) =>
-          path.endsWith('.html') ||
-          path.match(/\.(js|css|ico|png|jpg|jpeg|gif|svg)$/)
-            ? path
-            : '/index.html',
-      },
-    },
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        assetFileNames: 'assets/[name].[ext]',
-        // コード分割の設定を追加
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          mui: ['@emotion/react', '@emotion/styled'],
-        },
-      },
-    },
-  },
-  css: {
-    postcss: './postcss.config.js',
-  },
-  base: '/',
-  mode: process.env.NODE_ENV || 'production',
+  }
 })
