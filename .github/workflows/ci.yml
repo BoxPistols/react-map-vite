@@ -1,59 +1,101 @@
-name: CI
+# .github/workflows/ci.yml
+
+name: CI/CD
 
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
     branches: [main]
+
+env:
+  HUSKY: 0  # CI環境ではhuskyを無効化
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: development
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20.13.1'
           cache: 'pnpm'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@boxpistols'
 
-      # 最適化されたキャッシュ設定
       - name: Cache dependencies
         uses: actions/cache@v3
         id: cache
         with:
           path: |
             **/node_modules
+            ~/.pnpm-store
             !**/node_modules/.cache
             !**/node_modules/.vite
             !**/node_modules/.rollup.cache
             !**/*.log
-          key: ${{ runner.os }}-deps-${{ hashFiles('pnpm-lock.yaml') }}-v1
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-deps-
+            ${{ runner.os }}-pnpm-
+            ${{ runner.os }}-
 
       - name: Install dependencies
+        run: pnpm install --frozen-lockfile
         if: steps.cache.outputs.cache-hit != 'true'
-        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Lint and Format
         run: pnpm run fix
 
-      # クリーンアップとビルド
-      - name: Build
+      - name: Build package
         run: |
-          # キャッシュのクリーンアップ
+          # クリーンアップ
           find . -type d -name ".cache" -exec rm -rf {} +
           find . -type d -name ".vite" -exec rm -rf {} +
           # ビルド実行
           pnpm run build
           pnpm run build:sb
+
+      # パッケージの公開（タグプッシュ時のみ）
+      - name: Publish package
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed 's/refs\/tags\/v//')
+          npm version $VERSION --no-git-tag-version
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            dist
+            storybook-static
+          retention-days: 7
+
+  # デプロイジョブ
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
