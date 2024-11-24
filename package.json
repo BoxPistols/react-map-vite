@@ -1,7 +1,11 @@
 {
-  "name": "react-drone-vite",
+  "name": "@boxpistols/react-map-vite",
   "version": "0.0.1",
+  "main": "dist/index.js",
   "repository": "git@github.com:BoxPistols/react-drone-vite.git",
+  "publishConfig": {
+    "@BoxPistols:registry": "https://npm.pkg.github.com"
+  },
   "author": "BoxPistols",
   "license": "UNLICENSED",
   "private": true,
@@ -74,7 +78,9 @@
     "vite": "^5.4.11"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["pnpm run fix"]
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm run fix"
+    ]
   },
   "husky": {
     "hooks": {
