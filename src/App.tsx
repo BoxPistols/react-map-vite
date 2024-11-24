@@ -90,6 +90,8 @@ const AppContent = () => {
             <div className={`${commonClassName} whitespace-nowrap`}>OS</div>
           </>
         )
+      default:
+        return null
     }
   }
 

@@ -1,34 +1,68 @@
 {
   "compilerOptions": {
+    // パス設定
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
+    "rootDir": "src",
+    "outDir": "dist",
+
+    // ECMAScript設定
     "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+
+    // モジュール解決
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+
+    // 出力設定
+    "declaration": true, // 型定義ファイルの生成を有効化
+    "declarationDir": "./dist", // 型定義ファイルの出力先
+    "sourceMap": true, // ソースマップの生成
+    "noEmit": true, // 出力を無効化
+    "emitDeclarationOnly": false, // JSファイルも出力
+
+    // コンパイル最適化
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+    "incremental": true, // インクリメンタルビルドを有効化
+    "composite": true, // プロジェクト参照を有効化
+
+    // 型チェック強化
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vite/client"]
+    "noImplicitReturns": true, // 暗黙的なreturnを禁止
+    "noImplicitOverride": true, // オーバーライドを明示的に
+    "allowUnreachableCode": false, // 到達不能コードを禁止
+
+    // モジュールの互換性
+    "esModuleInterop": true, // CommonJSモジュールとの互換性
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // ライブラリ固有の設定
+    "types": ["vite/client", "node", "react", "react-dom"],
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json", "src/**/*.d.ts"],
   "exclude": [
     "node_modules",
-    "**/dist",
-    "**/node_modules/",
+    "dist",
+    "build",
+    "coverage",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.stories.tsx",
+    "**/*.test.tsx",
     "**/tailwind.config.js",
-    "**/postcss.config.cjs",
-    "**/*.d.ts"
+    "**/postcss.config.cjs"
   ],
   "references": [
     {

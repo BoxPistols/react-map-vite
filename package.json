@@ -1,15 +1,25 @@
 {
   "name": "@boxpistols/react-map-vite",
   "version": "0.0.1",
+  "private": false,
+  "type": "module",
   "main": "dist/index.js",
-  "repository": "git@github.com:BoxPistols/react-drone-vite.git",
-  "publishConfig": {
-    "@BoxPistols:registry": "https://npm.pkg.github.com"
-  },
+  "module": "./dist/react-map-vite.es.js",
+  "types": "./dist/index.d.ts",
   "author": "BoxPistols",
   "license": "UNLICENSED",
-  "private": true,
-  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/react-map-vite.es.js",
+      "require": "./dist/react-map-vite.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BoxPistols/react-map-vite.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

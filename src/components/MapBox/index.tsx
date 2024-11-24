@@ -32,6 +32,10 @@ const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
         map.remove()
       }
     }
+
+    // クリーンアップ関数を返す
+    // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+    return () => {}
   }, [latitude, longitude, zoom])
 
   return (
