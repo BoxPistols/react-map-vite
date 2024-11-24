@@ -1,8 +1,7 @@
-// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
-// vite.config.ts
 import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
@@ -11,6 +10,11 @@ export default defineConfig({
       babel: {
         plugins: ['@emotion/babel-plugin'],
       },
+    }),
+    dts({
+      insertTypesEntry: true,
+      include: ['src'],
+      exclude: ['src/**/*.stories.tsx', 'src/**/*.test.tsx'],
     }),
   ],
   build: {
@@ -25,26 +29,17 @@ export default defineConfig({
         'react',
         'react-dom',
         '@mui/material',
-        '@mui/icons-material',
         '@emotion/react',
         '@emotion/styled',
-        '@emotion/cache',
       ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           '@mui/material': 'MaterialUI',
-          '@emotion/react': 'emotionReact',
-          '@emotion/styled': 'emotionStyled',
-          '@emotion/cache': 'emotionCache',
         },
-        // ライブラリ配信用のアセット設定
-        assetFileNames: 'assets/[name].[ext]',
       },
     },
-    sourcemap: true,
-    outDir: 'dist',
   },
   resolve: {
     alias: {
