@@ -18,7 +18,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'ReactMapVite',
       fileName: (format) => `react-map-vite.${format}.js`,
-      formats: ['es', 'umd']
+      formats: ['es', 'umd'],
     },
     rollupOptions: {
       external: [
@@ -28,7 +28,7 @@ export default defineConfig({
         '@mui/icons-material',
         '@emotion/react',
         '@emotion/styled',
-        '@emotion/cache'
+        '@emotion/cache',
       ],
       output: {
         globals: {
@@ -37,18 +37,18 @@ export default defineConfig({
           '@mui/material': 'MaterialUI',
           '@emotion/react': 'emotionReact',
           '@emotion/styled': 'emotionStyled',
-          '@emotion/cache': 'emotionCache'
+          '@emotion/cache': 'emotionCache',
         },
         // ライブラリ配信用のアセット設定
-        assetFileNames: 'assets/[name].[ext]'
-      }
+        assetFileNames: 'assets/[name].[ext]',
+      },
     },
     sourcemap: true,
-    outDir: 'dist'
+    outDir: 'dist',
   },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
     },
-  }
+  },
 })
