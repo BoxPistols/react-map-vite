@@ -1,8 +1,9 @@
-import { theme } from '@/lib/themes/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import type { Meta } from '@storybook/react'
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import Layout from '.'
+import { Layout } from '.'
+import { theme } from '../../lib/themes/theme'
 
 const meta: Meta<typeof Layout> = {
   title: 'Layouts/Layout',
