@@ -156,6 +156,10 @@ const ThemeSwitcherDecorator = (Story, context) => {
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen', // フルスクリーンレイアウトを強制
+    backgrounds: {
+      disable: true, // 背景色の制御をThemeProviderに任せる
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -170,9 +174,6 @@ const preview: Preview = {
     docs: {
       toc: { headingSelector: 'h2, h3' },
       autodocs: false,
-    },
-    backgrounds: {
-      disable: true,
     },
     showThemeSwitcher: true,
     themeSwitcherIconColor: 'auto',
