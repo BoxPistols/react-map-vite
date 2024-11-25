@@ -1,11 +1,13 @@
 {
   "name": "@boxpistols/react-map-vite",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/react-map-vite.es.js",
@@ -85,7 +87,9 @@
     "vite-plugin-dts": "^4.3.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["pnpm run fix"]
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm run fix"
+    ]
   },
   "husky": {
     "hooks": {
