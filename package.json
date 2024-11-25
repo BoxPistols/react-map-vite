@@ -5,13 +5,16 @@
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/react-map-vite.es.js",
       "require": "./dist/react-map-vite.umd.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./styles.css": "./dist/style.css"
   },
   "sideEffects": false,
   "scripts": {
@@ -85,7 +88,9 @@
     "vite-plugin-dts": "^4.3.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["pnpm run fix"]
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm run fix"
+    ]
   },
   "husky": {
     "hooks": {
