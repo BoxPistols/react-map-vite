@@ -191,5 +191,3 @@ export const CustomSelect = ({
     </StyledFormControl>
   )
 }
-
-export default CustomSelect

@@ -1,6 +1,10 @@
+import React from 'react'
+
 import { Box } from '@mui/material'
+
 import type { Meta, StoryObj } from '@storybook/react'
-import Mapbox from '.' // Mapbox コンポーネントの正しいインポートパスを確認してください
+
+import { Mapbox } from '.' // Mapbox コンポーネントの正しいインポートパスを確認してください
 
 const meta: Meta<typeof Mapbox> = {
   title: 'Components/Map/Mapbox',

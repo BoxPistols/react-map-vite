@@ -1,8 +1,12 @@
-import { Box } from '@mui/material'
-import type { SelectChangeEvent } from '@mui/material'
-import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
 import { useState } from 'react'
 import type { ReactNode } from 'react'
+
+import { Box } from '@mui/material'
+
+import type { SelectChangeEvent } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react'
+
 import { CustomSelect } from '.'
 
 const meta: Meta<typeof CustomSelect> = {

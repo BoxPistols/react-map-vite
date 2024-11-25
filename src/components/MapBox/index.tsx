@@ -7,7 +7,7 @@ type MapboxProps = {
   zoom: number // ズームレベル
 }
 
-const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
+export const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
   const mapContainer = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -39,7 +39,6 @@ const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
   }, [latitude, longitude, zoom])
 
   return (
-    // <div className='relative h-screen overflow-hidden'>
     <main className='absolute inset-0'>
       <div
         ref={mapContainer}
@@ -47,8 +46,5 @@ const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
         style={{ width: '100vw', height: '100vh' }}
       />
     </main>
-    // </div>
   )
 }
-
-export default Mapbox
