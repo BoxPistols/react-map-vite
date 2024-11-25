@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import MapLibre from '.'
+import { MapLibre } from '.'
 
 const meta: Meta<typeof MapLibre> = {
   title: 'Components/Map/MapLibre/Normal',

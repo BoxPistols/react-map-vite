@@ -1,4 +1,4 @@
-import CustomSelect from '@/components/Form/CustomSelect'
+import { CustomSelect } from '@/components/Form/CustomSelect'
 import CustomTextField from '@/components/Form/CustomTextField'
 import MainGrid from '@/components/MainGrid'
 import type { PageProps } from '@/types/type'
