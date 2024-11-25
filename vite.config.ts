@@ -60,7 +60,7 @@ export default defineConfig(({ mode }) => {
         },
       },
       sourcemap: true,
-      minify: 'terser' as const,
+      minify: 'esbuild' as const,
     },
   }
 
@@ -70,7 +70,7 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       emptyOutDir: true,
       sourcemap: true,
-      minify: 'terser' as const,
+      minify: 'esbuild' as const,
     },
   }
 
