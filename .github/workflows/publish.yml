@@ -34,6 +34,14 @@ jobs:
           pnpm run build
           pnpm run build:sb
 
+      # パッケージの内容確認ステップを追加
+      - name: Check package contents
+        run: npm pack --dry-run
+
+      # テストを追加（もしある場合）
+      - name: Run tests
+        run: pnpm test
+
       - name: Publish to GitHub Packages
         run: npm publish
         env:
