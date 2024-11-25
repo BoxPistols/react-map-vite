@@ -8,7 +8,7 @@ type LayoutProps = {
   sideNavWidth?: number
 }
 
-const Layout = ({
+export const Layout = ({
   open = false,
   onToggle,
   sideNavWidth = 160,

@@ -11,7 +11,12 @@
       "import": "./dist/react-map-vite.es.js",
       "require": "./dist/react-map-vite.umd.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./styles.css": "./dist/style.css"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "sideEffects": false,
   "scripts": {
@@ -25,8 +30,8 @@
     "fix": "pnpm run lint && pnpm run format",
     "sb": "storybook dev -p 6006",
     "build:dev": "pnpm run build",
-    "build:sb": "storybook build --quiet -o storybook-static",
-    "build:all": "NODE_ENV=production pnpm run build && STORYBOOK_DISABLE_TELEMETRY=1 pnpm run build:sb --quiet",
+    "build:sb": "storybook build",
+    "build:all": "pnpm run build && pnpm run build:sb",
     "prepare": "husky install"
   },
   "dependencies": {
