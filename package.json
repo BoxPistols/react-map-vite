@@ -20,9 +20,10 @@
   },
   "sideEffects": false,
   "scripts": {
+    "build:lib": "pnpm run build:types && vite build --mode lib",
     "build:types": "tsc -p tsconfig.build.json",
-    "build": "pnpm run build:types && vite build",
-    "prepublishOnly": "pnpm run build",
+    "prepublishOnly": "pnpm run build:lib",
+    "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
     "format": "pnpm biome format --write .",
