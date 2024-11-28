@@ -41,14 +41,14 @@ jobs:
           scope: '@boxpistols'
 
       - name: Get pnpm store directory
+        id: pnpm-store
         shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Cache pnpm modules
         uses: actions/cache@v3
         with:
-          path: ${{ env.STORE_PATH }}
+          path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
@@ -70,7 +70,7 @@ jobs:
 
       - name: Build Storybook
         run: pnpm run build:sb
-        continue-on-error: true  # 一時的な対応として
+        # continue-on-error: true  # 一時的な対応として
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
