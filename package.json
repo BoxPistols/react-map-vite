@@ -42,6 +42,7 @@
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.8",
     "@mui/system": "^6.1.8",
+    "@storybook/preview-api": "^8.4.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/maplibre-gl": "^1.14.0",

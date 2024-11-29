@@ -5,33 +5,28 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
-
     // ECMAScript設定
     "target": "ES2020",
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-
     // モジュール解決
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-
     // 出力設定 - 重要な変更箇所
     "declaration": true, // 型定義ファイルの生成
     "declarationDir": "./dist", // 型定義の出力先
     "sourceMap": true, // ソースマップ生成
     "noEmit": false, // 出力を有効化
     "emitDeclarationOnly": true, // 型定義のみ出力
-
     // コンパイル最適化
     "useDefineForClassFields": true,
     "skipLibCheck": true,
     "incremental": true,
-
     // 型チェック - ライブラリ用に緩和
     "strict": false, // 厳密な型チェックを無効化
     "noImplicitAny": false, // any型を許容
@@ -39,12 +34,10 @@
     "noUnusedParameters": false, // 未使用のパラメータを許容
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
-
     // モジュールの互換性
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-
     // ライブラリ固有の設定
     "types": ["vite/client", "node", "react", "react-dom"],
     "typeRoots": ["./node_modules/@types", "./src/types"]
@@ -53,7 +46,10 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.json",
-    "src/types/**/*.d.ts"
+    "src/types/**/*.d.ts",
+    ".storybook/**/*",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
@@ -62,5 +58,10 @@
     "**/*.test.ts",
     "**/*.stories.tsx",
     "**/*.test.tsx"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }
