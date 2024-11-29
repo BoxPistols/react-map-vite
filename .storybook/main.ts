@@ -14,9 +14,9 @@ const config: StorybookConfig = {
   framework: {
     name: '@storybook/react-vite',
     options: {
-      builder: {
-        viteConfigPath: 'vite.config.ts',
-      },
+      // builder: {
+      //   viteConfigPath: 'vite.config.ts',
+      // },
     },
   },
 
@@ -28,10 +28,10 @@ const config: StorybookConfig = {
           '@': path.resolve(__dirname, '../src'),
         },
       },
-      build: {
-        sourcemap: true,
-        chunkSizeWarningLimit: 1600,
-      },
+      // build: {
+      //   sourcemap: true,
+      //   chunkSizeWarningLimit: 1600,
+      // },
       optimizeDeps: {
         include: ['@emotion/react', '@emotion/styled', '@mui/material'],
       },
