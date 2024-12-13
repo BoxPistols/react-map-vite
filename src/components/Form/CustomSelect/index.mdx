@@ -28,7 +28,7 @@ import { useTheme } from "@mui/material/styles";
 
 ## 概要
 
-CustomSelect は、Material-UI の Select をベースにカスタマイズされたドロップダウン選択コンポーネントです。MUI の機能性を活かしながら、よりシンプルで使いやすい UI を提供します。
+CustomSelectは、Material-UIのSelectコンポーネントをベースにした高機能なドロップダウン選択コンポーネントです。単一選択と複数選択の両方をサポートし、MUIの機能性を活かしながら、よりシンプルで使いやすいUIを提供します。
 
 ### 主要な Props
 
@@ -42,6 +42,7 @@ CustomSelect は、Material-UI の Select をベースにカスタマイズさ�
 - `tooltip`: ツールチップ
 - `size`: サイズ（'small' | 'medium'）
 - `fullWidth`: 幅 100%
+- `multiple`: 複数選択モード
 
 Tooltip は独自にラベルに組み込んでおり、ユーザーに選択肢の説明を提供します。
 
@@ -49,7 +50,7 @@ Tooltip は独自にラベルに組み込んでおり、ユーザーに選択肢
 
 ## 使用例
 
-### 基本的な使用方法
+### 基本的なSelectフォームの例
 
 <CustomSelect
   label="色を選択"
@@ -97,37 +98,33 @@ Tooltip は独自にラベルに組み込んでおり、ユーザーに選択肢
 />
 ```
 
-### エラー状態の例
+### 複数選択の例
 
 <CustomSelect
-  label="職業"
+  label="好きな食べ物"
+  multiple
   options={[
-    { value: "student", label: "学生" },
-    { value: "employed", label: "会社員" },
-    { value: "other", label: "その他" },
+    { value: "sushi", label: "寿司" },
+    { value: "ramen", label: "ラーメン" },
+    { value: "tempura", label: "天ぷら" },
+    { value: "udon", label: "うどん" },
   ]}
-  error
-  helperText="職業を選択してください"
+  placeholder="複数選択可能です"
 />
 
 ```tsx
 <CustomSelect
-  label="職業"
+  label="好きな食べ物"
+  multiple
   options={[
-    { value: "student", label: "学生" },
-    { value: "employed", label: "会社員" },
-    { value: "other", label: "その他" },
+    { value: "sushi", label: "寿司" },
+    { value: "ramen", label: "ラーメン" },
+    { value: "tempura", label: "天ぷら" },
+    { value: "udon", label: "うどん" },
   ]}
-  error
-  helperText="職業を選択してください"
+  placeholder="複数選択可能です"
 />
 ```
-
-## 関連リンク
-
-- [MUI Select](https://mui.com/components/selects/)
-- [MUI Form Control API](https://mui.com/api/form-control/)
-- [MUI Select API](https://mui.com/api/select/)
 
 ## API Props 一覧
 
@@ -153,7 +150,25 @@ CustomSelect のオプションは、以下の通りです。詳細な API は[M
     <td>選択肢の配列</td>
   </tr>
   <tr>
-    <td>placeholder *初期値としてのplaceholderではありません</td>
+    <td>multiple</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>複数選択を有効にする</td>
+  </tr>
+  <tr>
+    <td>value</td>
+    <td>string | string[] | number | number[]</td>
+    <td>multiple ? [] : ''</td>
+    <td>選択値（複数選択の場合は配列）</td>
+  </tr>
+  <tr>
+    <td>onChange</td>
+    <td>(event, value) => void</td>
+    <td></td>
+    <td>値変更時のコールバック</td>
+  </tr>
+  <tr>
+    <td>placeholder</td>
     <td>string</td>
     <td>'選択してください'</td>
     <td>プレースホルダー</td>
@@ -201,6 +216,12 @@ CustomSelect のオプションは、以下の通りです。詳細な API は[M
     <td>幅100%</td>
   </tr>
 </table>
+
+## 関連リンク
+
+- [MUI Select](https://mui.com/components/selects/)
+- [MUI Select API](https://mui.com/api/select/)
+- [MUI Form Control API](https://mui.com/api/form-control/)
 
 </Container>
 

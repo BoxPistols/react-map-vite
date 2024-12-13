@@ -80,14 +80,6 @@ export const Required: Story = {
   },
 }
 
-export const MultipleRequired: Story = {
-  args: {
-    ...Multiple.args,
-    label: '必須の複数選択セレクト',
-    required: true,
-  },
-}
-
 export const WithTooltip: Story = {
   args: {
     ...Default.args,
@@ -113,14 +105,6 @@ export const Disabled: Story = {
   },
 }
 
-export const WithHelperText: Story = {
-  args: {
-    ...Default.args,
-    label: 'ヘルパーテキスト付きセレクト',
-    helperText: 'これはヘルパーテキストです',
-  },
-}
-
 export const WithPlaceholder: Story = {
   args: {
     ...Default.args,
@@ -131,22 +115,13 @@ export const WithPlaceholder: Story = {
 
 export const AllFeaturesMedium: Story = {
   args: {
-    label: '全機能セレクト (通常サイズ)',
+    label: 'ALL FEATURES',
     options: defaultOptions,
     required: true,
     tooltip: 'このフィールドは全機能を示しています',
     error: false,
-    helperText: 'このフィールドには全ての機能が有効です',
+    helperText: 'このフィールドは全ての機能が有効です',
     placeholder: '選択してください',
-    size: 'medium',
-  },
-}
-
-export const AllFeaturesSmall: Story = {
-  args: {
-    ...AllFeaturesMedium.args,
-    label: '全機能セレクト (小さいサイズ)',
-    size: 'small',
   },
 }
 
@@ -162,6 +137,7 @@ export const InteractiveExample: Story = {
     const [value, setValue] = useState<string | string[]>('')
     const [hasError, setHasError] = useState(false)
 
+    // これは意図的にエラーを発生させるための処理です
     const handleChange = (
       _event: SelectChangeEvent<unknown>,
       value: string | string[] | number | number[]
@@ -198,7 +174,7 @@ export const InteractiveMultipleExample: Story = {
   render: (args) => {
     const [value, setValue] = useState<string[]>([])
     const [hasError, setHasError] = useState(false)
-
+    // これは、意図的にエラーを発生させるための処理です
     const handleChange = (
       _event: SelectChangeEvent<unknown>,
       value: string | string[] | number | number[]

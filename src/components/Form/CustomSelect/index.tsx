@@ -28,7 +28,13 @@ type CustomSelectProps = Omit<
     event: SelectChangeEvent<unknown>,
     value: string | string[] | number | number[]
   ) => void
-  // ... 既存のProps
+  required?: boolean
+  error?: boolean
+  size?: 'small' | 'medium'
+  fullWidth?: boolean
+  id?: string
+  name?: string
+  inputProps?: SelectProps['inputProps']
 }
 
 const StyledFormControl = styled(FormControl)({
@@ -60,6 +66,7 @@ const RequiredMark = styled('span')(({ theme }) => ({
   marginLeft: 0,
   fontSize: '1.2em',
   lineHeight: '1.25',
+  verticalAlign: 'middle',
 }))
 
 const TooltipIcon = styled(HelpOutlineOutlinedIcon)<{
@@ -68,6 +75,7 @@ const TooltipIcon = styled(HelpOutlineOutlinedIcon)<{
   fontSize: size === 'small' ? '0.875rem' : '1rem',
   marginLeft: '4px',
   color: 'inherit',
+  verticalAlign: 'middle',
 }))
 
 export const CustomSelect = ({
@@ -176,6 +184,13 @@ export const CustomSelect = ({
               .join(', ')
           }
           // ... 単一選択の場合の処理
+          if (!selected) {
+            return <em>{placeholder}</em>
+          }
+          return options.find((option) => option.value === selected)?.label
+
+          // 以下のようにも書ける
+          // return options.find((option) => option.value === selected)?.label || '';
         }}
         inputProps={{
           ...inputProps,
