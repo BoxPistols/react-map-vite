@@ -1,9 +1,8 @@
+import { theme } from '@/lib/themes/theme'
 import { ThemeProvider } from '@mui/material/styles'
-import type { Meta } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { BrowserRouter } from 'react-router-dom'
-import { Layout } from '.'
-import { theme } from '../../lib/themes/theme'
+import Layout from '.'
 
 const meta: Meta<typeof Layout> = {
   title: 'Layouts/Layout',
@@ -33,3 +32,11 @@ const meta: Meta<typeof Layout> = {
 } satisfies Meta<typeof Layout>
 
 export default meta
+
+type Story = StoryObj<typeof meta>
+
+export const Toggle: Story = {
+  args: {
+    open: true,
+  },
+}

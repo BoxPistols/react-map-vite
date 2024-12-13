@@ -28,22 +28,27 @@ import { CustomTableExample } from "@/components/Table/mock/Example";
 
 <Container>
 
-# CustomSelect
+# CustomTable
 
 ## 概要
 
-CustomTableは、MUIのTableをベースにカスタマイズされたテーブルコンポーネントです。
-MUIの基本能性を活かしながら、より実践的なUIUXを提供するテーブルコンポーネントです。
+- CustomTable は、MUI の Table をベースにカスタマイズされたテーブルコンポーネントです
+- MUI の基本能性を活かしながら、より実践的な UIUX を提供するコンポーネントを目指しています
+- ここでは MUI-X は使わず、テーブルの体験デザインとしての基本的なユーザビリティ機能を追加して提供ています
+- 必要応じてさらに機能追加や調整をしていく予定です
 
 ### 参考テーブル
 
-これは CustomTable の一般的な使用例です
+MUI のデフォルトのテーブルをベースに、CustomTable は以下のオプションが追加されています
 
-MUIのデフォルトのテーブルをベースに、CustomTableはページネーションの制御、キーワード検索フォルター、表示カラムの選択、CRUD操作のハンドラアイコンなどを提供します。
+- キーワード検索
+- 表示カラムの選択表示
+- CRUD 操作のためのハンドラアイコン
+- ページネーションの数の制御
 
-Exampleとして、何らかのステータスのbool状態を表示するカラムUIも表示させています
+Example として、何らかのステータスの bool 状態を表示するカラム UI も表示させています
 
-<CustomTableExample defaultPageSize="5"/>
+<CustomTableExample defaultPageSize="5" />
 
 ### 主要な Props
 
@@ -58,12 +63,20 @@ Exampleとして、何らかのステータスのbool状態を表示するカラ
   <tbody>
     <tr>
       <td>columns</td>
-      <td>Column[]<br/>accessor: string<br/>header: string<br/>sortable?: boolean</td>
-        <td>カラム制御、Sortable</td>
+      <td>
+        <p>Column[]</p>
+        <p>accessor: string</p>
+        <p>header: string</p>
+        <p>sortable?: boolean</p>
+      </td>
+      <td>カラム制御、Sortable</td>
     </tr>
     <tr>
       <td>data</td>
-      <td>Array&lt;<br/>Record&lt;string, string | number | boolean&gt;&gt;</td>
+      <td>
+        <p>Array&lt;</p>
+        <p>Record&lt;string, string | number | boolean&gt;&gt;</p>
+      </td>
       <td>表示するデータ</td>
     </tr>
     <tr>
@@ -93,19 +106,29 @@ Exampleとして、何らかのステータスのbool状態を表示するカラ
     </tr>
     <tr>
       <td>onView</td>
-      <td>(row: Record&lt;<br/>string, string | number | boolean&gt;) => void</td>
+      <td>
+        <p>(row: Record&lt;</p>
+        <p>string, string | number | boolean&gt;) => void</p>
+      </td>
       <td>行の表示アイコンのハンドラ</td>
     </tr>
     <tr>
       <td>onEdit</td>
-      <td>(row: Record&lt;<br/>string, string | number | boolean&gt;) => void</td>
+      <td>
+        <p>(row: Record&lt;</p>
+        <p>string, string | number | boolean&gt;) => void</p>
+      </td>
       <td>行の編集アイコンのハンドラ</td>
     </tr>
     <tr>
       <td>onDelete</td>
-      <td>(row: Record&lt;<br/>string, string | number | boolean&gt;) => void</td>
+      <td>
+        <p>(row: Record&lt;</p>
+        <p>string, string | number | boolean&gt;) => void</p>
+      </td>
       <td>行の削除アイコンのハンドラ</td>
     </tr>
+
   </tbody>
 </table>
 

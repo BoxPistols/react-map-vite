@@ -19,7 +19,7 @@ import CustomTextField from ".";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-<Meta title="Components/Form/CustomTextField/Info" />
+<Meta title="Components/CustomTextField/Info" />
 
 <ThemeProvider theme={theme}>
 
@@ -123,19 +123,19 @@ export const GroupedForm = () => {
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
-  const requiredFields = ['lastName', 'email'] // 必須フィールドのリスト
+const requiredFields = ['lastName', 'email'] // 必須フィールドのリスト
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
-  }
+const handleChange = (e) => {
+const { name, value } = e.target
+setFormData((prevData) => ({
+...prevData,
+[name]: value,
+}))
+}
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const newErrors = {}
+const handleSubmit = (e) => {
+e.preventDefault()
+const newErrors = {}
 
     // 必須フィールドのみをチェック
     requiredFields.forEach((field) => {
@@ -150,33 +150,33 @@ export const GroupedForm = () => {
       setErrors(newErrors)
     }
 
-  }
+}
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false)
-  }
+const handleCloseDialog = () => {
+setOpenDialog(false)
+}
 
-  return (
+return (
 
-    <>
-      <Box
-        component='form'
-        onSubmit={handleSubmit}
-        sx={{
+<>
+<Box
+component='form'
+onSubmit={handleSubmit}
+sx={{
           maxWidth: 600,
           margin: 'auto',
           border: `1px solid ${theme.palette.divider}`,
           p: 8,
           borderRadius: 2,
         }}>
-        <FormControl component='fieldset' sx={{ width: '100%', mb: 2 }}>
-          <Typography variant='h6' component='legend' sx={{ mb: 2 }}>
-            個人情報
-          </Typography>
+<FormControl component='fieldset' sx={{ width: '100%', mb: 2 }}>
+<Typography variant='h6' component='legend' sx={{ mb: 2 }}>
+個人情報
+</Typography>
 
-          <Box sx={{ display: 'flex', gap: 2, mb: 4, flexDirection: { xs: 'column', sm: 'row' } }}>
+<Box sx={{ display: 'flex', gap: 2, mb: 4, flexDirection: { xs: 'column', sm: 'row' } }}>
 
-            <CustomTextField
+<CustomTextField
               label='姓'
               name='lastName'
               value={formData.lastName}
@@ -185,7 +185,7 @@ export const GroupedForm = () => {
               helperText={errors.lastName}
               required
             />
-            <CustomTextField
+<CustomTextField
               label='名'
               name='firstName'
               value={formData.firstName}
@@ -193,8 +193,8 @@ export const GroupedForm = () => {
               error={!!errors.firstName}
               helperText={errors.firstName}
             />
-          </Box>
-          <CustomTextField
+</Box>
+<CustomTextField
             label='メールアドレス'
             name='email'
             type='email'
@@ -205,7 +205,7 @@ export const GroupedForm = () => {
             required
             tooltip='有効なメールアドレスを入力してください'
           />
-        </FormControl>
+</FormControl>
 
         <FormControl component='fieldset' sx={{ width: '100%', mb: 2, mt: 4 }}>
           <Typography variant='h6' component='legend' sx={{ mb: 2 }}>
@@ -263,7 +263,7 @@ export const GroupedForm = () => {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1 }}/>
           <Button
             onClick={handleCloseDialog}
             variant='outlined'
@@ -275,7 +275,7 @@ export const GroupedForm = () => {
       </Dialog>
     </>
 
-  )
+)
 }
 
 // フォームの表示

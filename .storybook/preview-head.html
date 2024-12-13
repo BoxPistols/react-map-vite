@@ -332,14 +332,9 @@
     min-height: 100vh;
     overflow: hidden;
   }
-
-  /* ----- Info Table 対策 ----- */
-  :where(span:not(.sb-anchor, .sb-unstyled, .sb-unstyled span)) {
-    font-size: inherit !important;
+  /* Table */
+  :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+    margin: 0.5em 0 !important;
+    line-height: 1.25 !important;
   }
-
-  /* .MuiTableRow-root:last-child th, */
-  /* .sbdocs.sbdocs-wrapper .MuiTableRow-root:last-child td {
-    border: 1px solid #cde !important;
-  } */
 </style>

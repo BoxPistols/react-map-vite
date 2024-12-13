@@ -1,20 +1,16 @@
-import React from 'react'
-import { type ChangeEvent, useState } from 'react'
-
-import type { Meta, StoryObj } from '@storybook/react'
-
 import { Box } from '@mui/material'
-
-import { CustomTextField } from '.'
+import type { Meta, StoryObj } from '@storybook/react'
+import { type ChangeEvent, useState } from 'react'
+import CustomTextField from '.'
 
 const meta: Meta<typeof CustomTextField> = {
-  title: 'Components/Form/CustomTextField',
+  title: 'Components/CustomTextField',
   component: CustomTextField,
-  tags: ['autodocs', 'text', 'input', 'form'],
+  tags: ['!autodocs', 'text', 'input', 'form'],
   parameters: {
+    showThemeSwitcher: true,
     // themeSwitcherIconColor: 'black',
-    showThemeSwitcher: false,
-    // themeSwitcherPosition: 'right-top',
+    themeSwitcherPosition: 'right-top',
   },
   argTypes: {
     label: { control: 'text' },
