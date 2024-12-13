@@ -8,7 +8,7 @@ import { CustomSelect } from '.'
 const meta: Meta<typeof CustomSelect> = {
   title: 'Components/CustomSelect',
   component: CustomSelect,
-  tags: ['!autodocs', 'select', 'input', 'form'],
+  tags: ['autodocs', 'select', 'input', 'form'],
   parameters: {
     showThemeSwitcher: true,
     themeSwitcherPosition: 'right-top',
@@ -53,6 +53,13 @@ export const Default: Story = {
     options: defaultOptions,
     placeholder: '選択してください',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'デフォルトのセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const Multiple: Story = {
@@ -62,6 +69,13 @@ export const Multiple: Story = {
     multiple: true,
     placeholder: '複数選択可能です',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '複数選択可能なセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const Small: Story = {
@@ -69,6 +83,13 @@ export const Small: Story = {
     ...Default.args,
     label: '小さいサイズのセレクト',
     size: 'small',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '小さいサイズのセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -78,13 +99,12 @@ export const Required: Story = {
     label: '必須のセレクト',
     required: true,
   },
-}
-
-export const MultipleRequired: Story = {
-  args: {
-    ...Multiple.args,
-    label: '必須の複数選択セレクト',
-    required: true,
+  parameters: {
+    docs: {
+      description: {
+        story: '必須のセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -93,6 +113,13 @@ export const WithTooltip: Story = {
     ...Default.args,
     label: 'ツールチップ付きセレクト',
     tooltip: 'これは役立つツールチップです',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ツールチップ付きセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -103,6 +130,13 @@ export const WithError: Story = {
     error: true,
     helperText: 'このフィールドにはエラーがあります',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'エラー状態のセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const Disabled: Story = {
@@ -111,13 +145,12 @@ export const Disabled: Story = {
     label: '無効化されたセレクト',
     disabled: true,
   },
-}
-
-export const WithHelperText: Story = {
-  args: {
-    ...Default.args,
-    label: 'ヘルパーテキスト付きセレクト',
-    helperText: 'これはヘルパーテキストです',
+  parameters: {
+    docs: {
+      description: {
+        story: '無効化されたセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -127,26 +160,33 @@ export const WithPlaceholder: Story = {
     label: 'プレースホルダー付きセレクト',
     placeholder: 'オプションを選択してください',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'プレースホルダー付きセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const AllFeaturesMedium: Story = {
   args: {
-    label: '全機能セレクト (通常サイズ)',
+    label: 'ALL FEATURES',
     options: defaultOptions,
     required: true,
+    multiple: true,
     tooltip: 'このフィールドは全機能を示しています',
     error: false,
-    helperText: 'このフィールドには全ての機能が有効です',
+    helperText: 'このフィールドは全ての機能が有効です',
     placeholder: '選択してください',
-    size: 'medium',
   },
-}
-
-export const AllFeaturesSmall: Story = {
-  args: {
-    ...AllFeaturesMedium.args,
-    label: '全機能セレクト (小さいサイズ)',
-    size: 'small',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multiple, Required, Tooltip, Error, Disabled, Placeholder<br/>留意点として、複数かつ必須の場合は入力後の全て解除を防止してます',
+      },
+    },
   },
 }
 
@@ -158,10 +198,18 @@ export const InteractiveExample: Story = {
     options: defaultOptions,
     placeholder: '選択してください',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'インタラクティブなセレクトコンポーネント',
+      },
+    },
+  },
   render: (args) => {
     const [value, setValue] = useState<string | string[]>('')
     const [hasError, setHasError] = useState(false)
 
+    // これは意図的にエラーを発生させるための処理です
     const handleChange = (
       _event: SelectChangeEvent<unknown>,
       value: string | string[] | number | number[]
@@ -195,10 +243,17 @@ export const InteractiveMultipleExample: Story = {
     options: defaultOptions,
     placeholder: '複数選択可能です',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'インタラクティブな複数選択セレクトコンポーネント',
+      },
+    },
+  },
   render: (args) => {
     const [value, setValue] = useState<string[]>([])
     const [hasError, setHasError] = useState(false)
-
+    // これは、意図的にエラーを発生させるための処理です
     const handleChange = (
       _event: SelectChangeEvent<unknown>,
       value: string | string[] | number | number[]
