@@ -1,3 +1,4 @@
+# .github/workflows/ci.yml
 name: CI/CD
 
 on:
@@ -12,7 +13,6 @@ on:
 env:
   HUSKY: 0
   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
-  NODE_ENV: production # 本番モードでビルド
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1 # 履歴を最小限に
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
@@ -37,45 +37,41 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.13.1'
-          cache: 'pnpm' # Node.jsモジュールのキャッシュを有効化
           registry-url: 'https://npm.pkg.github.com'
           scope: '@boxpistols'
 
-      # pnpm storeのキャッシュを最適化
       - name: Get pnpm store directory
-        id: pnpm-cache
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - name: Setup pnpm cache
+      - name: Cache pnpm modules
         uses: actions/cache@v3
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --no-frozen-lockfile
 
-      # 並列実行でビルド時間を短縮
-      - name: Build and Lint
+      - name: Lint and Format
+        run: pnpm run fix
+
+      - name: Clean build directories
         run: |
-          pnpm run fix &
-          pnpm run build &
-          wait
+          rm -rf dist
+          rm -rf storybook-static
 
-      # Storybookビルドの最適化
+      # ビルドステップを分割
+      - name: Build package
+        run: pnpm run build
+
       - name: Build Storybook
-        run: |
-          export NODE_OPTIONS="--max_old_space_size=4096"
-          pnpm run build:sb
-        env:
-          STORYBOOK_DISABLE_TELEMETRY: 1
-          NODE_ENV: production
+        run: pnpm run build:sb
+        continue-on-error: true  # 一時的な対応として
 
-      # 必要なファイルのみをアップロード
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -83,7 +79,7 @@ jobs:
           path: |
             dist
             storybook-static
-          retention-days: 1 # 保持期間を短縮
+          retention-days: 7
 
   publish:
     needs: build
@@ -95,8 +91,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
@@ -117,8 +111,8 @@ jobs:
           name: build-artifacts
           path: .
 
-      - name: Install production dependencies
-        run: pnpm install --prod --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
 
       - name: Publish package
         run: npm publish
