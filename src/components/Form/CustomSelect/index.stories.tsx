@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
+import type { SelectChangeEvent } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import type { ReactNode } from 'react'
+import React from 'react'
 import { CustomSelect } from '.'
-import type { SelectChangeEvent } from '@mui/material'
 
 const meta: Meta<typeof CustomSelect> = {
   title: 'Components/CustomSelect',
@@ -11,7 +11,6 @@ const meta: Meta<typeof CustomSelect> = {
   tags: ['!autodocs', 'select', 'input', 'form'],
   parameters: {
     showThemeSwitcher: true,
-    // themeSwitcherIconColor: 'black',
     themeSwitcherPosition: 'right-top',
   },
   argTypes: {
@@ -22,6 +21,7 @@ const meta: Meta<typeof CustomSelect> = {
     disabled: { control: 'boolean' },
     helperText: { control: 'text' },
     placeholder: { control: 'text' },
+    multiple: { control: 'boolean' },
     size: {
       control: 'radio',
       options: ['small', 'medium'],
@@ -55,6 +55,15 @@ export const Default: Story = {
   },
 }
 
+export const Multiple: Story = {
+  args: {
+    ...Default.args,
+    label: '複数選択可能なセレクト',
+    multiple: true,
+    placeholder: '複数選択可能です',
+  },
+}
+
 export const Small: Story = {
   args: {
     ...Default.args,
@@ -67,6 +76,14 @@ export const Required: Story = {
   args: {
     ...Default.args,
     label: '必須のセレクト',
+    required: true,
+  },
+}
+
+export const MultipleRequired: Story = {
+  args: {
+    ...Multiple.args,
+    label: '必須の複数選択セレクト',
     required: true,
   },
 }
@@ -142,16 +159,19 @@ export const InteractiveExample: Story = {
     placeholder: '選択してください',
   },
   render: (args) => {
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState<string | string[]>('')
     const [hasError, setHasError] = useState(false)
 
     const handleChange = (
-      event: SelectChangeEvent<unknown>,
-      _child: ReactNode
+      _event: SelectChangeEvent<unknown>,
+      value: string | string[] | number | number[]
     ) => {
-      const newValue = event.target.value as string
-      setValue(newValue)
-      setHasError(newValue === 'option2' || newValue === 'option3')
+      setValue(value as string | string[])
+      if (Array.isArray(value)) {
+        setHasError(value.some((v) => v === 'option2' || v === 'option3'))
+      } else {
+        setHasError(value === 'option2' || value === 'option3')
+      }
     }
 
     return (
@@ -161,6 +181,44 @@ export const InteractiveExample: Story = {
         onChange={handleChange}
         error={hasError}
         helperText={hasError ? 'この選択をするとエラーになります' : ''}
+      />
+    )
+  },
+}
+
+export const InteractiveMultipleExample: Story = {
+  args: {
+    label: '2つ以上選択するとエラーになります',
+    required: true,
+    multiple: true,
+    tooltip: '複数の選択肢を変更すると状態が更新されます',
+    options: defaultOptions,
+    placeholder: '複数選択可能です',
+  },
+  render: (args) => {
+    const [value, setValue] = useState<string[]>([])
+    const [hasError, setHasError] = useState(false)
+
+    const handleChange = (
+      _event: SelectChangeEvent<unknown>,
+      value: string | string[] | number | number[]
+    ) => {
+      const newValue = value as string[]
+      setValue(newValue)
+      setHasError(newValue.length > 1)
+    }
+
+    return (
+      <CustomSelect
+        {...args}
+        value={value}
+        onChange={handleChange}
+        error={hasError}
+        helperText={
+          hasError
+            ? '2つ以上の項目を選択することはできません'
+            : '1つまで選択可能です'
+        }
       />
     )
   },
@@ -176,10 +234,11 @@ export const SizeComparison: Story = {
         placeholder='選択してください'
       />
       <CustomSelect
-        label='小さいサイズのセレクト'
+        label='小さいサイズの複数選択セレクト'
         options={defaultOptions}
         size='small'
-        placeholder='選択してください'
+        multiple
+        placeholder='複数選択可能です'
       />
     </Box>
   ),

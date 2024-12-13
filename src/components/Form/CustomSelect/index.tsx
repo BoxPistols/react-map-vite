@@ -13,12 +13,22 @@ import type { SelectChangeEvent } from '@mui/material'
 import styled from '@mui/material/styles/styled'
 import { useState } from 'react'
 
-type CustomSelectProps = Omit<SelectProps, 'label'> & {
+type CustomSelectProps = Omit<
+  SelectProps,
+  'label' | 'multiple' | 'value' | 'onChange'
+> & {
   label: string
   tooltip?: string
   helperText?: string
   options: Array<{ value: string | number; label: string }>
   placeholder?: string
+  multiple?: boolean
+  value?: string | string[] | number | number[]
+  onChange?: (
+    event: SelectChangeEvent<unknown>,
+    value: string | string[] | number | number[]
+  ) => void
+  // ... 既存のProps
 }
 
 const StyledFormControl = styled(FormControl)({
@@ -73,7 +83,8 @@ export const CustomSelect = ({
   name,
   inputProps,
   placeholder = '選択してください',
-  value: propValue = '', // 外部からのvalueを受け取る
+  multiple = false,
+  value: propValue = multiple ? [] : '',
   onChange, // 外部のonChangeを受け取る
   ...props
 }: CustomSelectProps) => {
@@ -83,8 +94,8 @@ export const CustomSelect = ({
   const inputName = name || inputId
 
   // valueの初期化。undefinedではなく明示的な空文字やnullで初期化する
-  const [value, setValue] = useState<string | number>(
-    (propValue as string | number) || ''
+  const [value, setValue] = useState<string | string[] | number | number[]>(
+    propValue || (multiple ? [] : '')
   )
 
   const handleChange = (event: SelectChangeEvent<unknown>) => {
@@ -134,6 +145,7 @@ export const CustomSelect = ({
       <Select
         variant='outlined'
         {...props}
+        multiple={multiple}
         id={inputId}
         name={inputName}
         label=''
@@ -148,6 +160,23 @@ export const CustomSelect = ({
         aria-describedby={
           tooltip ? `${inputId}-tooltip` : `${inputId}-helper-text`
         }
+        renderValue={(selected) => {
+          if (multiple) {
+            if (
+              !selected ||
+              (Array.isArray(selected) && selected.length === 0)
+            ) {
+              return <em>{placeholder}</em>
+            }
+            return (Array.isArray(selected) ? selected : [selected])
+              .map(
+                (value) =>
+                  options.find((option) => option.value === value)?.label
+              )
+              .join(', ')
+          }
+          // ... 単一選択の場合の処理
+        }}
         inputProps={{
           ...inputProps,
           'aria-label': `${label}${required ? '（必須）' : ''}`,
@@ -162,12 +191,13 @@ export const CustomSelect = ({
             height: 'auto',
           },
           '& .MuiSelect-select.MuiSelect-select': {
-            color: value
-              ? theme.palette.text.primary
-              : theme.palette.text.secondary,
+            color:
+              value && (Array.isArray(value) ? value.length > 0 : value)
+                ? theme.palette.text.primary
+                : theme.palette.text.secondary,
           },
         }}>
-        {placeholder && (
+        {placeholder && !multiple && (
           <MenuItem value='' disabled>
             <em>{placeholder}</em>
           </MenuItem>
