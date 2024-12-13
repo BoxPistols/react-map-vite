@@ -62,7 +62,7 @@ const TooltipIcon = styled(HelpOutlineOutlinedIcon)<{
   color: 'inherit',
 }))
 
-export const CustomTextField = ({
+const CustomTextField = ({
   label,
   InputProps,
   inputProps,

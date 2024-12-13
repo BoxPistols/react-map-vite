@@ -8,11 +8,11 @@ interface MapLibreProps {
   zoom?: number
 }
 
-export const MapLibre = ({
+const MapLibre: React.FC<MapLibreProps> = ({
   latitude = 35.6814,
   longitude = 139.767,
   zoom = 9,
-}: MapLibreProps) => {
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<maplibregl.Map | null>(null)
   const [lng, setLng] = useState(longitude)
@@ -61,3 +61,5 @@ export const MapLibre = ({
     </div>
   )
 }
+
+export default MapLibre

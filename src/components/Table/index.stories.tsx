@@ -11,6 +11,12 @@ const meta = {
     // layout: 'centered',
     showThemeSwitcher: false,
     // themeSwitcherPosition: 'top-right',
+    docs: {
+      description: {
+        component:
+          'CRUD操作ハンドラやキーワード検索機能を備えた基本的なテーブルコンポーネント<br>デフォルトでカラムの選択表示やソート機能も備えている',
+      },
+    },
   },
 } satisfies Meta<typeof CustomTable>
 
@@ -34,6 +40,13 @@ export const Default: Story = {
     showCRUD: false,
     searchable: false,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '基本的なテーブルコンポーネントの使用例',
+      },
+    },
+  },
 }
 
 // 検索機能付き
@@ -41,6 +54,13 @@ export const WithSearch: Story = {
   args: {
     ...Default.args,
     searchable: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'キーワード検索機能を有効化した使用例',
+      },
+    },
   },
 }
 
@@ -52,6 +72,13 @@ export const WithCRUD: Story = {
     onView: (row) => console.log('View:', row),
     onEdit: (row) => console.log('Edit:', row),
     onDelete: (row) => console.log('Delete:', row),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'CRUD操作ハンドラを有効化した使用例',
+      },
+    },
   },
 }
 
@@ -65,6 +92,13 @@ export const FullFeatured: Story = {
     onEdit: (row) => console.log('Edit:', row),
     onDelete: (row) => console.log('Delete:', row),
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'CRUD操作ハンドラとキーワード検索機能を有効化した使用例',
+      },
+    },
+  },
 }
 
 // カスタムページサイズ
@@ -73,6 +107,13 @@ export const CustomPagination: Story = {
     ...FullFeatured.args,
     defaultPageSize: 5,
     pageSizeOptions: [5, 10, 15],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ページサイズをカスタマイズした使用例',
+      },
+    },
   },
 }
 
@@ -85,6 +126,13 @@ export const Minimal: Story = {
     ],
     data: dummyData.slice(0, 3),
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '最小構成の使用例',
+      },
+    },
+  },
 }
 
 // ローディング状態
@@ -93,6 +141,13 @@ export const Loading: Story = {
     ...Default.args,
     loading: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ローディング状態の使用例',
+      },
+    },
+  },
 }
 
 // データなし
@@ -100,5 +155,12 @@ export const NoData: Story = {
   args: {
     ...Default.args,
     data: [],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'データがない場合の使用例',
+      },
+    },
   },
 }

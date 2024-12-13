@@ -1,4 +1,5 @@
 import maplibregl from 'maplibre-gl'
+import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { hookUseTheme } from '@/hooks/useTheme'
@@ -12,13 +13,13 @@ interface Map3DProps {
   bearing: number
 }
 
-export const Map3D = ({
+export const Map3D: React.FC<Map3DProps> = ({
   latitude = 35.6809591,
   longitude = 139.7673068,
   zoom = 9,
   pitch = 60,
   bearing = -20,
-}: Map3DProps) => {
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapInstance = useRef<maplibregl.Map | null>(null)
   const [mapInfo, setMapInfo] = useState({

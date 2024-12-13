@@ -132,6 +132,7 @@ export const CustomSelect = ({
         )}
       </StyledInputLabel>
       <Select
+        variant='outlined'
         {...props}
         id={inputId}
         name={inputName}
@@ -142,7 +143,6 @@ export const CustomSelect = ({
         value={value} // stateからのvalueを使う
         onChange={handleChange} // 自作のhandleChangeを使う
         displayEmpty
-        variant='outlined' // variantを明示的に指定
         aria-required={required ? 'true' : 'false'}
         aria-invalid={error ? 'true' : 'false'}
         aria-describedby={
@@ -191,3 +191,5 @@ export const CustomSelect = ({
     </StyledFormControl>
   )
 }
+
+export default CustomSelect

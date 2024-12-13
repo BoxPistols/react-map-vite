@@ -22,7 +22,7 @@ import {
   useTheme,
 } from '@mui/material'
 
-import { CustomSelect } from '@/components/Form/CustomSelect'
+import CustomSelect from '@/components/Form/CustomSelect'
 import type { PageProps } from '@/types/type'
 
 const MapPage = ({

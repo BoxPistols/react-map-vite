@@ -7,7 +7,7 @@ type MapboxProps = {
   zoom: number // ズームレベル
 }
 
-export const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
+const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
   const mapContainer = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -32,13 +32,10 @@ export const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
         map.remove()
       }
     }
-
-    // クリーンアップ関数を返す
-    // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
-    return () => {}
   }, [latitude, longitude, zoom])
 
   return (
+    // <div className='relative h-screen overflow-hidden'>
     <main className='absolute inset-0'>
       <div
         ref={mapContainer}
@@ -46,5 +43,8 @@ export const Mapbox = ({ latitude, longitude, zoom }: MapboxProps) => {
         style={{ width: '100vw', height: '100vh' }}
       />
     </main>
+    // </div>
   )
 }
+
+export default Mapbox

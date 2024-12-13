@@ -1,9 +1,9 @@
 // Components
 import { CustomSelect } from './components/Form/CustomSelect'
-import { CustomTextField } from './components/Form/CustomTextField'
+import CustomTextField from './components/Form/CustomTextField'
 import { Map3D } from './components/Map3D'
-import { Mapbox } from './components/MapBox'
-import { MapLibre } from './components/MapLibre'
+import Mapbox from './components/MapBox'
+import MapLibre from './components/MapLibre'
 // TableComponents
 import * as TableComponents from './components/Table/TableComponents'
 
@@ -11,7 +11,7 @@ import { ThemeProvide } from './components/ThemeProvider'
 
 // Layouts
 import { Header } from './layouts/header'
-import { Layout } from './layouts/layout'
+import Layout from './layouts/layout'
 import { SettingDrawer } from './layouts/settingDrawer'
 import { SideNav } from './layouts/sideNav'
 

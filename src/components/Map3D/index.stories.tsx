@@ -4,7 +4,6 @@ import { Map3D } from '.'
 const meta: Meta<typeof Map3D> = {
   title: 'Components/Map/MapLibre/Map3D',
   component: Map3D,
-  tags: ['!autodocs', 'map', 'geolocation', 'interactive'],
   parameters: {
     // document 非表示
     docs: { disable: true },
@@ -20,6 +19,7 @@ const meta: Meta<typeof Map3D> = {
       </div>
     ),
   ],
+  tags: ['map', 'geolocation', 'interactive'],
   argTypes: {
     latitude: {
       control: { type: 'number', min: -90, max: 90, step: 0.000001 },
