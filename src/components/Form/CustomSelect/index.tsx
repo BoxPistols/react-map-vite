@@ -132,6 +132,7 @@ export const CustomSelect = ({
         )}
       </StyledInputLabel>
       <Select
+        variant='outlined'
         {...props}
         id={inputId}
         name={inputName}
