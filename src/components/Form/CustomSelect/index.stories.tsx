@@ -8,7 +8,7 @@ import { CustomSelect } from '.'
 const meta: Meta<typeof CustomSelect> = {
   title: 'Components/CustomSelect',
   component: CustomSelect,
-  tags: ['!autodocs', 'select', 'input', 'form'],
+  tags: ['autodocs', 'select', 'input', 'form'],
   parameters: {
     showThemeSwitcher: true,
     themeSwitcherPosition: 'right-top',
@@ -53,6 +53,13 @@ export const Default: Story = {
     options: defaultOptions,
     placeholder: '選択してください',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'デフォルトのセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const Multiple: Story = {
@@ -62,6 +69,13 @@ export const Multiple: Story = {
     multiple: true,
     placeholder: '複数選択可能です',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '複数選択可能なセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const Small: Story = {
@@ -69,6 +83,13 @@ export const Small: Story = {
     ...Default.args,
     label: '小さいサイズのセレクト',
     size: 'small',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '小さいサイズのセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -78,6 +99,13 @@ export const Required: Story = {
     label: '必須のセレクト',
     required: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '必須のセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const WithTooltip: Story = {
@@ -85,6 +113,13 @@ export const WithTooltip: Story = {
     ...Default.args,
     label: 'ツールチップ付きセレクト',
     tooltip: 'これは役立つツールチップです',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ツールチップ付きセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -95,6 +130,13 @@ export const WithError: Story = {
     error: true,
     helperText: 'このフィールドにはエラーがあります',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'エラー状態のセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const Disabled: Story = {
@@ -102,6 +144,13 @@ export const Disabled: Story = {
     ...Default.args,
     label: '無効化されたセレクト',
     disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '無効化されたセレクトコンポーネント',
+      },
+    },
   },
 }
 
@@ -111,6 +160,13 @@ export const WithPlaceholder: Story = {
     label: 'プレースホルダー付きセレクト',
     placeholder: 'オプションを選択してください',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'プレースホルダー付きセレクトコンポーネント',
+      },
+    },
+  },
 }
 
 export const AllFeaturesMedium: Story = {
@@ -118,10 +174,19 @@ export const AllFeaturesMedium: Story = {
     label: 'ALL FEATURES',
     options: defaultOptions,
     required: true,
+    multiple: true,
     tooltip: 'このフィールドは全機能を示しています',
     error: false,
     helperText: 'このフィールドは全ての機能が有効です',
     placeholder: '選択してください',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multiple, Required, Tooltip, Error, Disabled, Placeholder<br/>留意点として、複数かつ必須の場合は入力後の全て解除を防止してます',
+      },
+    },
   },
 }
 
@@ -132,6 +197,13 @@ export const InteractiveExample: Story = {
     tooltip: '選択肢を変更すると状態が更新されます',
     options: defaultOptions,
     placeholder: '選択してください',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'インタラクティブなセレクトコンポーネント',
+      },
+    },
   },
   render: (args) => {
     const [value, setValue] = useState<string | string[]>('')
@@ -170,6 +242,13 @@ export const InteractiveMultipleExample: Story = {
     tooltip: '複数の選択肢を変更すると状態が更新されます',
     options: defaultOptions,
     placeholder: '複数選択可能です',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'インタラクティブな複数選択セレクトコンポーネント',
+      },
+    },
   },
   render: (args) => {
     const [value, setValue] = useState<string[]>([])
