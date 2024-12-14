@@ -90,8 +90,8 @@ export const CustomSelect = ({
   id,
   name,
   inputProps,
-  placeholder = '選択してください',
   multiple = false,
+  placeholder = multiple ? '複数の選択が可能です' : '選択してください',
   value: propValue = multiple ? [] : '',
   onChange, // 外部のonChangeを受け取る
   ...props
@@ -183,14 +183,11 @@ export const CustomSelect = ({
               )
               .join(', ')
           }
-          // ... 単一選択の場合の処理
+          // 単一選択の場合の処理
           if (!selected) {
             return <em>{placeholder}</em>
           }
           return options.find((option) => option.value === selected)?.label
-
-          // 以下のようにも書ける
-          // return options.find((option) => option.value === selected)?.label || '';
         }}
         inputProps={{
           ...inputProps,
