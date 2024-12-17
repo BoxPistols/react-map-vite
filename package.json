@@ -5,7 +5,9 @@
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -94,14 +96,12 @@
     "vite-plugin-dts": "^4.3.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["pnpm run fix"]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm run fix",
-      "post-checkout": "chmod +x .husky/pre-commit && pnpm run prepare",
-      "post-merge": "chmod +x .husky/pre-commit && pnpm run prepare"
-    }
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm run fix"
+    ],
+    "*.{css,scss}": [
+      "pnpm run format"
+    ]
   },
   "volta": {
     "node": "20.13.1"
