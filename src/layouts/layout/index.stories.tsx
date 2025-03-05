@@ -1,4 +1,5 @@
-import { theme } from '@/lib/themes/theme'
+import React from 'react'
+import { theme } from '../../theme/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BrowserRouter } from 'react-router-dom'
