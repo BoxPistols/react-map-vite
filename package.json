@@ -5,9 +5,7 @@
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -96,23 +94,14 @@
     "vite-plugin-dts": "^4.5.3"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "pnpm run fix"
-    ],
-    "*.{css,scss}": [
-      "pnpm run format"
-    ]
+    "*.{js,jsx,ts,tsx}": ["pnpm run fix"],
+    "*.{css,scss}": ["pnpm run format"]
   },
   "volta": {
     "node": "20.13.1"
   },
   "pnpm": {
-    "ignoredBuiltDependencies": [
-      "@biomejs/biome",
-      "esbuild"
-    ],
-    "onlyBuiltDependencies": [
-      "@biomejs/biome"
-    ]
+    "ignoredBuiltDependencies": ["@biomejs/biome", "esbuild"],
+    "onlyBuiltDependencies": ["@biomejs/biome"]
   }
 }
