@@ -5,9 +5,7 @@
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -38,72 +36,72 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@emotion/cache": "^11.13.5",
-    "@emotion/react": "^11.13.5",
-    "@emotion/styled": "^11.13.5",
-    "@mui/icons-material": "^6.1.8",
-    "@mui/material": "^6.1.8",
-    "@mui/system": "^6.1.8",
-    "@storybook/preview-api": "^8.4.6",
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.6",
+    "@mui/material": "^6.4.6",
+    "@mui/system": "^6.4.6",
+    "@storybook/preview-api": "^8.6.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/maplibre-gl": "^1.14.0",
     "@types/react-router-dom": "^5.3.3",
     "cli-table3": "^0.6.5",
     "init": "^0.1.2",
     "map-or-similar": "^1.5.0",
-    "mapbox-gl": "^3.8.0",
+    "mapbox-gl": "^3.10.0",
     "maplibre-gl": "^4.7.1",
     "memoizerific": "^1.11.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
-    "rollup": "^4.27.3",
+    "react-router-dom": "^6.30.0",
+    "rollup": "^4.34.9",
     "string-width": "^4.2.3",
-    "vercel": "^39.1.1"
+    "vercel": "^39.4.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@chromatic-com/storybook": "^3.2.2",
+    "@chromatic-com/storybook": "^3.2.5",
     "@emotion/babel-plugin": "^11.13.5",
     "@fullhuman/postcss-purgecss": "^6.0.0",
-    "@storybook/addon-a11y": "^8.4.5",
-    "@storybook/addon-essentials": "^8.4.5",
-    "@storybook/addon-interactions": "^8.4.5",
-    "@storybook/addon-links": "^8.4.5",
-    "@storybook/addon-mdx-gfm": "^8.4.5",
-    "@storybook/blocks": "^8.4.5",
-    "@storybook/react": "^8.4.5",
-    "@storybook/react-vite": "^8.4.5",
-    "@storybook/test": "^8.4.5",
-    "@tailwindcss/forms": "^0.5.9",
-    "@types/node": "^20.11.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@storybook/addon-a11y": "^8.6.3",
+    "@storybook/addon-essentials": "^8.6.3",
+    "@storybook/addon-interactions": "^8.6.3",
+    "@storybook/addon-links": "^8.6.3",
+    "@storybook/addon-mdx-gfm": "^8.6.3",
+    "@storybook/blocks": "^8.6.3",
+    "@storybook/react": "^8.6.3",
+    "@storybook/react-vite": "^8.6.3",
+    "@storybook/test": "^8.6.3",
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/node": "^20.17.23",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "esbuild": "^0.24.0",
-    "globals": "^15.12.0",
+    "esbuild": "^0.24.2",
+    "globals": "^15.15.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
-    "postcss": "^8.4.49",
-    "react-map-gl": "^7.1.7",
-    "storybook": "^8.4.5",
-    "tailwindcss": "^3.4.15",
-    "terser": "^5.36.0",
-    "typescript": "^5.6.3",
-    "vite": "^6.0.3",
-    "vite-plugin-dts": "^4.3.0"
+    "lint-staged": "^15.4.3",
+    "postcss": "^8.5.3",
+    "react-map-gl": "^7.1.9",
+    "storybook": "^8.6.3",
+    "tailwindcss": "^3.4.17",
+    "terser": "^5.39.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.3"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "pnpm run fix"
-    ],
-    "*.{css,scss}": [
-      "pnpm run format"
-    ]
+    "*.{js,jsx,ts,tsx}": ["pnpm run fix"],
+    "*.{css,scss}": ["pnpm run format"]
   },
   "volta": {
     "node": "20.13.1"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": ["@biomejs/biome", "esbuild"],
+    "onlyBuiltDependencies": ["@biomejs/biome"]
   }
 }
