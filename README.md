@@ -162,3 +162,125 @@ pnpm、`git commit`を実行して`pnpm run fix`が走っているか確認し�
 + [TypeScript ハンドブック](https://www.typescriptlang.org/)：TypeScript の言語機能、ベストプラクティス、サンプルコードなど
 + [Vite 公式ドキュメント](https://ja.vitejs.dev/)：Vite の設定、プラグイン、ビルドオプションなど
 + [Biome 公式ドキュメント](https://biomejs.dev/ja)：Biome の設定、ルール、オプション設定など
+
+---
+
+## Github Packages
+
+GitHub Packages は GitHub が提供するパッケージレジストリサービスです。npm、Maven、NuGet、RubyGems などと互換性があり、チームのプライベートコードやオープンソースプロジェクトのパッケージを公開・管理できます。
+
+### 主な特徴
+
++ GitHub リポジトリと統合されたパッケージ管理
++ CI/CD ワークフローとの連携が容易
++ パッケージのバージョン管理とアクセス制御
++ npm や Docker などの多様なパッケージ形式をサポート
+
+### 使用例
+
+```sh
+# .npmrcの設定例
+@your-org:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+# パッケージをインストールする
+npm install @your-org/package-name
+```
+
+詳細は [GitHub Packages のドキュメント](https://docs.github.com/ja/packages) を参照してください。
+
+## 開発者向け設定
+
+### パッケージ公開の仕組み
+
+このプロジェクトではGitHub Packagesを使用して、Reactコンポーネントライブラリを公開しています。パッケージの公開には以下の2つの方法があります：
+
+#### 1. 手動で公開する場合
+
+Personal Access Token (classic)をGitHubで生成し、以下のいずれかの方法で設定します：
+
+1. GitHubでPersonal Access Token (classic)を生成
+   + 必要な権限: `repo`, `write:packages`
+   + [トークン作成手順](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+2. 認証設定（いずれかを選択）：
+
+   ```bash
+   # A. 環境変数として設定
+   export GITHUB_TOKEN=your_github_token
+
+   # B. .npmrc.localファイルを作成（.gitignoreに記載済み）
+   echo "//npm.pkg.github.com/:_authToken=your_github_token" > .npmrc.local
+
+   # C. 一時的に.npmrcファイルを結合して公開する
+   cat .npmrc.local .npmrc > .npmrc.combined && mv .npmrc.combined .npmrc
+   pnpm publish
+   git checkout -- .npmrc  # 元の状態に戻す
+   ```
+
+#### 2. GitHub Actions による自動公開（推奨）
+
+リポジトリに`.github/workflows/publish.yml`ファイルを作成することで、新しいリリースを作成すると自動的にパッケージが公開されます：
+
+```yaml
+name: Publish Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@boxpistols'
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build library
+        run: pnpm build:lib
+
+      - name: Publish package
+        run: pnpm publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+```
+
+**ワークフローの利点:**
+
++ 開発者は個別にトークン設定が不要になる
++ リポジトリのSecrets管理が不要（自動で`GITHUB_TOKEN`が提供される）
++ バージョン管理とリリース作成のプロセスが標準化される
+
+### パッケージの使用方法
+
+プロジェクトでこのパッケージを使用するには：
+
+1. プロジェクトの`.npmrc`ファイルに以下を追加：
+
+   ```bash
+   @boxpistols:registry=https://npm.pkg.github.com
+   //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+   ```
+
+2. パッケージをインストール：
+
+   ```bash
+   pnpm add @boxpistols/react-map-vite
+   ```
+
+詳細は[GitHub Packagesのドキュメント](https://docs.github.com/ja/packages)を参照してください。

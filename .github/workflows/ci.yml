@@ -48,7 +48,7 @@ jobs:
       - name: Cache pnpm modules
         uses: actions/cache@v3
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
@@ -56,21 +56,51 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      # 追加: テストの実行（もしテストスクリプトがある場合）
+      # - name: Run tests
+      #   run: pnpm test
+
       - name: Lint and Format
         run: pnpm run fix
+
+      # 追加: タグとpackage.jsonのバージョン一致検証（リリースの場合）
+      - name: Verify version on release
+        if: github.event_name == 'release'
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          RELEASE_VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Package version: $PACKAGE_VERSION"
+          echo "Release version: $RELEASE_VERSION"
+          if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
+            echo "::error::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が一致しません"
+            exit 1
+          fi
 
       - name: Clean build directories
         run: |
           rm -rf dist
           rm -rf storybook-static
 
-      # ビルドステップを分割
+      # 追加: ライブラリビルドを明示的に実行
+      - name: Build library
+        run: pnpm run build:lib
+
+      # 標準ビルドも維持
       - name: Build package
         run: pnpm run build
 
       - name: Build Storybook
         run: pnpm run build:sb
         continue-on-error: true  # 一時的な対応として
+
+      # 追加: ビルド結果のサマリー表示
+      - name: Build summary
+        run: |
+          echo "## ビルド結果" >> $GITHUB_STEP_SUMMARY
+          echo "- パッケージバージョン: $(node -p "require('./package.json').version")" >> $GITHUB_STEP_SUMMARY
+          echo "- レジストリ: $(node -p "require('./package.json').publishConfig.registry")" >> $GITHUB_STEP_SUMMARY
+          echo "- ビルドファイル:" >> $GITHUB_STEP_SUMMARY
+          ls -la dist | awk '{print "  - " $9 " (" $5 " bytes)"}' >> $GITHUB_STEP_SUMMARY
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -114,7 +144,40 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      # 追加: .npmrcファイルの適切な設定
+      - name: Setup .npmrc for GitHub Packages
+        run: |
+          echo "@boxpistols:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "always-auth=true" >> .npmrc
+          cat .npmrc
+
+      # 追加: パッケージ情報の表示
+      - name: Package info
+        run: |
+          echo "## 公開パッケージ情報" >> $GITHUB_STEP_SUMMARY
+          echo "- Package name: $(node -p "require('./package.json').name")" >> $GITHUB_STEP_SUMMARY
+          echo "- Version: $(node -p "require('./package.json').version")" >> $GITHUB_STEP_SUMMARY
+          echo "- Publishing to: $(node -p "require('./package.json').publishConfig.registry")" >> $GITHUB_STEP_SUMMARY
+
+      # 変更: npmではなくpnpmでパブリッシュし、--no-git-checksフラグを追加
       - name: Publish package
-        run: npm publish
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 追加: 成功メッセージ
+      - name: Publish success
+        if: success()
+        run: |
+          echo "## パブリッシュ成功 :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "- パッケージ: $(node -p "require('./package.json').name")" >> $GITHUB_STEP_SUMMARY
+          echo "- バージョン: $(node -p "require('./package.json').version")" >> $GITHUB_STEP_SUMMARY
+          echo "- 公開日時: $(date)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Auto increment version
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          npm version patch
+          git push --follow-tags

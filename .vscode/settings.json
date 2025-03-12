@@ -60,7 +60,8 @@
   "[postcss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "docwriter.style": "JSDoc"
   // MDXをmarkdownとして扱い一時的にPreview
   // "files.associations": {
   // 	"*.mdx": "markdown"

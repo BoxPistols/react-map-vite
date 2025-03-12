@@ -5,7 +5,9 @@
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -33,7 +35,11 @@
     "build:dev": "pnpm run build",
     "build:sb": "storybook build",
     "build:all": "pnpm run build && pnpm run build:sb",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "bump:patch": "npm version patch",
+    "bump:minor": "npm version minor",
+    "bump:major": "npm version major",
+    "publish": "npm publish"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -94,14 +100,23 @@
     "vite-plugin-dts": "^4.5.3"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["pnpm run fix"],
-    "*.{css,scss}": ["pnpm run format"]
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm run fix"
+    ],
+    "*.{css,scss}": [
+      "pnpm run format"
+    ]
   },
   "volta": {
     "node": "20.13.1"
   },
   "pnpm": {
-    "ignoredBuiltDependencies": ["@biomejs/biome", "esbuild"],
-    "onlyBuiltDependencies": ["@biomejs/biome"]
+    "ignoredBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild"
+    ],
+    "onlyBuiltDependencies": [
+      "@biomejs/biome"
+    ]
   }
 }
