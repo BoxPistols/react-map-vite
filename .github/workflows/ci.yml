@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  pre-publish-check:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Build job executed"
+      - run: echo "Pre-publish check executed"
 
   publish:
-    needs: build
+    needs: pre-publish-check
     if: github.event_name == 'release' && github.event.action == 'created'
     runs-on: ubuntu-latest
     permissions:
@@ -44,7 +44,8 @@ jobs:
           echo "Package version: $PACKAGE_VERSION"
           echo "Release version: $RELEASE_VERSION"
           if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
-            echo "::warning::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が異なります"
+            echo "::error::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が異なります"
+            exit 1
           fi
 
       # ライブラリのビルド
