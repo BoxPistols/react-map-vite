@@ -41,16 +41,24 @@ pnpm install
 
 ```json
   "scripts": {
+    "build:lib": "pnpm run build:types && vite build --mode lib",
+    "build:types": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm run build:lib",
+    "build": "vite build",
     "dev": "vite",
-    "build": "tsc && vite build",
-    "format": "biome format --write .",
-    "lint": "biome lint --write ./src",
-    "fix": "pnpm run lint && pnpm run format",
     "preview": "vite preview",
+    "format": "pnpm biome format --write .",
+    "lint": "pnpm biome lint --write ./src",
+    "fix": "pnpm run lint && pnpm run format",
     "sb": "storybook dev -p 6006",
-    "sb-build": "storybook build",
-    "build-all": "pnpm run build && pnpm run sb-build",
-    "prepare": "husky"
+    "build:dev": "pnpm run build",
+    "build:sb": "storybook build",
+    "build:all": "pnpm run build && pnpm run build:sb",
+    "prepare": "husky install",
+    "bump:patch": "npm version patch",
+    "bump:minor": "npm version minor",
+    "bump:major": "npm version major",
+    "publish": "npm publish"
   },
 ```
 
@@ -77,7 +85,14 @@ pnpm fix
 #### プロダクション用ビルド
 
 ```sh
+# 通常のアプリケーションビルド
 pnpm run build
+
+# ライブラリとして公開するためのビルド
+pnpm run build:lib
+
+# 型定義ファイルのビルド
+pnpm run build:types
 ```
 
 #### Storybook
@@ -88,7 +103,7 @@ pnpm sb
 
 ### Node 管理
 
-Node.jsのバージョン管理にはVoltaを推奨します
+Node.jsのバージョン管理にはVoltaを推奨します。このプロジェクトではNode.js v20.13.1を使用しています。
 
 ```sh
 # install Volta
@@ -101,6 +116,8 @@ $ cat ~/.zshrc（各自の環境ファイル）
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# プロジェクトで指定されたNodeバージョンをインストール
+$ volta install node@20.13.1
 ```
 
 #### Volta ドキュメント
@@ -180,11 +197,11 @@ GitHub Packages は GitHub が提供するパッケージレジストリサー�
 
 ```sh
 # .npmrcの設定例
-@your-org:registry=https://npm.pkg.github.com
+@boxpistols:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 
 # パッケージをインストールする
-npm install @your-org/package-name
+pnpm add @boxpistols/react-map-vite
 ```
 
 詳細は [GitHub Packages のドキュメント](https://docs.github.com/ja/packages) を参照してください。
@@ -220,17 +237,25 @@ Personal Access Token (classic)をGitHubで生成し、以下のいずれかの�
 
 #### 2. GitHub Actions による自動公開（推奨）
 
-リポジトリに`.github/workflows/publish.yml`ファイルを作成することで、新しいリリースを作成すると自動的にパッケージが公開されます：
+リポジトリに`.github/workflows/ci.yml`ファイルが設定されており、新しいリリースを作成すると自動的にパッケージが公開されます：
 
 ```yaml
-name: Publish Package
+name: CI
 
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  pre-publish-check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Pre-publish check executed"
+
+  publish:
+    needs: pre-publish-check
+    if: github.event_name == 'release' && github.event.action == 'created'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -238,26 +263,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@boxpistols'
-
-      - uses: pnpm/action-setup@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 8
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.13.1'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@boxpistols'
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Verify version
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          RELEASE_VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Package version: $PACKAGE_VERSION"
+          echo "Release version: $RELEASE_VERSION"
+          if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
+            echo "::error::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が異なります"
+            exit 1
+          fi
 
       - name: Build library
-        run: pnpm build:lib
+        run: pnpm run build:lib
 
       - name: Publish package
         run: pnpm publish --no-git-checks
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 **ワークフローの利点:**
@@ -304,12 +342,18 @@ jobs:
 ```bash
 # パッチバージョンを上げる（例：0.0.6 → 0.0.7）
 npm version patch
+# または
+pnpm run bump:patch
 
 # マイナーバージョンを上げる（例：0.0.7 → 0.1.0）
 npm version minor
+# または
+pnpm run bump:minor
 
 # メジャーバージョンを上げる（例：0.1.0 → 1.0.0）
 npm version major
+# または
+pnpm run bump:major
 
 # バージョン更新と同時にタグもプッシュする
 git push --follow-tags
@@ -335,7 +379,7 @@ npm version patch
 npm version prerelease --preid ft-66
 ```
 
-これにより、開発中の機能を明示的に示すバージョン番号が設定されます。
+これにより、開発中の機能を明示的に示すバージョン番号が設定されます。現在のバージョンは `0.0.7-ft-66.0` です。
 
 #### 3. GitHubでのリリース作成
 
