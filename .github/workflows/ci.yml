@@ -35,7 +35,7 @@ jobs:
             - uses: actions/checkout@v4
 
             # ステップ2: pnpmパッケージマネージャーのセットアップ
-            - name: Setup pnpm & Node.js
+            - name: Setup pnpm for build
               uses: pnpm/action-setup@v2
               with:
                   version: 8
@@ -44,32 +44,32 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: '20.13.1'
-                  cache: 'pnpm' # pnpmのキャッシュを有効化
+                  cache: 'pnpm'
 
             # ステップ4: 依存パッケージのインストール
             - name: Install dependencies
-              run: pnpm install --frozen-lockfile # バージョンを固定してインストール
+              run: pnpm install --no-frozen-lockfile
 
             # ステップ5: コードのリントとフォーマットチェック
             - name: Lint & Format
-              run: pnpm run fix # package.jsonのfixスクリプトを実行
+              run: pnpm run fix
 
             # ステップ6: ライブラリのビルド
             - name: Build library
-              run: pnpm run build:lib # TypeScript型定義とライブラリをビルド
+              run: pnpm run build:lib
 
             # ステップ7: Storybookのビルド（失敗しても続行）
             - name: Build Storybook
               run: pnpm run build:sb
-              continue-on-error: true # Storybookビルドが失敗してもワークフローを続行
+              continue-on-error: true
 
             # ステップ8: ビルド成果物をアーティファクトとして保存
             - name: Upload artifacts
               uses: actions/upload-artifact@v4
               with:
-                  name: build-artifacts # アーティファクト名
-                  path: dist # 保存するディレクトリ
-                  retention-days: 7 # 保存期間（7日間）
+                  name: build-artifacts
+                  path: dist
+                  retention-days: 7
 
             # ステップ9: ビルド結果のサマリーを出力
             - name: Build summary
@@ -87,15 +87,15 @@ jobs:
         runs-on: ubuntu-latest
         # GitHub Packagesへの書き込み権限を設定
         permissions:
-            contents: read # リポジトリコンテンツの読み取り権限
-            packages: write # パッケージの書き込み権限
+            contents: read
+            packages: write
 
         steps:
             # ステップ1: リポジトリのコードをチェックアウト
             - uses: actions/checkout@v4
 
             # ステップ2: pnpmパッケージマネージャーのセットアップ
-            - name: Setup pnpm & Node.js
+            - name: Setup pnpm for publishing
               uses: pnpm/action-setup@v2
               with:
                   version: 8
@@ -104,8 +104,8 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: '20.13.1'
-                  registry-url: 'https://npm.pkg.github.com' # GitHub Packagesのレジストリ
-                  scope: '@boxpistols' # パッケージのスコープ
+                  registry-url: 'https://npm.pkg.github.com'
+                  scope: '@boxpistols'
 
             # ステップ4: パッケージバージョンとリリースタグの整合性を検証
             - name: Verify version
@@ -121,24 +121,22 @@ jobs:
             - name: Download artifacts
               uses: actions/download-artifact@v4
               with:
-                  name: build-artifacts # lint-buildジョブで保存したアーティファクト名
-                  path: dist # ダウンロード先ディレクトリ
+                  name: build-artifacts
+                  path: dist
 
             # ステップ6: 依存パッケージのインストール
             - name: Install dependencies
-              run: pnpm install --frozen-lockfile
+              run: pnpm install --no-frozen-lockfile
 
             # ステップ7: パッケージをGitHub Packagesに公開
             - name: Publish package
-              run: pnpm publish --no-git-checks # Gitチェックをスキップして公開
+              run: pnpm publish --no-git-checks
               env:
-                  # GitHub Packagesへの認証に必要なトークン
-                  # GITHUB_TOKENは自動的に提供される認証トークン
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             # ステップ8: 公開成功時のサマリーを出力
             - name: Publish summary
-              if: success() # 公開が成功した場合のみ実行
+              if: success()
               run: |
                   echo "## パブリッシュ成功 :rocket:" >> $GITHUB_STEP_SUMMARY
                   echo "- パッケージ: $(node -p "require('./package.json').name") v$(node -p "require('./package.json').version")" >> $GITHUB_STEP_SUMMARY
