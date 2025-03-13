@@ -1,3 +1,8 @@
+/*
+- このコードスニペットは、さまざまなコンポーネント、レイアウト、テーマ、フック、タイプ、定数をエクスポートしています。
+- タイプスクリプトプロジェクトのさまざまなファイルのユーティリティ。これらの要素を整理してエクスポートします。
+- プロジェクトの他の部分で簡単にアクセスしてインポートします。
+*/
 // Components
 import { CustomSelect } from './components/Form/CustomSelect'
 import CustomTextField from './components/Form/CustomTextField'

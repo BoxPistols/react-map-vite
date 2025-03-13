@@ -24,9 +24,7 @@ dist-ssr
 *.sw?
 
 *storybook.log
-
 storybook-static
-
 .env
-
 .vercel
+.npmrc.local
