@@ -1,6 +1,6 @@
-// src/components/Table/utils/formatters.tsx
-import { theme } from '@/theme/theme'
 import { Box } from '@mui/material'
+// src/components/Table/utils/formatters.tsx
+import { theme } from '../../../lib/themes/theme'
 
 // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 export const formatCellValue = (value: unknown): React.ReactNode => {

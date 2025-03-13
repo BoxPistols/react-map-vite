@@ -1,7 +1,7 @@
-import { darkTheme, theme as lightTheme } from '@/theme/theme'
 import { useColorScheme, useMediaQuery } from '@mui/material'
 import type { Theme } from '@mui/material/styles'
 import { useEffect, useMemo } from 'react'
+import { darkTheme, theme as lightTheme } from '../lib/themes/theme'
 
 export const hookUseTheme = () => {
   const { mode, setMode } = useColorScheme()

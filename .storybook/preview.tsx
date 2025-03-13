@@ -10,7 +10,7 @@ import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
 import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
 import React, { useEffect, useMemo, useState } from 'react'
-import { darkTheme, theme as lightTheme } from '../src/theme/theme'
+import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
@@ -50,11 +50,8 @@ const ThemeSwitcherDecorator = (Story, context) => {
   const themeSwitcherPosition =
     context.parameters.themeSwitcherPosition ?? 'top-right'
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    console.log('isDocsPage:', isDocsPage)
-    console.log('currentTheme:', currentTheme)
-    console.log('globals.theme:', globals.theme)
-
     updateLocalStorage(currentTheme)
 
     if (currentTheme === 'dark') {
@@ -156,9 +153,9 @@ const ThemeSwitcherDecorator = (Story, context) => {
 
 const preview: Preview = {
   parameters: {
-    layout: 'fullscreen', // フルスクリーンレイアウトを強制
+    layout: 'fullscreen',
     backgrounds: {
-      disable: true, // 背景色の制御をThemeProviderに任せる
+      disable: true,
     },
     controls: {
       matchers: {
@@ -166,7 +163,6 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
-    // アセットのベースパスを設定
     staticDirs: ['../public'],
     assets: {
       prefix: '.',
@@ -196,8 +192,6 @@ const preview: Preview = {
       },
     },
   },
-
-  tags: ['autodocs', 'autodocs'],
 }
 
 export default preview

@@ -1,120 +1,147 @@
-# .github/workflows/ci.yml
+# GitHub Packagesへのパッケージ公開ワークフロー
+# このワークフローは以下の機能を提供します:
+# 1. コードの品質チェック（リント・フォーマット）
+# 2. ライブラリのビルド
+# 3. GitHub Packagesへのパッケージ公開
 name: CI/CD
 
+# ワークフローのトリガー設定
 on:
-  push:
-    branches: [main]
-    tags: ['v*']
-  pull_request:
-    branches: [main]
-  release:
-    types: [created]
+    # mainブランチへのプッシュ、またはタグ（v*）が作成された時に実行
+    push:
+        branches: [main]
+        tags: ['v*']
+    # mainブランチへのプルリクエスト時に実行
+    pull_request:
+        branches: [main]
+    # GitHubでリリースが作成された時に実行
+    release:
+        types: [created]
+    # 手動実行も可能
+    workflow_dispatch:
 
+# 環境変数の設定
 env:
-  HUSKY: 0
-  PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+    # Huskyフックを無効化（CI環境では不要）
+    HUSKY: 0
 
+# 実行するジョブの定義
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    # リント・ビルドジョブ: コード品質チェックとビルドを行う
+    lint-build:
+        runs-on: ubuntu-latest
+        steps:
+            # ステップ1: リポジトリのコードをチェックアウト
+            - uses: actions/checkout@v4
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+            # ステップ2: pnpmパッケージマネージャーのセットアップ
+            - name: Setup pnpm for build
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
+            # ステップ3: Node.jsのセットアップ（キャッシュ機能付き）
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20.13.1'
+                  cache: 'pnpm'
+                  registry-url: 'https://npm.pkg.github.com'
+                  scope: '@boxpistols'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.13.1'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@boxpistols'
+            # ステップ4: 依存パッケージのインストール
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+            # ステップ5: コードのリントとフォーマットチェック
+            - name: Lint & Format
+              run: pnpm run fix
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+            # ステップ6: ライブラリのビルド
+            - name: Build library
+              run: pnpm run build:lib
 
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+            # ステップ7: Storybookのビルド（失敗しても続行）
+            - name: Build Storybook
+              run: pnpm run build:sb
+              continue-on-error: true
 
-      - name: Lint and Format
-        run: pnpm run fix
+            # ステップ8: ビルド成果物をアーティファクトとして保存
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: |
+                      dist
+                      storybook-static
+                  retention-days: 7
 
-      - name: Clean build directories
-        run: |
-          rm -rf dist
-          rm -rf storybook-static
+            # ステップ9: ビルド結果のサマリーを出力
+            - name: Build summary
+              run: |
+                  echo "## ビルド結果" >> $GITHUB_STEP_SUMMARY
+                  echo "- パッケージ: $(node -p 'require("./package.json").name')" >> $GITHUB_STEP_SUMMARY
+                  echo "- バージョン: $(node -p 'require("./package.json").version')" >> $GITHUB_STEP_SUMMARY
 
-      # ビルドステップを分割
-      - name: Build package
-        run: pnpm run build
+    # パッケージ公開ジョブ: GitHub Packagesにパッケージを公開する
+    publish:
+        # lint-buildジョブが成功した後に実行
+        needs: lint-build
+        # リリースが作成された場合のみ実行
+        if: github.event_name == 'release' && github.event.action == 'created'
+        runs-on: ubuntu-latest
+        # GitHub Packagesへの書き込み権限を設定
+        permissions:
+            contents: read
+            packages: write
 
-      - name: Build Storybook
-        run: pnpm run build:sb
-        continue-on-error: true  # 一時的な対応として
+        steps:
+            # ステップ1: リポジトリのコードをチェックアウト
+            - uses: actions/checkout@v4
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: |
-            dist
-            storybook-static
-          retention-days: 7
+            # ステップ2: pnpmパッケージマネージャーのセットアップ
+            - name: Setup pnpm for publishing
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
 
-  publish:
-    needs: build
-    if: github.event_name == 'release' && github.event.action == 'created'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+            # ステップ3: Node.jsのセットアップ（GitHub Packages用の設定付き）
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20.13.1'
+                  registry-url: 'https://npm.pkg.github.com'
+                  scope: '@boxpistols'
 
-    steps:
-      - uses: actions/checkout@v4
+            # ステップ4: パッケージバージョンとリリースタグの整合性を検証
+            - name: Verify version
+              run: |
+                  PACKAGE_VERSION=$(node -p 'require("./package.json").version')
+                  RELEASE_VERSION=${GITHUB_REF#refs/tags/v}
+                  if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
+                    echo "::error::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が異なります"
+                    exit 1
+                  fi
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
+            # ステップ5: ビルド成果物をダウンロード
+            - name: Download artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: .
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.13.1'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@boxpistols'
+            # ステップ6: 依存パッケージのインストール
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifacts
-          path: .
+            # ステップ7: パッケージをGitHub Packagesに公開
+            - name: Publish package
+              run: pnpm publish --no-git-checks
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
-      - name: Publish package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # ステップ8: 公開成功時のサマリーを出力
+            - name: Publish summary
+              if: success()
+              run: |
+                  echo "## パブリッシュ成功 :rocket:" >> $GITHUB_STEP_SUMMARY
+                  echo "- パッケージ: $(node -p 'require("./package.json").name') v$(node -p 'require("./package.json").version')" >> $GITHUB_STEP_SUMMARY
+                  echo "- 公開日時: $(date)" >> $GITHUB_STEP_SUMMARY
