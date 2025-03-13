@@ -10,7 +10,6 @@
  * - レスポンシブデザイン
  */
 
-import { theme } from '@/theme/theme'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -44,6 +43,7 @@ import {
 import { styled } from '@mui/material/styles'
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
+import { theme } from '../../lib/themes/theme'
 
 /**
  * テーブルのカラム定義インターフェース

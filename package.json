@@ -16,6 +16,11 @@
       "import": "./dist/react-map-vite.es.js",
       "require": "./dist/react-map-vite.umd.js"
     },
+    "./theme": {
+      "types": "./dist/lib/themes/theme.d.ts",
+      "import": "./dist/lib/themes/theme.js",
+      "require": "./dist/lib/themes/theme.cjs"
+    },
     "./styles.css": "./dist/style.css"
   },
   "publishConfig": {
