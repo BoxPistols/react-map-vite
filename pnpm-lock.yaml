@@ -26,9 +26,6 @@ importers:
       '@mui/system':
         specifier: ^6.4.6
         version: 6.4.6(@emotion/react@11.14.0(@types/react@18.3.18)(react@18.3.1))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@18.3.18)(react@18.3.1))(@types/react@18.3.18)(react@18.3.1))(@types/react@18.3.18)(react@18.3.1)
-      '@storybook/preview-api':
-        specifier: ^8.6.3
-        version: 8.6.3(storybook@8.6.3)
       '@tailwindcss/aspect-ratio':
         specifier: ^0.4.2
         version: 0.4.2(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.23)(typescript@5.8.2)))
@@ -108,6 +105,9 @@ importers:
       '@storybook/blocks':
         specifier: ^8.6.3
         version: 8.6.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.3)
+      '@storybook/preview-api':
+        specifier: ^8.6.4
+        version: 8.6.4(storybook@8.6.3)
       '@storybook/react':
         specifier: ^8.6.3
         version: 8.6.3(@storybook/test@8.6.3(storybook@8.6.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.3)(typescript@5.8.2)
@@ -1193,6 +1193,11 @@ packages:
 
   '@storybook/preview-api@8.6.3':
     resolution: {integrity: sha512-y2Ic6eHBQD/AwaCHctKOJ4tOM1r7/mPXfhGh0I+Qf8kZPlDTgQcJ6Z7/Ruma1L+ijXPBWouDaPw51gipcX+t9Q==}
+    peerDependencies:
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+
+  '@storybook/preview-api@8.6.4':
+    resolution: {integrity: sha512-5HBfxggzxGz0dg2c61NpPiQJav7UAmzsQlzmI5SzWOS6lkaylcDG8giwKzASVCXVWBxNji9qIDFM++UH090aDg==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
@@ -4912,6 +4917,10 @@ snapshots:
       storybook: 8.6.3
 
   '@storybook/preview-api@8.6.3(storybook@8.6.3)':
+    dependencies:
+      storybook: 8.6.3
+
+  '@storybook/preview-api@8.6.4(storybook@8.6.3)':
     dependencies:
       storybook: 8.6.3
 
