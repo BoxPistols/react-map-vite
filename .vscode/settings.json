@@ -68,7 +68,10 @@
   },
   "workbench.tree.indent": 4,
   "prettier.tabWidth": 4,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
   // MDXをmarkdownとして扱い一時的にPreview
   // "files.associations": {
   // 	"*.mdx": "markdown"

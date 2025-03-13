@@ -54,6 +54,30 @@ pnpm install
   },
 ```
 
+## プライベートパッケージのインストール方法
+
+制限付きアクセスは、組織のメンバーまたは特別に許可された組織のメンバーのみがアクセスできます。
+
+### 1. 認証設定
+
+プロジェクトのルートディレクトリに`.npmrc`ファイルを作成し、以下の内容を追加します：
+
+```bash
+@boxpistols:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+### 2. GitHub個人アクセストークンの設定
+
+1. GitHubで[個人アクセストークン](https://github.com/settings/tokens)を作成します（`read:packages`スコープが必要）
+2. 環境変数として設定するか、`.npmrc`ファイルの`${GITHUB_TOKEN}`を実際のトークンに置き換えます
+
+### 3. パッケージのインストール
+
+```sh
+pnpm add @boxpistols/react-map-vite
+```
+
 ### 主なターミナル実行コマンド
 
 #### ローカル開発サーバを起動
