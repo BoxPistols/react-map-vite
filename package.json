@@ -1,6 +1,6 @@
 {
   "name": "@boxpistols/react-map-vite",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
@@ -39,7 +39,13 @@
     "bump:patch": "npm version patch",
     "bump:minor": "npm version minor",
     "bump:major": "npm version major",
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "release": "pnpm run bump:patch && pnpm run build:lib && pnpm publish",
+    "release:minor": "pnpm run bump:minor && pnpm run build:lib && pnpm publish",
+    "release:major": "pnpm run bump:major && pnpm run build:lib && pnpm publish",
+    "version:patch": "pnpm run bump:patch && pnpm run build:lib",
+    "version:minor": "pnpm run bump:minor && pnpm run build:lib",
+    "version:major": "pnpm run bump:major && pnpm run build:lib"
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
