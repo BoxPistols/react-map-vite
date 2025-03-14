@@ -1,6 +1,6 @@
 {
   "name": "@boxpistols/react-map-vite",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "type": "module",
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
