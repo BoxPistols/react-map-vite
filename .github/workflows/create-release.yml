@@ -1,0 +1,59 @@
+name: タグとリリース自動作成（マージ時）
+
+on:
+    pull_request:
+        types: [closed]
+        branches:
+            - main
+
+jobs:
+    create-release:
+        # PRがマージされた場合かつupdate/xxxブランチからのPRだった場合のみ実行
+        if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'update/')
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: チェックアウト
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Node.jsセットアップ
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20.13.1'
+
+            - name: バージョン取得
+              id: get-version
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+            - name: タグ作成
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git tag -a v${{ steps.get-version.outputs.version }} -m "Release v${{ steps.get-version.outputs.version }}"
+                  git push origin v${{ steps.get-version.outputs.version }}
+
+            - name: リリース作成
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: v${{ steps.get-version.outputs.version }}
+                  release_name: Release v${{ steps.get-version.outputs.version }}
+                  body: |
+                      ## リリースノート v${{ steps.get-version.outputs.version }}
+
+                      ### 変更内容
+                      ${{ github.event.pull_request.title }}
+
+                      ${{ github.event.pull_request.body }}
+
+                      ### コミット
+                      https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}
+                  draft: false
+                  prerelease: false
