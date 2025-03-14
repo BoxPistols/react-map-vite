@@ -9,7 +9,7 @@ on:
 jobs:
     create-release:
         # PRがマージされた場合かつupdate/xxxブランチからのPRだった場合のみ実行
-        if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'update/')
+        if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'update/')
         runs-on: ubuntu-latest
         permissions:
             contents: write
