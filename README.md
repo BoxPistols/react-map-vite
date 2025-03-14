@@ -215,8 +215,7 @@ VSCode 拡張検索枠に @recommended を入力すると、この開発環境�
 - フォーマットを Biome に選択、既定ツールにする
 - `Cmd + ,（カンマ）`
 - ワークスペース
-- Formt on Save をオン
-
+- Format on Save をオン
 ### 運用
 
 #### コミット・プッシュ前に
