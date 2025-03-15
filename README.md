@@ -249,3 +249,152 @@ pnpm、`git commit`を実行して`pnpm run fix`が走っているか確認し�
 - [TypeScript ハンドブック](https://www.typescriptlang.org/)：TypeScript の言語機能、ベストプラクティス、サンプルコードなど
 - [Vite 公式ドキュメント](https://ja.vitejs.dev/)：Vite の設定、プラグイン、ビルドオプションなど
 - [Biome 公式ドキュメント](https://biomejs.dev/ja)：Biome の設定、ルール、オプション設定など
+
+# @boxpistols/react-map-vite
+
+## パッケージの公開と管理
+
+### 1. バージョン管理
+
+#### 自動バージョン更新
+
+- `update/*` ブランチから PR を作成すると、自動的にパッチバージョンが更新されます
+- 例: `0.0.10` → `0.0.11`
+
+```bash
+# バージョンの確認
+node -p "require('./package.json').version"
+```
+
+### 2. パッケージの公開
+
+#### 2.1 認証設定
+
+1. `.npmrc` の設定（リポジトリにコミット）:
+
+```plaintext
+@boxpistols:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+always-auth=true
+```
+
+2. 環境変数の設定:
+
+```bash
+# GitHub Personal Access Token を設定
+export GITHUB_TOKEN=your_github_token
+```
+
+#### 2.2 パッケージの公開手順
+
+```bash
+# 1. 現在のバージョンを確認
+npm view @boxpistols/react-map-vite versions --registry=https://npm.pkg.github.com
+
+# 2. パッケージを公開
+npm publish --access restricted
+```
+
+### 3. トラブルシューティング
+
+#### 3.1 認証エラー
+
+```bash
+# 認証状態の確認
+npm whoami --registry=https://npm.pkg.github.com
+
+# トークンの再設定
+export GITHUB_TOKEN=your_github_token
+```
+
+#### 3.2 バージョンの同期エラー
+
+パッケージのバージョンが同期されていない場合（例：GitHub上は`v0.0.11`だが、npm registryは`0.0.10`）：
+
+1. **バージョンの確認**:
+
+```bash
+# package.jsonのバージョン
+node -p "require('./package.json').version"
+
+# 公開済みバージョン
+npm view @boxpistols/react-map-vite versions --registry=https://npm.pkg.github.com
+```
+
+2. **強制的な再公開**:
+
+```bash
+# キャッシュのクリア
+npm cache clean --force
+
+# パッケージの再公開
+npm publish --access restricted --force
+```
+
+#### 3.3 インストールエラー
+
+パッケージのインストールに問題がある場合：
+
+1. **認証設定の確認**:
+
+```bash
+# プロジェクトの.npmrcファイル
+@boxpistols:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+2. **キャッシュのクリア**:
+
+```bash
+npm cache clean --force
+```
+
+3. **特定バージョンのインストール**:
+
+```bash
+# 最新バージョン
+npm install @boxpistols/react-map-vite@latest
+
+# 特定のバージョン
+npm install @boxpistols/react-map-vite@0.0.11
+```
+
+### 4. CI/CD
+
+#### 4.1 自動パブリッシュ
+
+PRがマージされると以下が自動的に実行されます：
+
+1. バージョンの更新（`update/*` ブランチの場合）
+2. タグの作成
+3. リリースの作成
+4. パッケージの公開
+
+#### 4.2 手動パブリッシュ
+
+GitHub Actionsで手動パブリッシュも可能：
+
+1. Actions タブを開く
+2. "手動パッケージ公開" ワークフローを選択
+3. "Run workflow" をクリック
+4. バージョンを入力して実行
+
+### 5. ベストプラクティス
+
+1. **バージョン管理**:
+   - セマンティックバージョニングに従う
+   - 破壊的変更は必ずメジャーバージョンを上げる
+
+2. **開発フロー**:
+   - 機能追加は `update/*` ブランチから
+   - PRマージ後に自動パブリッシュ
+   - 緊急修正は手動パブリッシュを使用
+
+3. **セキュリティ**:
+   - GitHub Tokenは定期的に更新
+   - `.npmrc.local` は `.gitignore` に追加
+
+4. **トラブルシューティング**:
+   - エラー時は必ずログを確認
+   - バージョンの整合性を確認
+   - 必要に応じて手動で再公開
