@@ -270,20 +270,29 @@ node -p "require('./package.json').version"
 
 #### 2.1 認証設定
 
-1. `.npmrc` の設定（リポジトリにコミット）:
+1. `.env.local`ファイルの作成（`.gitignore`に追加）:
+
+```plaintext
+GITHUB_TOKEN=your_github_token_here
+```
+
+2. `.npmrc`の設定（リポジトリにコミット）:
 
 ```plaintext
 @boxpistols:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-always-auth=true
 ```
 
-2. 環境変数の設定:
+3. 環境変数の読み込み:
 
 ```bash
-# GitHub Personal Access Token を設定
-export GITHUB_TOKEN=your_github_token
+# シェルに環境変数を設定
+source .env.local
+
+# または直接エクスポート
+export GITHUB_TOKEN=your_github_token_here
 ```
+
+> 注意: `.npmrc.local`は非推奨となり、代わりに`.env.local`を使用します。
 
 #### 2.2 パッケージの公開手順
 

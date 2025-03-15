@@ -71,6 +71,9 @@
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
   // MDXをmarkdownとして扱い一時的にPreview
   // "files.associations": {
