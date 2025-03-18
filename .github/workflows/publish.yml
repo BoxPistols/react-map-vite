@@ -1,12 +1,12 @@
+# mainブランチへのプッシュ時にトリガーされ、GitHub Packagesにパッケージを公開します
+# 条件として、package.jsonが変更された場合にのみ実行されます
 name: Publish Package
-
-on:
+"on":
     push:
         branches:
             - main
         paths:
-            - "package.json"
-
+            - package.json # package.jsonの変更時に実行
 jobs:
     publish:
         runs-on: ubuntu-latest
@@ -20,8 +20,8 @@ jobs:
                   version: 8
             - uses: actions/setup-node@v4
               with:
-                  node-version: "20.13.1"
-                  registry-url: "https://npm.pkg.github.com"
+                  node-version: 20.13.1
+                  registry-url: https://npm.pkg.github.com
                   scope: "@boxpistols"
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
