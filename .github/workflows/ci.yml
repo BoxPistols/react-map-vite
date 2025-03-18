@@ -7,141 +7,142 @@ name: CI/CD
 
 # ワークフローのトリガー設定
 on:
-  # mainブランチへのプッシュ、またはタグ（v*）が作成された時に実行
-  push:
-    branches: [ main ]
-    tags: [ 'v*' ]
-  # mainブランチへのプルリクエスト時に実行
-  pull_request:
-    branches: [ main ]
-  # GitHubでリリースが作成された時に実行
-  release:
-    types: [ created ]
-  # 手動実行も可能
-  workflow_dispatch:
+    # mainブランチへのプッシュ、またはタグ（v*）が作成された時に実行
+    push:
+        branches: [main]
+        paths-ignore: ["package.json"] # package.jsonの変更時は実行しない
+        tags: ["v*"]
+    # mainブランチへのプルリクエスト時に実行
+    pull_request:
+        branches: [main]
+    # GitHubでリリースが作成された時に実行
+    release:
+        types: [created]
+    # 手動実行も可能
+    workflow_dispatch:
 
-    # 環境変数の設定
+        # 環境変数の設定
 env:
-  # Huskyフックを無効化（CI環境では不要）
-  HUSKY: 0
+    # Huskyフックを無効化（CI環境では不要）
+    HUSKY: 0
 
 # 実行するジョブの定義
 jobs:
-  # リント・ビルドジョブ: コード品質チェックとビルドを行う
-  lint-build:
-    runs-on: ubuntu-latest
-    steps:
-    # ステップ1: リポジトリのコードをチェックアウト
-    - uses: actions/checkout@v4
+    # リント・ビルドジョブ: コード品質チェックとビルドを行う
+    lint-build:
+        runs-on: ubuntu-latest
+        steps:
+            # ステップ1: リポジトリのコードをチェックアウト
+            - uses: actions/checkout@v4
 
-    # ステップ2: pnpmパッケージマネージャーのセットアップ
-    - name: Setup pnpm for build
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
+            # ステップ2: pnpmパッケージマネージャーのセットアップ
+            - name: Setup pnpm for build
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
 
-    # ステップ3: Node.jsのセットアップ（キャッシュ機能付き）
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '20.13.1'
-        cache: 'pnpm'
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@boxpistols'
+            # ステップ3: Node.jsのセットアップ（キャッシュ機能付き）
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "20.13.1"
+                  cache: "pnpm"
+                  registry-url: "https://npm.pkg.github.com"
+                  scope: "@boxpistols"
 
-    # ステップ4: 依存パッケージのインストール
-    - name: Install dependencies
-      run: pnpm install --no-frozen-lockfile
+            # ステップ4: 依存パッケージのインストール
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
 
-    # ステップ5: コードのリントとフォーマットチェック
-    - name: Lint & Format
-      run: pnpm run fix
+            # ステップ5: コードのリントとフォーマットチェック
+            - name: Lint & Format
+              run: pnpm run fix
 
-    # ステップ6: ライブラリのビルド
-    - name: Build library
-      run: pnpm run build:lib
+            # ステップ6: ライブラリのビルド
+            - name: Build library
+              run: pnpm run build:lib
 
-    # ステップ7: Storybookのビルド（失敗しても続行）
-    - name: Build Storybook
-      run: pnpm run build:sb
-      continue-on-error: true
+            # ステップ7: Storybookのビルド（失敗しても続行）
+            - name: Build Storybook
+              run: pnpm run build:sb
+              continue-on-error: true
 
-    # ステップ8: ビルド成果物をアーティファクトとして保存
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts
-        path: |
-          dist
-          storybook-static
-        retention-days: 7
+            # ステップ8: ビルド成果物をアーティファクトとして保存
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: |
+                      dist
+                      storybook-static
+                  retention-days: 7
 
-    # ステップ9: ビルド結果のサマリーを出力
-    - name: Build summary
-      run: |
-        echo "## ビルド結果" >> $GITHUB_STEP_SUMMARY
-        echo "- パッケージ: $(node -p 'require("./package.json").name')" >> $GITHUB_STEP_SUMMARY
-        echo "- バージョン: $(node -p 'require("./package.json").version')" >> $GITHUB_STEP_SUMMARY
+            # ステップ9: ビルド結果のサマリーを出力
+            - name: Build summary
+              run: |
+                  echo "## ビルド結果" >> $GITHUB_STEP_SUMMARY
+                  echo "- パッケージ: $(node -p 'require("./package.json").name')" >> $GITHUB_STEP_SUMMARY
+                  echo "- バージョン: $(node -p 'require("./package.json").version')" >> $GITHUB_STEP_SUMMARY
 
-  # パッケージ公開ジョブ: GitHub Packagesにパッケージを公開する
-  publish:
-    # lint-buildジョブが成功した後に実行
-    needs: lint-build
-    # リリースが作成された場合のみ実行
-    if: github.event_name == 'release' && github.event.action == 'created'
-    runs-on: ubuntu-latest
-    # GitHub Packagesへの書き込み権限を設定
-    permissions:
-      contents: read
-      packages: write
+    # パッケージ公開ジョブ: GitHub Packagesにパッケージを公開する
+    publish:
+        # lint-buildジョブが成功した後に実行
+        needs: lint-build
+        # リリースが作成された場合のみ実行
+        if: github.event_name == 'release' && github.event.action == 'created'
+        runs-on: ubuntu-latest
+        # GitHub Packagesへの書き込み権限を設定
+        permissions:
+            contents: read
+            packages: write
 
-    steps:
-    # ステップ1: リポジトリのコードをチェックアウト
-    - uses: actions/checkout@v4
+        steps:
+            # ステップ1: リポジトリのコードをチェックアウト
+            - uses: actions/checkout@v4
 
-    # ステップ2: pnpmパッケージマネージャーのセットアップ
-    - name: Setup pnpm for publishing
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
+            # ステップ2: pnpmパッケージマネージャーのセットアップ
+            - name: Setup pnpm for publishing
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
 
-    # ステップ3: Node.jsのセットアップ（GitHub Packages用の設定付き）
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '20.13.1'
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@boxpistols'
+            # ステップ3: Node.jsのセットアップ（GitHub Packages用の設定付き）
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "20.13.1"
+                  registry-url: "https://npm.pkg.github.com"
+                  scope: "@boxpistols"
 
-    # ステップ4: パッケージバージョンとリリースタグの整合性を検証
-    - name: Verify version
-      run: |
-        PACKAGE_VERSION=$(node -p 'require("./package.json").version')
-        RELEASE_VERSION=${GITHUB_REF#refs/tags/v}
-        if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
-          echo "::error::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が異なります"
-          exit 1
-        fi
+            # ステップ4: パッケージバージョンとリリースタグの整合性を検証
+            - name: Verify version
+              run: |
+                  PACKAGE_VERSION=$(node -p 'require("./package.json").version')
+                  RELEASE_VERSION=${GITHUB_REF#refs/tags/v}
+                  if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
+                    echo "::error::パッケージバージョン($PACKAGE_VERSION)とタグバージョン($RELEASE_VERSION)が異なります"
+                    exit 1
+                  fi
 
-    # ステップ5: ビルド成果物をダウンロード
-    - name: Download artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: build-artifacts
-        path: .
+            # ステップ5: ビルド成果物をダウンロード
+            - name: Download artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: .
 
-    # ステップ6: 依存パッケージのインストール
-    - name: Install dependencies
-      run: pnpm install --no-frozen-lockfile
+            # ステップ6: 依存パッケージのインストール
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
 
-    # ステップ7: パッケージをGitHub Packagesに公開
-    - name: Publish package
-      run: pnpm publish --no-git-checks
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # ステップ7: パッケージをGitHub Packagesに公開
+            - name: Publish package
+              run: pnpm publish --no-git-checks
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    # ステップ8: 公開成功時のサマリーを出力
-    - name: Publish summary
-      if: success()
-      run: |
-        echo "## パブリッシュ成功 :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo "- パッケージ: $(node -p 'require("./package.json").name') v$(node -p 'require("./package.json").version')" >> $GITHUB_STEP_SUMMARY
-        echo "- 公開日時: $(date)" >> $GITHUB_STEP_SUMMARY
+            # ステップ8: 公開成功時のサマリーを出力
+            - name: Publish summary
+              if: success()
+              run: |
+                  echo "## パブリッシュ成功 :rocket:" >> $GITHUB_STEP_SUMMARY
+                  echo "- パッケージ: $(node -p 'require("./package.json").name') v$(node -p 'require("./package.json").version')" >> $GITHUB_STEP_SUMMARY
+                  echo "- 公開日時: $(date)" >> $GITHUB_STEP_SUMMARY
