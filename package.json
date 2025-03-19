@@ -27,6 +27,10 @@
     "registry": "https://npm.pkg.github.com",
     "access": "restricted"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BoxPistols/react-map-vite.git"
+  },
   "sideEffects": false,
   "scripts": {
     "build:lib": "pnpm run build:types && vite build --mode lib",
@@ -42,7 +46,8 @@
     "build:dev": "pnpm run build",
     "build:sb": "storybook build",
     "build:all": "pnpm run build && pnpm run build:sb",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish:github": "pnpm publish --no-git-checks"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
