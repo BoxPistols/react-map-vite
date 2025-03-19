@@ -14,7 +14,7 @@ on:
     # mainブランチへのプッシュ、またはタグ（v*）が作成された時に実行
     push:
         branches: [main]
-        paths-ignore: ["package.json"] # package.jsonの変更時は実行しない
+        # paths-ignore: ["package.json"] # package.jsonの変更時は実行しない
         tags: ["v*"]
     # mainブランチへのプルリクエスト時に実行
     pull_request:
