@@ -11,8 +11,14 @@ import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
+// MUIのローカルストレージキーを統一
 const updateLocalStorage = (theme) => {
+  // mui-modeのみを使用し、mui-color-schemeは削除
   localStorage.setItem('mui-mode', theme === 'dark' ? 'dark' : 'light')
+
+  // 競合するキーを削除
+  localStorage.removeItem('mui-color-scheme-dark')
+  localStorage.removeItem('mui-color-scheme-light')
 }
 
 const Decorator = (Story, context) => {
