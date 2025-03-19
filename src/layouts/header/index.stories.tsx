@@ -7,8 +7,6 @@ const meta: Meta<typeof Header> = {
   tags: ['!autodocs'],
   parameters: {
     layout: 'fullscreen',
-    themeSwitcherPosition: 'top-right',
-    themeSwitcherIconColor: 'white',
   },
 } satisfies Meta<typeof Header>
 

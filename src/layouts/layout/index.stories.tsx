@@ -11,8 +11,6 @@ const meta: Meta<typeof Layout> = {
   tags: ['!autodocs'],
   parameters: {
     layout: 'fullscreen',
-    themeSwitcherPosition: 'top-right',
-    themeSwitcherIconColor: 'white',
   },
   decorators: [
     (Story) => (

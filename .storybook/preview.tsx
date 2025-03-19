@@ -6,7 +6,7 @@ import {
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -15,28 +15,14 @@ const updateLocalStorage = (theme) => {
   localStorage.setItem('mui-mode', theme === 'dark' ? 'dark' : 'light')
 }
 
-const ThemeSwitcherDecorator = (Story, context) => {
+const Decorator = (Story, context) => {
   const [globals] = useGlobals()
-  const [isDocsPage, setIsDocsPage] = useState(false)
-
-  useEffect(() => {
-    const checkIfDocsPage = () => {
-      const isDocs = window.location.pathname.includes('/docs/')
-      setIsDocsPage(isDocs)
-    }
-
-    checkIfDocsPage()
-    window.addEventListener('popstate', checkIfDocsPage)
-    return () => window.removeEventListener('popstate', checkIfDocsPage)
-  }, [])
-
-  const currentTheme = isDocsPage ? 'light' : globals.theme || 'light'
+  const currentTheme = globals.theme || 'light'
 
   const muiTheme = useMemo(() => {
     return currentTheme === 'dark' ? darkTheme : lightTheme
   }, [currentTheme])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     updateLocalStorage(currentTheme)
 
@@ -50,7 +36,7 @@ const ThemeSwitcherDecorator = (Story, context) => {
     if (root) {
       root.style.backgroundColor = muiTheme.palette.background.default
     }
-  }, [currentTheme, muiTheme, isDocsPage, globals.theme])
+  }, [currentTheme, muiTheme])
 
   const cache = createCache({
     key: 'css',
@@ -92,7 +78,7 @@ const preview: Preview = {
     },
   },
 
-  decorators: [ThemeSwitcherDecorator],
+  decorators: [Decorator],
 
   globalTypes: {
     theme: {
@@ -110,4 +96,4 @@ const preview: Preview = {
   },
 }
 
-export default preview as Preview
+export default preview
