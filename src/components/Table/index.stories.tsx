@@ -8,9 +8,6 @@ const meta = {
   component: CustomTable,
   tags: ['autodocs'],
   parameters: {
-    // layout: 'centered',
-    showThemeSwitcher: false,
-    // themeSwitcherPosition: 'top-right',
     docs: {
       description: {
         component:

@@ -9,10 +9,6 @@ const meta: Meta<typeof CustomSelect> = {
   title: 'Components/CustomSelect',
   component: CustomSelect,
   tags: ['autodocs', 'select', 'input', 'form'],
-  parameters: {
-    showThemeSwitcher: true,
-    themeSwitcherPosition: 'right-top',
-  },
   argTypes: {
     label: { control: 'text' },
     required: { control: 'boolean' },

@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
 import Mapbox from '.' // Mapbox コンポーネントの正しいインポートパスを確認してください
 
 const meta: Meta<typeof Mapbox> = {
@@ -8,7 +9,6 @@ const meta: Meta<typeof Mapbox> = {
   parameters: {
     docs: { disable: true },
     layout: 'fullscreen',
-    showThemeSwitcher: false,
   },
   tags: ['map', 'geolocation', 'interactive'],
   argTypes: {

@@ -3,10 +3,7 @@ import {
   CacheProvider,
   ThemeProvider as EmotionThemeProvider,
 } from '@emotion/react'
-import Brightness4Icon from '@mui/icons-material/Brightness4'
-import Brightness7Icon from '@mui/icons-material/Brightness7'
-import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
-import { CssBaseline, IconButton, ThemeProvider } from '@mui/material'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -19,36 +16,25 @@ const updateLocalStorage = (theme) => {
 }
 
 const ThemeSwitcherDecorator = (Story, context) => {
-  const [globals, updateGlobals] = useGlobals()
+  const [globals] = useGlobals()
   const [isDocsPage, setIsDocsPage] = useState(false)
 
   useEffect(() => {
     const checkIfDocsPage = () => {
       const isDocs = window.location.pathname.includes('/docs/')
       setIsDocsPage(isDocs)
-
-      if (isDocs) {
-        updateLocalStorage('light')
-        updateGlobals({ theme: 'light' })
-      }
     }
 
     checkIfDocsPage()
     window.addEventListener('popstate', checkIfDocsPage)
     return () => window.removeEventListener('popstate', checkIfDocsPage)
-  }, [updateGlobals])
+  }, [])
 
   const currentTheme = isDocsPage ? 'light' : globals.theme || 'light'
 
   const muiTheme = useMemo(() => {
     return currentTheme === 'dark' ? darkTheme : lightTheme
   }, [currentTheme])
-
-  const showThemeSwitcher = context.parameters.showThemeSwitcher ?? false
-  const themeSwitcherIconColor =
-    context.parameters.themeSwitcherIconColor ?? 'auto'
-  const themeSwitcherPosition =
-    context.parameters.themeSwitcherPosition ?? 'top-right'
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -66,52 +52,6 @@ const ThemeSwitcherDecorator = (Story, context) => {
     }
   }, [currentTheme, muiTheme, isDocsPage, globals.theme])
 
-  const toggleTheme = () => {
-    if (!isDocsPage) {
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light'
-      updateGlobals({ theme: newTheme })
-    }
-  }
-
-  const getIconColor = () => {
-    switch (themeSwitcherIconColor) {
-      case 'white':
-        return '#ffffff'
-      case 'black':
-        return '#000000'
-      default:
-        return muiTheme.palette.text.primary
-    }
-  }
-
-  const iconColor = getIconColor()
-
-  const getPositionStyle = () => {
-    switch (themeSwitcherPosition) {
-      case 'top-left':
-        return { top: 10, left: 10 }
-      case 'top-right':
-        return { top: 10, right: 10 }
-      case 'bottom-left':
-        return { bottom: 10, left: 10 }
-      case 'bottom-right':
-        return { bottom: 10, right: 10 }
-      default:
-        return { top: 10, right: 10 }
-    }
-  }
-
-  const getThemeIcon = () => {
-    switch (currentTheme) {
-      case 'light':
-        return <Brightness7Icon sx={{ color: iconColor }} />
-      case 'dark':
-        return <Brightness4Icon sx={{ color: iconColor }} />
-      default:
-        return <SettingsBrightnessIcon sx={{ color: iconColor }} />
-    }
-  }
-
   const cache = createCache({
     key: 'css',
     prepend: true,
@@ -123,27 +63,6 @@ const ThemeSwitcherDecorator = (Story, context) => {
       <ThemeProvider theme={muiTheme}>
         <CacheProvider value={cache}>
           <CssBaseline />
-          {showThemeSwitcher && !isDocsPage && (
-            <IconButton
-              onClick={toggleTheme}
-              sx={{
-                position: 'fixed',
-                zIndex: 10000,
-                bgcolor:
-                  muiTheme.palette.mode === 'dark'
-                    ? 'rgba(255,255,255,0.1)'
-                    : 'rgba(0,0,0,0.1)',
-                '&:hover': {
-                  bgcolor:
-                    muiTheme.palette.mode === 'dark'
-                      ? 'rgba(255,255,255,0.2)'
-                      : 'rgba(0,0,0,0.2)',
-                },
-                ...getPositionStyle(),
-              }}>
-              {getThemeIcon()}
-            </IconButton>
-          )}
           <Story {...context} />
         </CacheProvider>
       </ThemeProvider>
@@ -171,9 +90,6 @@ const preview: Preview = {
       toc: { headingSelector: 'h2, h3' },
       autodocs: false,
     },
-    showThemeSwitcher: true,
-    themeSwitcherIconColor: 'auto',
-    themeSwitcherPosition: 'top-right',
   },
 
   decorators: [ThemeSwitcherDecorator],

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
 import { Map3D } from '.'
 
 const meta: Meta<typeof Map3D> = {
@@ -8,9 +9,6 @@ const meta: Meta<typeof Map3D> = {
     // document 非表示
     docs: { disable: true },
     layout: 'fullscreen',
-    showThemeSwitcher: true,
-    themeSwitcherIconColor: 'black',
-    themeSwitcherPosition: 'bottom-left',
   },
   decorators: [
     (Story) => (
