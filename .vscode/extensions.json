@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "biomejs.biome",
     "davidanson.vscode-markdownlint",
     "usernamehw.errorlens",
     "wayou.vscode-todo-highlight",

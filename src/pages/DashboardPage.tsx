@@ -1,11 +1,13 @@
-import CustomSelect from '@/components/Form/CustomSelect'
-import CustomTextField from '@/components/Form/CustomTextField'
-import MainGrid from '@/components/MainGrid'
-import type { PageProps } from '@/types/type'
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
-const DashboardPage = (_props: PageProps) => {
+import CustomSelect from '@/components/Form/CustomSelect'
+import CustomTextField from '@/components/Form/CustomTextField'
+import MainGrid from '@/components/MainGrid'
+
+type DashboardPageProps = object
+
+const DashboardPage: React.FC<DashboardPageProps> = () => {
   return (
     <>
       <MainGrid overview='Dashboard'>

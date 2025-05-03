@@ -1,8 +1,10 @@
-import MainGrid from '@/components/MainGrid'
-import type { PageProps } from '@/types/type'
 import { Typography } from '@mui/material'
 
-const InboxPage = (_props: PageProps) => {
+import MainGrid from '@/components/MainGrid'
+
+type InboxPageProps = object
+
+const InboxPage: React.FC<InboxPageProps> = () => {
   return (
     <MainGrid overview='Inbox'>
       <Typography>This is Inbox Page</Typography>

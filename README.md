@@ -27,16 +27,62 @@ brew install pnpm
 [pnpm Official](https://pnpm.io/)
 [pnpm Installation](https://pnpm.io/installation)
 
-### Biome のインストール
+## ESLint と Prettier のインストール
+
+### 1. ESLint と Prettier のインストール
 
 ```sh
-pnpm add -g @biome/cli
+pnpm add -D eslint prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
-### 依存パッケージのインストール
+### 2. ESLint の設定
+
+プロジェクトのルートディレクトリに `.eslintrc.js` ファイルを作成し、以下の内容を追加します：
+
+```javascript
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+  ],
+  rules: {
+    // ここにカスタムルールを追加
+  },
+};
+```
+
+### 3. Prettier の設定
+
+プロジェクトのルートディレクトリに `.prettierrc` ファイルを作成し、以下の内容を追加します：
+
+```json
+{
+  "singleQuote": true,
+  "trailingComma": "es5"
+}
+```
+
+### 4. スクリプトの追加
+
+`package.json` の `scripts` セクションに以下を追加します：
+
+```json
+"lint": "eslint .",
+"format": "prettier --write ."
+```
+
+### 5. 使用方法
+
+- コードをLintするには、以下のコマンドを実行します：
 
 ```sh
-pnpm install
+pnpm run lint
+```
+
+- コードを整形するには、以下のコマンドを実行します：
+
+```sh
+pnpm run format
 ```
 
 ## Scripts

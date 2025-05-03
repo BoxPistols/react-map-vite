@@ -276,6 +276,7 @@ export const CustomSelect = ({
     }
     return helperText
   }, [multiple, required, helperText])
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   getHelperText() && (
     <FormHelperText id={`${inputId}-helper-text`}>
       {getHelperText()}

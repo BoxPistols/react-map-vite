@@ -1,8 +1,9 @@
-import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 import { Drawer } from '@mui/material'
 import { Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import type { ReactNode } from 'react'
+
+import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 
 type SettingDrawerProps = {
   open: boolean

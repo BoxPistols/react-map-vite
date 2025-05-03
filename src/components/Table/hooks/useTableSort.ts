@@ -1,6 +1,7 @@
 // src/components/Table/hooks/useTableSort.ts
-import type { SortConfig } from '@/types/type'
 import { useMemo, useState } from 'react'
+
+import type { SortConfig } from '@/types/type'
 
 export const useTableSort = <T extends Record<string, unknown>>(
   data: Array<T>

@@ -1,8 +1,4 @@
 // src/components/Table/TableComponents/CustomTable.tsx
-import type { TableProps } from '@/types/type'
-
-import type React from 'react'
-import { useState } from 'react'
 
 import {
   Box,
@@ -17,6 +13,8 @@ import {
   TablePagination,
   Typography,
 } from '@mui/material'
+import type React from 'react'
+import { useState } from 'react'
 
 import {
   TableHeader,
@@ -25,16 +23,14 @@ import {
   TableToolbar,
 } from '@/components/Table/TableComponents'
 import { useTableSearch, useTableSort } from '@/components/Table/hooks'
+import type { TableProps } from '@/types/type'
 
 export const CustomTable = ({
   columns = [],
   data = [],
   showCRUD = false,
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   onView = () => {},
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   onEdit = () => {},
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   onDelete = () => {},
   searchable = false,
   defaultPageSize = 10,

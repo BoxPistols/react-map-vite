@@ -1,7 +1,8 @@
 // MainGrid.tsx
-import { LAYOUT_CONSTANTS } from '@/constants/layout'
 import { Box, Container, Typography } from '@mui/material'
 import type { ReactNode } from 'react'
+
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
 
 interface MainGridProps {
   children?: ReactNode

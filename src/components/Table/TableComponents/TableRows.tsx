@@ -1,20 +1,19 @@
 // src/components/Table/components/TableRows.tsx
 
-import type { Column } from '@/types/type'
-import type React from 'react'
-
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
   Visibility as VisibilityIcon,
 } from '@mui/icons-material'
 import { IconButton, Tooltip } from '@mui/material'
+import type React from 'react'
 
 import {
   StyledTableCell,
   StyledTableRow,
 } from '@/components/Table/TableComponents/StyledComponents'
 import { formatCellValue } from '@/components/Table/utils/formatters'
+import type { Column } from '@/types/type'
 
 interface TableRowsProps {
   visibleData: Array<Record<string, string | number | boolean>>

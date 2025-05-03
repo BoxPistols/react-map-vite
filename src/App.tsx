@@ -1,8 +1,5 @@
 import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
 import { useSidebarState } from '@/hooks/useSidebarState'
-import { hookUseTheme } from '@/hooks/useTheme'
-import { Header } from '@/layouts/header'
-import { SideNav } from '@/layouts/sideNav'
 
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
@@ -16,6 +13,8 @@ import {
 } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 
+import 'maplibre-gl/dist/maplibre-gl.css'
+import ThemeProvider from '@mui/system/ThemeProvider/ThemeProvider'
 import { useEffect, useRef, useState } from 'react'
 import {
   Route,
@@ -30,8 +29,9 @@ import MapPage from './pages/MapPage'
 import NaviPage from './pages/NaviPage'
 import WifiPage from './pages/WifiPage'
 
-import 'maplibre-gl/dist/maplibre-gl.css'
-import ThemeProvider from '@mui/system/ThemeProvider/ThemeProvider'
+import { hookUseTheme } from '@/hooks/useTheme'
+import { Header } from '@/layouts/header'
+import { SideNav } from '@/layouts/sideNav'
 
 const AppContent = () => {
   const { mode, setMode, theme } = hookUseTheme()
@@ -43,7 +43,6 @@ const AppContent = () => {
 
   const location = useLocation()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // ページが変わるたびにDrawerを閉じる
     setIsSettingDrawerOpen(false)

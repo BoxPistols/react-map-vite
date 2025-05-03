@@ -2,7 +2,6 @@ import type {
   CSSProperties,
   TypographyOptions,
 } from '@mui/material/styles/createTypography'
-
 import type React from 'react'
 
 declare module '@mui/material/styles' {

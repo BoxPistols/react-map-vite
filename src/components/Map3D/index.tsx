@@ -1,8 +1,10 @@
 import maplibregl from 'maplibre-gl'
 import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
+
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { hookUseTheme } from '@/hooks/useTheme'
+
 import { useTheme } from '@mui/material/styles'
 
 interface Map3DProps {
@@ -32,7 +34,6 @@ export const Map3D: React.FC<Map3DProps> = ({
   const { mode } = hookUseTheme()
   const theme = useTheme()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (mapContainer.current && !mapInstance.current) {
       const map = new maplibregl.Map({

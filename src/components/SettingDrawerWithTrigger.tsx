@@ -1,11 +1,13 @@
 // src/components/SettingDrawerWithTrigger.tsx
-import { LAYOUT_CONSTANTS } from '@/constants/layout'
-import { useSettingDrawerState } from '@/hooks/useSettingDrawerState'
 import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone'
 import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone'
 import { Box, useTheme } from '@mui/material'
 import type { ReactNode } from 'react'
+
 import { SettingDrawer } from './SettingDrawer'
+
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
+import { useSettingDrawerState } from '@/hooks/useSettingDrawerState'
 
 interface SettingDrawerWithTriggerProps {
   sideNavWidth: number

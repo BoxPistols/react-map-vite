@@ -1,8 +1,5 @@
 // src/components/Table/TableComponents/TableLoading.tsx
 
-import type { Column } from '@/types/type'
-import type React from 'react'
-
 import {
   Box,
   Skeleton,
@@ -12,11 +9,13 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
+import type React from 'react'
 
 import {
   StyledTableCell,
   StyledTableRow,
 } from '@/components/Table/TableComponents/StyledComponents'
+import type { Column } from '@/types/type'
 
 interface TableLoadingProps {
   columns: Column[]

@@ -1,8 +1,9 @@
-import { hookUseTheme } from '@/hooks/useTheme'
 import { ThemeProvider as MuiThemeProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 import { type ReactNode, useEffect } from 'react'
+
+import { hookUseTheme } from '@/hooks/useTheme'
 
 interface ThemeProviderProps {
   children: ReactNode

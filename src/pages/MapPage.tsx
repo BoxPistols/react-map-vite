@@ -1,13 +1,6 @@
 // src/pages/MapPage.tsx
 import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone'
 import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone'
-
-import CustomTextField from '@/components/Form/CustomTextField'
-
-import MainGrid from '@/components/MainGrid'
-import { Map3D } from '@/components/Map3D'
-import { SettingDrawer } from '@/components/SettingDrawer'
-import { LAYOUT_CONSTANTS } from '@/constants/layout'
 import {
   Box,
   Button,
@@ -23,7 +16,11 @@ import {
 } from '@mui/material'
 
 import CustomSelect from '@/components/Form/CustomSelect'
-import type { PageProps } from '@/types/type'
+import CustomTextField from '@/components/Form/CustomTextField'
+import MainGrid from '@/components/MainGrid'
+import { Map3D } from '@/components/Map3D'
+import { SettingDrawer } from '@/components/SettingDrawer'
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
 
 const MapPage = ({
   sideNavWidth = 0,
@@ -31,7 +28,7 @@ const MapPage = ({
   isSettingDrawerOpen = false,
   toggleSettingDrawer,
   totalDrawerWidth = sideNavWidth + settingDrawerWidth,
-}: PageProps) => {
+}) => {
   const theme = useTheme()
 
   const iconStyle = {

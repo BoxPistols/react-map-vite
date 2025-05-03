@@ -1,5 +1,6 @@
 // src/components/Table/index.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react'
+
 import { CustomTable } from './TableComponents/CustomTable'
 import { dummyData } from './mock/dummyData'
 
