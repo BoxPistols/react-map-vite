@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
-
 import type { MouseEvent } from 'react'
 
 const sampleText = '日本語ひらがなカタカナ123abcABC@*^¥'
@@ -25,39 +24,39 @@ const Typographies = () => {
   const displayTitle = theme.palette.text.primary
 
   const TextStyledDisplay = styled(Typography)`
-  font-weight: bold;
-  color: ${display};
-  font-size: 24px;
-  margin-bottom: 16px;
-  font-weight: bold;
-`
+    font-weight: bold;
+    color: ${display};
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: bold;
+  `
 
   const TextStyledVariant = styled(Typography)`
-  font-size: 16px;
-  font-weight: bold;
-  color: ${displayTitle};
-`
+    font-size: 16px;
+    font-weight: bold;
+    color: ${displayTitle};
+  `
 
   const TextStyledSmall = styled(Typography)`
-  font-size: 12px;
-  font-weight: bold;
-  color: ${noteText};
-  margin: 2px 4px 2px 10px;
-`
+    font-size: 12px;
+    font-weight: bold;
+    color: ${noteText};
+    margin: 2px 4px 2px 10px;
+  `
 
   const TextStyledSample = styled(Typography)`
-  margin-bottom: 2px;
-  border-left: 2px solid ${display};
-  padding: 2px 8px;
-  margin: 4px 4px 4px 10px;
-`
+    margin-bottom: 2px;
+    border-left: 2px solid ${display};
+    padding: 2px 8px;
+    margin: 4px 4px 4px 10px;
+  `
 
   const TextStyledNote = styled(Typography)`
-  font-size: 14px;
-  color: ${noteText};
-  margin-bottom: 16px;
-  margin: 8px 4px 4px 10px;
-`
+    font-size: 14px;
+    color: ${noteText};
+    margin-bottom: 16px;
+    margin: 8px 4px 4px 10px;
+  `
   const typographyVariantsHeading = [
     {
       variant: 'h1',

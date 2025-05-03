@@ -1,4 +1,5 @@
 import path from 'node:path'
+
 import type { StorybookConfig } from '@storybook/react-vite'
 import { mergeConfig } from 'vite'
 
@@ -31,6 +32,7 @@ const config: StorybookConfig = {
           '@': path.resolve(__dirname, '../src'),
         },
       },
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       plugins: [require('autoprefixer'), require('tailwindcss')],
     })
   },

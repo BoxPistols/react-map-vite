@@ -1,6 +1,7 @@
+import { Box } from '@mui/material'
+
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
-import { Box } from '@mui/material'
 
 type LayoutProps = {
   open?: boolean

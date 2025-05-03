@@ -19,7 +19,6 @@ const MapLibre: React.FC<MapLibreProps> = ({
   const [lat, setLat] = useState(latitude)
   const [zoomLevel, setZoomLevel] = useState(zoom)
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (map.current) return // マップが既に初期化されている場合は何もしない
     if (mapContainer.current) {
@@ -39,7 +38,7 @@ const MapLibre: React.FC<MapLibreProps> = ({
         }
       })
     }
-  }, []) // 初期化時のみ実行
+  }, [latitude, longitude, zoom]) // 初期化時のみ実行
 
   useEffect(() => {
     if (map.current) {

@@ -1,8 +1,9 @@
-import { colorData } from '@/lib/themes/colorToken'
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import type { Theme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
+
+import { colorData } from '@/lib/themes/colorToken'
 
 // styled-components
 const TextStyled = styled(Typography)(() => ({
@@ -46,7 +47,7 @@ interface ColorGroupProps {
   contrastText?: string
 }
 
-//　色のグループを表示するコンポーネント
+// 色のグループを表示するコンポーネント
 const ColorGroup = ({ title, colors }: ColorGroupProps) => {
   const theme = useTheme()
 
@@ -86,7 +87,6 @@ export const Color = () => {
   const theme = useTheme<Theme>()
   const [, forceUpdate] = useState({})
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // テーマが変更されたときに強制的に再レンダリングを行う
     forceUpdate({})

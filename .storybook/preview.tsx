@@ -7,6 +7,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { useGlobals } from '@storybook/preview-api'
 import type { Preview } from '@storybook/react'
 import React, { useEffect, useMemo } from 'react'
+
 import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'

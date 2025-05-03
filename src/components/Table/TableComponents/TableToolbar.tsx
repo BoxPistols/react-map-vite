@@ -1,12 +1,11 @@
 // src/components/Table/components/TableToolbar.tsx
 
-import type React from 'react'
-
 import {
   Search as SearchIcon,
   ViewColumn as ViewColumnIcon,
 } from '@mui/icons-material'
 import { Box, Button, InputAdornment, TextField } from '@mui/material'
+import type React from 'react'
 
 interface TableToolbarProps {
   searchable: boolean

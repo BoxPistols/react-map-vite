@@ -1,10 +1,9 @@
 // src/components/Table/components/TableHeader.tsx
+import { TableHead, TableRow, TableSortLabel } from '@mui/material'
 import type React from 'react'
 
-import type { Column, SortConfig } from '@/types/type'
-import { TableHead, TableRow, TableSortLabel } from '@mui/material'
-
 import { StyledTableCell } from '@/components/Table/TableComponents/StyledComponents'
+import type { Column, SortConfig } from '@/types/type'
 
 interface TableHeaderProps {
   columns: Column[]

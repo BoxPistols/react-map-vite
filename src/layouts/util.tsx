@@ -1,6 +1,4 @@
-import { getLayoutValue } from '@/constants/layout'
 import { styled } from '@mui/material'
-
 import {
   // useTheme,
   type CSSObject,
@@ -10,6 +8,7 @@ import {
 } from '@mui/material'
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 
+import { getLayoutValue } from '@/constants/layout'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
 
 const drawerWidth = getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
