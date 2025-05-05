@@ -2,6 +2,8 @@
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 
+import { LAYOUT_CONSTANTS } from '@/constants/layout'
+
 interface HeaderProps {
   toggleDrawer: () => void
   open: boolean
@@ -13,6 +15,9 @@ export const Header = ({ toggleDrawer, open }: HeaderProps) => {
       position='fixed'
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 100,
+        '& .MuiToolbar-root': {
+          minHeight: `${LAYOUT_CONSTANTS.HEADER.HEIGHT}px`,
+        },
       }}>
       <Toolbar>
         <IconButton
@@ -31,12 +36,11 @@ export const Header = ({ toggleDrawer, open }: HeaderProps) => {
         <Typography
           variant='h1'
           noWrap
-          component='div'
           sx={{
+            fontSize: '1.25rem',
             flexGrow: 1,
-            fontWeight: 500,
           }}>
-          Map App
+          MapApp - Theme
         </Typography>
       </Toolbar>
     </AppBar>

@@ -3,17 +3,18 @@ import {
   CacheProvider,
   ThemeProvider as EmotionThemeProvider,
 } from '@emotion/react'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import { Box, CssBaseline, ThemeProvider } from '@mui/material'
 import { useGlobals } from '@storybook/preview-api'
-import type { Preview } from '@storybook/react'
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
-import { darkTheme, theme as lightTheme } from '../src/lib/themes/theme'
+import { darkTheme, theme as lightTheme } from '../src/themes/theme'
+
+import type { Preview, StoryContext, StoryFn } from '@storybook/react' // Import required types
 import '../src/index.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 // MUIのローカルストレージキーを統一
-const updateLocalStorage = (theme) => {
+const updateLocalStorage = (theme: string) => {
   // mui-modeのみを使用し、mui-color-schemeは削除
   localStorage.setItem('mui-mode', theme === 'dark' ? 'dark' : 'light')
 
@@ -22,9 +23,11 @@ const updateLocalStorage = (theme) => {
   localStorage.removeItem('mui-color-scheme-light')
 }
 
-const Decorator = (Story, context) => {
+const Decorator = (Story: StoryFn, context: StoryContext) => {
+  // Updated with correct Storybook types
   const [globals] = useGlobals()
   const currentTheme = globals.theme || 'light'
+  const currentPadding = globals.padding || 'standard'
 
   const muiTheme = useMemo(() => {
     return currentTheme === 'dark' ? darkTheme : lightTheme
@@ -51,12 +54,21 @@ const Decorator = (Story, context) => {
     stylisPlugins: [],
   })
 
+  // パディング制御のロジック
+  const isFullscreen = context.viewMode === 'story'
+  const noPadding =
+    context.parameters.noPadding ||
+    (isFullscreen && context.parameters.fullscreenNoPadding) ||
+    currentPadding === 'none'
+
   return (
     <EmotionThemeProvider theme={muiTheme}>
       <ThemeProvider theme={muiTheme}>
         <CacheProvider value={cache}>
           <CssBaseline />
-          <Story {...context} />
+          <Box sx={{ p: noPadding ? 0 : 4 }}>
+            <Story />
+          </Box>
         </CacheProvider>
       </ThemeProvider>
     </EmotionThemeProvider>
@@ -100,7 +112,20 @@ const preview: Preview = {
         ],
       },
     },
+    padding: {
+      name: 'パディング',
+      description: 'コンテンツ周囲のパディング',
+      defaultValue: 'standard',
+      toolbar: {
+        icon: 'box',
+        items: [
+          { value: 'none', title: 'パディングなし' },
+          { value: 'standard', title: '標準パディング' },
+        ],
+      },
+    },
   },
 }
 
 export default preview
+export { Decorator }

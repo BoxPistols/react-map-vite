@@ -1,19 +1,27 @@
 import { useColorScheme, useMediaQuery } from '@mui/material'
-import type { Theme } from '@mui/material/styles'
 import { useEffect, useMemo } from 'react'
 
-import { darkTheme, theme as lightTheme } from '../lib/themes/theme'
+import { darkTheme, lightTheme } from '@/themes/theme'
 
-export const hookUseTheme = () => {
+import type { ThemeMode } from '../types/theme'
+
+/**
+ * テーマを管理するフック
+ * MUI 6のカラースキーム機能に対応
+ */
+
+export const useTheme = (_defaultMode: ThemeMode = 'system') => {
   const { mode, setMode } = useColorScheme()
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
-  const theme: Theme = useMemo(() => {
+  // メモ化でテーマの再計算を最適化
+  const theme = useMemo(() => {
     const resolvedMode =
       mode === 'system' ? (prefersDarkMode ? 'dark' : 'light') : mode
     return resolvedMode === 'dark' ? darkTheme : lightTheme
   }, [mode, prefersDarkMode])
 
+  // 副作用の最適化
   useEffect(() => {
     document.documentElement.classList.toggle(
       'dark',
@@ -23,3 +31,6 @@ export const hookUseTheme = () => {
 
   return { mode, setMode, theme }
 }
+
+// 後方互換性のためのエイリアス
+export const hookUseTheme = useTheme

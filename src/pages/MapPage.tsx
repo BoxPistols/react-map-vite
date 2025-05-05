@@ -15,12 +15,13 @@ import {
   useTheme,
 } from '@mui/material'
 
-import CustomSelect from '@/components/Form/CustomSelect'
-import CustomTextField from '@/components/Form/CustomTextField'
+import { CustomSelect } from '@/components/Form/CustomSelect'
+import { CustomTextField } from '@/components/Form/CustomTextField'
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
 import { SettingDrawer } from '@/components/SettingDrawer'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
+import type { PageProps } from '@/types/type'
 
 const MapPage = ({
   sideNavWidth = 0,
@@ -28,7 +29,7 @@ const MapPage = ({
   isSettingDrawerOpen = false,
   toggleSettingDrawer,
   totalDrawerWidth = sideNavWidth + settingDrawerWidth,
-}) => {
+}: PageProps) => {
   const theme = useTheme()
 
   const iconStyle = {

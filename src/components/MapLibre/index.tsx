@@ -1,6 +1,6 @@
 import maplibregl from 'maplibre-gl'
-import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
+import type React from 'react'
 
 interface MapLibreProps {
   latitude?: number
@@ -38,7 +38,7 @@ const MapLibre: React.FC<MapLibreProps> = ({
         }
       })
     }
-  }, [latitude, longitude, zoom]) // 初期化時のみ実行
+  }, [latitude, longitude, zoom]) // 依存配列に変数を追加
 
   useEffect(() => {
     if (map.current) {

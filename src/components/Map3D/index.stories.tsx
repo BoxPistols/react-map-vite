@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
-
 import { Map3D } from '.'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Map3D> = {
   title: 'Components/Map/MapLibre/Map3D',
@@ -10,6 +9,7 @@ const meta: Meta<typeof Map3D> = {
     // document 非表示
     docs: { disable: true },
     layout: 'fullscreen',
+    fullscreenNoPadding: true, // フルスクリーン時のみパディングなし
   },
   decorators: [
     (Story) => (

@@ -1,4 +1,4 @@
-import { theme } from "@/lib/themes/theme";
+import { theme } from '@/themes/theme'
 import {
   Box,
   Button,
@@ -10,15 +10,15 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import { Meta } from "@storybook/blocks";
-import { useState } from "react";
-import { CustomSelect } from ".";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+} from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
+import { Meta } from '@storybook/blocks'
+import { useState } from 'react'
+import { CustomSelect } from '.'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
-<Meta title="Components/CustomSelect/Info" />
+<Meta title='Components/CustomSelect/Info' />
 
 <ThemeProvider theme={theme}>
 
@@ -28,7 +28,7 @@ import { useTheme } from "@mui/material/styles";
 
 ## 概要
 
-CustomSelectは、Material-UIのSelectコンポーネントをベースにした高機能なドロップダウン選択コンポーネントです。単一選択と複数選択の両方をサポートし、MUIの機能性を活かしながら、よりシンプルで使いやすいUIを提供します。
+CustomSelect は、Material-UI の Select コンポーネントをベースにした高機能なドロップダウン選択コンポーネントです。単一選択と複数選択の両方をサポートし、MUI の機能性を活かしながら、よりシンプルで使いやすい UI を提供します。
 
 ### 主要な Props
 
@@ -50,25 +50,25 @@ Tooltip は独自にラベルに組み込んでおり、ユーザーに選択肢
 
 ## 使用例
 
-### 基本的なSelectフォームの例
+### 基本的な Select フォームの例
 
 <CustomSelect
-  label="色を選択"
+  label='色を選択'
   options={[
-    { value: "red", label: "赤" },
-    { value: "blue", label: "青" },
-    { value: "green", label: "緑" },
+    { value: 'red', label: '赤' },
+    { value: 'blue', label: '青' },
+    { value: 'green', label: '緑' },
   ]}
   required
 />
 
 ```tsx
 <CustomSelect
-  label="色を選択"
+  label='色を選択'
   options={[
-    { value: "red", label: "赤" },
-    { value: "blue", label: "青" },
-    { value: "green", label: "緑" },
+    { value: 'red', label: '赤' },
+    { value: 'blue', label: '青' },
+    { value: 'green', label: '緑' },
   ]}
   required
 />
@@ -77,49 +77,49 @@ Tooltip は独自にラベルに組み込んでおり、ユーザーに選択肢
 ### ツールチップ付きの例
 
 <CustomSelect
-  label="都道府県"
+  label='都道府県'
   options={[
-    { value: "tokyo", label: "東京都" },
-    { value: "osaka", label: "大阪府" },
-    { value: "kyoto", label: "京都府" },
+    { value: 'tokyo', label: '東京都' },
+    { value: 'osaka', label: '大阪府' },
+    { value: 'kyoto', label: '京都府' },
   ]}
-  tooltip="お住まいの都道府県を選択してください"
+  tooltip='お住まいの都道府県を選択してください'
 />
 
 ```tsx
 <CustomSelect
-  label="都道府県"
+  label='都道府県'
   options={[
-    { value: "tokyo", label: "東京都" },
-    { value: "osaka", label: "大阪府" },
-    { value: "kyoto", label: "京都府" },
+    { value: 'tokyo', label: '東京都' },
+    { value: 'osaka', label: '大阪府' },
+    { value: 'kyoto', label: '京都府' },
   ]}
-  tooltip="お住まいの都道府県を選択してください"
+  tooltip='お住まいの都道府県を選択してください'
 />
 ```
 
 ### 複数選択の例
 
 <CustomSelect
-  label="好きな食べ物"
+  label='好きな食べ物'
   multiple
   options={[
-    { value: "sushi", label: "寿司" },
-    { value: "ramen", label: "ラーメン" },
-    { value: "tempura", label: "天ぷら" },
-    { value: "udon", label: "うどん" },
+    { value: 'sushi', label: '寿司' },
+    { value: 'ramen', label: 'ラーメン' },
+    { value: 'tempura', label: '天ぷら' },
+    { value: 'udon', label: 'うどん' },
   ]}
 />
 
 ```tsx
 <CustomSelect
-  label="好きな食べ物"
+  label='好きな食べ物'
   multiple
   options={[
-    { value: "sushi", label: "寿司" },
-    { value: "ramen", label: "ラーメン" },
-    { value: "tempura", label: "天ぷら" },
-    { value: "udon", label: "うどん" },
+    { value: 'sushi', label: '寿司' },
+    { value: 'ramen', label: 'ラーメン' },
+    { value: 'tempura', label: '天ぷら' },
+    { value: 'udon', label: 'うどん' },
   ]}
 />
 ```

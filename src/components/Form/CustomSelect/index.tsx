@@ -11,11 +11,11 @@ import {
   Tooltip,
   useTheme,
 } from '@mui/material'
+import styled from '@mui/material/styles/styled'
+import { useCallback, useState } from 'react'
 import type { SelectProps } from '@mui/material'
 import type { SelectChangeEvent } from '@mui/material'
-import styled from '@mui/material/styles/styled'
 import type React from 'react'
-import { useCallback, useState } from 'react'
 
 // 拡張されたPropsの型定義
 type CustomSelectProps = Omit<
@@ -266,23 +266,6 @@ export const CustomSelect = ({
     return !required
   }, [clearable, hasValue, value, multiple, required])
 
-  // ヘルパーテキストの表示を改善
-  const getHelperText = useCallback(() => {
-    if (!helperText) {
-      if (multiple && required) {
-        return '1つ以上の選択が必要です'
-      }
-      return ''
-    }
-    return helperText
-  }, [multiple, required, helperText])
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  getHelperText() && (
-    <FormHelperText id={`${inputId}-helper-text`}>
-      {getHelperText()}
-    </FormHelperText>
-  )
-
   return (
     <StyledFormControl fullWidth={fullWidth} error={error} size={size}>
       <StyledInputLabel
@@ -336,7 +319,11 @@ export const CustomSelect = ({
         aria-required={required ? 'true' : 'false'}
         aria-invalid={error ? 'true' : 'false'}
         aria-describedby={
-          tooltip ? `${inputId}-tooltip` : `${inputId}-helper-text`
+          helperText // helperText を直接参照
+            ? `${inputId}-helper-text`
+            : tooltip
+              ? `${inputId}-tooltip`
+              : undefined // どちらもない場合は undefined
         }
         renderValue={renderSelectedValue}
         // クリアボタンとアイコンの制御
@@ -390,18 +377,19 @@ export const CustomSelect = ({
         ))}
       </Select>
       {/* ヘルパーテキストとツールチップの表示 */}
-      {helperText && (
-        <FormHelperText id={`${inputId}-helper-text`}>
+      {helperText && ( // helperText が存在する場合のみ表示
+        <FormHelperText id={`${inputId}-helper-text`} error={error}>
+          {' '}
+          {/* error prop を追加 */}
           {helperText}
         </FormHelperText>
       )}
-      {tooltip && (
-        <span id={`${inputId}-tooltip`} style={{ display: 'none' }}>
-          {tooltip}
-        </span>
-      )}
+      {tooltip &&
+        !helperText && ( // tooltip があり、helperText がない場合のみ span を表示
+          <span id={`${inputId}-tooltip`} style={{ display: 'none' }}>
+            {tooltip}
+          </span>
+        )}
     </StyledFormControl>
   )
 }
-
-export default CustomSelect

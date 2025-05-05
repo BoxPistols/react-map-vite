@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
+import React, { useState } from 'react'
 import type { SelectChangeEvent } from '@mui/material'
-import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
-import React from 'react'
 
 import { CustomSelect } from '.'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof CustomSelect> = {
   title: 'Components/CustomSelect',
@@ -187,6 +187,37 @@ export const AllFeaturesMedium: Story = {
   },
 }
 
+// インタラクティブな例のためのコンポーネントを別途定義
+const InteractiveExampleComponent = (
+  args: React.ComponentProps<typeof CustomSelect>
+) => {
+  const [value, setValue] = useState<string | string[]>('')
+  const [hasError, setHasError] = useState(false)
+
+  // これは意図的にエラーを発生させるための処理です
+  const handleChange = (
+    _event: SelectChangeEvent<unknown>,
+    value: string | string[] | number | number[]
+  ) => {
+    setValue(value as string | string[])
+    if (Array.isArray(value)) {
+      setHasError(value.some((v) => v === 'option2' || v === 'option3'))
+    } else {
+      setHasError(value === 'option2' || value === 'option3')
+    }
+  }
+
+  return (
+    <CustomSelect
+      {...args}
+      value={value}
+      onChange={handleChange}
+      error={hasError}
+      helperText={hasError ? 'この選択をするとエラーになります' : ''}
+    />
+  )
+}
+
 export const InteractiveExample: Story = {
   args: {
     label: 'オプション2 or 3を選択するとエラーになります',
@@ -202,35 +233,41 @@ export const InteractiveExample: Story = {
       },
     },
   },
-  render: (args) => {
-    const [value, setValue] = useState<string | string[]>('')
-    const [hasError, setHasError] = useState(false)
-
-    // これは意図的にエラーを発生させるための処理です
-    const handleChange = (
-      _event: SelectChangeEvent<unknown>,
-      value: string | string[] | number | number[]
-    ) => {
-      setValue(value as string | string[])
-      if (Array.isArray(value)) {
-        setHasError(value.some((v) => v === 'option2' || v === 'option3'))
-      } else {
-        setHasError(value === 'option2' || value === 'option3')
-      }
-    }
-
-    return (
-      <CustomSelect
-        {...args}
-        value={value}
-        onChange={handleChange}
-        error={hasError}
-        helperText={hasError ? 'この選択をするとエラーになります' : ''}
-      />
-    )
-  },
+  render: (args) => <InteractiveExampleComponent {...args} />,
 }
 
+// 複数選択のインタラクティブな例のためのコンポーネントを別途定義
+const InteractiveMultipleExampleComponent = (
+  args: React.ComponentProps<typeof CustomSelect>
+) => {
+  const [value, setValue] = useState<string[]>([])
+  const [hasError, setHasError] = useState(false)
+  // これは、意図的にエラーを発生させるための処理です
+  const handleChange = (
+    _event: SelectChangeEvent<unknown>,
+    value: string | string[] | number | number[]
+  ) => {
+    const newValue = value as string[]
+    setValue(newValue)
+    setHasError(newValue.length > 1)
+  }
+
+  return (
+    <CustomSelect
+      {...args}
+      value={value}
+      onChange={handleChange}
+      error={hasError}
+      helperText={
+        hasError
+          ? '2つ以上の項目を選択することはできません'
+          : '1つまで選択可能です'
+      }
+    />
+  )
+}
+
+// ストーリー名を InteractiveMultipleExample に変更
 export const InteractiveMultipleExample: Story = {
   args: {
     label: '2つ以上選択するとエラーになります',
@@ -247,51 +284,28 @@ export const InteractiveMultipleExample: Story = {
       },
     },
   },
-  render: (args) => {
-    const [value, setValue] = useState<string[]>([])
-    const [hasError, setHasError] = useState(false)
-    // これは、意図的にエラーを発生させるための処理です
-    const handleChange = (
-      _event: SelectChangeEvent<unknown>,
-      value: string | string[] | number | number[]
-    ) => {
-      const newValue = value as string[]
-      setValue(newValue)
-      setHasError(newValue.length > 1)
-    }
-
-    return (
-      <CustomSelect
-        {...args}
-        value={value}
-        onChange={handleChange}
-        error={hasError}
-        helperText={
-          hasError
-            ? '2つ以上の項目を選択することはできません'
-            : '1つまで選択可能です'
-        }
-      />
-    )
-  },
+  render: (args) => <InteractiveMultipleExampleComponent {...args} />,
 }
 
+// サイズ比較の例のためのコンポーネント
+const SizeComparisonComponent = () => (
+  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+    <CustomSelect
+      label='通常サイズのセレクト'
+      options={defaultOptions}
+      size='medium'
+      placeholder='選択してください'
+    />
+    <CustomSelect
+      label='小さいサイズの複数選択セレクト'
+      options={defaultOptions}
+      size='small'
+      multiple
+      placeholder='複数選択可能です'
+    />
+  </Box>
+)
+
 export const SizeComparison: Story = {
-  render: () => (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-      <CustomSelect
-        label='通常サイズのセレクト'
-        options={defaultOptions}
-        size='medium'
-        placeholder='選択してください'
-      />
-      <CustomSelect
-        label='小さいサイズの複数選択セレクト'
-        options={defaultOptions}
-        size='small'
-        multiple
-        placeholder='複数選択可能です'
-      />
-    </Box>
-  ),
+  render: () => <SizeComparisonComponent />,
 }

@@ -1,8 +1,9 @@
+// src/components/Table/utils/formatters.tsx
 import { Box } from '@mui/material'
 
-// src/components/Table/utils/formatters.tsx
-import { theme } from '../../../lib/themes/theme'
+import { theme } from '@/themes/theme'
 
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 export const formatCellValue = (value: unknown): React.ReactNode => {
   if (value === null || value === undefined) {
     return '-'

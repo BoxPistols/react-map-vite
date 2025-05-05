@@ -1,10 +1,9 @@
 import { Typography } from '@mui/material'
 
 import MainGrid from '@/components/MainGrid'
+import type { PageProps } from '@/types/type'
 
-type WifiPageProps = object
-
-const WifiPage: React.FC<WifiPageProps> = () => {
+const WifiPage = (_props: PageProps) => {
   return (
     <MainGrid overview='Wifi'>
       <Typography>This is Wifi Page</Typography>

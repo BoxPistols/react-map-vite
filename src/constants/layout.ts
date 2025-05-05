@@ -5,7 +5,7 @@
  */
 export const LAYOUT_CONSTANTS = {
   HEADER: {
-    HEIGHT: 64, // ヘッダーの高さ
+    HEIGHT: 44, // ヘッダーの高さ
   },
   SIDEBAR: {
     WIDTH_OPENED: 160, // サイドバーが開いているときの幅

@@ -1,8 +1,7 @@
 // src/stories/Tokens/Typography/index.stories.tsx
-import type { Meta } from '@storybook/react'
-import React from 'react'
-
 import Typography from '.'
+
+import type { Meta } from '@storybook/react'
 
 const TypographyStory: Meta = {
   title: 'Tokens/Typography',

@@ -1,4 +1,4 @@
-import { theme } from "@/lib/themes/theme";
+import { theme } from '@/themes/theme'
 import {
   Box,
   Button,
@@ -11,15 +11,15 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import { Meta } from "@storybook/blocks";
-import { useState } from "react";
-import CustomTextField from ".";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+} from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
+import { Meta } from '@storybook/blocks'
+import { useState } from 'react'
+import { CustomTextField } from '.'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
-<Meta title="Components/CustomTextField/Info" />
+<Meta title='Components/CustomTextField/Info' />
 
 <ThemeProvider theme={theme}>
 
@@ -28,10 +28,10 @@ import { useTheme } from "@mui/material/styles";
 
 ## 概要
 
-- CustomTextFieldは、Material-UIのTextFieldをベースにカスタマイズされた入力コンポーネントです。
-- MUIの機能性を活かしながら、マテリアルデザイン固有のクセを廃し、よりシンプルで使いやすいUIを提供します。
+- CustomTextField は、Material-UI の TextField をベースにカスタマイズされた入力コンポーネントです。
+- MUI の機能性を活かしながら、マテリアルデザイン固有のクセを廃し、よりシンプルで使いやすい UI を提供します。
 
-### 主要なProps
+### 主要な Props
 
 - `label`: ラベル
 - `placeholder`: プレースホルダー
@@ -41,32 +41,32 @@ import { useTheme } from "@mui/material/styles";
 - `required`: 必須
 - `tooltip`: ツールチップ
 - `size`: サイズ（'small' | 'medium'）
-- `fullWidth`: 幅100%
+- `fullWidth`: 幅 100%
 - `multiline`: 複数行
 - `rows`: 行数
 - `rowsMax`: 最大行数
 - `aria-label`: アクセシビリティラベル
 - `aria-describedby`: アクセシビリティ説明
-- `inputProps`: input要素のprops
+- `inputProps`: input 要素の props
 
-この中でTooltipは独自にラベルに組み込んでします。ユーザーに入力フォームの使い方を説明するための補助的な情報を提供します。
+この中で Tooltip は独自にラベルに組み込んでします。ユーザーに入力フォームの使い方を説明するための補助的な情報を提供します。
 
-その他のpropsについては、[MUI TextField API](https://mui.com/api/text-field/)を参照してください。
+その他の props については、[MUI TextField API](https://mui.com/api/text-field/)を参照してください。
 
 ## 使用例
 
 ### 基本的な使用方法
 
 <CustomTextField
-  label="ユーザー名"
-  placeholder="ユーザー名を入力してください"
+  label='ユーザー名'
+  placeholder='ユーザー名を入力してください'
   required
 />
 
 ```tsx
 <CustomTextField
-  label="ユーザー名"
-  placeholder="ユーザー名を入力してください"
+  label='ユーザー名'
+  placeholder='ユーザー名を入力してください'
   required
 />
 ```
@@ -74,40 +74,40 @@ import { useTheme } from "@mui/material/styles";
 ### ツールチップ付きの例
 
 <CustomTextField
-  label="メールアドレス"
-  placeholder="example@example.com"
-  tooltip="有効なメールアドレスを入力してください"
+  label='メールアドレス'
+  placeholder='example@example.com'
+  tooltip='有効なメールアドレスを入力してください'
 />
 
 ```tsx
 <CustomTextField
-  label="メールアドレス"
-  placeholder="example@example.com"
-  tooltip="有効なメールアドレスを入力してください"
+  label='メールアドレス'
+  placeholder='example@example.com'
+  tooltip='有効なメールアドレスを入力してください'
 />
 ```
 
 ### エラー状態の例
 
 <CustomTextField
-  label="パスワード"
-  type="password"
+  label='パスワード'
+  type='password'
   error
-  helperText="パスワードは8文字以上である必要があります"
+  helperText='パスワードは8文字以上である必要があります'
 />
 
 ```tsx
 <CustomTextField
-  label="パスワード"
-  type="password"
+  label='パスワード'
+  type='password'
   error
-  helperText="パスワードは8文字以上である必要があります"
+  helperText='パスワードは8文字以上である必要があります'
 />
 ```
 
 ## 実践的な例: グループ化されたフォーム
 
-以下は、FormControlを使用してフィールドをグループ化した、より複雑なフォームの例です。この例では、個人情報と住所情報を別々のグループに分けています。
+以下は、FormControl を使用してフィールドをグループ化した、より複雑なフォームの例です。この例では、個人情報と住所情報を別々のグループに分けています。
 
 export const GroupedForm = () => {
   const [formData, setFormData] = useState({
@@ -125,24 +125,11 @@ export const GroupedForm = () => {
 
 const requiredFields = ['lastName', 'email'] // 必須フィールドのリスト
 
-const handleChange = (e) => {
-const { name, value } = e.target
-setFormData((prevData) => ({
-...prevData,
-[name]: value,
-}))
-}
+const handleChange = (e) => { const { name, value } = e.target; setFormData((prevData) => ({ ...prevData, [name]: value, })) }
 
-const handleSubmit = (e) => {
-e.preventDefault()
-const newErrors = {}
+const handleSubmit = (e) => { e.preventDefault(); const newErrors = {}
 
-    // 必須フィールドのみをチェック
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
-        newErrors[field] = 'このフィールドは必須です'
-      }
-    })
+// 必須フィールドのみをチェック requiredFields.forEach((field) => { if (!formData[field]) { newErrors[field] = 'このフィールドは必須です' } })
 
     if (Object.keys(newErrors).length === 0) {
       setOpenDialog(true)
@@ -152,9 +139,7 @@ const newErrors = {}
 
 }
 
-const handleCloseDialog = () => {
-setOpenDialog(false)
-}
+const handleCloseDialog = () => { setOpenDialog(false) }
 
 return (
 
@@ -275,8 +260,7 @@ sx={{
       </Dialog>
     </>
 
-)
-}
+) }
 
 // フォームの表示
 
@@ -301,17 +285,9 @@ export const GroupedForm = () => {
 
 const requiredFields = ['lastName', 'email'] // 必須フィールドのリスト
 
-const handleChange = (e) => {
-const { name, value } = e.target
-setFormData((prevData) => ({
-...prevData,
-[name]: value,
-}))
-}
+const handleChange = (e) => { const { name, value } = e.target setFormData((prevData) => ({ ...prevData, [name]: value, })) }
 
-const handleSubmit = (e) => {
-e.preventDefault()
-const newErrors = {}
+const handleSubmit = (e) => { e.preventDefault() const newErrors = {}
 
     // 必須フィールドのみをチェック
     requiredFields.forEach((field) => {
@@ -328,9 +304,7 @@ const newErrors = {}
 
 }
 
-const handleCloseDialog = () => {
-setOpenDialog(false)
-}
+const handleCloseDialog = () => { setOpenDialog(false) }
 
 return (
 
@@ -347,7 +321,7 @@ sx={{
         }}>
 <FormControl component='fieldset' sx={{ width: '100%', mb: 2 }}>
 
-<Typography variant="h6" component="legend" sx={{ mb: 2 }}>
+<Typography variant='h6' component='legend' sx={{ mb: 2 }}>
   個人情報
 </Typography>
 
@@ -452,8 +426,7 @@ sx={{
       </Dialog>
     </>
 
-)
-}
+) }
 
 ```
 </details>

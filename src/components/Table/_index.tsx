@@ -41,10 +41,10 @@ import {
   Typography,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
+import type React from 'react'
 
-import { theme } from '../../lib/themes/theme'
+import { theme } from '@/themes/theme'
 
 /**
  * テーブルのカラム定義インターフェース
@@ -300,8 +300,11 @@ export const CustomTable = ({
   columns = [],
   data = [],
   showCRUD = false,
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   onView = () => {},
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   onEdit = () => {},
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
   onDelete = () => {},
   searchable = false,
   defaultPageSize = 10,

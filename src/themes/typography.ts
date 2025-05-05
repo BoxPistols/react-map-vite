@@ -1,8 +1,10 @@
+import type React from 'react'
+
 import type {
   CSSProperties,
   TypographyOptions,
 } from '@mui/material/styles/createTypography'
-import type React from 'react'
+import '@mui/material/Typography'
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
@@ -79,7 +81,7 @@ const pxToRem = (px: number) => {
   return `${Number.parseFloat(remValue)}rem`
 }
 
-const fontSizesVariant = {
+export const fontSizesVariant = {
   displayLarge: pxToRem(32),
   displayMedium: pxToRem(28),
   displaySmall: pxToRem(24),

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
-
 import MapLibre from '.'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof MapLibre> = {
   title: 'Components/Map/MapLibre/Normal',
@@ -8,6 +8,7 @@ const meta: Meta<typeof MapLibre> = {
   parameters: {
     docs: { disable: true },
     layout: 'fullscreen',
+    fullscreenNoPadding: true, // フルスクリーン時のみパディングなし
   },
   tags: ['map', 'geolocation', 'interactive'],
   argTypes: {

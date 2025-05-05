@@ -1,21 +1,24 @@
-// src/layouts/sideNav/index.tsx
 import { MoveToInbox as InboxIcon } from '@mui/icons-material'
 import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
+// src/layouts/sideNav/index.tsx
+import { Drawer } from '@mui/material'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Drawer, DrawerHeader } from '@/layouts/util'
-import { colorData } from '@/lib/themes/colorToken'
-import { theme } from '@/lib/themes/theme'
+import { DrawerHeader } from '@/layouts/util'
+import { colorData } from '@/themes/colorToken'
+import { theme } from '@/themes/theme'
 
 type SideNavProps = {
   open: boolean
   width: number
 }
+
+// テーマの型チェック
 
 export const SideNav = ({ open, width }: SideNavProps) => {
   const sideNavRef = useRef<HTMLDivElement>(null)

@@ -1,19 +1,12 @@
+/** @jsxImportSource react */
+import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
 import SendIcon from '@mui/icons-material/Send'
-import {
-  Button,
-  type ButtonProps,
-  type Theme,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Box, Button, type ButtonProps, Typography } from '@mui/material'
+
 import type { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
 
-interface CustomButtonProps extends ButtonProps {
-  colorShade: 'main' | 'dark' | 'light' | 'lighter'
-}
-
-const meta: Meta<CustomButtonProps> = {
+const meta: Meta<ButtonProps> = {
   title: 'Mui/Button',
   component: Button,
   argTypes: {
@@ -24,6 +17,26 @@ const meta: Meta<CustomButtonProps> = {
     size: {
       options: ['small', 'medium', 'large'],
       control: { type: 'select' },
+    },
+    startIcon: {
+      options: ['none', 'send', 'delete', 'add'],
+      control: { type: 'select' },
+      mapping: {
+        none: null,
+        send: <SendIcon />,
+        delete: <DeleteIcon />,
+        add: <AddIcon />,
+      },
+    },
+    endIcon: {
+      options: ['none', 'send', 'delete', 'add'],
+      control: { type: 'select' },
+      mapping: {
+        none: null,
+        send: <SendIcon />,
+        delete: <DeleteIcon />,
+        add: <AddIcon />,
+      },
     },
     color: {
       options: [
@@ -37,25 +50,15 @@ const meta: Meta<CustomButtonProps> = {
       ],
       control: { type: 'select' },
     },
-    colorShade: {
-      options: ['main', 'dark', 'light', 'lighter'],
-      control: { type: 'select' },
+    disabled: {
+      control: { type: 'boolean' },
     },
   },
 }
 
 export default meta
 
-type Story = StoryObj<CustomButtonProps>
-
-const getColorShade = (
-  theme: Theme,
-  color: keyof Theme['palette'] | 'inherit',
-  shade: keyof Theme['palette'][keyof Theme['palette']]
-) => {
-  if (color === 'inherit' || !theme.palette[color]) return undefined
-  return theme.palette[color][shade]
-}
+type Story = StoryObj<ButtonProps>
 
 export const Variants: Story = {
   args: {
@@ -63,40 +66,24 @@ export const Variants: Story = {
     variant: 'contained',
     color: 'primary',
     size: 'medium',
-    colorShade: 'light',
+    disabled: false,
   },
-  render: (args) => {
-    const theme = useTheme()
-    const color = getColorShade(
-      theme,
-      args.color as keyof Theme['palette'] | 'inherit',
-      args.colorShade as keyof Theme['palette'][keyof Theme['palette']]
-    )
-    const textColor =
-      args.colorShade === 'lighter' ? theme.palette.text.primary : undefined
-
-    return (
-      <>
-        <Typography variant='body2' gutterBottom>
-          Buttonバリエーション検証
+  render: (args) => (
+    <>
+      <Box p={4}>
+        <Typography variant='h6' gutterBottom>
+          ボタンバリエーション検証
         </Typography>
-        <Button
-          {...args}
-          sx={{
-            backgroundColor: args.variant === 'contained' ? color : undefined,
-            color: textColor,
-          }}
-        />
-      </>
-    )
-  },
+        <Button {...args} />
+      </Box>
+    </>
+  ),
 }
 
 export const Contained: Story = {
   args: {
     children: 'Button',
     variant: 'contained',
-    colorShade: 'main',
   },
 }
 
@@ -104,7 +91,6 @@ export const Outlined: Story = {
   args: {
     children: 'Button',
     variant: 'outlined',
-    colorShade: 'main',
   },
 }
 
@@ -112,7 +98,6 @@ export const Text: Story = {
   args: {
     children: 'Button',
     variant: 'text',
-    colorShade: 'main',
   },
 }
 
@@ -121,16 +106,14 @@ export const StartIcon: Story = {
     children: 'Button',
     startIcon: <SendIcon />,
     variant: 'contained',
-    colorShade: 'main',
   },
 }
 
-export const ErrorButton: Story = {
+export const EndIcon: Story = {
   args: {
     children: 'Button',
-    color: 'error',
+    endIcon: <SendIcon />,
     variant: 'contained',
-    colorShade: 'main',
   },
 }
 
@@ -139,11 +122,6 @@ export const Disabled: Story = {
     children: 'Button',
     disabled: true,
     variant: 'contained',
-    colorShade: 'main',
-    sx: {
-      opacity: 0.5,
-      cursor: 'not-allowed',
-    },
   },
 }
 
@@ -151,7 +129,6 @@ export const Custom: Story = {
   args: {
     children: 'Button',
     variant: 'outlined',
-    colorShade: 'main',
     sx: {
       minWidth: 210,
       maxWidth: 480,

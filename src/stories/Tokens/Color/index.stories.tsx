@@ -1,7 +1,6 @@
-import type { Meta } from '@storybook/react'
-import React from 'react'
-
 import { Color } from '.'
+
+import type { Meta } from '@storybook/react'
 
 const ColorStory: Meta = {
   title: 'Tokens/Color',

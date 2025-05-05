@@ -41,14 +41,11 @@ pnpm add -D eslint prettier eslint-config-prettier eslint-plugin-prettier
 
 ```javascript
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   rules: {
     // ここにカスタムルールを追加
   },
-};
+}
 ```
 
 ### 3. Prettier の設定
@@ -437,15 +434,18 @@ GitHub Actionsで手動パブリッシュも可能：
 ### 5. ベストプラクティス
 
 1. **バージョン管理**:
+
    - セマンティックバージョニングに従う
    - 破壊的変更は必ずメジャーバージョンを上げる
 
 2. **開発フロー**:
+
    - 機能追加は `update/*` ブランチから
    - PRマージ後に自動パブリッシュ
    - 緊急修正は手動パブリッシュを使用
 
 3. **セキュリティ**:
+
    - GitHub Tokenは定期的に更新
    - `.npmrc.local` は `.gitignore` に追加
 

@@ -4,7 +4,7 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from '@/App'
-import { ThemeProvide } from '@/components/ThemeProvider'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import './index.css'
 
 const cache = createCache({
@@ -16,13 +16,18 @@ const cache = createCache({
 const Root = () => {
   return (
     <StrictMode>
-      <ThemeProvide>
+      <ThemeProvider>
         <CacheProvider value={cache}>
           <App />
         </CacheProvider>
-      </ThemeProvide>
+      </ThemeProvider>
     </StrictMode>
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<Root />)
+const rootElement = document.getElementById('root')
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(<Root />)
+} else {
+  console.error('Root element not found')
+}

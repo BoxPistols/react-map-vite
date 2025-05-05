@@ -2,11 +2,11 @@ name: バージョン自動更新（PR作成時）
 
 on:
   pull_request:
-    types: [ opened, reopened, synchronize ]
+    types: [opened, reopened, synchronize]
     branches:
-    - main
+      - main
     paths-ignore:
-    - 'package.json' # package.jsonが既に更新されている場合は実行しない
+      - 'package.json' # package.jsonが既に更新されている場合は実行しない
 
 jobs:
   version-bump:
@@ -18,51 +18,51 @@ jobs:
       pull-requests: write
 
     steps:
-    - name: チェックアウト
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.head_ref }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: チェックアウト
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Node.jsセットアップ
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.13.1'
+      - name: Node.jsセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.13.1'
 
-    - name: パッチバージョン更新
-      id: version-bump
-      run: |
-        # 現在のバージョンを取得
-        CURRENT_VERSION=$(node -p "require('./package.json').version")
+      - name: パッチバージョン更新
+        id: version-bump
+        run: |
+          # 現在のバージョンを取得
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
 
-        # バージョンを分解
-        IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+          # バージョンを分解
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
 
-        # パッチバージョンを更新
-        NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+          # パッチバージョンを更新
+          NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
 
-        # package.jsonを更新
-        sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" package.json
+          # package.jsonを更新
+          sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" package.json
 
-        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-        echo "old_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "old_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
-    - name: 変更をコミット
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add package.json
-        git commit -m "バージョンを${{ steps.version-bump.outputs.old_version }}から${{ steps.version-bump.outputs.new_version }}に更新"
-        git push
+      - name: 変更をコミット
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add package.json
+          git commit -m "バージョンを${{ steps.version-bump.outputs.old_version }}から${{ steps.version-bump.outputs.new_version }}に更新"
+          git push
 
-    - name: PRにコメント
-      uses: actions/github-script@v6
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: `🔖 バージョンを \`${{ steps.version-bump.outputs.old_version }}\` から \`${{ steps.version-bump.outputs.new_version }}\` に自動更新しました。`
-          })
+      - name: PRにコメント
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🔖 バージョンを \`${{ steps.version-bump.outputs.old_version }}\` から \`${{ steps.version-bump.outputs.new_version }}\` に自動更新しました。`
+            })

@@ -1,6 +1,3 @@
-import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
-import { useSidebarState } from '@/hooks/useSidebarState'
-
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
@@ -12,8 +9,6 @@ import {
   Select,
 } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
-
-import 'maplibre-gl/dist/maplibre-gl.css'
 import ThemeProvider from '@mui/system/ThemeProvider/ThemeProvider'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -23,15 +18,19 @@ import {
   useLocation,
 } from 'react-router-dom'
 
+import { LAYOUT_CONSTANTS, getLayoutValue } from '@/constants/layout'
+import { useSidebarState } from '@/hooks/useSidebarState'
+import { hookUseTheme } from '@/hooks/useTheme'
+import { Header } from '@/layouts/header'
+import { SideNav } from '@/layouts/sideNav'
+
 import DashboardPage from './pages/DashboardPage'
 import InboxPage from './pages/InboxPage'
 import MapPage from './pages/MapPage'
 import NaviPage from './pages/NaviPage'
 import WifiPage from './pages/WifiPage'
 
-import { hookUseTheme } from '@/hooks/useTheme'
-import { Header } from '@/layouts/header'
-import { SideNav } from '@/layouts/sideNav'
+import 'maplibre-gl/dist/maplibre-gl.css'
 
 const AppContent = () => {
   const { mode, setMode, theme } = hookUseTheme()
@@ -43,6 +42,7 @@ const AppContent = () => {
 
   const location = useLocation()
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // ページが変わるたびにDrawerを閉じる
     setIsSettingDrawerOpen(false)
@@ -89,8 +89,6 @@ const AppContent = () => {
             <div className={`${commonClassName} whitespace-nowrap`}>OS</div>
           </>
         )
-      default:
-        return null
     }
   }
 
@@ -119,14 +117,18 @@ const AppContent = () => {
         <ClickAwayListener onClickAway={handleClickAway}>
           <Box>
             <IconButton
-              className='fixed top-3 right-3 z-100 rounded-md'
+              className='fixed top-1 right-3 z-100 rounded-md'
+              aria-label='open drawer'
+              aria-controls='setting-drawer'
+              aria-haspopup='true'
               ref={iconButtonRef}
+              size='small'
               onClick={() => setSelectOpen(!selectOpen)}
               sx={{
                 zIndex: theme.zIndex.appBar,
                 border: '1px solid',
                 borderColor: theme.palette.text.primary,
-                width: '100px',
+                width: '88px',
                 color: theme.palette.text.primary,
                 backgroundColor: theme.palette.background.paper,
                 '&:hover': {

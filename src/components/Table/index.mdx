@@ -1,11 +1,11 @@
 {/* src/components/Table/index.mdx */}
 
-import { useState } from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import { useTheme } from "@mui/material/styles";
-import { theme } from "@/lib/themes/theme";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { Meta, Canvas } from "@storybook/blocks";
+import { useState } from 'react'
+import { ThemeProvider } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
+import { theme } from '@/themes/theme'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { Meta, Canvas } from '@storybook/blocks'
 
 import {
   Box,
@@ -18,11 +18,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from "@mui/material";
+} from '@mui/material'
 
-import { CustomTableExample } from "@/components/Table/mock/Example";
+import { CustomTableExample } from '@/components/Table/mock/ExampleTable'
 
-<Meta title="Components/Table/CustomTable/Info" />
+<Meta title='Components/Table/CustomTable/Info' />
 
 <ThemeProvider theme={theme}>
 
@@ -48,7 +48,7 @@ MUI のデフォルトのテーブルをベースに、CustomTable は以下の�
 
 Example として、何らかのステータスの bool 状態を表示するカラム UI も表示させています
 
-<CustomTableExample defaultPageSize="5" />
+<CustomTableExample defaultPageSize='5' />
 
 ### 主要な Props
 

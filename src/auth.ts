@@ -1,3 +1,4 @@
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const password = import.meta.env.VITE_APP_PASSWORD
 
@@ -18,3 +19,4 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.style.pointerEvents = 'none'
   authenticateUser()
 })
+*/

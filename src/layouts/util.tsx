@@ -6,10 +6,12 @@ import {
   Drawer as MuiDrawer,
   type Theme,
 } from '@mui/material'
-import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import type React from 'react'
 
 import { getLayoutValue } from '@/constants/layout'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
+
+import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 
 const drawerWidth = getLayoutValue(LAYOUT_CONSTANTS.SIDEBAR.WIDTH_OPENED)
 
@@ -41,7 +43,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 })
 
 // AppBar
-export const AppBar = styled(MuiAppBar, {
+export const AppBar: React.ComponentType<AppBarProps> = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -60,9 +62,14 @@ export const AppBar = styled(MuiAppBar, {
 }))
 
 // Drawer
-export const Drawer = styled(MuiDrawer, {
+interface DrawerProps {
+  open?: boolean
+  theme?: Theme
+}
+
+export const Drawer: React.ComponentType<DrawerProps> = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})<DrawerProps>(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
   whiteSpace: 'nowrap',
@@ -78,7 +85,7 @@ export const Drawer = styled(MuiDrawer, {
 }))
 
 // DrawerHeader
-export const DrawerHeader = styled('div')(({ theme }) => ({
+export const DrawerHeader: React.ComponentType = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',

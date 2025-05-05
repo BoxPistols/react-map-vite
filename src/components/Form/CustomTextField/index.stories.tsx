@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import type { Meta, StoryObj } from '@storybook/react'
-import { type ChangeEvent, useState } from 'react'
-import React from 'react'
+import React, { type ChangeEvent, useState } from 'react'
 
-import CustomTextField from '.'
+import { CustomTextField } from '.'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof CustomTextField> = {
   title: 'Components/CustomTextField',
@@ -111,6 +111,32 @@ export const AllFeaturesSmall: Story = {
   },
 }
 
+// any型を避けるために適切な型を定義
+const InteractiveTextFieldExample = (
+  props: React.ComponentProps<typeof CustomTextField>
+) => {
+  const [value, setValue] = useState('')
+  const [hasError, setHasError] = useState(false)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value
+    setValue(newValue)
+    setHasError(newValue.length < 3 || newValue.length > 20)
+  }
+
+  return (
+    <CustomTextField
+      {...props}
+      value={value}
+      onChange={handleChange}
+      error={hasError}
+      helperText={
+        hasError ? '入力は3文字以上20文字以下である必要があります' : ''
+      }
+    />
+  )
+}
+
 export const InteractiveExample: Story = {
   args: {
     label: 'インタラクティブなテキストフィールド',
@@ -118,43 +144,25 @@ export const InteractiveExample: Story = {
     required: true,
     tooltip: '入力は3文字以上20文字以下である必要があります',
   },
-  render: (args) => {
-    const [value, setValue] = useState('')
-    const [hasError, setHasError] = useState(false)
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value
-      setValue(newValue)
-      setHasError(newValue.length < 3 || newValue.length > 20)
-    }
-
-    return (
-      <CustomTextField
-        {...args}
-        value={value}
-        onChange={handleChange}
-        error={hasError}
-        helperText={
-          hasError ? '入力は3文字以上20文字以下である必要があります' : ''
-        }
-      />
-    )
-  },
+  render: (args) => <InteractiveTextFieldExample {...args} />,
 }
 
+// SizeComparisonコンポーネント
+const SizeComparisonComponent = () => (
+  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+    <CustomTextField
+      label='通常サイズのテキストフィールド'
+      placeholder='ここにテキストを入力'
+      size='medium'
+    />
+    <CustomTextField
+      label='小さいサイズのテキストフィールド'
+      placeholder='ここにテキストを入力'
+      size='small'
+    />
+  </Box>
+)
+
 export const SizeComparison: Story = {
-  render: () => (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-      <CustomTextField
-        label='通常サイズのテキストフィールド'
-        placeholder='ここにテキストを入力'
-        size='medium'
-      />
-      <CustomTextField
-        label='小さいサイズのテキストフィールド'
-        placeholder='ここにテキストを入力'
-        size='small'
-      />
-    </Box>
-  ),
+  render: () => <SizeComparisonComponent />,
 }

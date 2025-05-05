@@ -2,11 +2,10 @@
 import { Box } from '@mui/material'
 
 import MainGrid from '@/components/MainGrid'
-import { CustomTableExample } from '@/components/Table/mock/Example'
+import { CustomTableExample } from '@/components/Table/mock/ExampleTable'
+import type { PageProps } from '@/types/type'
 
-type NaviPageProps = object
-
-const NaviPage: React.FC<NaviPageProps> = () => {
+const NaviPage = (_props: PageProps) => {
   return (
     <div>
       <MainGrid overview='Navi'>

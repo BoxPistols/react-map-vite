@@ -1,13 +1,12 @@
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
-import CustomSelect from '@/components/Form/CustomSelect'
-import CustomTextField from '@/components/Form/CustomTextField'
+import { CustomSelect } from '@/components/Form/CustomSelect'
+import { CustomTextField } from '@/components/Form/CustomTextField'
 import MainGrid from '@/components/MainGrid'
+import type { PageProps } from '@/types/type'
 
-type DashboardPageProps = object
-
-const DashboardPage: React.FC<DashboardPageProps> = () => {
+const DashboardPage = (_props: PageProps) => {
   return (
     <>
       <MainGrid overview='Dashboard'>
@@ -46,10 +45,22 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
                 flexDirection={'row'}
                 my={4}
                 gap={4}>
-                <Button variant='contained' color='secondary'>
-                  Click me
-                </Button>
+                <Button color='secondary'>Click me</Button>
                 <Button>Click me</Button>
+              </Box>
+              {/* Button UI Test */}
+              <Box
+                display={{ xs: 'block', sm: 'flex' }}
+                flexDirection={'row'}
+                my={4}
+                gap={4}>
+                <Button size='small'>Small</Button>
+                <Button size='medium'>Medium</Button>
+                <Button size='large'>Large</Button>
+
+                <Button variant='outlined'>Outlined</Button>
+                <Button variant='text'>Text</Button>
+                <Button disabled>Disabled</Button>
               </Box>
             </Box>
           </form>

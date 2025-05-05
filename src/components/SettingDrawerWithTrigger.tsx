@@ -4,10 +4,10 @@ import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwo
 import { Box, useTheme } from '@mui/material'
 import type { ReactNode } from 'react'
 
-import { SettingDrawer } from './SettingDrawer'
-
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
 import { useSettingDrawerState } from '@/hooks/useSettingDrawerState'
+
+import { SettingDrawer } from './SettingDrawer'
 
 interface SettingDrawerWithTriggerProps {
   sideNavWidth: number

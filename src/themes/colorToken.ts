@@ -124,7 +124,7 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
   text: {
     primary: isLight ? '#223354' : '#ffffff',
     secondary: isLight ? '#4A515E' : '#cfcfcf',
-    disabled: '#9e9e9e',
+    disabled: isLight ? greyShades[400] : greyShades[500],
     white: '#ffffff',
   },
   background: {
@@ -138,7 +138,7 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
     active: isLight ? '#f5f5f5' : '#333333',
   },
   surface: {
-    background: isLight ? '#fafbfc' : '#616161',
+    background: isLight ? '#fafbfc' : '#4e4e4e',
     backgroundDark: '#616161',
     backgroundDisabled: isLight ? '#e0e0e0' : '#616161',
   },
@@ -149,9 +149,9 @@ const createThemeColors = (isLight: boolean): ThemeColors => ({
     action: amber[400],
     disabled: isLight ? '#e0e0e0' : '#616161',
   },
-  divider: isLight ? '#E0E0E0' : '#616161',
+  divider: isLight ? '#E0E0E0' : '#323235',
   common: {
-    black: isLight ? '#123456' : '#000000',
+    black: isLight ? '#323538' : '#2c2828',
     white: '#ffffff',
   },
 })

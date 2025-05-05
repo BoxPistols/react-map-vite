@@ -7,8 +7,9 @@ import {
   useTheme,
 } from '@mui/material'
 import { FormControl, InputLabel } from '@mui/material'
-import type { CSSProperties } from '@mui/material/styles/createTypography'
 import styled from '@mui/material/styles/styled'
+
+import type { CSSProperties } from '@mui/material/styles/createTypography'
 
 type CustomTextFieldProps = TextFieldProps & {
   label: string
@@ -158,4 +159,4 @@ const CustomTextField = ({
   )
 }
 
-export default CustomTextField
+export { CustomTextField }

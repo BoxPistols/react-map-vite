@@ -1,10 +1,16 @@
 // src/components/Table/mock/Example.tsx
-import { dummyData } from './dummyData'
-
 import { CustomTable } from '@/components/Table/TableComponents/CustomTable'
 import type { User } from '@/types/type'
 
-export const CustomTableExample = ({ defaultPageSize = 10 }) => {
+import { dummyData } from './dummyData'
+
+interface CustomTableExampleProps {
+  defaultPageSize?: number // Make this optional with the ? operator
+}
+
+export const CustomTableExample = ({
+  defaultPageSize = 10, // Add default value
+}: CustomTableExampleProps) => {
   // カラム定義
   const columns = [
     { header: 'ID', accessor: 'id' },
@@ -20,18 +26,21 @@ export const CustomTableExample = ({ defaultPageSize = 10 }) => {
   // CRUD handlers
   const handleView = (row: Record<string, string | number | boolean>) => {
     console.log('Viewing:', row)
+    // biome-ignore lint/style/useTemplate: <explanation>
     alert('Viewing: ' + JSON.stringify(row, null, 2))
     // 詳細表示のロジック
   }
 
   const handleEdit = (row: Record<string, string | number | boolean>) => {
     console.log('Editing:', row)
+    // biome-ignore lint/style/useTemplate: <explanation>
     alert('Editing: ' + JSON.stringify(row, null, 2))
     // 編集モーダルを開くなどの編集ロジック
   }
 
   const handleDelete = (row: Record<string, string | number | boolean>) => {
     console.log('Deleting:', row)
+    // biome-ignore lint/style/useTemplate: <explanation>
     alert('Deleting: ' + JSON.stringify(row, null, 2))
     // 削除確認モーダルを表示するなどの削除ロジック
   }

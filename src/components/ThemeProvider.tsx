@@ -1,27 +1,33 @@
-import { ThemeProvider as MuiThemeProvider } from '@mui/material'
-import CssBaseline from '@mui/material/CssBaseline'
+import { CssBaseline } from '@mui/material'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
-import { type ReactNode, useEffect } from 'react'
+import { useEffect } from 'react'
+import type { ReactNode } from 'react'
 
-import { hookUseTheme } from '@/hooks/useTheme'
+import { useTheme } from '../hooks/useTheme'
 
-interface ThemeProviderProps {
+import type { ThemeMode } from '../types/theme'
+
+export interface ThemeProviderProps {
   children: ReactNode
+  defaultMode?: ThemeMode
 }
-
-export const ThemeProvide = ({ children }: ThemeProviderProps) => {
-  const { theme, mode } = hookUseTheme()
+/**
+ * MUI 6に対応したテーマプロバイダー
+ */
+export const ThemeProvider = ({
+  children,
+  defaultMode = 'light', // デフォルトのテーマはsystemでも良い
+}: ThemeProviderProps) => {
+  const { theme, mode } = useTheme(defaultMode)
 
   useEffect(() => {
     console.log(`Current theme mode: ${mode}`) // 状態確認のために使用
   }, [mode])
 
   return (
-    <CssVarsProvider theme={theme}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </MuiThemeProvider>
+    <CssVarsProvider theme={theme} defaultMode={defaultMode}>
+      <CssBaseline />
+      {children}
     </CssVarsProvider>
   )
 }

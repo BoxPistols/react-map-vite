@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-import { colorData } from './src/lib/themes/colorToken'
+const { colorData } = require('./src/themes/colorToken')
 
 // ヘルパー関数
 const createColorSet = (colorKey) => ({

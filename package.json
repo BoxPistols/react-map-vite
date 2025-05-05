@@ -16,98 +16,115 @@
     "map",
     "maplibre-gl"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/react-map-vite.es.js",
-      "require": "./dist/react-map-vite.umd.js"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.js"
+    },
+    "./styles": {
+      "types": "./dist/styles/index.d.ts",
+      "import": "./dist/styles/index.es.js",
+      "require": "./dist/styles/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.es.js",
+      "require": "./dist/components/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.es.js",
+      "require": "./dist/hooks/index.js"
+    },
+    "./layouts": {
+      "types": "./dist/layouts/index.d.ts",
+      "import": "./dist/layouts/index.es.js",
+      "require": "./dist/layouts/index.js"
     },
     "./theme": {
-      "types": "./dist/lib/themes/theme.d.ts",
-      "import": "./dist/lib/themes/theme.js",
-      "require": "./dist/lib/themes/theme.cjs"
-    },
-    "./styles.css": "./dist/style.css"
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.es.js",
+      "require": "./dist/theme/index.js"
+    }
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BoxPistols/react-map-vite.git"
-  },
-  "sideEffects": false,
   "scripts": {
-    "build:lib": "pnpm run build:types && vite build --mode lib",
-    "build:types": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "pnpm run build:lib",
-    "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview",
+    "build": "vite build && tsc --emitDeclarationOnly --outDir dist",
+    "build-sandbox": "vite build --mode sandbox",
+    "prepublishOnly": "pnpm run build",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "fix": "eslint . --ext .ts,.tsx --fix",
+    "fix": "pnpm run lint:fix && pnpm run format",
+    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build:dev": "pnpm run build",
-    "build:storybook": "storybook build",
-    "build:all": "pnpm run build && pnpm run build:storybook",
-    "prepare": "husky install",
-    "publish:github": "pnpm publish --no-git-checks"
+    "build-storybook": "storybook build",
+    "build-all": "pnpm run build && pnpm run build-storybook",
+    "prepare": "husky",
+    "chromatic": "npx chromatic --project-token=chpt_3237e259e6d7ecb"
+  },
+  "peerDependencies": {
+    "@mui/material": "^6.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.6",
-    "@mui/material": "^6.4.6",
-    "@mui/system": "^6.4.6",
-    "@storybook/preview-api": "^8.6.3",
+    "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.1",
+    "@mui/system": "^6.1.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/typography": "^0.5.13",
     "@types/maplibre-gl": "^1.14.0",
     "@types/react-router-dom": "^5.3.3",
-    "cli-table3": "^0.6.5",
+    "cli-table3": "^0.6.4",
     "init": "^0.1.2",
     "map-or-similar": "^1.5.0",
-    "mapbox-gl": "^3.10.0",
-    "maplibre-gl": "^4.7.1",
+    "mapbox-gl": "^3.3.0",
+    "maplibre-gl": "^4.5.0",
     "memoizerific": "^1.11.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.0",
-    "rollup": "^4.34.9",
-    "string-width": "^4.2.3",
-    "vercel": "^39.4.2"
+    "react-router-dom": "^6.23.1",
+    "string-width": "^4.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.1",
-    "@babel/eslint-parser": "^7.27.1",
     "@chromatic-com/storybook": "^3.2.5",
-    "@emotion/babel-plugin": "^11.13.5",
-    "@eslint/js": "^9.24.0",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "@storybook/addon-a11y": "^8.6.3",
     "@storybook/addon-essentials": "^8.6.3",
     "@storybook/addon-interactions": "^8.6.3",
     "@storybook/addon-links": "^8.6.3",
     "@storybook/addon-mdx-gfm": "^8.6.3",
+    "@storybook/addon-onboarding": "^8.6.3",
     "@storybook/blocks": "^8.6.3",
+    "@storybook/manager-api": "^8.6.3",
+    "@storybook/preview-api": "^8.6.3",
     "@storybook/react": "^8.6.3",
     "@storybook/react-vite": "^8.6.3",
     "@storybook/test": "^8.6.3",
-    "@tailwindcss/forms": "^0.5.10",
-    "@types/autoprefixer": "^10.2.4",
-    "@types/node": "^20.17.23",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@types/tailwindcss": "^3.1.0",
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "chromatic": "^11.25.2",
+    "globals": "^15.1.0",
+    "postcss": "^8.4.38",
+    "react-map-gl": "^7.1.7",
+    "storybook": "^8.6.3",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vite-plugin-dts": "^4.5.3",
+    "@eslint/js": "^9.24.0",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
-    "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.20",
-    "esbuild": "^0.24.2",
     "eslint": "^9.24.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
@@ -115,23 +132,13 @@
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "globals": "^15.15.0",
     "husky": "^9.1.5",
     "lint-staged": "^15.2.9",
-    "postcss": "^8.5.3",
     "prettier": "^3.5.3",
-    "react-map-gl": "^7.1.9",
-    "storybook": "^8.6.3",
-    "tailwindcss": "^3.4.17",
-    "terser": "^5.39.0",
     "turbo": "^2.1.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.29.1",
-    "vite": "^6.2.0",
-    "vite-plugin-dts": "^4.5.3"
+    "typescript-eslint": "^8.29.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -143,11 +150,5 @@
   },
   "volta": {
     "node": "20.13.1"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "esbuild"
-    ],
-    "onlyBuiltDependencies": []
   }
 }
