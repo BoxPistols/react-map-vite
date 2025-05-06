@@ -3,7 +3,6 @@ import { Box } from '@mui/material'
 
 import { theme } from '@/themes/theme'
 
-// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 export const formatCellValue = (value: unknown): React.ReactNode => {
   if (value === null || value === undefined) {
     return '-'

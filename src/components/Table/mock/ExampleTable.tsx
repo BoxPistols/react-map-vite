@@ -26,21 +26,18 @@ export const CustomTableExample = ({
   // CRUD handlers
   const handleView = (row: Record<string, string | number | boolean>) => {
     console.log('Viewing:', row)
-    // biome-ignore lint/style/useTemplate: <explanation>
     alert('Viewing: ' + JSON.stringify(row, null, 2))
     // 詳細表示のロジック
   }
 
   const handleEdit = (row: Record<string, string | number | boolean>) => {
     console.log('Editing:', row)
-    // biome-ignore lint/style/useTemplate: <explanation>
     alert('Editing: ' + JSON.stringify(row, null, 2))
     // 編集モーダルを開くなどの編集ロジック
   }
 
   const handleDelete = (row: Record<string, string | number | boolean>) => {
     console.log('Deleting:', row)
-    // biome-ignore lint/style/useTemplate: <explanation>
     alert('Deleting: ' + JSON.stringify(row, null, 2))
     // 削除確認モーダルを表示するなどの削除ロジック
   }

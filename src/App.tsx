@@ -42,7 +42,6 @@ const AppContent = () => {
 
   const location = useLocation()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // ページが変わるたびにDrawerを閉じる
     setIsSettingDrawerOpen(false)

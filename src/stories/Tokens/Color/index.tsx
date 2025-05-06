@@ -88,7 +88,6 @@ export const Color = () => {
   const theme = useTheme<Theme>()
   const [, forceUpdate] = useState({})
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // テーマが変更されたときに強制的に再レンダリングを行う
     forceUpdate({})

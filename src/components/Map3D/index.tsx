@@ -33,7 +33,6 @@ export const Map3D: React.FC<Map3DProps> = ({
   const { mode } = hookUseTheme()
   const theme = useTheme()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (mapContainer.current && !mapInstance.current) {
       const map = new maplibregl.Map({

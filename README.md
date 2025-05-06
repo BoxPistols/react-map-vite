@@ -27,59 +27,17 @@ brew install pnpm
 [pnpm Official](https://pnpm.io/)
 [pnpm Installation](https://pnpm.io/installation)
 
-## ESLint と Prettier のインストール
-
-### 1. ESLint と Prettier のインストール
+### ESLint と Prettier のインストール
 
 ```sh
-pnpm add -D eslint prettier eslint-config-prettier eslint-plugin-prettier
+# プロジェクトに ESLint と Prettier を追加
+pnpm add -D eslint prettier eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-### 2. ESLint の設定
-
-プロジェクトのルートディレクトリに `.eslintrc.js` ファイルを作成し、以下の内容を追加します：
-
-```javascript
-module.exports = {
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-  rules: {
-    // ここにカスタムルールを追加
-  },
-}
-```
-
-### 3. Prettier の設定
-
-プロジェクトのルートディレクトリに `.prettierrc` ファイルを作成し、以下の内容を追加します：
-
-```json
-{
-  "singleQuote": true,
-  "trailingComma": "es5"
-}
-```
-
-### 4. スクリプトの追加
-
-`package.json` の `scripts` セクションに以下を追加します：
-
-```json
-"lint": "eslint .",
-"format": "prettier --write ."
-```
-
-### 5. 使用方法
-
-- コードをLintするには、以下のコマンドを実行します：
+### 依存パッケージのインストール
 
 ```sh
-pnpm run lint
-```
-
-- コードを整形するには、以下のコマンドを実行します：
-
-```sh
-pnpm run format
+pnpm install
 ```
 
 ## Scripts
@@ -88,16 +46,129 @@ pnpm run format
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "format": "biome format --write .",
-    "lint": "biome lint --write ./src",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss}\"",
+    "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
     "fix": "pnpm run lint && pnpm run format",
     "preview": "vite preview",
-    "sb": "storybook dev -p 6006",
-    "sb-build": "storybook build",
-    "build-all": "pnpm run build && pnpm run sb-build",
-    "prepare": "husky"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build-all": "pnpm run build && pnpm run build-storybook",
+    "prepare": "husky install"
   },
 ```
+
+### 主なターミナル実行コマンド
+
+#### ローカル開発サーバを起動
+
+```sh
+pnpm dev
+```
+
+#### Lintチェック
+
+```sh
+pnpm lint
+```
+
+#### ファイルの整形と自動改善
+
+```sh
+pnpm fix
+```
+
+#### プロダクション用ビルド
+
+```sh
+pnpm run build
+```
+
+#### Storybook
+
+```sh
+pnpm storybook
+```
+
+### Node 管理
+
+Node.jsのバージョン管理にはVoltaを推奨します
+
+```sh
+# install Volta
+$ curl https://get.volta.sh | bash
+# or
+$ brew install volta
+$ volta setup
+$ cat ~/.zshrc（各自の環境ファイル）
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+```
+
+#### Volta ドキュメント
+
+- [Volta のインストールと使い方 #Node.js - Qiita](https://qiita.com/YoshinoriKanno/items/1a41b840a68dea2fb7e7)
+- <https://volta.sh/>
+- [brew install volta](https://formulae.brew.sh/formula/volta)
+
+## 自動整形
+
+### VSCode 拡張ツール
+
+- ESLint <https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint>
+- Prettier <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
+- ErrorLens <https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens>
+- MarkdownLint <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
+- 他 .vscode/extensions.json 参照
+
+VSCode 拡張検索枠に @recommended を入力すると、この開発環境に必要な拡張機能が表示されます
+
+![Code 2024-07-10 20 59 57](https://github.com/BoxPistols/react-drone-vite/assets/10333049/518a259e-09eb-43cc-8e3b-9b841226fcaa)
+
+#### VSCode 設定
+
+基本的に上記拡張ツールを入れると使えるはずですが、`Cmd + S`で自動整形されない、動かない場合は以下を確認
+
+- `Cmd + Shift + P` 「フォーマット」
+- フォーマットを Prettier に選択、既定ツールにする
+- `Cmd + ,（カンマ）`
+- ワークスペース
+- Format On Save をオン
+
+### 運用フロー
+
+#### コミット・プッシュ前に
+
+- `pnpm run fix`で全ファイル一括整形+自動改善可能なものは自動改善
+- この操作を習慣づけることで個々の書式による差分がなくなり、エラー検知も常時行える
+- 動的な箇所の変更などで挙動やデプロイの懸念がある場合は`pnpm run build`を実行し、エラーが無いか確認する
+
+↑
+
+##### husky にて自動化
+
+もし`git commit`を実行した時に自動で`pnpm run fix`が走らなければ Local に husky が入っていません。その時は以下の操作をして husky を入れてください
+
+```sh
+pnpm run prepare
+# or
+pnpm add -D husky
+pnpm dlx husky install
+chmod -R +x .husky
+```
+
+pnpm、`git commit`を実行して`pnpm run fix`が走っているか確認してください
+
+## React + TypeScript + Vite + ESLint + Prettier
+
+- [React 公式ドキュメント](https://ja.react.dev/blog/2023/03/16/introducing-react-dev/)：React の基本概念、チュートリアル、API リファレンスなど
+- [TypeScript ハンドブック](https://www.typescriptlang.org/)：TypeScript の言語機能、ベストプラクティス、サンプルコードなど
+- [Vite 公式ドキュメント](https://ja.vitejs.dev/)：Vite の設定、プラグイン、ビルドオプションなど
+- [ESLint 公式ドキュメント](https://eslint.org/)：ESLint の設定、ルール、プラグインなど
+- [Prettier 公式ドキュメント](https://prettier.io/)：Prettier の設定、オプション、インテグレーションなど
+
+---
 
 ## プライベートパッケージのインストール方法
 
@@ -184,118 +255,7 @@ PRがマージされると、自動的に以下が実行されます：
 - マイナーバージョン（0.1.0）やメジャーバージョン（1.0.0）への更新が必要な場合は、PRを作成する前に手動でpackage.jsonを更新してください
 - CIワークフローの詳細は`.github/workflows/`ディレクトリ内のYAMLファイルを参照してください
 
-### 主なターミナル実行コマンド
-
-#### ローカル開発サーバを起動
-
-```sh
-pnpm dev
-```
-
-#### Lintチェック
-
-```sh
-pnpm lint
-```
-
-#### ファイルの整形と自動改善
-
-```sh
-pnpm fix
-```
-
-#### プロダクション用ビルド
-
-```sh
-pnpm run build
-```
-
-#### Storybook
-
-```sh
-pnpm sb
-```
-
-### Node 管理
-
-Node.jsのバージョン管理にはVoltaを推奨します
-
-```sh
-# install Volta
-$ curl https://get.volta.sh | bash
-# or
-$ brew install volta
-$ volta setup
-$ cat ~/.zshrc（各自の環境ファイル）
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-```
-
-#### Volta ドキュメント
-
-- [Volta のインストールと使い方 #Node.js - Qiita](https://qiita.com/YoshinoriKanno/items/1a41b840a68dea2fb7e7)
-- <https://volta.sh/>
-- [brew install voltahttps://formulae.brew.sh/formula/volta](https://formulae.brew.sh/formula/volta)
-
-## 自動整形
-
-### VSCode 拡張ツール
-
-- Biome <https://marketplace.visualstudio.com/items?itemName=biomejs.biome>
-- ErrorLens <https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens>
-- MarkdownLint <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
-- 他 .vscode/extensions.json 参照
-
-VSCode 拡張検索枠に @recommended を入力すると、この開発環境に必要な拡張機能が表示されます
-
-![Code 2024-07-10 20 59 57](https://github.com/BoxPistols/react-drone-vite/assets/10333049/518a259e-09eb-43cc-8e3b-9b841226fcaa)
-
-#### VSCode 設定
-
-基本的に上記拡張ツール２点入れると使えるはずですが、`Cmd + S`で自動整形されない、動かない場合は以下を確認
-
-- `Cmd + Shift + P` 「フォーマット」
-- フォーマットを Biome に選択、既定ツールにする
-- `Cmd + ,（カンマ）`
-- ワークスペース
-- Format on Save をオン
-
-### 運用
-
-#### コミット・プッシュ前に
-
-- `pnpm run fix`で全ファイル一括整形+自動改善可能なものは自動改善
-- この操作を習慣づけることで個々の書式による差分がなくなり、エラー検知も常時行える
-- 動的な箇所の変更などで挙動やデプロイの懸念がある場合は`pnpm run build`を実行し、エラーが無いか確認する
-
-↑
-
-##### husky にて自動化
-
-もし`git commit`を実行した時に自動で`pnpm run fix`が走らなければ Local に husky が入っていません。その時は以下の操作をして husky を入れてください
-
-```sh
-pnpm run prepare
-# or
-pnpm add -D husky
-pnpm dlx husky install
-chmod -R +x .husky
-```
-
-pnpm、`git commit`を実行して`pnpm run fix`が走っているか確認してください
-
-## React + TypeScript + Vite + Biome
-
-- [React 公式ドキュメント](https://ja.react.dev/blog/2023/03/16/introducing-react-dev/)：React の基本概念、チュートリアル、API リファレンスなど
-- [TypeScript ハンドブック](https://www.typescriptlang.org/)：TypeScript の言語機能、ベストプラクティス、サンプルコードなど
-- [Vite 公式ドキュメント](https://ja.vitejs.dev/)：Vite の設定、プラグイン、ビルドオプションなど
-- [Biome 公式ドキュメント](https://biomejs.dev/ja)：Biome の設定、ルール、オプション設定など
-
-# @boxpistols/react-map-vite
-
-## パッケージの公開と管理
+## @boxpistols/react-map-vite パッケージの公開と管理
 
 ### 1. バージョン管理
 
