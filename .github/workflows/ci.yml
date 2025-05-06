@@ -63,7 +63,7 @@ jobs:
 
       # ステップ6: ライブラリのビルド
       - name: Build library
-        run: pnpm run build:lib
+        run: pnpm run build
 
       # ステップ7: Storybookのビルド（失敗しても続行）
       - name: Build Storybook
