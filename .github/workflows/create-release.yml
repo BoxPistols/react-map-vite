@@ -35,6 +35,14 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+          # タグの存在確認
+          if git rev-parse "v${{ steps.get-version.outputs.version }}" >/dev/null 2>&1; then
+            echo "タグ v${{ steps.get-version.outputs.version }} は既に存在します。"
+            exit 0
+          fi
+
+          # タグが存在しない場合のみ作成
           git tag -a v${{ steps.get-version.outputs.version }} -m "Release v${{ steps.get-version.outputs.version }}"
           git push origin v${{ steps.get-version.outputs.version }}
 
