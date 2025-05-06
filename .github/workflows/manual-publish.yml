@@ -48,7 +48,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: ライブラリのビルド
-        run: pnpm run build:lib
+        run: pnpm run build
 
       - name: 認証情報の確認
         run: |
