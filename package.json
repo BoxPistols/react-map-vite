@@ -14,7 +14,7 @@
   "keywords": [
     "react",
     "map",
-    "maplibre-gl"
+    "maplibre"
   ],
   "sideEffects": false,
   "exports": {
