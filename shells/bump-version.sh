@@ -3,6 +3,12 @@
 # エラーが発生したら即座に終了
 set -e
 
+# Gitの文字エンコーディング設定
+git config --local i18n.commitEncoding UTF-8
+git config --local i18n.logOutputEncoding UTF-8
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
+
 # OS判定
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	# macOSの場合
@@ -46,8 +52,7 @@ else
 	sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" package.json
 fi
 
-# 変更をコミット（UTF-8エンコーディングを指定）
-git config --local i18n.commitEncoding UTF-8
+# 変更をコミット
 git add package.json
 git commit -m "バージョンを$CURRENT_VERSIONから$NEW_VERSIONに更新"
 git push origin main
