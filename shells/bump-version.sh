@@ -3,6 +3,20 @@
 # エラーが発生したら即座に終了
 set -e
 
+# GitHub CLIがインストールされているか確認
+if ! command -v gh &>/dev/null; then
+	echo "エラー: GitHub CLI (gh) がインストールされていません"
+	echo "インストール方法: https://cli.github.com/manual/installation"
+	exit 1
+fi
+
+# GitHub CLIにログインしているか確認
+if ! gh auth status &>/dev/null; then
+	echo "エラー: GitHub CLIにログインしていません"
+	echo "ログイン方法: gh auth login"
+	exit 1
+fi
+
 # Gitの文字エンコーディング設定
 git config --local i18n.commitEncoding UTF-8
 git config --local i18n.logOutputEncoding UTF-8
@@ -61,4 +75,10 @@ git push origin main
 git tag "v$NEW_VERSION"
 git push origin "v$NEW_VERSION"
 
-echo "✅ バージョンを$CURRENT_VERSIONから$NEW_VERSIONに更新し、タグを発行しました。"
+# GitHub Releaseを作成
+gh release create "v$NEW_VERSION" \
+	--title "Release v$NEW_VERSION" \
+	--notes "Version $NEW_VERSION release" \
+	--target main
+
+echo "✅ バージョンを$CURRENT_VERSIONから$NEW_VERSIONに更新し、タグとリリースを発行しました。"
