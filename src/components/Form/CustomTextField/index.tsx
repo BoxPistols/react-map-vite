@@ -1,11 +1,6 @@
 // CustomTextField
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
-import {
-  TextField,
-  type TextFieldProps,
-  Tooltip,
-  useTheme,
-} from '@mui/material'
+import { TextField, type TextFieldProps, Tooltip } from '@mui/material'
 import { FormControl, InputLabel } from '@mui/material'
 import styled from '@mui/material/styles/styled'
 
@@ -76,7 +71,6 @@ const CustomTextField = ({
   placeholder = '入力してください',
   ...props
 }: CustomTextFieldProps) => {
-  const theme = useTheme()
   const inputId =
     props.id || `custom-textfield-${label.replace(/\s+/g, '-').toLowerCase()}`
   const inputName = name || inputId
@@ -90,7 +84,7 @@ const CustomTextField = ({
         size={size as 'small' | undefined}
         sx={{
           lineHeight: size === 'small' ? '1.5' : '1.75',
-          color: theme.palette.text.primary,
+
           marginBottom: 0,
         }}>
         {required && (
@@ -101,7 +95,6 @@ const CustomTextField = ({
               mr: 1,
               ml: 0,
               lineHeight: '1.25',
-              color: theme.palette.error.main,
             }}>
             *
           </RequiredMark>
