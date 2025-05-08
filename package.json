@@ -1,6 +1,6 @@
 {
   "name": "@boxpistols/react-map-vite",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "type": "module",
   "main": "./dist/react-map-vite.umd.js",
   "module": "./dist/react-map-vite.es.js",
@@ -42,11 +42,6 @@
       "types": "./dist/layouts/index.d.ts",
       "import": "./dist/layouts/index.es.js",
       "require": "./dist/layouts/index.js"
-    },
-    "./theme": {
-      "types": "./dist/theme/index.d.ts",
-      "import": "./dist/theme/index.es.js",
-      "require": "./dist/theme/index.js"
     }
   },
   "publishConfig": {
@@ -55,7 +50,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly --outDir dist",
+    "build": "vite build --mode lib && tsc --emitDeclarationOnly --outDir dist",
     "build-sandbox": "vite build --mode sandbox",
     "prepublishOnly": "pnpm run build",
     "format": "prettier --write .",
