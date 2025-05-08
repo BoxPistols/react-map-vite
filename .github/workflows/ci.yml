@@ -67,7 +67,7 @@ jobs:
 
       # ステップ7: Storybookのビルド（失敗しても続行）
       - name: Build Storybook
-        run: pnpm run build:sb
+        run: pnpm run build-storybook
         continue-on-error: true
 
       # ステップ8: ビルド成果物をアーティファクトとして保存
@@ -139,7 +139,9 @@ jobs:
 
       # ステップ7: パッケージをGitHub Packagesに公開
       - name: Publish package
-        run: pnpm publish --no-git-checks
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+          pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
