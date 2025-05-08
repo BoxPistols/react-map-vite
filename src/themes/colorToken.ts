@@ -85,7 +85,7 @@ const greyShades: GreyShades = {
 
 const createThemeColors = (isLight: boolean): ThemeColors => ({
   primary: createColorSet(
-    isLight ? '#0e0d6a' : '#4f4ea7',
+    isLight ? '#0e0d6a' : '#7778fd',
     isLight ? '#11114a' : '#272675',
     isLight ? '#5451d6' : '#5a58b4',
     isLight ? '#b5b4ee' : '#b1b0e9'
