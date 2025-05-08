@@ -34,9 +34,14 @@ export default defineConfig(({ mode }) => {
     ...commonConfig,
     build: {
       lib: {
-        entry: resolve(__dirname, 'src/index.ts'),
-        name: 'ReactMapVite',
-        fileName: (format) => `react-map-vite.${format}.js`,
+        entry: {
+          index: resolve(__dirname, 'src/index.ts'),
+          components: resolve(__dirname, 'src/components/index.ts'),
+          theme: resolve(__dirname, 'src/theme/index.ts'),
+        },
+        formats: ['es', 'cjs'],
+        fileName: (format, entryName) =>
+          format === 'es' ? `${entryName}.es.js` : `${entryName}.js`,
       },
       rollupOptions: {
         external: [

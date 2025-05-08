@@ -42,6 +42,16 @@
       "types": "./dist/layouts/index.d.ts",
       "import": "./dist/layouts/index.es.js",
       "require": "./dist/layouts/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.es.js",
+      "require": "./dist/theme/index.js"
+    },
+    "./themes": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.es.js",
+      "require": "./dist/theme/index.js"
     }
   },
   "publishConfig": {
