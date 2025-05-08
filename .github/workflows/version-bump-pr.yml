@@ -29,31 +29,25 @@ jobs:
         with:
           node-version: '20.13.1'
 
-      - name: パッチバージョン更新
-        id: version-bump
+      - name: バージョン取得＆重複チェック
+        id: get-version
         run: |
-          # 現在のバージョンを取得
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-
-          # バージョンを分解
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
-
-          # パッチバージョンを更新
-          NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
-
-          # package.jsonを更新
-          sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" package.json
-
-          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "old_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-
-      - name: 変更をコミット
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add package.json
-          git commit -m "バージョンを${{ steps.version-bump.outputs.old_version }}から${{ steps.version-bump.outputs.new_version }}に更新"
-          git push
+          VERSION=$(node -p "require('./package.json').version")
+          # 既存タグ一覧を取得
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            # 既存ならバージョンを+1
+            IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+            NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+            echo "バージョン $VERSION は既に存在するため、$NEW_VERSION に更新します。"
+            sed -i "s/\"version\": \"$VERSION\"/\"version\": \"$NEW_VERSION\"/" package.json
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add package.json
+            git commit -m "mainマージ時にバージョンを$VERSIONから$NEW_VERSIONに自動更新"
+            git push
+            VERSION=$NEW_VERSION
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: PRにコメント
         uses: actions/github-script@v6
