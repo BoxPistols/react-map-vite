@@ -54,7 +54,7 @@ fi
 
 # 変更をコミット
 git add package.json
-git commit -m "バージョンを$CURRENT_VERSIONから$NEW_VERSIONに更新"
+git commit --allow-empty -m "Update version to $NEW_VERSION" --no-edit
 git push origin main
 
 # タグを発行
