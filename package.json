@@ -49,9 +49,9 @@
       "require": "./dist/theme/index.js"
     },
     "./themes": {
-      "types": "./dist/theme/index.d.ts",
-      "import": "./dist/theme/index.es.js",
-      "require": "./dist/theme/index.js"
+      "types": "./dist/themes/index.d.ts",
+      "import": "./dist/themes/index.es.js",
+      "require": "./dist/themes/index.js"
     }
   },
   "publishConfig": {
