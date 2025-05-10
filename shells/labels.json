@@ -1,47 +1,47 @@
 [
-	{
-		"color": "d876e3",
-		"description": "UIUXデザイン",
-		"name": "UIUX"
-	},
-	{
-		"color": "0075ca",
-		"description": "ドキュメントの追加 更新",
-		"name": "ドキュメント"
-	},
-	{
-		"color": "B60205",
-		"description": "最優先課題",
-		"name": "バグ"
-	},
-	{
-		"color": "7057ff",
-		"description": "バックエンド対応",
-		"name": "バックエンド"
-	},
-	{
-		"color": "008672",
-		"description": "フロントエンド対応",
-		"name": "フロントエンド"
-	},
-	{
-		"color": "D93F0B",
-		"description": "仕様変更に関する対応",
-		"name": "仕様変更"
-	},
-	{
-		"color": "B3FA11",
-		"description": "今ないけど必要な機能",
-		"name": "機能追加：高"
-	},
-	{
-		"color": "16C9F5",
-		"description": "求職者画面の課題対応",
-		"name": "求職者画面"
-	},
-	{
-		"color": "C5DEF5",
-		"description": "開発環境 パッケージの追加 変更 更新",
-		"name": "環境構築"
-	}
+  {
+    "color": "d876e3",
+    "description": "UIUXデザイン",
+    "name": "UIUX"
+  },
+  {
+    "color": "0075ca",
+    "description": "ドキュメントの追加 更新",
+    "name": "ドキュメント"
+  },
+  {
+    "color": "B60205",
+    "description": "最優先課題",
+    "name": "バグ"
+  },
+  {
+    "color": "7057ff",
+    "description": "バックエンド対応",
+    "name": "バックエンド"
+  },
+  {
+    "color": "008672",
+    "description": "フロントエンド対応",
+    "name": "フロントエンド"
+  },
+  {
+    "color": "D93F0B",
+    "description": "仕様変更に関する対応",
+    "name": "仕様変更"
+  },
+  {
+    "color": "B3FA11",
+    "description": "今ないけど必要な機能",
+    "name": "機能追加：高"
+  },
+  {
+    "color": "16C9F5",
+    "description": "コンテンツの課題対応",
+    "name": "コンテンツ"
+  },
+  {
+    "color": "C5DEF5",
+    "description": "開発環境 パッケージの追加 変更 更新",
+    "name": "環境構築"
+  }
 ]
