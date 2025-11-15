@@ -142,7 +142,7 @@ export const WithAction: Story = {
       <Alert
         severity="warning"
         action={
-          <button onClick={() => alert('アクション実行')}>実行</button>
+          <Button onClick={() => alert('アクション実行')}>実行</Button>
         }
       >
         カスタムアクション付きアラート
