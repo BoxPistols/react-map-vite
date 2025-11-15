@@ -131,236 +131,175 @@ export const Dense: Story = {
   ),
 }
 
-export const Sorting: Story = {
-  render: () => {
-    type Order = 'asc' | 'desc'
-    type OrderBy = keyof Data
+const SortingExample = () => {
+  type Order = 'asc' | 'desc'
+  type OrderBy = keyof Data
 
-    const [order, setOrder] = useState<Order>('asc')
-    const [orderBy, setOrderBy] = useState<OrderBy>('calories')
+  const [order, setOrder] = useState<Order>('asc')
+  const [orderBy, setOrderBy] = useState<OrderBy>('calories')
 
-    const handleRequestSort = (property: OrderBy) => {
-      const isAsc = orderBy === property && order === 'asc'
-      setOrder(isAsc ? 'desc' : 'asc')
-      setOrderBy(property)
+  const handleRequestSort = (property: OrderBy) => {
+    const isAsc = orderBy === property && order === 'asc'
+    setOrder(isAsc ? 'desc' : 'asc')
+    setOrderBy(property)
+  }
+
+  const sortedRows = [...rows].sort((a, b) => {
+    if (order === 'asc') {
+      return a[orderBy] < b[orderBy] ? -1 : 1
     }
+    return a[orderBy] > b[orderBy] ? -1 : 1
+  })
 
-    const sortedRows = [...rows].sort((a, b) => {
-      if (order === 'asc') {
-        return a[orderBy] < b[orderBy] ? -1 : 1
-      }
-      return a[orderBy] > b[orderBy] ? -1 : 1
-    })
-
-    return (
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === 'name'}
-                  direction={orderBy === 'name' ? order : 'asc'}
-                  onClick={() => handleRequestSort('name')}>
-                  デザート
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="right">
-                <TableSortLabel
-                  active={orderBy === 'calories'}
-                  direction={orderBy === 'calories' ? order : 'asc'}
-                  onClick={() => handleRequestSort('calories')}>
-                  カロリー
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="right">
-                <TableSortLabel
-                  active={orderBy === 'fat'}
-                  direction={orderBy === 'fat' ? order : 'asc'}
-                  onClick={() => handleRequestSort('fat')}>
-                  脂質
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="right">
-                <TableSortLabel
-                  active={orderBy === 'carbs'}
-                  direction={orderBy === 'carbs' ? order : 'asc'}
-                  onClick={() => handleRequestSort('carbs')}>
-                  炭水化物
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="right">
-                <TableSortLabel
-                  active={orderBy === 'protein'}
-                  direction={orderBy === 'protein' ? order : 'asc'}
-                  onClick={() => handleRequestSort('protein')}>
-                  タンパク質
-                </TableSortLabel>
-              </TableCell>
+  return (
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <TableSortLabel
+                active={orderBy === 'name'}
+                direction={orderBy === 'name' ? order : 'asc'}
+                onClick={() => handleRequestSort('name')}>
+                デザート
+              </TableSortLabel>
+            </TableCell>
+            <TableCell align="right">
+              <TableSortLabel
+                active={orderBy === 'calories'}
+                direction={orderBy === 'calories' ? order : 'asc'}
+                onClick={() => handleRequestSort('calories')}>
+                カロリー
+              </TableSortLabel>
+            </TableCell>
+            <TableCell align="right">
+              <TableSortLabel
+                active={orderBy === 'fat'}
+                direction={orderBy === 'fat' ? order : 'asc'}
+                onClick={() => handleRequestSort('fat')}>
+                脂質
+              </TableSortLabel>
+            </TableCell>
+            <TableCell align="right">
+              <TableSortLabel
+                active={orderBy === 'carbs'}
+                direction={orderBy === 'carbs' ? order : 'asc'}
+                onClick={() => handleRequestSort('carbs')}>
+                炭水化物
+              </TableSortLabel>
+            </TableCell>
+            <TableCell align="right">
+              <TableSortLabel
+                active={orderBy === 'protein'}
+                direction={orderBy === 'protein' ? order : 'asc'}
+                onClick={() => handleRequestSort('protein')}>
+                タンパク質
+              </TableSortLabel>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedRows.slice(0, 8).map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.name}</TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedRows.slice(0, 8).map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.name}</TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )
-  },
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
 }
 
-export const WithSelection: Story = {
-  render: () => {
-    const [selected, setSelected] = useState<readonly number[]>([])
+export const Sorting: Story = {
+  render: () => <SortingExample />,
+}
 
-    const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        const newSelected = rows.map((n) => n.id)
-        setSelected(newSelected)
-        return
-      }
-      setSelected([])
-    }
+const WithSelectionExample = () => {
+  const [selected, setSelected] = useState<readonly number[]>([])
 
-    const handleClick = (id: number) => {
-      const selectedIndex = selected.indexOf(id)
-      let newSelected: readonly number[] = []
-
-      if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, id)
-      } else if (selectedIndex === 0) {
-        newSelected = newSelected.concat(selected.slice(1))
-      } else if (selectedIndex === selected.length - 1) {
-        newSelected = newSelected.concat(selected.slice(0, -1))
-      } else if (selectedIndex > 0) {
-        newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1)
-        )
-      }
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelected = rows.map((n) => n.id)
       setSelected(newSelected)
+      return
     }
+    setSelected([])
+  }
 
-    const isSelected = (id: number) => selected.indexOf(id) !== -1
+  const handleClick = (id: number) => {
+    const selectedIndex = selected.indexOf(id)
+    let newSelected: readonly number[] = []
 
-    return (
-      <Box sx={{ width: '100%' }}>
-        <Paper sx={{ width: '100%', mb: 2 }}>
-          {selected.length > 0 && (
-            <Toolbar
-              sx={{
-                pl: { sm: 2 },
-                pr: { xs: 1, sm: 1 },
-                ...(selected.length > 0 && {
-                  bgcolor: (theme) =>
-                    alpha(
-                      theme.palette.primary.main,
-                      theme.palette.action.activatedOpacity
-                    ),
-                }),
-              }}>
-              <Typography
-                sx={{ flex: '1 1 100%' }}
-                color="inherit"
-                variant="subtitle1"
-                component="div">
-                {selected.length} 件選択中
-              </Typography>
-              <Tooltip title="削除">
-                <IconButton>
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="フィルター">
-                <IconButton>
-                  <FilterListIcon />
-                </IconButton>
-              </Tooltip>
-            </Toolbar>
-          )}
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      color="primary"
-                      indeterminate={
-                        selected.length > 0 && selected.length < rows.length
-                      }
-                      checked={rows.length > 0 && selected.length === rows.length}
-                      onChange={handleSelectAllClick}
-                    />
-                  </TableCell>
-                  <TableCell>デザート</TableCell>
-                  <TableCell align="right">カロリー</TableCell>
-                  <TableCell align="right">脂質</TableCell>
-                  <TableCell align="right">炭水化物</TableCell>
-                  <TableCell align="right">タンパク質</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.slice(0, 8).map((row) => {
-                  const isItemSelected = isSelected(row.id)
-                  return (
-                    <TableRow
-                      hover
-                      onClick={() => handleClick(row.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                      sx={{ cursor: 'pointer' }}>
-                      <TableCell padding="checkbox">
-                        <Checkbox color="primary" checked={isItemSelected} />
-                      </TableCell>
-                      <TableCell>{row.name}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
-                    </TableRow>
-                  )
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
-    )
-  },
-}
-
-export const WithPagination: Story = {
-  render: () => {
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(5)
-
-    const handleChangePage = (_event: unknown, newPage: number) => {
-      setPage(newPage)
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id)
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1))
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1))
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      )
     }
+    setSelected(newSelected)
+  }
 
-    const handleChangeRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      setRowsPerPage(parseInt(event.target.value, 10))
-      setPage(0)
-    }
+  const isSelected = (id: number) => selected.indexOf(id) !== -1
 
-    return (
-      <Paper sx={{ width: '100%' }}>
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        {selected.length > 0 && (
+          <Toolbar
+            sx={{
+              pl: { sm: 2 },
+              pr: { xs: 1, sm: 1 },
+              ...(selected.length > 0 && {
+                bgcolor: (theme) =>
+                  alpha(
+                    theme.palette.primary.main,
+                    theme.palette.action.activatedOpacity
+                  ),
+              }),
+            }}>
+            <Typography
+              sx={{ flex: '1 1 100%' }}
+              color="inherit"
+              variant="subtitle1"
+              component="div">
+              {selected.length} 件選択中
+            </Typography>
+            <Tooltip title="削除">
+              <IconButton>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="フィルター">
+              <IconButton>
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+          </Toolbar>
+        )}
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    color="primary"
+                    indeterminate={
+                      selected.length > 0 && selected.length < rows.length
+                    }
+                    checked={rows.length > 0 && selected.length === rows.length}
+                    onChange={handleSelectAllClick}
+                  />
+                </TableCell>
                 <TableCell>デザート</TableCell>
                 <TableCell align="right">カロリー</TableCell>
                 <TableCell align="right">脂質</TableCell>
@@ -369,36 +308,103 @@ export const WithPagination: Story = {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <TableRow key={row.id}>
+              {rows.slice(0, 8).map((row) => {
+                const isItemSelected = isSelected(row.id)
+                return (
+                  <TableRow
+                    hover
+                    onClick={() => handleClick(row.id)}
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.id}
+                    selected={isItemSelected}
+                    sx={{ cursor: 'pointer' }}>
+                    <TableCell padding="checkbox">
+                      <Checkbox color="primary" checked={isItemSelected} />
+                    </TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell align="right">{row.calories}</TableCell>
                     <TableCell align="right">{row.fat}</TableCell>
                     <TableCell align="right">{row.carbs}</TableCell>
                     <TableCell align="right">{row.protein}</TableCell>
                   </TableRow>
-                ))}
+                )
+              })}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage="ページあたりの行数:"
-          labelDisplayedRows={({ from, to, count }) =>
-            `${count} 件中 ${from}–${to}`
-          }
-        />
       </Paper>
-    )
-  },
+    </Box>
+  )
+}
+
+export const WithSelection: Story = {
+  render: () => <WithSelectionExample />,
+}
+
+const WithPaginationExample = () => {
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
+
+  const handleChangePage = (_event: unknown, newPage: number) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
+
+  return (
+    <Paper sx={{ width: '100%' }}>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>デザート</TableCell>
+              <TableCell align="right">カロリー</TableCell>
+              <TableCell align="right">脂質</TableCell>
+              <TableCell align="right">炭水化物</TableCell>
+              <TableCell align="right">タンパク質</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage="ページあたりの行数:"
+        labelDisplayedRows={({ from, to, count }) =>
+          `${count} 件中 ${from}–${to}`
+        }
+      />
+    </Paper>
+  )
+}
+
+export const WithPagination: Story = {
+  render: () => <WithPaginationExample />,
 }
 
 export const Sticky: Story = {

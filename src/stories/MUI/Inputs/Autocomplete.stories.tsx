@@ -102,46 +102,49 @@ export const Multiple: Story = {
   ),
 }
 
-export const FixedOptions: Story = {
-  render: () => {
-    const fixedOptions = [top100Films[0]]
-    const [value, setValue] = useState([...fixedOptions, top100Films[1]])
+const fixedOptions = [top100Films[0]]
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          固定オプション
-        </Typography>
-        <Autocomplete
-          multiple
-          value={value}
-          onChange={(event, newValue) => {
-            setValue([
-              ...fixedOptions,
-              ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
-            ])
-          }}
-          options={top100Films}
-          getOptionDisabled={(option) =>
-            fixedOptions.indexOf(option) !== -1
-          }
-          renderTags={(tagValue, getTagProps) =>
-            tagValue.map((option, index) => (
-              <Chip
-                label={option}
-                {...getTagProps({ index })}
-                disabled={fixedOptions.indexOf(option) !== -1}
-              />
-            ))
-          }
-          sx={{ width: 500 }}
-          renderInput={(params) => (
-            <TextField {...params} label="固定オプション" placeholder="映画を選択" />
-          )}
-        />
-      </Box>
-    )
-  },
+const FixedOptionsExample = () => {
+  const [value, setValue] = useState([...fixedOptions, top100Films[1]])
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        固定オプション
+      </Typography>
+      <Autocomplete
+        multiple
+        value={value}
+        onChange={(event, newValue) => {
+          setValue([
+            ...fixedOptions,
+            ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
+          ])
+        }}
+        options={top100Films}
+        getOptionDisabled={(option) =>
+          fixedOptions.indexOf(option) !== -1
+        }
+        renderTags={(tagValue, getTagProps) =>
+          tagValue.map((option, index) => (
+            <Chip
+              label={option}
+              {...getTagProps({ index })}
+              disabled={fixedOptions.indexOf(option) !== -1}
+            />
+          ))
+        }
+        sx={{ width: 500 }}
+        renderInput={(params) => (
+          <TextField {...params} label="固定オプション" placeholder="映画を選択" />
+        )}
+      />
+    </Box>
+  )
+}
+
+export const FixedOptions: Story = {
+  render: () => <FixedOptionsExample />,
 }
 
 export const Checkboxes: Story = {

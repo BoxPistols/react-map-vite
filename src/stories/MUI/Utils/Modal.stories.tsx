@@ -65,62 +65,66 @@ export const Basic: Story = {
   ),
 }
 
-export const WithTransition: Story = {
-  render: () => {
-    const [open, setOpen] = useState(false)
+const WithTransitionExample = () => {
+  const [open, setOpen] = useState(false)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          トランジション付き
-        </Typography>
-        <Button onClick={() => setOpen(true)}>Open modal</Button>
-        <Modal
-          open={open}
-          onClose={() => setOpen(false)}
-          closeAfterTransition
-        >
-          <Fade in={open}>
-            <Box sx={style}>
-              <Typography variant="h6" component="h2">
-                フェードイン
-              </Typography>
-              <Typography sx={{ mt: 2 }}>
-                フェードトランジション付きのモーダルです。
-              </Typography>
-            </Box>
-          </Fade>
-        </Modal>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        トランジション付き
+      </Typography>
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        closeAfterTransition
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography variant="h6" component="h2">
+              フェードイン
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              フェードトランジション付きのモーダルです。
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+    </Box>
+  )
+}
+
+export const WithTransition: Story = {
+  render: () => <WithTransitionExample />,
+}
+
+const KeepMountedExample = () => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        常にマウント
+      </Typography>
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <Modal
+        keepMounted
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <Box sx={style}>
+          <Typography variant="h6" component="h2">
+            常にマウントされたモーダル
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
+            このモーダルはDOMに常に存在します。
+          </Typography>
+        </Box>
+      </Modal>
+    </Box>
+  )
 }
 
 export const KeepMounted: Story = {
-  render: () => {
-    const [open, setOpen] = useState(false)
-
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          常にマウント
-        </Typography>
-        <Button onClick={() => setOpen(true)}>Open modal</Button>
-        <Modal
-          keepMounted
-          open={open}
-          onClose={() => setOpen(false)}
-        >
-          <Box sx={style}>
-            <Typography variant="h6" component="h2">
-              常にマウントされたモーダル
-            </Typography>
-            <Typography sx={{ mt: 2 }}>
-              このモーダルはDOMに常に存在します。
-            </Typography>
-          </Box>
-        </Modal>
-      </Box>
-    )
-  },
+  render: () => <KeepMountedExample />,
 }

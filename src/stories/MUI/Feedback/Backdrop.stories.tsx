@@ -45,26 +45,28 @@ export const Basic: Story = {
   ),
 }
 
-export const WithMessage: Story = {
-  render: () => {
-    const [open, setOpen] = useState(false)
+const WithMessageExample = () => {
+  const [open, setOpen] = useState(false)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          メッセージ付き
-        </Typography>
-        <Button onClick={() => setOpen(!open)}>Show backdrop</Button>
-        <Backdrop
-          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={open}
-        >
-          <Box sx={{ textAlign: 'center' }}>
-            <CircularProgress color="inherit" />
-            <Typography sx={{ mt: 2 }}>読み込み中...</Typography>
-          </Box>
-        </Backdrop>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        メッセージ付き
+      </Typography>
+      <Button onClick={() => setOpen(!open)}>Show backdrop</Button>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <Box sx={{ textAlign: 'center' }}>
+          <CircularProgress color="inherit" />
+          <Typography sx={{ mt: 2 }}>読み込み中...</Typography>
+        </Box>
+      </Backdrop>
+    </Box>
+  )
+}
+
+export const WithMessage: Story = {
+  render: () => <WithMessageExample />,
 }

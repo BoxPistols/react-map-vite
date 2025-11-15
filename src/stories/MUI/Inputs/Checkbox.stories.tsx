@@ -120,110 +120,114 @@ export const WithLabel: Story = {
   ),
 }
 
-export const Group: Story = {
-  render: () => {
-    const [state, setState] = useState({
-      javascript: true,
-      typescript: false,
-      react: true,
+const GroupExample = () => {
+  const [state, setState] = useState({
+    javascript: true,
+    typescript: false,
+    react: true,
+  })
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
     })
+  }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setState({
-        ...state,
-        [event.target.name]: event.target.checked,
-      })
-    }
+  return (
+    <FormControl component="fieldset" variant="standard">
+      <FormLabel component="legend">技術スタック</FormLabel>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.javascript}
+              onChange={handleChange}
+              name="javascript"
+            />
+          }
+          label="JavaScript"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.typescript}
+              onChange={handleChange}
+              name="typescript"
+            />
+          }
+          label="TypeScript"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.react}
+              onChange={handleChange}
+              name="react"
+            />
+          }
+          label="React"
+        />
+      </FormGroup>
+      <FormHelperText>技術スタックを選択してください</FormHelperText>
+    </FormControl>
+  )
+}
 
-    return (
-      <FormControl component="fieldset" variant="standard">
-        <FormLabel component="legend">技術スタック</FormLabel>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.javascript}
-                onChange={handleChange}
-                name="javascript"
-              />
-            }
-            label="JavaScript"
+export const Group: Story = {
+  render: () => <GroupExample />,
+}
+
+const IndeterminateExample = () => {
+  const [checked, setChecked] = useState([true, false])
+
+  const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked([event.target.checked, event.target.checked])
+  }
+
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked([event.target.checked, checked[1]])
+  }
+
+  const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked([checked[0], event.target.checked])
+  }
+
+  const children = (
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+      <FormControlLabel
+        label="子アイテム 1"
+        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+      />
+      <FormControlLabel
+        label="子アイテム 2"
+        control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+      />
+    </Box>
+  )
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        不確定状態
+      </Typography>
+      <FormControlLabel
+        label="親アイテム"
+        control={
+          <Checkbox
+            checked={checked[0] && checked[1]}
+            indeterminate={checked[0] !== checked[1]}
+            onChange={handleChange1}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.typescript}
-                onChange={handleChange}
-                name="typescript"
-              />
-            }
-            label="TypeScript"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.react}
-                onChange={handleChange}
-                name="react"
-              />
-            }
-            label="React"
-          />
-        </FormGroup>
-        <FormHelperText>技術スタックを選択してください</FormHelperText>
-      </FormControl>
-    )
-  },
+        }
+      />
+      {children}
+    </Box>
+  )
 }
 
 export const Indeterminate: Story = {
-  render: () => {
-    const [checked, setChecked] = useState([true, false])
-
-    const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setChecked([event.target.checked, event.target.checked])
-    }
-
-    const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setChecked([event.target.checked, checked[1]])
-    }
-
-    const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setChecked([checked[0], event.target.checked])
-    }
-
-    const children = (
-      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-        <FormControlLabel
-          label="子アイテム 1"
-          control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-        />
-        <FormControlLabel
-          label="子アイテム 2"
-          control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-        />
-      </Box>
-    )
-
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          不確定状態
-        </Typography>
-        <FormControlLabel
-          label="親アイテム"
-          control={
-            <Checkbox
-              checked={checked[0] && checked[1]}
-              indeterminate={checked[0] !== checked[1]}
-              onChange={handleChange1}
-            />
-          }
-        />
-        {children}
-      </Box>
-    )
-  },
+  render: () => <IndeterminateExample />,
 }
 
 export const CustomIcon: Story = {

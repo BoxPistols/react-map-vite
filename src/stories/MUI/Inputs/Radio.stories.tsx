@@ -94,48 +94,50 @@ export const Colors: Story = {
   ),
 }
 
+const RadioGroupExampleComponent = () => {
+  const [value, setValue] = useState('option1')
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+  }
+
+  return (
+    <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label">オプション</FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        value={value}
+        onChange={handleChange}
+        name="radio-buttons-group"
+      >
+        <FormControlLabel
+          value="option1"
+          control={<Radio />}
+          label="オプション 1"
+        />
+        <FormControlLabel
+          value="option2"
+          control={<Radio />}
+          label="オプション 2"
+        />
+        <FormControlLabel
+          value="option3"
+          control={<Radio />}
+          label="オプション 3"
+        />
+        <FormControlLabel
+          value="disabled"
+          disabled
+          control={<Radio />}
+          label="無効なオプション"
+        />
+      </RadioGroup>
+    </FormControl>
+  )
+}
+
 export const RadioGroupExample: Story = {
-  render: () => {
-    const [value, setValue] = useState('option1')
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value)
-    }
-
-    return (
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">オプション</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          value={value}
-          onChange={handleChange}
-          name="radio-buttons-group"
-        >
-          <FormControlLabel
-            value="option1"
-            control={<Radio />}
-            label="オプション 1"
-          />
-          <FormControlLabel
-            value="option2"
-            control={<Radio />}
-            label="オプション 2"
-          />
-          <FormControlLabel
-            value="option3"
-            control={<Radio />}
-            label="オプション 3"
-          />
-          <FormControlLabel
-            value="disabled"
-            disabled
-            control={<Radio />}
-            label="無効なオプション"
-          />
-        </RadioGroup>
-      </FormControl>
-    )
-  },
+  render: () => <RadioGroupExampleComponent />,
 }
 
 export const Direction: Story = {
@@ -216,38 +218,40 @@ export const WithHelperText: Story = {
   ),
 }
 
+const ErrorStateExample = () => {
+  const [value, setValue] = useState('')
+  const [error, setError] = useState(false)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+    setError(false)
+  }
+
+  const handleSubmit = () => {
+    if (!value) {
+      setError(true)
+    }
+  }
+
+  return (
+    <FormControl error={error}>
+      <FormLabel id="required-radio-group-label">
+        必須項目 <span style={{ color: 'red' }}>*</span>
+      </FormLabel>
+      <RadioGroup
+        aria-labelledby="required-radio-group-label"
+        value={value}
+        onChange={handleChange}
+        name="required-radio-group"
+      >
+        <FormControlLabel value="yes" control={<Radio />} label="はい" />
+        <FormControlLabel value="no" control={<Radio />} label="いいえ" />
+      </RadioGroup>
+      {error && <FormHelperText>この項目は必須です</FormHelperText>}
+    </FormControl>
+  )
+}
+
 export const ErrorState: Story = {
-  render: () => {
-    const [value, setValue] = useState('')
-    const [error, setError] = useState(false)
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value)
-      setError(false)
-    }
-
-    const handleSubmit = () => {
-      if (!value) {
-        setError(true)
-      }
-    }
-
-    return (
-      <FormControl error={error}>
-        <FormLabel id="required-radio-group-label">
-          必須項目 <span style={{ color: 'red' }}>*</span>
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="required-radio-group-label"
-          value={value}
-          onChange={handleChange}
-          name="required-radio-group"
-        >
-          <FormControlLabel value="yes" control={<Radio />} label="はい" />
-          <FormControlLabel value="no" control={<Radio />} label="いいえ" />
-        </RadioGroup>
-        {error && <FormHelperText>この項目は必須です</FormHelperText>}
-      </FormControl>
-    )
-  },
+  render: () => <ErrorStateExample />,
 }
