@@ -13,8 +13,6 @@ import {
   typographyOptions,
 } from './typography'
 
-import type { TypographyOptions } from '@mui/material/styles/createTypography'
-
 // Button共通
 const CommomButtonStyles = {
   height: '100%',
@@ -28,7 +26,7 @@ const CommomButtonStyles = {
 
 // 共通設定
 const commonThemeOptions = {
-  typography: typographyOptions as TypographyOptions,
+  typography: typographyOptions,
   shape: { borderRadius: 4 },
   transitions: {
     easing: { sharp: 'cubic-bezier(0.4, 0, 0.6, 1)' },

@@ -64,7 +64,7 @@ const ColorGroup = ({ title, colors }: ColorGroupProps) => {
       </Typography>
       <Grid container spacing={3}>
         {Object.entries(colors).map(([shade, color]) => (
-          <Grid item key={shade}>
+          <Grid key={shade}>
             <BoxStyled style={{ backgroundColor: color }}>
               <TextStyled
                 style={{

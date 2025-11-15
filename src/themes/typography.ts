@@ -1,9 +1,5 @@
 import type React from 'react'
-
-import type {
-  CSSProperties,
-  TypographyOptions,
-} from '@mui/material/styles/createTypography'
+import type { CSSProperties } from 'react'
 import '@mui/material/Typography'
 
 declare module '@mui/material/styles' {
@@ -114,7 +110,7 @@ const heading = {
 }
 
 // Typography options
-export const typographyOptions: TypographyOptions = {
+export const typographyOptions = {
   htmlFontSize: baseFontSize,
   fontSize: baseFontSize,
   fontFamily: 'Inter, Noto Sans JP, Helvetica, Arial, sans-serif',
