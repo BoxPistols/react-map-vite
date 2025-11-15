@@ -209,47 +209,47 @@ export const FreeSolo: Story = {
   ),
 }
 
+interface FilmOptionType {
+  title: string
+  year: number
+}
+
+const filmsByYear: FilmOptionType[] = [
+  { title: '君の名は。', year: 2016 },
+  { title: '千と千尋の神隠し', year: 2001 },
+  { title: 'もののけ姫', year: 1997 },
+  { title: '天気の子', year: 2019 },
+  { title: 'すずめの戸締まり', year: 2022 },
+  { title: 'ハウルの動く城', year: 2004 },
+  { title: '崖の上のポニョ', year: 2008 },
+  { title: '風の谷のナウシカ', year: 1984 },
+  { title: '天空の城ラピュタ', year: 1986 },
+  { title: '魔女の宅急便', year: 1989 },
+]
+
+const getDecade = (year: number) => {
+  return `${Math.floor(year / 10) * 10}年代`
+}
+
+const sortedFilmsByYear = [...filmsByYear].sort(
+  (a, b) => -getDecade(b.year).localeCompare(getDecade(a.year))
+)
+
 export const Grouped: Story = {
-  render: () => {
-    interface FilmOptionType {
-      title: string
-      year: number
-    }
-
-    const options: FilmOptionType[] = [
-      { title: '君の名は。', year: 2016 },
-      { title: '千と千尋の神隠し', year: 2001 },
-      { title: 'もののけ姫', year: 1997 },
-      { title: '天気の子', year: 2019 },
-      { title: 'すずめの戸締まり', year: 2022 },
-      { title: 'ハウルの動く城', year: 2004 },
-      { title: '崖の上のポニョ', year: 2008 },
-      { title: '風の谷のナウシカ', year: 1984 },
-      { title: '天空の城ラピュタ', year: 1986 },
-      { title: '魔女の宅急便', year: 1989 },
-    ]
-
-    const getDecade = (year: number) => {
-      return `${Math.floor(year / 10) * 10}年代`
-    }
-
-    return (
-      <Box>
-        <Typography variant='h6' gutterBottom>
-          グループ化
-        </Typography>
-        <Autocomplete
-          options={options.sort(
-            (a, b) => -getDecade(b.year).localeCompare(getDecade(a.year))
-          )}
-          groupBy={(option) => getDecade(option.year)}
-          getOptionLabel={(option) => option.title}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label='年代別' />}
-        />
-      </Box>
-    )
-  },
+  render: () => (
+    <Box>
+      <Typography variant='h6' gutterBottom>
+        グループ化
+      </Typography>
+      <Autocomplete
+        options={sortedFilmsByYear}
+        groupBy={(option) => getDecade(option.year)}
+        getOptionLabel={(option) => option.title}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label='年代別' />}
+      />
+    </Box>
+  ),
 }
 
 export const Disabled: Story = {

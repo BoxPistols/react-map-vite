@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -235,14 +235,25 @@ export const AlertVariants: Story = {
 }
 
 const ConsecutiveExample = () => {
-  // TODO: Implement useEffect to process snackPack queue for consecutive display
-  const [_snackPack, setSnackPack] = useState<
+  const [snackPack, setSnackPack] = useState<
     readonly { message: string; key: number }[]
   >([])
   const [open, setOpen] = useState(false)
   const [messageInfo, setMessageInfo] = useState<
     { message: string; key: number } | undefined
   >(undefined)
+
+  useEffect(() => {
+    if (snackPack.length && !messageInfo) {
+      // Set a new snack when we don't have an active one
+      setMessageInfo({ ...snackPack[0] })
+      setSnackPack((prev) => prev.slice(1))
+      setOpen(true)
+    } else if (snackPack.length && messageInfo && open) {
+      // Close an active snack when a new one is added
+      setOpen(false)
+    }
+  }, [snackPack, messageInfo, open])
 
   const handleClick = (message: string) => {
     setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }])
