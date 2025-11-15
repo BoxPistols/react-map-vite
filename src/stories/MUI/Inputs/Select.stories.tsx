@@ -50,14 +50,13 @@ export const Playground: Story = {
   },
   render: (args) => (
     <FormControl sx={{ minWidth: 200 }}>
-      <InputLabel id="playground-select-label">選択</InputLabel>
+      <InputLabel id='playground-select-label'>選択</InputLabel>
       <Select
         {...args}
-        labelId="playground-select-label"
-        id="playground-select"
-        label="選択"
-        defaultValue={10}
-      >
+        labelId='playground-select-label'
+        id='playground-select'
+        label='選択'
+        defaultValue={10}>
         <MenuItem value={10}>オプション 1</MenuItem>
         <MenuItem value={20}>オプション 2</MenuItem>
         <MenuItem value={30}>オプション 3</MenuItem>
@@ -71,43 +70,40 @@ const VariantsExample = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         バリエーション
       </Typography>
       <FormControl sx={{ minWidth: 200 }}>
-        <InputLabel id="outlined-label">Outlined</InputLabel>
+        <InputLabel id='outlined-label'>Outlined</InputLabel>
         <Select
-          labelId="outlined-label"
+          labelId='outlined-label'
           value={age}
-          label="Outlined"
-          onChange={(e) => setAge(e.target.value)}
-        >
+          label='Outlined'
+          onChange={(e) => setAge(e.target.value)}>
           <MenuItem value={10}>10代</MenuItem>
           <MenuItem value={20}>20代</MenuItem>
           <MenuItem value={30}>30代</MenuItem>
         </Select>
       </FormControl>
 
-      <FormControl variant="filled" sx={{ minWidth: 200 }}>
-        <InputLabel id="filled-label">Filled</InputLabel>
+      <FormControl variant='filled' sx={{ minWidth: 200 }}>
+        <InputLabel id='filled-label'>Filled</InputLabel>
         <Select
-          labelId="filled-label"
+          labelId='filled-label'
           value={age}
-          onChange={(e) => setAge(e.target.value)}
-        >
+          onChange={(e) => setAge(e.target.value)}>
           <MenuItem value={10}>10代</MenuItem>
           <MenuItem value={20}>20代</MenuItem>
           <MenuItem value={30}>30代</MenuItem>
         </Select>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ minWidth: 200 }}>
-        <InputLabel id="standard-label">Standard</InputLabel>
+      <FormControl variant='standard' sx={{ minWidth: 200 }}>
+        <InputLabel id='standard-label'>Standard</InputLabel>
         <Select
-          labelId="standard-label"
+          labelId='standard-label'
           value={age}
-          onChange={(e) => setAge(e.target.value)}
-        >
+          onChange={(e) => setAge(e.target.value)}>
           <MenuItem value={10}>10代</MenuItem>
           <MenuItem value={20}>20代</MenuItem>
           <MenuItem value={30}>30代</MenuItem>
@@ -126,17 +122,16 @@ const WithHelperTextExample = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ヘルパーテキスト
       </Typography>
       <FormControl sx={{ minWidth: 200 }}>
-        <InputLabel id="helper-label">年齢層</InputLabel>
+        <InputLabel id='helper-label'>年齢層</InputLabel>
         <Select
-          labelId="helper-label"
+          labelId='helper-label'
           value={value}
-          label="年齢層"
-          onChange={(e) => setValue(e.target.value)}
-        >
+          label='年齢層'
+          onChange={(e) => setValue(e.target.value)}>
           <MenuItem value={10}>10代</MenuItem>
           <MenuItem value={20}>20代</MenuItem>
           <MenuItem value={30}>30代</MenuItem>
@@ -146,8 +141,8 @@ const WithHelperTextExample = () => {
       </FormControl>
 
       <FormControl error sx={{ minWidth: 200 }}>
-        <InputLabel id="error-label">必須項目</InputLabel>
-        <Select labelId="error-label" label="必須項目" value="">
+        <InputLabel id='error-label'>必須項目</InputLabel>
+        <Select labelId='error-label' label='必須項目' value=''>
           <MenuItem value={1}>選択肢 1</MenuItem>
           <MenuItem value={2}>選択肢 2</MenuItem>
         </Select>
@@ -161,14 +156,7 @@ export const WithHelperText: Story = {
   render: () => <WithHelperTextExample />,
 }
 
-const names = [
-  'JavaScript',
-  'TypeScript',
-  'React',
-  'Vue',
-  'Angular',
-  'Svelte',
-]
+const names = ['JavaScript', 'TypeScript', 'React', 'Vue', 'Angular', 'Svelte']
 
 const MultipleExample = () => {
   const [selectedNames, setSelectedNames] = useState<string[]>([])
@@ -182,18 +170,17 @@ const MultipleExample = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         複数選択
       </Typography>
       <FormControl sx={{ minWidth: 300 }}>
-        <InputLabel id="multiple-select-label">技術スタック</InputLabel>
+        <InputLabel id='multiple-select-label'>技術スタック</InputLabel>
         <Select
-          labelId="multiple-select-label"
+          labelId='multiple-select-label'
           multiple
           value={selectedNames}
           onChange={handleChange}
-          label="技術スタック"
-        >
+          label='技術スタック'>
           {names.map((name) => (
             <MenuItem key={name} value={name}>
               {name}
@@ -221,25 +208,24 @@ const MultipleWithChipsExample = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         複数選択（チップ表示）
       </Typography>
       <FormControl sx={{ minWidth: 300 }}>
-        <InputLabel id="chip-select-label">技術スタック</InputLabel>
+        <InputLabel id='chip-select-label'>技術スタック</InputLabel>
         <Select
-          labelId="chip-select-label"
+          labelId='chip-select-label'
           multiple
           value={selectedNames}
           onChange={handleChange}
-          input={<OutlinedInput label="技術スタック" />}
+          input={<OutlinedInput label='技術スタック' />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip key={value} label={value} size="small" />
+                <Chip key={value} label={value} size='small' />
               ))}
             </Box>
-          )}
-        >
+          )}>
           {names.map((name) => (
             <MenuItem key={name} value={name}>
               {name}
@@ -260,11 +246,11 @@ const NativeExample = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ネイティブセレクト
       </Typography>
       <FormControl sx={{ minWidth: 200 }}>
-        <InputLabel htmlFor="native-select">年齢</InputLabel>
+        <InputLabel htmlFor='native-select'>年齢</InputLabel>
         <Select
           native
           value={value}
@@ -272,9 +258,8 @@ const NativeExample = () => {
           inputProps={{
             id: 'native-select',
           }}
-          label="年齢"
-        >
-          <option aria-label="None" value="" />
+          label='年齢'>
+          <option aria-label='None' value='' />
           <option value={10}>10代</option>
           <option value={20}>20代</option>
           <option value={30}>30代</option>
@@ -292,17 +277,12 @@ export const Native: Story = {
 export const Disabled: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         無効状態
       </Typography>
       <FormControl sx={{ minWidth: 200 }}>
-        <InputLabel id="disabled-label">選択</InputLabel>
-        <Select
-          labelId="disabled-label"
-          disabled
-          value={10}
-          label="選択"
-        >
+        <InputLabel id='disabled-label'>選択</InputLabel>
+        <Select labelId='disabled-label' disabled value={10} label='選択'>
           <MenuItem value={10}>オプション 1</MenuItem>
           <MenuItem value={20}>オプション 2</MenuItem>
         </Select>

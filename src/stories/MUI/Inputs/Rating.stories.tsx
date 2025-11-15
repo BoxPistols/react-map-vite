@@ -45,7 +45,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Rating defaultValue={3} />
@@ -56,12 +56,12 @@ export const Basic: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
-      <Rating defaultValue={3} size="small" />
-      <Rating defaultValue={3} size="medium" />
-      <Rating defaultValue={3} size="large" />
+      <Rating defaultValue={3} size='small' />
+      <Rating defaultValue={3} size='medium' />
+      <Rating defaultValue={3} size='large' />
     </Box>
   ),
 }
@@ -69,15 +69,15 @@ export const Sizes: Story = {
 export const Precision: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         精度
       </Typography>
       <Box>
-        <Typography variant="body2">整数のみ（precision=1）</Typography>
+        <Typography variant='body2'>整数のみ（precision=1）</Typography>
         <Rating defaultValue={3} precision={1} />
       </Box>
       <Box>
-        <Typography variant="body2">0.5刻み（precision=0.5）</Typography>
+        <Typography variant='body2'>0.5刻み（precision=0.5）</Typography>
         <Rating defaultValue={2.5} precision={0.5} />
       </Box>
     </Box>
@@ -89,7 +89,7 @@ const ControlledExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         制御されたRating
       </Typography>
       <Rating
@@ -98,7 +98,7 @@ const ControlledExample = () => {
           setValue(newValue)
         }}
       />
-      <Typography variant="body2" sx={{ mt: 2 }}>
+      <Typography variant='body2' sx={{ mt: 2 }}>
         現在の評価: {value !== null ? value : '未評価'}
       </Typography>
     </Box>
@@ -112,7 +112,7 @@ export const Controlled: Story = {
 export const ReadOnly: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         読み取り専用
       </Typography>
       <Rating value={4} readOnly />
@@ -124,7 +124,7 @@ export const ReadOnly: Story = {
 export const Disabled: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         無効状態
       </Typography>
       <Rating defaultValue={3} disabled />
@@ -137,7 +137,7 @@ const NoRatingExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         未評価対応
       </Typography>
       <Rating
@@ -146,7 +146,7 @@ const NoRatingExample = () => {
           setValue(newValue)
         }}
       />
-      <Typography variant="body2" sx={{ mt: 2 }}>
+      <Typography variant='body2' sx={{ mt: 2 }}>
         {value === null ? '未評価' : `評価: ${value}`}
       </Typography>
     </Box>
@@ -160,13 +160,13 @@ export const NoRating: Story = {
 export const CustomIcon: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カスタムアイコン
       </Typography>
       <Rating
         defaultValue={3}
-        icon={<FavoriteIcon fontSize="inherit" />}
-        emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+        icon={<FavoriteIcon fontSize='inherit' />}
+        emptyIcon={<FavoriteBorderIcon fontSize='inherit' />}
       />
     </Box>
   ),
@@ -186,7 +186,7 @@ const HighlighterExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ホバー表示
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -200,7 +200,7 @@ const HighlighterExample = () => {
           }}
         />
         {value !== null && (
-          <Typography variant="body2">
+          <Typography variant='body2'>
             {labels[hover !== -1 ? hover : value]}
           </Typography>
         )}
@@ -216,15 +216,15 @@ export const Highlighter: Story = {
 export const Max: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         最大値のカスタマイズ
       </Typography>
       <Box>
-        <Typography variant="body2">3段階評価</Typography>
+        <Typography variant='body2'>3段階評価</Typography>
         <Rating defaultValue={2} max={3} />
       </Box>
       <Box>
-        <Typography variant="body2">10段階評価</Typography>
+        <Typography variant='body2'>10段階評価</Typography>
         <Rating defaultValue={7} max={10} />
       </Box>
     </Box>
@@ -236,7 +236,7 @@ const IconStylesExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アイコンスタイルのカスタマイズ
       </Typography>
       <Rating
@@ -244,8 +244,8 @@ const IconStylesExample = () => {
         onChange={(event, newValue) => {
           setValue(newValue)
         }}
-        icon={<StarIcon fontSize="inherit" />}
-        emptyIcon={<StarIcon fontSize="inherit" />}
+        icon={<StarIcon fontSize='inherit' />}
+        emptyIcon={<StarIcon fontSize='inherit' />}
         sx={{
           '& .MuiRating-iconFilled': {
             color: '#ff6d75',

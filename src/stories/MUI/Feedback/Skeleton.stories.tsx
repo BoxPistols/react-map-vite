@@ -35,14 +35,14 @@ export const Playground: Story = {
 export const Variants: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         バリエーション
       </Typography>
       <Stack spacing={1}>
-        <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-        <Skeleton variant="circular" width={40} height={40} />
-        <Skeleton variant="rectangular" width={210} height={60} />
-        <Skeleton variant="rounded" width={210} height={60} />
+        <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
+        <Skeleton variant='circular' width={40} height={40} />
+        <Skeleton variant='rectangular' width={210} height={60} />
+        <Skeleton variant='rounded' width={210} height={60} />
       </Stack>
     </Box>
   ),
@@ -51,12 +51,12 @@ export const Variants: Story = {
 export const Animations: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アニメーション
       </Typography>
       <Stack spacing={1}>
-        <Skeleton animation="pulse" />
-        <Skeleton animation="wave" />
+        <Skeleton animation='pulse' />
+        <Skeleton animation='wave' />
         <Skeleton animation={false} />
       </Stack>
     </Box>
@@ -66,13 +66,13 @@ export const Animations: Story = {
 export const MediaExample: Story = {
   render: () => (
     <Box sx={{ width: 300 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         メディアカードの例
       </Typography>
-      <Skeleton variant="rectangular" width={300} height={118} />
+      <Skeleton variant='rectangular' width={300} height={118} />
       <Box sx={{ pt: 0.5 }}>
         <Skeleton />
-        <Skeleton width="60%" />
+        <Skeleton width='60%' />
       </Box>
     </Box>
   ),
@@ -81,22 +81,22 @@ export const MediaExample: Story = {
 export const FacebookExample: Story = {
   render: () => (
     <Box sx={{ width: 300 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         Facebook風
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ margin: 1 }}>
-          <Skeleton variant="circular">
+          <Skeleton variant='circular'>
             <Avatar />
           </Skeleton>
         </Box>
         <Box sx={{ width: '100%' }}>
-          <Skeleton width="100%">
+          <Skeleton width='100%'>
             <Typography>.</Typography>
           </Skeleton>
         </Box>
       </Box>
-      <Skeleton variant="rectangular" width="100%">
+      <Skeleton variant='rectangular' width='100%'>
         <div style={{ paddingTop: '57%' }} />
       </Skeleton>
     </Box>

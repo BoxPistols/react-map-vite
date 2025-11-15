@@ -28,8 +28,7 @@ const Item = ({ children }: { children: React.ReactNode }) => (
       textAlign: 'center',
       bgcolor: 'primary.light',
       color: 'white',
-    }}
-  >
+    }}>
     {children}
   </Paper>
 )
@@ -51,7 +50,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Stack spacing={2}>
@@ -67,10 +66,10 @@ export const Direction: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           column (デフォルト)
         </Typography>
-        <Stack direction="column" spacing={2}>
+        <Stack direction='column' spacing={2}>
           <Item>Item 1</Item>
           <Item>Item 2</Item>
           <Item>Item 3</Item>
@@ -78,10 +77,10 @@ export const Direction: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           row
         </Typography>
-        <Stack direction="row" spacing={2}>
+        <Stack direction='row' spacing={2}>
           <Item>Item 1</Item>
           <Item>Item 2</Item>
           <Item>Item 3</Item>
@@ -89,10 +88,10 @@ export const Direction: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           row-reverse
         </Typography>
-        <Stack direction="row-reverse" spacing={2}>
+        <Stack direction='row-reverse' spacing={2}>
           <Item>Item 1</Item>
           <Item>Item 2</Item>
           <Item>Item 3</Item>
@@ -100,10 +99,10 @@ export const Direction: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           column-reverse
         </Typography>
-        <Stack direction="column-reverse" spacing={2}>
+        <Stack direction='column-reverse' spacing={2}>
           <Item>Item 1</Item>
           <Item>Item 2</Item>
           <Item>Item 3</Item>
@@ -117,7 +116,7 @@ export const Spacing: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           spacing=0
         </Typography>
         <Stack spacing={0}>
@@ -128,7 +127,7 @@ export const Spacing: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           spacing=2
         </Typography>
         <Stack spacing={2}>
@@ -139,7 +138,7 @@ export const Spacing: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           spacing=4
         </Typography>
         <Stack spacing={4}>
@@ -155,24 +154,22 @@ export const Spacing: Story = {
 export const Dividers: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         区切り線付き
       </Typography>
       <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={2}
-      >
+        direction='row'
+        divider={<Divider orientation='vertical' flexItem />}
+        spacing={2}>
         <Item>Item 1</Item>
         <Item>Item 2</Item>
         <Item>Item 3</Item>
       </Stack>
       <Box sx={{ mt: 4 }}>
         <Stack
-          direction="column"
-          divider={<Divider orientation="horizontal" flexItem />}
-          spacing={2}
-        >
+          direction='column'
+          divider={<Divider orientation='horizontal' flexItem />}
+          spacing={2}>
           <Item>Item 1</Item>
           <Item>Item 2</Item>
           <Item>Item 3</Item>
@@ -185,13 +182,12 @@ export const Dividers: Story = {
 export const Responsive: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         レスポンシブ
       </Typography>
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
-        spacing={{ xs: 1, sm: 2, md: 4 }}
-      >
+        spacing={{ xs: 1, sm: 2, md: 4 }}>
         <Item>Item 1</Item>
         <Item>Item 2</Item>
         <Item>Item 3</Item>
@@ -204,10 +200,10 @@ export const FlexboxProps: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           alignItems - flex-start
         </Typography>
-        <Stack direction="row" spacing={2} alignItems="flex-start">
+        <Stack direction='row' spacing={2} alignItems='flex-start'>
           <Item>Item 1</Item>
           <Paper sx={{ p: 4, bgcolor: 'secondary.light', color: 'white' }}>
             Item 2 (tall)
@@ -217,10 +213,10 @@ export const FlexboxProps: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           alignItems - center
         </Typography>
-        <Stack direction="row" spacing={2} alignItems="center">
+        <Stack direction='row' spacing={2} alignItems='center'>
           <Item>Item 1</Item>
           <Paper sx={{ p: 4, bgcolor: 'secondary.light', color: 'white' }}>
             Item 2 (tall)
@@ -230,15 +226,14 @@ export const FlexboxProps: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           justifyContent - space-between
         </Typography>
         <Stack
-          direction="row"
+          direction='row'
           spacing={2}
-          justifyContent="space-between"
-          sx={{ width: '100%' }}
-        >
+          justifyContent='space-between'
+          sx={{ width: '100%' }}>
           <Item>Item 1</Item>
           <Item>Item 2</Item>
           <Item>Item 3</Item>
@@ -251,15 +246,10 @@ export const FlexboxProps: Story = {
 export const UseFlexGap: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         useFlexGap
       </Typography>
-      <Stack
-        direction="row"
-        spacing={2}
-        useFlexGap
-        flexWrap="wrap"
-      >
+      <Stack direction='row' spacing={2} useFlexGap flexWrap='wrap'>
         <Item>Item 1</Item>
         <Item>Item 2</Item>
         <Item>Item 3</Item>

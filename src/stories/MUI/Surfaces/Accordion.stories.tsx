@@ -32,9 +32,7 @@ export const Playground: Story = {
         <Typography>アコーディオン</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          これはアコーディオンのコンテンツです。
-        </Typography>
+        <Typography>これはアコーディオンのコンテンツです。</Typography>
       </AccordionDetails>
     </Accordion>
   ),
@@ -43,7 +41,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Accordion>
@@ -73,9 +71,7 @@ export const Basic: Story = {
           <Typography>無効なアコーディオン</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            このアコーディオンは無効です。
-          </Typography>
+          <Typography>このアコーディオンは無効です。</Typography>
         </AccordionDetails>
       </Accordion>
     </Box>
@@ -92,20 +88,15 @@ const ControlledExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         制御されたアコーディオン
       </Typography>
       <Accordion
         expanded={expanded === 'panel1'}
-        onChange={handleChange('panel1')}
-      >
+        onChange={handleChange('panel1')}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            一般設定
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            基本的な設定
-          </Typography>
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>一般設定</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>基本的な設定</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -115,13 +106,10 @@ const ControlledExample = () => {
       </Accordion>
       <Accordion
         expanded={expanded === 'panel2'}
-        onChange={handleChange('panel2')}
-      >
+        onChange={handleChange('panel2')}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography sx={{ width: '33%', flexShrink: 0 }}>ユーザー</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            ユーザー管理
-          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>ユーザー管理</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -131,20 +119,13 @@ const ControlledExample = () => {
       </Accordion>
       <Accordion
         expanded={expanded === 'panel3'}
-        onChange={handleChange('panel3')}
-      >
+        onChange={handleChange('panel3')}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            詳細設定
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            高度な設定
-          </Typography>
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>詳細設定</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>高度な設定</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            高度な設定オプションにアクセスできます。
-          </Typography>
+          <Typography>高度な設定オプションにアクセスできます。</Typography>
         </AccordionDetails>
       </Accordion>
     </Box>
@@ -158,7 +139,7 @@ export const Controlled: Story = {
 export const WithActions: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アクション付き
       </Typography>
       <Accordion>
@@ -166,13 +147,11 @@ export const WithActions: Story = {
           <Typography>アコーディオン</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            アクションボタンを含むアコーディオンです。
-          </Typography>
+          <Typography>アクションボタンを含むアコーディオンです。</Typography>
         </AccordionDetails>
         <AccordionActions>
-          <Button size="small">キャンセル</Button>
-          <Button size="small">保存</Button>
+          <Button size='small'>キャンセル</Button>
+          <Button size='small'>保存</Button>
         </AccordionActions>
       </Accordion>
     </Box>
@@ -182,7 +161,7 @@ export const WithActions: Story = {
 export const DefaultExpanded: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         デフォルトで展開
       </Typography>
       <Accordion defaultExpanded>
@@ -212,7 +191,7 @@ export const DefaultExpanded: Story = {
 export const CustomStyle: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カスタムスタイル
       </Typography>
       <Accordion
@@ -222,12 +201,10 @@ export const CustomStyle: Story = {
           '&:before': {
             display: 'none',
           },
-        }}
-      >
+        }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          sx={{ bgcolor: 'action.hover' }}
-        >
+          sx={{ bgcolor: 'action.hover' }}>
           <Typography>カスタムスタイルのアコーディオン</Typography>
         </AccordionSummary>
         <AccordionDetails>

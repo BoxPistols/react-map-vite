@@ -40,14 +40,14 @@ export const Playground: Story = {
 export const CircularIndeterminate: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         円形 - 不定
       </Typography>
-      <Stack direction="row" spacing={2}>
+      <Stack direction='row' spacing={2}>
         <CircularProgress />
-        <CircularProgress color="secondary" />
-        <CircularProgress color="success" />
-        <CircularProgress color="error" />
+        <CircularProgress color='secondary' />
+        <CircularProgress color='success' />
+        <CircularProgress color='error' />
       </Stack>
     </Box>
   ),
@@ -70,17 +70,17 @@ const CircularDeterminateExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         円形 - 確定
       </Typography>
-      <Stack direction="row" spacing={2} alignItems="center">
-        <CircularProgress variant="determinate" value={progress} />
+      <Stack direction='row' spacing={2} alignItems='center'>
+        <CircularProgress variant='determinate' value={progress} />
         <CircularProgress
-          variant="determinate"
+          variant='determinate'
           value={progress}
-          color="secondary"
+          color='secondary'
         />
-        <Typography variant="body2">{progress}%</Typography>
+        <Typography variant='body2'>{progress}%</Typography>
       </Stack>
     </Box>
   )
@@ -107,11 +107,11 @@ const CircularWithLabelExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         円形 - ラベル付き
       </Typography>
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-        <CircularProgress variant="determinate" value={progress} size={80} />
+        <CircularProgress variant='determinate' value={progress} size={80} />
         <Box
           sx={{
             top: 0,
@@ -122,9 +122,8 @@ const CircularWithLabelExample = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}
-        >
-          <Typography variant="caption" component="div" color="text.secondary">
+          }}>
+          <Typography variant='caption' component='div' color='text.secondary'>
             {`${Math.round(progress)}%`}
           </Typography>
         </Box>
@@ -140,10 +139,10 @@ export const CircularWithLabel: Story = {
 export const CircularSizes: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         円形 - サイズ
       </Typography>
-      <Stack direction="row" spacing={2} alignItems="center">
+      <Stack direction='row' spacing={2} alignItems='center'>
         <CircularProgress size={20} />
         <CircularProgress size={30} />
         <CircularProgress size={40} />
@@ -157,14 +156,14 @@ export const CircularSizes: Story = {
 export const LinearIndeterminate: Story = {
   render: () => (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         線形 - 不定
       </Typography>
       <Stack spacing={2}>
         <LinearProgress />
-        <LinearProgress color="secondary" />
-        <LinearProgress color="success" />
-        <LinearProgress color="error" />
+        <LinearProgress color='secondary' />
+        <LinearProgress color='success' />
+        <LinearProgress color='error' />
       </Stack>
     </Box>
   ),
@@ -187,21 +186,21 @@ const LinearDeterminateExample = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         線形 - 確定
       </Typography>
       <Stack spacing={2}>
-        <LinearProgress variant="determinate" value={progress} />
+        <LinearProgress variant='determinate' value={progress} />
         <LinearProgress
-          variant="determinate"
+          variant='determinate'
           value={progress}
-          color="secondary"
+          color='secondary'
         />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Box sx={{ width: '100%' }}>
-            <LinearProgress variant="determinate" value={progress} />
+            <LinearProgress variant='determinate' value={progress} />
           </Box>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             {`${Math.round(progress)}%`}
           </Typography>
         </Box>
@@ -244,10 +243,10 @@ const LinearBufferExample = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         線形 - バッファ
       </Typography>
-      <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
+      <LinearProgress variant='buffer' value={progress} valueBuffer={buffer} />
     </Box>
   )
 }
@@ -259,10 +258,10 @@ export const LinearBuffer: Story = {
 export const LinearQuery: Story = {
   render: () => (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         線形 - クエリ
       </Typography>
-      <LinearProgress variant="query" />
+      <LinearProgress variant='query' />
     </Box>
   ),
 }
@@ -270,16 +269,16 @@ export const LinearQuery: Story = {
 export const LinearColors: Story = {
   render: () => (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         線形 - カラー
       </Typography>
       <Stack spacing={2}>
-        <LinearProgress color="primary" />
-        <LinearProgress color="secondary" />
-        <LinearProgress color="success" />
-        <LinearProgress color="error" />
-        <LinearProgress color="warning" />
-        <LinearProgress color="info" />
+        <LinearProgress color='primary' />
+        <LinearProgress color='secondary' />
+        <LinearProgress color='success' />
+        <LinearProgress color='error' />
+        <LinearProgress color='warning' />
+        <LinearProgress color='info' />
       </Stack>
     </Box>
   ),
@@ -302,16 +301,16 @@ const CombinedExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         円形と線形の組み合わせ
       </Typography>
       <Stack spacing={3}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <CircularProgress variant="determinate" value={progress} />
+          <CircularProgress variant='determinate' value={progress} />
           <Box sx={{ width: '100%' }}>
-            <LinearProgress variant="determinate" value={progress} />
+            <LinearProgress variant='determinate' value={progress} />
           </Box>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             {`${Math.round(progress)}%`}
           </Typography>
         </Box>

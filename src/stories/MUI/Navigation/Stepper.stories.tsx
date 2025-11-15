@@ -69,10 +69,7 @@ const HorizontalStepper = () => {
               ステップ {activeStep + 1}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-              >
+              <Button disabled={activeStep === 0} onClick={handleBack}>
                 戻る
               </Button>
               <Button onClick={handleNext}>
@@ -93,7 +90,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <HorizontalStepper />
@@ -114,10 +111,10 @@ const VerticalStepperExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         縦方向
       </Typography>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper activeStep={activeStep} orientation='vertical'>
         {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -127,8 +124,7 @@ const VerticalStepperExample = () => {
                 <Button
                   disabled={activeStep === 0}
                   onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
+                  sx={{ mr: 1 }}>
                   戻る
                 </Button>
                 <Button onClick={handleNext}>
@@ -150,7 +146,7 @@ export const Vertical: Story = {
 export const AlternativeLabel: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         代替ラベル
       </Typography>
       <Stepper activeStep={1} alternativeLabel>
@@ -167,7 +163,7 @@ export const AlternativeLabel: Story = {
 export const Optional: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         オプションステップ
       </Typography>
       <Stepper activeStep={1}>
@@ -175,7 +171,8 @@ export const Optional: Story = {
           <StepLabel>ステップ 1</StepLabel>
         </Step>
         <Step>
-          <StepLabel optional={<Typography variant="caption">オプション</Typography>}>
+          <StepLabel
+            optional={<Typography variant='caption'>オプション</Typography>}>
             ステップ 2
           </StepLabel>
         </Step>
@@ -190,7 +187,7 @@ export const Optional: Story = {
 export const Error: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         エラーステップ
       </Typography>
       <Stepper activeStep={1}>

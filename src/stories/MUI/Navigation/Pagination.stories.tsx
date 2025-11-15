@@ -45,13 +45,13 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Stack spacing={2}>
         <Pagination count={10} />
-        <Pagination count={10} color="primary" />
-        <Pagination count={10} color="secondary" />
+        <Pagination count={10} color='primary' />
+        <Pagination count={10} color='secondary' />
         <Pagination count={10} disabled />
       </Stack>
     </Box>
@@ -61,12 +61,12 @@ export const Basic: Story = {
 export const Variants: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         バリエーション
       </Typography>
       <Stack spacing={2}>
-        <Pagination count={10} variant="text" />
-        <Pagination count={10} variant="outlined" />
+        <Pagination count={10} variant='text' />
+        <Pagination count={10} variant='outlined' />
       </Stack>
     </Box>
   ),
@@ -75,13 +75,13 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
       <Stack spacing={2}>
-        <Pagination count={10} size="small" />
-        <Pagination count={10} size="medium" />
-        <Pagination count={10} size="large" />
+        <Pagination count={10} size='small' />
+        <Pagination count={10} size='medium' />
+        <Pagination count={10} size='large' />
       </Stack>
     </Box>
   ),
@@ -90,12 +90,12 @@ export const Sizes: Story = {
 export const Shapes: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         形状
       </Typography>
       <Stack spacing={2}>
-        <Pagination count={10} shape="circular" />
-        <Pagination count={10} shape="rounded" />
+        <Pagination count={10} shape='circular' />
+        <Pagination count={10} shape='rounded' />
       </Stack>
     </Box>
   ),
@@ -106,7 +106,7 @@ const ControlledExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         制御されたPagination
       </Typography>
       <Stack spacing={2}>
@@ -128,7 +128,7 @@ export const Controlled: Story = {
 export const Ranges: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         範囲
       </Typography>
       <Stack spacing={2}>
@@ -143,7 +143,7 @@ export const Ranges: Story = {
 export const Boundaries: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         境界表示数
       </Typography>
       <Stack spacing={2}>
@@ -158,7 +158,7 @@ export const Boundaries: Story = {
 export const Buttons: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ボタン
       </Typography>
       <Stack spacing={2}>

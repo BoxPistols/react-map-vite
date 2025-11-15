@@ -72,12 +72,12 @@ export const Basic: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
-      <Checkbox size="small" defaultChecked />
-      <Checkbox size="medium" defaultChecked />
-      <Checkbox size="large" defaultChecked />
+      <Checkbox size='small' defaultChecked />
+      <Checkbox size='medium' defaultChecked />
+      <Checkbox size='large' defaultChecked />
     </Box>
   ),
 }
@@ -85,16 +85,16 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カラー
       </Typography>
       <Box sx={{ display: 'flex', gap: 1 }}>
         <Checkbox defaultChecked />
-        <Checkbox defaultChecked color="primary" />
-        <Checkbox defaultChecked color="secondary" />
-        <Checkbox defaultChecked color="success" />
-        <Checkbox defaultChecked color="error" />
-        <Checkbox defaultChecked color="warning" />
+        <Checkbox defaultChecked color='primary' />
+        <Checkbox defaultChecked color='secondary' />
+        <Checkbox defaultChecked color='success' />
+        <Checkbox defaultChecked color='error' />
+        <Checkbox defaultChecked color='warning' />
       </Box>
     </Box>
   ),
@@ -103,19 +103,15 @@ export const Colors: Story = {
 export const WithLabel: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ラベル付き
       </Typography>
-      <FormControlLabel control={<Checkbox />} label="同意する" />
+      <FormControlLabel control={<Checkbox />} label='同意する' />
       <FormControlLabel
         control={<Checkbox defaultChecked />}
-        label="ニュースレターを受け取る"
+        label='ニュースレターを受け取る'
       />
-      <FormControlLabel
-        disabled
-        control={<Checkbox />}
-        label="無効な項目"
-      />
+      <FormControlLabel disabled control={<Checkbox />} label='無効な項目' />
     </Box>
   ),
 }
@@ -135,38 +131,38 @@ const GroupExample = () => {
   }
 
   return (
-    <FormControl component="fieldset" variant="standard">
-      <FormLabel component="legend">技術スタック</FormLabel>
+    <FormControl component='fieldset' variant='standard'>
+      <FormLabel component='legend'>技術スタック</FormLabel>
       <FormGroup>
         <FormControlLabel
           control={
             <Checkbox
               checked={state.javascript}
               onChange={handleChange}
-              name="javascript"
+              name='javascript'
             />
           }
-          label="JavaScript"
+          label='JavaScript'
         />
         <FormControlLabel
           control={
             <Checkbox
               checked={state.typescript}
               onChange={handleChange}
-              name="typescript"
+              name='typescript'
             />
           }
-          label="TypeScript"
+          label='TypeScript'
         />
         <FormControlLabel
           control={
             <Checkbox
               checked={state.react}
               onChange={handleChange}
-              name="react"
+              name='react'
             />
           }
-          label="React"
+          label='React'
         />
       </FormGroup>
       <FormHelperText>技術スタックを選択してください</FormHelperText>
@@ -196,11 +192,11 @@ const IndeterminateExample = () => {
   const children = (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       <FormControlLabel
-        label="子アイテム 1"
+        label='子アイテム 1'
         control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
       />
       <FormControlLabel
-        label="子アイテム 2"
+        label='子アイテム 2'
         control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
       />
     </Box>
@@ -208,11 +204,11 @@ const IndeterminateExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         不確定状態
       </Typography>
       <FormControlLabel
-        label="親アイテム"
+        label='親アイテム'
         control={
           <Checkbox
             checked={checked[0] && checked[1]}
@@ -233,7 +229,7 @@ export const Indeterminate: Story = {
 export const CustomIcon: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カスタムアイコン
       </Typography>
       <Checkbox

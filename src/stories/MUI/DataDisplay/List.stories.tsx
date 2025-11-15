@@ -44,15 +44,17 @@ export const Playground: Story = {
     disablePadding: false,
   },
   render: (args) => (
-    <List {...args} sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List
+      {...args}
+      sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <ListItem>
-        <ListItemText primary="アイテム 1" />
+        <ListItemText primary='アイテム 1' />
       </ListItem>
       <ListItem>
-        <ListItemText primary="アイテム 2" />
+        <ListItemText primary='アイテム 2' />
       </ListItem>
       <ListItem>
-        <ListItemText primary="アイテム 3" />
+        <ListItemText primary='アイテム 3' />
       </ListItem>
     </List>
   ),
@@ -61,18 +63,18 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本リスト
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem>
-          <ListItemText primary="Single-line item" />
+          <ListItemText primary='Single-line item' />
         </ListItem>
         <ListItem>
-          <ListItemText primary="Single-line item" />
+          <ListItemText primary='Single-line item' />
         </ListItem>
         <ListItem>
-          <ListItemText primary="Single-line item" />
+          <ListItemText primary='Single-line item' />
         </ListItem>
       </List>
     </Box>
@@ -82,7 +84,7 @@ export const Basic: Story = {
 export const WithIcon: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アイコン付きリスト
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -90,19 +92,19 @@ export const WithIcon: Story = {
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="受信トレイ" />
+          <ListItemText primary='受信トレイ' />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText primary="下書き" />
+          <ListItemText primary='下書き' />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <SendIcon />
           </ListItemIcon>
-          <ListItemText primary="送信済み" />
+          <ListItemText primary='送信済み' />
         </ListItem>
       </List>
     </Box>
@@ -112,7 +114,7 @@ export const WithIcon: Story = {
 export const WithAvatar: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アバター付きリスト
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -122,7 +124,7 @@ export const WithAvatar: Story = {
               <FolderIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Photos" secondary="Jan 9, 2024" />
+          <ListItemText primary='Photos' secondary='Jan 9, 2024' />
         </ListItem>
         <ListItem>
           <ListItemAvatar>
@@ -130,7 +132,7 @@ export const WithAvatar: Story = {
               <FolderIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Work" secondary="Jan 7, 2024" />
+          <ListItemText primary='Work' secondary='Jan 7, 2024' />
         </ListItem>
       </List>
     </Box>
@@ -140,26 +142,26 @@ export const WithAvatar: Story = {
 export const TwoLine: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         2行リスト
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        <ListItem alignItems="flex-start">
+        <ListItem alignItems='flex-start'>
           <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="https://i.pravatar.cc/150?img=1" />
+            <Avatar alt='Remy Sharp' src='https://i.pravatar.cc/150?img=1' />
           </ListItemAvatar>
           <ListItemText
-            primary="Brunch this weekend?"
+            primary='Brunch this weekend?'
             secondary="Ali Connors — I'll be in your neighborhood doing errands this…"
           />
         </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
+        <Divider variant='inset' component='li' />
+        <ListItem alignItems='flex-start'>
           <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="https://i.pravatar.cc/150?img=2" />
+            <Avatar alt='Travis Howard' src='https://i.pravatar.cc/150?img=2' />
           </ListItemAvatar>
           <ListItemText
-            primary="Summer BBQ"
+            primary='Summer BBQ'
             secondary="to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this…"
           />
         </ListItem>
@@ -171,7 +173,7 @@ export const TwoLine: Story = {
 export const Interactive: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         インタラクティブリスト
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -179,19 +181,19 @@ export const Interactive: Story = {
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="受信トレイ" />
+          <ListItemText primary='受信トレイ' />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
             <StarIcon />
           </ListItemIcon>
-          <ListItemText primary="スター付き" />
+          <ListItemText primary='スター付き' />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
             <SendIcon />
           </ListItemIcon>
-          <ListItemText primary="送信済み" />
+          <ListItemText primary='送信済み' />
         </ListItemButton>
       </List>
     </Box>
@@ -203,38 +205,37 @@ const NestedExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ネストされたリスト
       </Typography>
       <List
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-        component="nav"
-      >
+        component='nav'>
         <ListItemButton>
           <ListItemIcon>
             <SendIcon />
           </ListItemIcon>
-          <ListItemText primary="送信メール" />
+          <ListItemText primary='送信メール' />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText primary="下書き" />
+          <ListItemText primary='下書き' />
         </ListItemButton>
         <ListItemButton onClick={() => setOpen(!open)}>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="受信トレイ" />
+          <ListItemText primary='受信トレイ' />
         </ListItemButton>
         {open && (
-          <List component="div" disablePadding>
+          <List component='div' disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <StarIcon />
               </ListItemIcon>
-              <ListItemText primary="スター付き" />
+              <ListItemText primary='スター付き' />
             </ListItemButton>
           </List>
         )}
@@ -265,22 +266,22 @@ const WithSwitchExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         スイッチ付きリスト
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem>
-          <ListItemText primary="Wi-Fi" />
+          <ListItemText primary='Wi-Fi' />
           <Switch
-            edge="end"
+            edge='end'
             onChange={handleToggle('wifi')}
             checked={checked.indexOf('wifi') !== -1}
           />
         </ListItem>
         <ListItem>
-          <ListItemText primary="Bluetooth" />
+          <ListItemText primary='Bluetooth' />
           <Switch
-            edge="end"
+            edge='end'
             onChange={handleToggle('bluetooth')}
             checked={checked.indexOf('bluetooth') !== -1}
           />
@@ -298,35 +299,38 @@ export const Dense: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 3 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           通常
         </Typography>
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <List
+          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           <ListItem>
-            <ListItemText primary="Single-line item" />
+            <ListItemText primary='Single-line item' />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Single-line item" />
+            <ListItemText primary='Single-line item' />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Single-line item" />
+            <ListItemText primary='Single-line item' />
           </ListItem>
         </List>
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           密集
         </Typography>
-        <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <List
+          dense
+          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           <ListItem>
-            <ListItemText primary="Single-line item" />
+            <ListItemText primary='Single-line item' />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Single-line item" />
+            <ListItemText primary='Single-line item' />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Single-line item" />
+            <ListItemText primary='Single-line item' />
           </ListItem>
         </List>
       </Box>

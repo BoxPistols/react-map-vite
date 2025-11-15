@@ -40,7 +40,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Paper sx={{ p: 2, width: 200 }}>
@@ -53,10 +53,10 @@ export const Basic: Story = {
 export const Elevations: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         影の高さ (Elevation)
       </Typography>
-      <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+      <Stack direction='row' spacing={2} flexWrap='wrap' useFlexGap>
         {[0, 1, 2, 3, 4, 6, 8, 12, 16, 24].map((elevation) => (
           <Paper
             key={elevation}
@@ -68,9 +68,8 @@ export const Elevations: Story = {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-            }}
-          >
-            <Typography variant="body2" align="center">
+            }}>
+            <Typography variant='body2' align='center'>
               elevation={elevation}
             </Typography>
           </Paper>
@@ -83,14 +82,14 @@ export const Elevations: Story = {
 export const Variants: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         バリエーション
       </Typography>
       <Stack spacing={2}>
-        <Paper variant="elevation" sx={{ p: 2 }}>
+        <Paper variant='elevation' sx={{ p: 2 }}>
           <Typography>Elevation (デフォルト)</Typography>
         </Paper>
-        <Paper variant="outlined" sx={{ p: 2 }}>
+        <Paper variant='outlined' sx={{ p: 2 }}>
           <Typography>Outlined</Typography>
         </Paper>
       </Stack>
@@ -101,15 +100,15 @@ export const Variants: Story = {
 export const Square: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         角丸の有無
       </Typography>
-      <Stack direction="row" spacing={2}>
+      <Stack direction='row' spacing={2}>
         <Paper sx={{ p: 2, width: 150, height: 100 }}>
-          <Typography variant="body2">角丸あり (デフォルト)</Typography>
+          <Typography variant='body2'>角丸あり (デフォルト)</Typography>
         </Paper>
         <Paper square sx={{ p: 2, width: 150, height: 100 }}>
-          <Typography variant="body2">角丸なし (square)</Typography>
+          <Typography variant='body2'>角丸なし (square)</Typography>
         </Paper>
       </Stack>
     </Box>
@@ -119,15 +118,15 @@ export const Square: Story = {
 export const WithContent: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         コンテンツ付き
       </Typography>
       <Stack spacing={2}>
         <Paper sx={{ p: 3 }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant='h6' gutterBottom>
             見出し
           </Typography>
-          <Typography variant="body1">
+          <Typography variant='body1'>
             Paper コンポーネントはコンテンツをグループ化するのに適しています。
             適切なパディングと影により、コンテンツが浮き上がって見えます。
           </Typography>
@@ -140,20 +139,28 @@ export const WithContent: Story = {
 export const CustomBackground: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カスタム背景色
       </Typography>
       <Stack spacing={2}>
-        <Paper sx={{ p: 2, bgcolor: 'primary.main', color: 'primary.contrastText' }}>
+        <Paper
+          sx={{ p: 2, bgcolor: 'primary.main', color: 'primary.contrastText' }}>
           <Typography>Primary 背景</Typography>
         </Paper>
-        <Paper sx={{ p: 2, bgcolor: 'secondary.main', color: 'secondary.contrastText' }}>
+        <Paper
+          sx={{
+            p: 2,
+            bgcolor: 'secondary.main',
+            color: 'secondary.contrastText',
+          }}>
           <Typography>Secondary 背景</Typography>
         </Paper>
-        <Paper sx={{ p: 2, bgcolor: 'error.main', color: 'error.contrastText' }}>
+        <Paper
+          sx={{ p: 2, bgcolor: 'error.main', color: 'error.contrastText' }}>
           <Typography>Error 背景</Typography>
         </Paper>
-        <Paper sx={{ p: 2, bgcolor: 'success.main', color: 'success.contrastText' }}>
+        <Paper
+          sx={{ p: 2, bgcolor: 'success.main', color: 'success.contrastText' }}>
           <Typography>Success 背景</Typography>
         </Paper>
       </Stack>
@@ -164,11 +171,11 @@ export const CustomBackground: Story = {
 export const NestedPaper: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ネストされた Paper
       </Typography>
       <Paper sx={{ p: 3 }} elevation={3}>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           外側の Paper
         </Typography>
         <Paper sx={{ p: 2, mt: 2 }} elevation={6}>
@@ -182,7 +189,7 @@ export const NestedPaper: Story = {
 export const Grid: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         グリッドレイアウト
       </Typography>
       <Box
@@ -190,8 +197,7 @@ export const Grid: Story = {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
           gap: 2,
-        }}
-      >
+        }}>
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <Paper
             key={item}
@@ -202,8 +208,7 @@ export const Grid: Story = {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            elevation={2}
-          >
+            elevation={2}>
             <Typography>アイテム {item}</Typography>
           </Paper>
         ))}

@@ -24,8 +24,7 @@ const Item = ({ children }: { children: React.ReactNode }) => (
       textAlign: 'center',
       bgcolor: 'primary.light',
       color: 'white',
-    }}
-  >
+    }}>
     {children}
   </Paper>
 )
@@ -55,7 +54,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本グリッド
       </Typography>
       <Grid container spacing={2}>
@@ -86,7 +85,7 @@ export const Spacing: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           spacing=0
         </Typography>
         <Grid container spacing={0}>
@@ -103,7 +102,7 @@ export const Spacing: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           spacing=2
         </Typography>
         <Grid container spacing={2}>
@@ -120,7 +119,7 @@ export const Spacing: Story = {
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           spacing=4
         </Typography>
         <Grid container spacing={4}>
@@ -142,7 +141,7 @@ export const Spacing: Story = {
 export const Responsive: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         レスポンシブグリッド
       </Typography>
       <Grid container spacing={2}>
@@ -169,7 +168,7 @@ export const Responsive: Story = {
 export const AutoLayout: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         自動レイアウト
       </Typography>
       <Grid container spacing={2}>
@@ -203,7 +202,7 @@ export const AutoLayout: Story = {
 export const NestedGrid: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ネストされたグリッド
       </Typography>
       <Grid container spacing={2}>
@@ -213,12 +212,14 @@ export const NestedGrid: Story = {
             <Box sx={{ mt: 2 }}>
               <Grid container spacing={1}>
                 <Grid item xs={6}>
-                  <Paper sx={{ p: 1, bgcolor: 'secondary.light', color: 'white' }}>
+                  <Paper
+                    sx={{ p: 1, bgcolor: 'secondary.light', color: 'white' }}>
                     内側 1
                   </Paper>
                 </Grid>
                 <Grid item xs={6}>
-                  <Paper sx={{ p: 1, bgcolor: 'secondary.light', color: 'white' }}>
+                  <Paper
+                    sx={{ p: 1, bgcolor: 'secondary.light', color: 'white' }}>
                     内側 2
                   </Paper>
                 </Grid>
@@ -237,7 +238,7 @@ export const NestedGrid: Story = {
 export const ColumnSpacing: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         列・行の間隔を個別に指定
       </Typography>
       <Grid container columnSpacing={2} rowSpacing={1}>

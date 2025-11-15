@@ -42,10 +42,10 @@ export const Playground: Story = {
   render: (args) => (
     <Card {...args} sx={{ maxWidth: 345 }}>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant='h5' component='div'>
           カードタイトル
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant='body2' color='text.secondary'>
           これはカードのコンテンツです。
         </Typography>
       </CardContent>
@@ -56,23 +56,23 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Stack spacing={2} sx={{ maxWidth: 345 }}>
         <Card>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant='h5' component='div'>
               Lizard
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant='body2' color='text.secondary'>
               Lizards are a widespread group of squamate reptiles, with over
               6,000 species, ranging across all continents except Antarctica
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">共有</Button>
-            <Button size="small">詳細</Button>
+            <Button size='small'>共有</Button>
+            <Button size='small'>詳細</Button>
           </CardActions>
         </Card>
       </Stack>
@@ -83,22 +83,22 @@ export const Basic: Story = {
 export const Variants: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         バリエーション
       </Typography>
       <Stack spacing={2} sx={{ maxWidth: 345 }}>
-        <Card variant="elevation">
+        <Card variant='elevation'>
           <CardContent>
-            <Typography variant="h6">Elevation (デフォルト)</Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant='h6'>Elevation (デフォルト)</Typography>
+            <Typography variant='body2' color='text.secondary'>
               影付きのカードです。
             </Typography>
           </CardContent>
         </Card>
-        <Card variant="outlined">
+        <Card variant='outlined'>
           <CardContent>
-            <Typography variant="h6">Outlined</Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant='h6'>Outlined</Typography>
+            <Typography variant='body2' color='text.secondary'>
               枠線のあるカードです。
             </Typography>
           </CardContent>
@@ -111,27 +111,27 @@ export const Variants: Story = {
 export const WithMedia: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         メディア付き
       </Typography>
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
-          component="img"
-          height="140"
-          image="https://picsum.photos/400/140"
-          alt="random image"
+          component='img'
+          height='140'
+          image='https://picsum.photos/400/140'
+          alt='random image'
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant='h5' component='div'>
             画像付きカード
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             カードに画像を表示する例です。
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">共有</Button>
-          <Button size="small">詳細</Button>
+          <Button size='small'>共有</Button>
+          <Button size='small'>詳細</Button>
         </CardActions>
       </Card>
     </Box>
@@ -141,41 +141,41 @@ export const WithMedia: Story = {
 export const WithHeader: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ヘッダー付き
       </Typography>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: 'error.main' }} aria-label="recipe">
+            <Avatar sx={{ bgcolor: 'error.main' }} aria-label='recipe'>
               R
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label='settings'>
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2024"
+          title='Shrimp and Chorizo Paella'
+          subheader='September 14, 2024'
         />
         <CardMedia
-          component="img"
-          height="194"
-          image="https://picsum.photos/400/194"
-          alt="Paella dish"
+          component='img'
+          height='194'
+          image='https://picsum.photos/400/194'
+          alt='Paella dish'
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             This impressive paella is a perfect party dish and a fun meal to
             cook together with your guests.
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label='add to favorites'>
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="share">
+          <IconButton aria-label='share'>
             <ShareIcon />
           </IconButton>
         </CardActions>
@@ -189,51 +189,48 @@ const ComplexExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         複雑なカード
       </Typography>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: 'primary.main' }}>U</Avatar>
-          }
+          avatar={<Avatar sx={{ bgcolor: 'primary.main' }}>U</Avatar>}
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label='settings'>
               <MoreVertIcon />
             </IconButton>
           }
-          title="ユーザー名"
-          subheader="2024年1月1日"
+          title='ユーザー名'
+          subheader='2024年1月1日'
         />
         <CardMedia
-          component="img"
-          height="194"
-          image="https://picsum.photos/400/194?random=1"
-          alt="Random"
+          component='img'
+          height='194'
+          image='https://picsum.photos/400/194?random=1'
+          alt='Random'
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             これは複雑なカードレイアウトの例です。
             展開可能なコンテンツを含んでいます。
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label='add to favorites'>
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="share">
+          <IconButton aria-label='share'>
             <ShareIcon />
           </IconButton>
           <IconButton
             onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
-            aria-label="show more"
-            sx={{ marginLeft: 'auto' }}
-          >
+            aria-label='show more'
+            sx={{ marginLeft: 'auto' }}>
             <MoreVertIcon />
           </IconButton>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout='auto' unmountOnExit>
           <CardContent>
             <Typography paragraph>詳細情報:</Typography>
             <Typography paragraph>
@@ -254,21 +251,21 @@ export const Complex: Story = {
 export const ActionButtons: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アクションボタン
       </Typography>
       <Card sx={{ maxWidth: 345 }}>
         <CardContent>
-          <Typography variant="h5" component="div">
+          <Typography variant='h5' component='div'>
             タイトル
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             カードのコンテンツ
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">共有</Button>
-          <Button size="small">詳細</Button>
+          <Button size='small'>共有</Button>
+          <Button size='small'>詳細</Button>
         </CardActions>
       </Card>
     </Box>

@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/blocks'
 
-<Meta title="MUI/Inputs/概要" />
+<Meta title='MUI/Inputs/概要' />
 
 # Inputs（入力コンポーネント）
 
@@ -10,7 +10,9 @@ import { Meta } from '@storybook/blocks'
 ## 📝 コンポーネント一覧
 
 ### テキスト入力
+
 - **TextField** - 基本的なテキスト入力フィールド
+
   - variant: outlined（デフォルト）, filled, standard
   - multiline対応で複数行入力も可能
   - helperTextでヒントを表示
@@ -21,7 +23,9 @@ import { Meta } from '@storybook/blocks'
   - カスタムレンダリング可能
 
 ### 選択入力
+
 - **Select** - ドロップダウン選択
+
   - MenuItemで選択肢を定義
   - 複数選択モード対応
   - 選択肢のグループ化も可能
@@ -31,12 +35,15 @@ import { Meta } from '@storybook/blocks'
   - よりリッチなUI
 
 ### Boolean入力
+
 - **Checkbox** - チェックボックス
+
   - 独立した選択肢
   - indeterminate（不定）状態もサポート
   - FormGroupで複数をグループ化
 
 - **Switch** - トグルスイッチ
+
   - ON/OFF状態の切り替え
   - 設定画面でよく使用
   - ラベル位置のカスタマイズ可能
@@ -47,7 +54,9 @@ import { Meta } from '@storybook/blocks'
   - 方向（horizontal/vertical）指定可能
 
 ### 数値・範囲入力
+
 - **Slider** - スライダー
+
   - 範囲内の値を選択
   - 離散値・連続値両対応
   - 範囲選択（min-max）も可能
@@ -58,12 +67,15 @@ import { Meta } from '@storybook/blocks'
   - カスタムアイコンに変更可能
 
 ### ボタン系
+
 - **ButtonGroup** - ボタングループ
+
   - 関連するボタンをグループ化
   - variant/size/colorを統一
   - 垂直配置も可能
 
 - **Fab** - フローティングアクションボタン
+
   - 主要なアクションを強調
   - extended（拡張）モードでテキスト表示
   - 画面の固定位置に配置
@@ -76,22 +88,25 @@ import { Meta } from '@storybook/blocks'
 ## 💡 使い分けのヒント
 
 ### TextField vs Autocomplete vs Select
-| コンポーネント | 選択肢の数 | 検索 | 自由入力 | 用途 |
-|--------------|-----------|------|---------|-----|
-| TextField | - | - | ✓ | テキスト入力 |
-| Select | 〜20個 | ✗ | ✗ | 少数の選択肢 |
-| Autocomplete | 20個〜 | ✓ | △ | 多数の選択肢 |
+
+| コンポーネント | 選択肢の数 | 検索 | 自由入力 | 用途         |
+| -------------- | ---------- | ---- | -------- | ------------ |
+| TextField      | -          | -    | ✓        | テキスト入力 |
+| Select         | 〜20個     | ✗    | ✗        | 少数の選択肢 |
+| Autocomplete   | 20個〜     | ✓    | △        | 多数の選択肢 |
 
 ### Checkbox vs Radio vs Switch
-| コンポーネント | 選択数 | 状態 | 用途 |
-|--------------|-------|------|-----|
-| Checkbox | 複数OK | ON/OFF | リストからの複数選択 |
-| Radio | 1つのみ | 排他的 | グループから1つ選択 |
-| Switch | - | ON/OFF | 設定のON/OFF切替 |
+
+| コンポーネント | 選択数  | 状態   | 用途                 |
+| -------------- | ------- | ------ | -------------------- |
+| Checkbox       | 複数OK  | ON/OFF | リストからの複数選択 |
+| Radio          | 1つのみ | 排他的 | グループから1つ選択  |
+| Switch         | -       | ON/OFF | 設定のON/OFF切替     |
 
 ## ♿ アクセシビリティ
 
 ### ラベルの重要性
+
 ```tsx
 // ❌ 悪い例
 <TextField />
@@ -104,16 +119,18 @@ import { Meta } from '@storybook/blocks'
 ```
 
 ### 必須項目の明示
+
 ```tsx
 <TextField
   required
-  label="お名前"
+  label='お名前'
   error={hasError}
-  helperText={hasError && "お名前は必須です"}
+  helperText={hasError && 'お名前は必須です'}
 />
 ```
 
 ### キーボード操作
+
 - すべてのコンポーネントはキーボードで操作可能
 - Tabキーで移動
 - Enter/Spaceで選択
@@ -121,17 +138,21 @@ import { Meta } from '@storybook/blocks'
 ## 🎨 スタイリング
 
 ### バリアント
+
 多くのコンポーネントで3つのvariantをサポート:
+
 - **contained** - 背景色あり（目立つ）
 - **outlined** - 枠線のみ（中間）
 - **text** - テキストのみ（控えめ）
 
 ### サイズ
+
 - **small** - コンパクト
 - **medium** - 標準（デフォルト）
 - **large** - 大きめ
 
 ### カラー
+
 - primary, secondary - ブランドカラー
 - error - エラー表示
 - warning, info, success - 状態表示
@@ -139,6 +160,7 @@ import { Meta } from '@storybook/blocks'
 ## 📋 実装例
 
 ### ログインフォーム
+
 ```tsx
 <TextField
   fullWidth
@@ -159,12 +181,11 @@ import { Meta } from '@storybook/blocks'
 ```
 
 ### 検索フィールド
+
 ```tsx
 <Autocomplete
   options={options}
-  renderInput={(params) => (
-    <TextField {...params} label="検索" />
-  )}
+  renderInput={(params) => <TextField {...params} label='検索' />}
   freeSolo
 />
 ```

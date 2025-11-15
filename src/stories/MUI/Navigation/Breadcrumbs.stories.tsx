@@ -36,13 +36,13 @@ export const Playground: Story = {
   },
   render: (args) => (
     <Breadcrumbs {...args}>
-      <Link underline="hover" color="inherit" href="/">
+      <Link underline='hover' color='inherit' href='/'>
         Home
       </Link>
-      <Link underline="hover" color="inherit" href="/catalog">
+      <Link underline='hover' color='inherit' href='/catalog'>
         Catalog
       </Link>
-      <Typography color="text.primary">Accessories</Typography>
+      <Typography color='text.primary'>Accessories</Typography>
     </Breadcrumbs>
   ),
 }
@@ -50,17 +50,17 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+      <Breadcrumbs aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='/'>
           Home
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link underline='hover' color='inherit' href='/catalog'>
           Catalog
         </Link>
-        <Typography color="text.primary">Accessories</Typography>
+        <Typography color='text.primary'>Accessories</Typography>
       </Breadcrumbs>
     </Box>
   ),
@@ -69,17 +69,17 @@ export const Basic: Story = {
 export const ActiveLast: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         最後の項目もリンク
       </Typography>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+      <Breadcrumbs aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='/'>
           Home
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link underline='hover' color='inherit' href='/catalog'>
           Catalog
         </Link>
-        <Link underline="hover" color="inherit" href="/accessories">
+        <Link underline='hover' color='inherit' href='/accessories'>
           Accessories
         </Link>
       </Breadcrumbs>
@@ -90,37 +90,39 @@ export const ActiveLast: Story = {
 export const CustomSeparator: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カスタムセパレータ
       </Typography>
-      <Breadcrumbs separator="›" aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+      <Breadcrumbs separator='›' aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='/'>
           Home
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link underline='hover' color='inherit' href='/catalog'>
           Catalog
         </Link>
-        <Typography color="text.primary">Accessories</Typography>
+        <Typography color='text.primary'>Accessories</Typography>
       </Breadcrumbs>
       <Box sx={{ my: 2 }} />
-      <Breadcrumbs separator="-" aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+      <Breadcrumbs separator='-' aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='/'>
           Home
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link underline='hover' color='inherit' href='/catalog'>
           Catalog
         </Link>
-        <Typography color="text.primary">Accessories</Typography>
+        <Typography color='text.primary'>Accessories</Typography>
       </Breadcrumbs>
       <Box sx={{ my: 2 }} />
-      <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize='small' />}
+        aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='/'>
           Home
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link underline='hover' color='inherit' href='/catalog'>
           Catalog
         </Link>
-        <Typography color="text.primary">Accessories</Typography>
+        <Typography color='text.primary'>Accessories</Typography>
       </Breadcrumbs>
     </Box>
   ),
@@ -129,31 +131,28 @@ export const CustomSeparator: Story = {
 export const WithIcon: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アイコン付き
       </Typography>
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label='breadcrumb'>
         <Link
-          underline="hover"
+          underline='hover'
           sx={{ display: 'flex', alignItems: 'center' }}
-          color="inherit"
-          href="/"
-        >
-          <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          color='inherit'
+          href='/'>
+          <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
           Home
         </Link>
         <Link
-          underline="hover"
+          underline='hover'
           sx={{ display: 'flex', alignItems: 'center' }}
-          color="inherit"
-          href="/catalog"
-        >
+          color='inherit'
+          href='/catalog'>
           Catalog
         </Link>
         <Typography
           sx={{ display: 'flex', alignItems: 'center' }}
-          color="text.primary"
-        >
+          color='text.primary'>
           Accessories
         </Typography>
       </Breadcrumbs>
@@ -164,23 +163,23 @@ export const WithIcon: Story = {
 export const MaxItems: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         最大表示項目数
       </Typography>
-      <Breadcrumbs maxItems={2} aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+      <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='/'>
           Home
         </Link>
-        <Link underline="hover" color="inherit" href="/catalog">
+        <Link underline='hover' color='inherit' href='/catalog'>
           Catalog
         </Link>
-        <Link underline="hover" color="inherit" href="/accessories">
+        <Link underline='hover' color='inherit' href='/accessories'>
           Accessories
         </Link>
-        <Link underline="hover" color="inherit" href="/new-collection">
+        <Link underline='hover' color='inherit' href='/new-collection'>
           New Collection
         </Link>
-        <Typography color="text.primary">Belts</Typography>
+        <Typography color='text.primary'>Belts</Typography>
       </Breadcrumbs>
     </Box>
   ),
@@ -209,20 +208,18 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
 export const CustomizedBreadcrumbs: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カスタムスタイル
       </Typography>
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label='breadcrumb'>
         <StyledBreadcrumb
-          component="a"
-          href="/"
-          label="Home"
-          icon={<HomeIcon fontSize="small" />}
+          component='a'
+          href='/'
+          label='Home'
+          icon={<HomeIcon fontSize='small' />}
         />
-        <StyledBreadcrumb component="a" href="/catalog" label="Catalog" />
-        <StyledBreadcrumb
-          label="Accessories"
-        />
+        <StyledBreadcrumb component='a' href='/catalog' label='Catalog' />
+        <StyledBreadcrumb label='Accessories' />
       </Breadcrumbs>
     </Box>
   ),
@@ -231,33 +228,31 @@ export const CustomizedBreadcrumbs: Story = {
 export const RouterIntegration: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ルーター統合
       </Typography>
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label='breadcrumb'>
         <Link
-          underline="hover"
-          color="inherit"
-          href="/"
+          underline='hover'
+          color='inherit'
+          href='/'
           onClick={(e: React.MouseEvent) => {
             e.preventDefault()
             alert('Navigate to /')
-          }}
-        >
+          }}>
           ホーム
         </Link>
         <Link
-          underline="hover"
-          color="inherit"
-          href="/products"
+          underline='hover'
+          color='inherit'
+          href='/products'
           onClick={(e: React.MouseEvent) => {
             e.preventDefault()
             alert('Navigate to /products')
-          }}
-        >
+          }}>
           商品
         </Link>
-        <Typography color="text.primary">詳細</Typography>
+        <Typography color='text.primary'>詳細</Typography>
       </Breadcrumbs>
     </Box>
   ),

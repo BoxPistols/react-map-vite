@@ -50,7 +50,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box sx={{ width: 300 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Slider defaultValue={30} />
@@ -62,13 +62,13 @@ export const Sizes: Story = {
   render: () => (
     <Box sx={{ width: 300, display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           小
         </Typography>
-        <Slider size="small" defaultValue={30} />
+        <Slider size='small' defaultValue={30} />
       </Box>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           中（デフォルト）
         </Typography>
         <Slider defaultValue={50} />
@@ -80,14 +80,14 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <Box sx={{ width: 300, display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カラー
       </Typography>
-      <Slider defaultValue={30} color="primary" />
-      <Slider defaultValue={40} color="secondary" />
-      <Slider defaultValue={50} color="success" />
-      <Slider defaultValue={60} color="error" />
-      <Slider defaultValue={70} color="warning" />
+      <Slider defaultValue={30} color='primary' />
+      <Slider defaultValue={40} color='secondary' />
+      <Slider defaultValue={50} color='success' />
+      <Slider defaultValue={60} color='error' />
+      <Slider defaultValue={70} color='warning' />
     </Box>
   ),
 }
@@ -96,7 +96,7 @@ export const Discrete: Story = {
   render: () => (
     <Box sx={{ width: 300, display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           離散値
         </Typography>
         <Slider
@@ -105,11 +105,11 @@ export const Discrete: Story = {
           marks
           min={0}
           max={100}
-          valueLabelDisplay="auto"
+          valueLabelDisplay='auto'
         />
       </Box>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           カスタムマーク
         </Typography>
         <Slider
@@ -121,7 +121,7 @@ export const Discrete: Story = {
             { value: 37, label: '37°C' },
             { value: 100, label: '100°C' },
           ]}
-          valueLabelDisplay="auto"
+          valueLabelDisplay='auto'
         />
       </Box>
     </Box>
@@ -137,17 +137,17 @@ const RangeExample = () => {
 
   return (
     <Box sx={{ width: 300 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         範囲選択
       </Typography>
       <Slider
         value={value}
         onChange={handleChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay='auto'
         min={0}
         max={100}
       />
-      <Typography variant="body2" sx={{ mt: 2 }}>
+      <Typography variant='body2' sx={{ mt: 2 }}>
         選択範囲: {value[0]} - {value[1]}
       </Typography>
     </Box>
@@ -163,10 +163,10 @@ const WithInputExample = () => {
 
   return (
     <Box sx={{ width: 300 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         入力フィールド付き
       </Typography>
-      <Stack spacing={2} direction="row" alignItems="center">
+      <Stack spacing={2} direction='row' alignItems='center'>
         <VolumeDown />
         <Slider
           value={value}
@@ -174,7 +174,7 @@ const WithInputExample = () => {
         />
         <VolumeUp />
       </Stack>
-      <Typography variant="body2" sx={{ mt: 2 }}>
+      <Typography variant='body2' sx={{ mt: 2 }}>
         音量: {value}%
       </Typography>
     </Box>
@@ -189,25 +189,25 @@ export const Vertical: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           縦向き
         </Typography>
         <Slider
-          orientation="vertical"
+          orientation='vertical'
           defaultValue={30}
           sx={{ height: 200 }}
-          valueLabelDisplay="auto"
+          valueLabelDisplay='auto'
         />
       </Box>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           縦向き（範囲選択）
         </Typography>
         <Slider
-          orientation="vertical"
+          orientation='vertical'
           defaultValue={[20, 37]}
           sx={{ height: 200 }}
-          valueLabelDisplay="auto"
+          valueLabelDisplay='auto'
         />
       </Box>
     </Box>
@@ -217,7 +217,7 @@ export const Vertical: Story = {
 export const Disabled: Story = {
   render: () => (
     <Box sx={{ width: 300 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         無効状態
       </Typography>
       <Slider defaultValue={30} disabled />
@@ -237,14 +237,14 @@ export const CustomMarks: Story = {
 
     return (
       <Box sx={{ width: 300 }}>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           カスタムラベル
         </Typography>
         <Slider
           defaultValue={50}
           step={null}
           marks={marks}
-          valueLabelDisplay="auto"
+          valueLabelDisplay='auto'
         />
       </Box>
     )

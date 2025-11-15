@@ -1,5 +1,11 @@
 /** @jsxImportSource react */
-import { Backdrop, Box, Button, CircularProgress, Typography } from '@mui/material'
+import {
+  Backdrop,
+  Box,
+  Button,
+  CircularProgress,
+  Typography,
+} from '@mui/material'
 import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
@@ -22,9 +28,8 @@ const BasicExample = () => {
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
-        onClick={() => setOpen(false)}
-      >
-        <CircularProgress color="inherit" />
+        onClick={() => setOpen(false)}>
+        <CircularProgress color='inherit' />
       </Backdrop>
     </Box>
   )
@@ -37,7 +42,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <BasicExample />
@@ -50,16 +55,15 @@ const WithMessageExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         メッセージ付き
       </Typography>
       <Button onClick={() => setOpen(!open)}>Show backdrop</Button>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-      >
+        open={open}>
         <Box sx={{ textAlign: 'center' }}>
-          <CircularProgress color="inherit" />
+          <CircularProgress color='inherit' />
           <Typography sx={{ mt: 2 }}>読み込み中...</Typography>
         </Box>
       </Backdrop>

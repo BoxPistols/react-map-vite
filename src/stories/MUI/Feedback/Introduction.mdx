@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/blocks'
 
-<Meta title="MUI/Feedback/概要" />
+<Meta title='MUI/Feedback/概要' />
 
 # Feedback（フィードバック）
 
@@ -10,7 +10,9 @@ import { Meta } from '@storybook/blocks'
 ## 🔔 コンポーネント一覧
 
 ### 通知・メッセージ
+
 - **Alert** - アラート表示
+
   - severity: error, warning, info, success
   - アイコンとカラーで状態を視覚化
   - アクションボタンを追加可能
@@ -21,18 +23,22 @@ import { Meta } from '@storybook/blocks'
   - アクションボタン付き
 
 ### ダイアログ
+
 - **Dialog** - ダイアログ
   - モーダルな操作を要求
   - fullScreen, maxWidth指定可能
   - トランジション効果
 
 ### ローディング
+
 - **Progress** - プログレスバー
+
   - **Circular** - 円形プログレス
   - **Linear** - 線形プログレス
   - determinate（進捗あり）/ indeterminate（進捗なし）
 
 - **Skeleton** - スケルトンローディング
+
   - コンテンツの形状を表示
   - variant: text, rectangular, circular, rounded
   - アニメーション: pulse, wave, false
@@ -45,21 +51,24 @@ import { Meta } from '@storybook/blocks'
 ## 💡 使い分けのヒント
 
 ### Alert vs Snackbar vs Dialog
-| コンポーネント | 重要度 | 持続時間 | 操作の必要性 | 用途 |
-|--------------|-------|---------|------------|-----|
-| Alert | 高 | 長め | △ | 重要な情報表示 |
-| Snackbar | 中 | 短い | ✗ | 操作完了の通知 |
-| Dialog | 高 | ユーザー操作まで | ✓ | 確認・入力を要求 |
+
+| コンポーネント | 重要度 | 持続時間         | 操作の必要性 | 用途             |
+| -------------- | ------ | ---------------- | ------------ | ---------------- |
+| Alert          | 高     | 長め             | △            | 重要な情報表示   |
+| Snackbar       | 中     | 短い             | ✗            | 操作完了の通知   |
+| Dialog         | 高     | ユーザー操作まで | ✓            | 確認・入力を要求 |
 
 ### Progress vs Skeleton
-| コンポーネント | 使用場面 | 進捗表示 | 用途 |
-|--------------|----------|---------|-----|
-| Progress | 処理中 | 可能 | ファイルアップロードなど |
-| Skeleton | 読み込み中 | 不可 | ページ/コンポーネント読み込み |
+
+| コンポーネント | 使用場面   | 進捗表示 | 用途                          |
+| -------------- | ---------- | -------- | ----------------------------- |
+| Progress       | 処理中     | 可能     | ファイルアップロードなど      |
+| Skeleton       | 読み込み中 | 不可     | ページ/コンポーネント読み込み |
 
 ## ♿ アクセシビリティ
 
 ### role属性の使用
+
 ```tsx
 // Alertには自動的に適切なroleが付与される
 <Alert severity="error">
@@ -74,13 +83,12 @@ import { Meta } from '@storybook/blocks'
 ```
 
 ### フォーカス管理
+
 ```tsx
 // Dialogを開いた時、自動的にフォーカスが移る
 <Dialog open={open} onClose={handleClose}>
   <DialogTitle>確認</DialogTitle>
-  <DialogContent>
-    削除してもよろしいですか？
-  </DialogContent>
+  <DialogContent>削除してもよろしいですか？</DialogContent>
   <DialogActions>
     <Button onClick={handleClose}>キャンセル</Button>
     <Button onClick={handleDelete} autoFocus>
@@ -91,16 +99,16 @@ import { Meta } from '@storybook/blocks'
 ```
 
 ### スクリーンリーダー対応
+
 ```tsx
 // aria-labelで状態を伝える
-<CircularProgress
-  aria-label="読み込み中"
-/>
+<CircularProgress aria-label='読み込み中' />
 ```
 
 ## 🎨 使用パターン
 
 ### 成功通知
+
 ```tsx
 const [open, setOpen] = useState(false)
 
@@ -113,28 +121,27 @@ const [open, setOpen] = useState(false)
 ```
 
 ### エラー表示
+
 ```tsx
-<Alert severity="error" onClose={handleClose}>
+<Alert severity='error' onClose={handleClose}>
   <AlertTitle>エラー</AlertTitle>
   データの保存に失敗しました。もう一度お試しください。
 </Alert>
 ```
 
 ### 確認ダイアログ
+
 ```tsx
 <Dialog open={open} onClose={handleClose}>
   <DialogTitle>削除の確認</DialogTitle>
   <DialogContent>
     <DialogContentText>
-      このアイテムを削除してもよろしいですか？
-      この操作は取り消せません。
+      このアイテムを削除してもよろしいですか？ この操作は取り消せません。
     </DialogContentText>
   </DialogContent>
   <DialogActions>
-    <Button onClick={handleClose}>
-      キャンセル
-    </Button>
-    <Button onClick={handleDelete} color="error" variant="contained">
+    <Button onClick={handleClose}>キャンセル</Button>
+    <Button onClick={handleDelete} color='error' variant='contained'>
       削除
     </Button>
   </DialogActions>
@@ -142,23 +149,27 @@ const [open, setOpen] = useState(false)
 ```
 
 ### ローディング状態
+
 ```tsx
 // ページ全体のローディング
-<Backdrop open={loading}>
-  <CircularProgress color="inherit" />
+;<Backdrop open={loading}>
+  <CircularProgress color='inherit' />
 </Backdrop>
 
 // コンテンツの一部
-{loading ? (
-  <Skeleton variant="rectangular" height={200} />
-) : (
-  <img src={imageUrl} alt="画像" />
-)}
+{
+  loading ? (
+    <Skeleton variant='rectangular' height={200} />
+  ) : (
+    <img src={imageUrl} alt='画像' />
+  )
+}
 ```
 
 ## 📋 ベストプラクティス
 
 ### 1. フィードバックのタイミング
+
 ```tsx
 // ✅ 良い例：即座にフィードバック
 const handleSubmit = async () => {
@@ -173,17 +184,19 @@ const handleSubmit = async () => {
 ```
 
 ### 2. 適切なseverityの選択
+
 - **error** - エラー、失敗
 - **warning** - 警告、注意が必要
 - **info** - 情報、ヒント
 - **success** - 成功、完了
 
 ### 3. アクションの提供
+
 ```tsx
 <Snackbar
-  message="削除しました"
+  message='削除しました'
   action={
-    <Button color="inherit" size="small" onClick={handleUndo}>
+    <Button color='inherit' size='small' onClick={handleUndo}>
       元に戻す
     </Button>
   }
@@ -191,6 +204,7 @@ const handleSubmit = async () => {
 ```
 
 ### 4. 多重表示の防止
+
 ```tsx
 // ❌ 悪い例：複数のダイアログを同時表示
 <Dialog open={dialog1Open}>...</Dialog>
@@ -204,6 +218,7 @@ const handleSubmit = async () => {
 ## 🚫 避けるべきパターン
 
 ### 1. 過度なフィードバック
+
 ```tsx
 // ❌ ユーザーが行った操作すべてに通知
 onClick={() => setSnackbar({ open: true, message: 'クリックしました' })}
@@ -216,6 +231,7 @@ onClick={async () => {
 ```
 
 ### 2. 曖昧なメッセージ
+
 ```tsx
 // ❌ 何が起きたか不明
 <Alert severity="error">エラーが発生しました</Alert>
@@ -227,6 +243,7 @@ onClick={async () => {
 ```
 
 ### 3. 長すぎる自動非表示時間
+
 ```tsx
 // ❌ 10秒は長すぎる
 <Snackbar autoHideDuration={10000} />

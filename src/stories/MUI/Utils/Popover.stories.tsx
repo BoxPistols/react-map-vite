@@ -36,9 +36,7 @@ const BasicPopover = () => {
 
   return (
     <div>
-      <Button onClick={handleClick}>
-        Open Popover
-      </Button>
+      <Button onClick={handleClick}>Open Popover</Button>
       <Popover
         open={open}
         anchorEl={anchorEl}
@@ -46,8 +44,7 @@ const BasicPopover = () => {
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
-        }}
-      >
+        }}>
         <Typography sx={{ p: 2 }}>Popoverのコンテンツ</Typography>
       </Popover>
     </div>
@@ -61,7 +58,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <BasicPopover />
@@ -71,12 +68,19 @@ export const Basic: Story = {
 
 const PositioningExample = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [position, setPosition] = useState<{ vertical: 'top' | 'bottom', horizontal: 'left' | 'right' }>({
+  const [position, setPosition] = useState<{
+    vertical: 'top' | 'bottom'
+    horizontal: 'left' | 'right'
+  }>({
     vertical: 'bottom',
     horizontal: 'left',
   })
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, vert: 'top' | 'bottom', horiz: 'left' | 'right') => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    vert: 'top' | 'bottom',
+    horiz: 'left' | 'right'
+  ) => {
     setAnchorEl(event.currentTarget)
     setPosition({ vertical: vert, horizontal: horiz })
   }
@@ -85,13 +89,11 @@ const PositioningExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         位置指定
       </Typography>
       <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-        <Button onClick={(e) => handleClick(e, 'top', 'left')}>
-          Top-Left
-        </Button>
+        <Button onClick={(e) => handleClick(e, 'top', 'left')}>Top-Left</Button>
         <Button onClick={(e) => handleClick(e, 'top', 'right')}>
           Top-Right
         </Button>
@@ -106,8 +108,7 @@ const PositioningExample = () => {
         open={open}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
-        anchorOrigin={position}
-      >
+        anchorOrigin={position}>
         <Typography sx={{ p: 2 }}>
           {position.vertical}-{position.horizontal}
         </Typography>
