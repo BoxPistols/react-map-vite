@@ -62,7 +62,7 @@ export const Playground: Story = {
     <Autocomplete
       {...args}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="映画" />}
+      renderInput={(params) => <TextField {...params} label='映画' />}
     />
   ),
 }
@@ -70,14 +70,14 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Autocomplete
         disablePortal
         options={top100Films}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="映画" />}
+        renderInput={(params) => <TextField {...params} label='映画' />}
       />
     </Box>
   ),
@@ -86,7 +86,7 @@ export const Basic: Story = {
 export const Multiple: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         複数選択
       </Typography>
       <Autocomplete
@@ -95,7 +95,7 @@ export const Multiple: Story = {
         defaultValue={[top100Films[0], top100Films[1]]}
         sx={{ width: 500 }}
         renderInput={(params) => (
-          <TextField {...params} label="複数の映画" placeholder="映画を選択" />
+          <TextField {...params} label='複数の映画' placeholder='映画を選択' />
         )}
       />
     </Box>
@@ -109,7 +109,7 @@ const FixedOptionsExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         固定オプション
       </Typography>
       <Autocomplete
@@ -122,12 +122,11 @@ const FixedOptionsExample = () => {
           ])
         }}
         options={top100Films}
-        getOptionDisabled={(option) =>
-          fixedOptions.indexOf(option) !== -1
-        }
+        getOptionDisabled={(option) => fixedOptions.indexOf(option) !== -1}
         renderTags={(tagValue, getTagProps) =>
           tagValue.map((option, index) => (
             <Chip
+              key={option}
               label={option}
               {...getTagProps({ index })}
               disabled={fixedOptions.indexOf(option) !== -1}
@@ -136,7 +135,11 @@ const FixedOptionsExample = () => {
         }
         sx={{ width: 500 }}
         renderInput={(params) => (
-          <TextField {...params} label="固定オプション" placeholder="映画を選択" />
+          <TextField
+            {...params}
+            label='固定オプション'
+            placeholder='映画を選択'
+          />
         )}
       />
     </Box>
@@ -149,12 +152,12 @@ export const FixedOptions: Story = {
 
 export const Checkboxes: Story = {
   render: () => {
-    const icon = <CheckBoxOutlineBlankIcon fontSize="small" />
-    const checkedIcon = <CheckBoxIcon fontSize="small" />
+    const icon = <CheckBoxOutlineBlankIcon fontSize='small' />
+    const checkedIcon = <CheckBoxIcon fontSize='small' />
 
     return (
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           チェックボックス
         </Typography>
         <Autocomplete
@@ -163,7 +166,7 @@ export const Checkboxes: Story = {
           disableCloseOnSelect
           getOptionLabel={(option) => option}
           renderOption={(props, option, { selected }) => {
-            const { key, ...rest } = props as any
+            const { key, ...rest } = props
             return (
               <li key={key} {...rest}>
                 <Checkbox
@@ -178,7 +181,11 @@ export const Checkboxes: Story = {
           }}
           sx={{ width: 500 }}
           renderInput={(params) => (
-            <TextField {...params} label="チェックボックス" placeholder="映画を選択" />
+            <TextField
+              {...params}
+              label='チェックボックス'
+              placeholder='映画を選択'
+            />
           )}
         />
       </Box>
@@ -189,14 +196,14 @@ export const Checkboxes: Story = {
 export const FreeSolo: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         自由入力
       </Typography>
       <Autocomplete
         freeSolo
         options={top100Films}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="自由入力可能" />}
+        renderInput={(params) => <TextField {...params} label='自由入力可能' />}
       />
     </Box>
   ),
@@ -228,15 +235,17 @@ export const Grouped: Story = {
 
     return (
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           グループ化
         </Typography>
         <Autocomplete
-          options={options.sort((a, b) => -getDecade(b.year).localeCompare(getDecade(a.year)))}
+          options={options.sort(
+            (a, b) => -getDecade(b.year).localeCompare(getDecade(a.year))
+          )}
           groupBy={(option) => getDecade(option.year)}
           getOptionLabel={(option) => option.title}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="年代別" />}
+          renderInput={(params) => <TextField {...params} label='年代別' />}
         />
       </Box>
     )
@@ -247,26 +256,28 @@ export const Disabled: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           無効状態
         </Typography>
         <Autocomplete
           disabled
           options={top100Films}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="無効" />}
+          renderInput={(params) => <TextField {...params} label='無効' />}
         />
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           一部のオプションを無効
         </Typography>
         <Autocomplete
           options={top100Films}
-          getOptionDisabled={(option) => option === top100Films[0] || option === top100Films[1]}
+          getOptionDisabled={(option) =>
+            option === top100Films[0] || option === top100Films[1]
+          }
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="一部無効" />}
+          renderInput={(params) => <TextField {...params} label='一部無効' />}
         />
       </Box>
     </Box>
@@ -277,26 +288,26 @@ export const Sizes: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           Small
         </Typography>
         <Autocomplete
-          size="small"
+          size='small'
           options={top100Films}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Small" />}
+          renderInput={(params) => <TextField {...params} label='Small' />}
         />
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           Medium
         </Typography>
         <Autocomplete
-          size="medium"
+          size='medium'
           options={top100Films}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Medium" />}
+          renderInput={(params) => <TextField {...params} label='Medium' />}
         />
       </Box>
     </Box>
@@ -306,17 +317,26 @@ export const Sizes: Story = {
 export const LimitTags: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         表示タグ数の制限
       </Typography>
       <Autocomplete
         multiple
         limitTags={2}
         options={top100Films}
-        defaultValue={[top100Films[0], top100Films[1], top100Films[2], top100Films[3]]}
+        defaultValue={[
+          top100Films[0],
+          top100Films[1],
+          top100Films[2],
+          top100Films[3],
+        ]}
         sx={{ width: 500 }}
         renderInput={(params) => (
-          <TextField {...params} label="最大2タグ表示" placeholder="映画を選択" />
+          <TextField
+            {...params}
+            label='最大2タグ表示'
+            placeholder='映画を選択'
+          />
         )}
       />
     </Box>

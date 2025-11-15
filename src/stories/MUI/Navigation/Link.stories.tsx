@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { Link, Box, Typography } from '@mui/material'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'MUI/Navigation/Link',
@@ -37,11 +38,11 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Link href="#">デフォルトリンク</Link>
-      <Link href="#" color="inherit">
+      <Link href='#'>デフォルトリンク</Link>
+      <Link href='#' color='inherit'>
         色を継承
       </Link>
-      <Link href="#" variant="body2">
+      <Link href='#' variant='body2'>
         body2
       </Link>
     </Box>
@@ -51,13 +52,13 @@ export const Basic: Story = {
 export const Underline: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Link href="#" underline="none">
+      <Link href='#' underline='none'>
         下線なし
       </Link>
-      <Link href="#" underline="hover">
+      <Link href='#' underline='hover'>
         ホバーで下線
       </Link>
-      <Link href="#" underline="always">
+      <Link href='#' underline='always'>
         常に下線
       </Link>
     </Box>
@@ -67,25 +68,25 @@ export const Underline: Story = {
 export const Colors: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Link href="#" color="primary">
+      <Link href='#' color='primary'>
         Primary
       </Link>
-      <Link href="#" color="secondary">
+      <Link href='#' color='secondary'>
         Secondary
       </Link>
-      <Link href="#" color="error">
+      <Link href='#' color='error'>
         Error
       </Link>
-      <Link href="#" color="warning">
+      <Link href='#' color='warning'>
         Warning
       </Link>
-      <Link href="#" color="info">
+      <Link href='#' color='info'>
         Info
       </Link>
-      <Link href="#" color="success">
+      <Link href='#' color='success'>
         Success
       </Link>
-      <Link href="#" color="inherit">
+      <Link href='#' color='inherit'>
         Inherit
       </Link>
     </Box>
@@ -95,16 +96,16 @@ export const Colors: Story = {
 export const Variants: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Link href="#" variant="h6">
+      <Link href='#' variant='h6'>
         h6リンク
       </Link>
-      <Link href="#" variant="body1">
+      <Link href='#' variant='body1'>
         body1リンク
       </Link>
-      <Link href="#" variant="body2">
+      <Link href='#' variant='body2'>
         body2リンク
       </Link>
-      <Link href="#" variant="caption">
+      <Link href='#' variant='caption'>
         captionリンク
       </Link>
     </Box>
@@ -115,11 +116,11 @@ export const InText: Story = {
   render: () => (
     <Typography>
       このテキストには
-      <Link href="#" sx={{ mx: 0.5 }}>
+      <Link href='#' sx={{ mx: 0.5 }}>
         リンク
       </Link>
       が含まれています。
-      <Link href="#" color="secondary" sx={{ mx: 0.5 }}>
+      <Link href='#' color='secondary' sx={{ mx: 0.5 }}>
         セカンダリカラーのリンク
       </Link>
       も使用できます。
@@ -130,8 +131,8 @@ export const InText: Story = {
 export const Button: Story = {
   render: () => (
     <Link
-      component="button"
-      variant="body2"
+      component='button'
+      variant='body2'
       onClick={() => {
         console.log('クリックされました')
       }}>
@@ -143,11 +144,14 @@ export const Button: Story = {
 export const Security: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="subtitle2">外部リンク（安全）:</Typography>
-      <Link href="https://example.com" target="_blank" rel="noopener noreferrer">
+      <Typography variant='subtitle2'>外部リンク（安全）:</Typography>
+      <Link
+        href='https://example.com'
+        target='_blank'
+        rel='noopener noreferrer'>
         新しいタブで開く
       </Link>
-      <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+      <Typography variant='caption' color='text.secondary' sx={{ mt: 1 }}>
         外部リンクには必ず rel=&quot;noopener noreferrer&quot; を付けましょう
       </Typography>
     </Box>

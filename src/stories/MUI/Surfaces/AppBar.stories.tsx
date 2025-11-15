@@ -1,8 +1,17 @@
 /** @jsxImportSource react */
+import AccountCircle from '@mui/icons-material/AccountCircle'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import AccountCircle from '@mui/icons-material/AccountCircle'
-import { AppBar, Box, IconButton, InputBase, Toolbar, Typography, alpha, styled } from '@mui/material'
+import {
+  AppBar,
+  Box,
+  IconButton,
+  InputBase,
+  Toolbar,
+  Typography,
+  alpha,
+  styled,
+} from '@mui/material'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -74,7 +83,7 @@ export const Playground: Story = {
   render: (args) => (
     <AppBar {...args}>
       <Toolbar>
-        <Typography variant="h6">My App</Typography>
+        <Typography variant='h6'>My App</Typography>
       </Toolbar>
     </AppBar>
   ),
@@ -83,12 +92,12 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
-          <Typography variant="h6" component="div">
+          <Typography variant='h6' component='div'>
             News
           </Typography>
         </Toolbar>
@@ -100,21 +109,20 @@ export const Basic: Story = {
 export const WithMenu: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         メニューアイコン付き
       </Typography>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
+            sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             News
           </Typography>
         </Toolbar>
@@ -126,36 +134,34 @@ export const WithMenu: Story = {
 export const WithSearch: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         検索付き
       </Typography>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
+            sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             MUI
           </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="検索…" />
+            <StyledInputBase placeholder='検索…' />
           </Search>
           <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="account"
-            sx={{ ml: 2 }}
-          >
+            size='large'
+            edge='end'
+            color='inherit'
+            aria-label='account'
+            sx={{ ml: 2 }}>
             <AccountCircle />
           </IconButton>
         </Toolbar>
@@ -167,24 +173,24 @@ export const WithSearch: Story = {
 export const Colors: Story = {
   render: () => (
     <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <AppBar position="static" color="default">
+      <AppBar position='static' color='default'>
         <Toolbar>
-          <Typography variant="h6">Default</Typography>
+          <Typography variant='h6'>Default</Typography>
         </Toolbar>
       </AppBar>
-      <AppBar position="static" color="primary">
+      <AppBar position='static' color='primary'>
         <Toolbar>
-          <Typography variant="h6">Primary</Typography>
+          <Typography variant='h6'>Primary</Typography>
         </Toolbar>
       </AppBar>
-      <AppBar position="static" color="secondary">
+      <AppBar position='static' color='secondary'>
         <Toolbar>
-          <Typography variant="h6">Secondary</Typography>
+          <Typography variant='h6'>Secondary</Typography>
         </Toolbar>
       </AppBar>
-      <AppBar position="static" color="transparent">
+      <AppBar position='static' color='transparent'>
         <Toolbar>
-          <Typography variant="h6">Transparent</Typography>
+          <Typography variant='h6'>Transparent</Typography>
         </Toolbar>
       </AppBar>
     </Box>

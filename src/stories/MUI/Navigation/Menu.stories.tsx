@@ -1,8 +1,8 @@
 /** @jsxImportSource react */
-import ContentCut from '@mui/icons-material/ContentCut'
-import ContentCopy from '@mui/icons-material/ContentCopy'
-import ContentPaste from '@mui/icons-material/ContentPaste'
 import Cloud from '@mui/icons-material/Cloud'
+import ContentCopy from '@mui/icons-material/ContentCopy'
+import ContentCut from '@mui/icons-material/ContentCut'
+import ContentPaste from '@mui/icons-material/ContentPaste'
 import {
   Box,
   Button,
@@ -57,24 +57,22 @@ const BasicExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
       <Button
-        variant="outlined"
+        variant='outlined'
         onClick={handleClick}
         aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-      >
+        aria-haspopup='true'
+        aria-expanded={open ? 'true' : undefined}>
         メニューを開く
       </Button>
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <MenuItem onClick={handleClose}>プロフィール</MenuItem>
         <MenuItem onClick={handleClose}>マイアカウント</MenuItem>
         <MenuItem onClick={handleClose}>ログアウト</MenuItem>
@@ -93,42 +91,35 @@ const WithIconsExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アイコン付き
       </Typography>
-      <Button
-        variant="outlined"
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-      >
+      <Button variant='outlined' onClick={(e) => setAnchorEl(e.currentTarget)}>
         編集メニュー
       </Button>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => setAnchorEl(null)}
-      >
+      <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
         <MenuItem onClick={() => setAnchorEl(null)}>
           <ListItemIcon>
-            <ContentCut fontSize="small" />
+            <ContentCut fontSize='small' />
           </ListItemIcon>
           <ListItemText>切り取り</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => setAnchorEl(null)}>
           <ListItemIcon>
-            <ContentCopy fontSize="small" />
+            <ContentCopy fontSize='small' />
           </ListItemIcon>
           <ListItemText>コピー</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => setAnchorEl(null)}>
           <ListItemIcon>
-            <ContentPaste fontSize="small" />
+            <ContentPaste fontSize='small' />
           </ListItemIcon>
           <ListItemText>貼り付け</ListItemText>
         </MenuItem>
         <Divider />
         <MenuItem onClick={() => setAnchorEl(null)}>
           <ListItemIcon>
-            <Cloud fontSize="small" />
+            <Cloud fontSize='small' />
           </ListItemIcon>
           <ListItemText>クラウドバックアップ</ListItemText>
         </MenuItem>
@@ -147,20 +138,13 @@ const DenseExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         密度の高いメニュー
       </Typography>
-      <Button
-        variant="outlined"
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-      >
+      <Button variant='outlined' onClick={(e) => setAnchorEl(e.currentTarget)}>
         密度の高いメニュー
       </Button>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => setAnchorEl(null)}
-      >
+      <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
         <MenuItem dense onClick={() => setAnchorEl(null)}>
           アイテム 1
         </MenuItem>
@@ -197,10 +181,10 @@ const SelectedExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         選択状態
       </Typography>
-      <Button variant="outlined" onClick={handleClickListItem}>
+      <Button variant='outlined' onClick={handleClickListItem}>
         選択: {options[selectedIndex]}
       </Button>
       <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
@@ -208,8 +192,7 @@ const SelectedExample = () => {
           <MenuItem
             key={option}
             selected={index === selectedIndex}
-            onClick={() => handleMenuItemClick(index)}
-          >
+            onClick={() => handleMenuItemClick(index)}>
             {option}
           </MenuItem>
         ))}
@@ -245,13 +228,10 @@ const MaxHeightExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         最大高さ
       </Typography>
-      <Button
-        variant="outlined"
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-      >
+      <Button variant='outlined' onClick={(e) => setAnchorEl(e.currentTarget)}>
         長いメニュー
       </Button>
       <Menu
@@ -263,8 +243,7 @@ const MaxHeightExample = () => {
             maxHeight: 48 * 4.5,
             width: '20ch',
           },
-        }}
-      >
+        }}>
         {longMenuOptions.map((option) => (
           <MenuItem key={option} onClick={() => setAnchorEl(null)}>
             {option}
@@ -308,32 +287,24 @@ const PositioningExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         配置
       </Typography>
       <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-        <Button
-          variant="outlined"
-          onClick={(e) => handleClick(e, 'top-left')}
-        >
+        <Button variant='outlined' onClick={(e) => handleClick(e, 'top-left')}>
           Top Left
         </Button>
-        <Button
-          variant="outlined"
-          onClick={(e) => handleClick(e, 'top-right')}
-        >
+        <Button variant='outlined' onClick={(e) => handleClick(e, 'top-right')}>
           Top Right
         </Button>
         <Button
-          variant="outlined"
-          onClick={(e) => handleClick(e, 'bottom-left')}
-        >
+          variant='outlined'
+          onClick={(e) => handleClick(e, 'bottom-left')}>
           Bottom Left
         </Button>
         <Button
-          variant="outlined"
-          onClick={(e) => handleClick(e, 'bottom-right')}
-        >
+          variant='outlined'
+          onClick={(e) => handleClick(e, 'bottom-right')}>
           Bottom Right
         </Button>
       </Box>
@@ -341,8 +312,7 @@ const PositioningExample = () => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
-        anchorOrigin={getAnchorOrigin()}
-      >
+        anchorOrigin={getAnchorOrigin()}>
         <MenuItem onClick={() => setAnchorEl(null)}>アイテム 1</MenuItem>
         <MenuItem onClick={() => setAnchorEl(null)}>アイテム 2</MenuItem>
         <MenuItem onClick={() => setAnchorEl(null)}>アイテム 3</MenuItem>

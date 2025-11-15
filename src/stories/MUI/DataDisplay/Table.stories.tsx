@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import DeleteIcon from '@mui/icons-material/Delete'
+import FilterListIcon from '@mui/icons-material/FilterList'
 import {
   Box,
   Paper,
@@ -17,9 +18,9 @@ import {
   Tooltip,
   alpha,
 } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import FilterListIcon from '@mui/icons-material/FilterList'
 import { useState } from 'react'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'MUI/Data Display/Table',
@@ -76,10 +77,10 @@ export const Basic: Story = {
         <TableHead>
           <TableRow>
             <TableCell>デザート（100gあたり）</TableCell>
-            <TableCell align="right">カロリー</TableCell>
-            <TableCell align="right">脂質&nbsp;(g)</TableCell>
-            <TableCell align="right">炭水化物&nbsp;(g)</TableCell>
-            <TableCell align="right">タンパク質&nbsp;(g)</TableCell>
+            <TableCell align='right'>カロリー</TableCell>
+            <TableCell align='right'>脂質&nbsp;(g)</TableCell>
+            <TableCell align='right'>炭水化物&nbsp;(g)</TableCell>
+            <TableCell align='right'>タンパク質&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -87,13 +88,13 @@ export const Basic: Story = {
             <TableRow
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
+              <TableCell component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align='right'>{row.calories}</TableCell>
+              <TableCell align='right'>{row.fat}</TableCell>
+              <TableCell align='right'>{row.carbs}</TableCell>
+              <TableCell align='right'>{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -105,24 +106,24 @@ export const Basic: Story = {
 export const Dense: Story = {
   render: () => (
     <TableContainer component={Paper}>
-      <Table size="small">
+      <Table size='small'>
         <TableHead>
           <TableRow>
             <TableCell>デザート</TableCell>
-            <TableCell align="right">カロリー</TableCell>
-            <TableCell align="right">脂質</TableCell>
-            <TableCell align="right">炭水化物</TableCell>
-            <TableCell align="right">タンパク質</TableCell>
+            <TableCell align='right'>カロリー</TableCell>
+            <TableCell align='right'>脂質</TableCell>
+            <TableCell align='right'>炭水化物</TableCell>
+            <TableCell align='right'>タンパク質</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.slice(0, 5).map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.name}</TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align='right'>{row.calories}</TableCell>
+              <TableCell align='right'>{row.fat}</TableCell>
+              <TableCell align='right'>{row.carbs}</TableCell>
+              <TableCell align='right'>{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -164,7 +165,7 @@ const SortingExample = () => {
                 デザート
               </TableSortLabel>
             </TableCell>
-            <TableCell align="right">
+            <TableCell align='right'>
               <TableSortLabel
                 active={orderBy === 'calories'}
                 direction={orderBy === 'calories' ? order : 'asc'}
@@ -172,7 +173,7 @@ const SortingExample = () => {
                 カロリー
               </TableSortLabel>
             </TableCell>
-            <TableCell align="right">
+            <TableCell align='right'>
               <TableSortLabel
                 active={orderBy === 'fat'}
                 direction={orderBy === 'fat' ? order : 'asc'}
@@ -180,7 +181,7 @@ const SortingExample = () => {
                 脂質
               </TableSortLabel>
             </TableCell>
-            <TableCell align="right">
+            <TableCell align='right'>
               <TableSortLabel
                 active={orderBy === 'carbs'}
                 direction={orderBy === 'carbs' ? order : 'asc'}
@@ -188,7 +189,7 @@ const SortingExample = () => {
                 炭水化物
               </TableSortLabel>
             </TableCell>
-            <TableCell align="right">
+            <TableCell align='right'>
               <TableSortLabel
                 active={orderBy === 'protein'}
                 direction={orderBy === 'protein' ? order : 'asc'}
@@ -202,10 +203,10 @@ const SortingExample = () => {
           {sortedRows.slice(0, 8).map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.name}</TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align='right'>{row.calories}</TableCell>
+              <TableCell align='right'>{row.fat}</TableCell>
+              <TableCell align='right'>{row.carbs}</TableCell>
+              <TableCell align='right'>{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -269,17 +270,17 @@ const WithSelectionExample = () => {
             }}>
             <Typography
               sx={{ flex: '1 1 100%' }}
-              color="inherit"
-              variant="subtitle1"
-              component="div">
+              color='inherit'
+              variant='subtitle1'
+              component='div'>
               {selected.length} 件選択中
             </Typography>
-            <Tooltip title="削除">
+            <Tooltip title='削除'>
               <IconButton>
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="フィルター">
+            <Tooltip title='フィルター'>
               <IconButton>
                 <FilterListIcon />
               </IconButton>
@@ -290,9 +291,9 @@ const WithSelectionExample = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
+                <TableCell padding='checkbox'>
                   <Checkbox
-                    color="primary"
+                    color='primary'
                     indeterminate={
                       selected.length > 0 && selected.length < rows.length
                     }
@@ -301,10 +302,10 @@ const WithSelectionExample = () => {
                   />
                 </TableCell>
                 <TableCell>デザート</TableCell>
-                <TableCell align="right">カロリー</TableCell>
-                <TableCell align="right">脂質</TableCell>
-                <TableCell align="right">炭水化物</TableCell>
-                <TableCell align="right">タンパク質</TableCell>
+                <TableCell align='right'>カロリー</TableCell>
+                <TableCell align='right'>脂質</TableCell>
+                <TableCell align='right'>炭水化物</TableCell>
+                <TableCell align='right'>タンパク質</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -314,20 +315,20 @@ const WithSelectionExample = () => {
                   <TableRow
                     hover
                     onClick={() => handleClick(row.id)}
-                    role="checkbox"
+                    role='checkbox'
                     aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={row.id}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}>
-                    <TableCell padding="checkbox">
-                      <Checkbox color="primary" checked={isItemSelected} />
+                    <TableCell padding='checkbox'>
+                      <Checkbox color='primary' checked={isItemSelected} />
                     </TableCell>
                     <TableCell>{row.name}</TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align='right'>{row.calories}</TableCell>
+                    <TableCell align='right'>{row.fat}</TableCell>
+                    <TableCell align='right'>{row.carbs}</TableCell>
+                    <TableCell align='right'>{row.protein}</TableCell>
                   </TableRow>
                 )
               })}
@@ -365,10 +366,10 @@ const WithPaginationExample = () => {
           <TableHead>
             <TableRow>
               <TableCell>デザート</TableCell>
-              <TableCell align="right">カロリー</TableCell>
-              <TableCell align="right">脂質</TableCell>
-              <TableCell align="right">炭水化物</TableCell>
-              <TableCell align="right">タンパク質</TableCell>
+              <TableCell align='right'>カロリー</TableCell>
+              <TableCell align='right'>脂質</TableCell>
+              <TableCell align='right'>炭水化物</TableCell>
+              <TableCell align='right'>タンパク質</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -377,10 +378,10 @@ const WithPaginationExample = () => {
               .map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.name}</TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell align='right'>{row.calories}</TableCell>
+                  <TableCell align='right'>{row.fat}</TableCell>
+                  <TableCell align='right'>{row.carbs}</TableCell>
+                  <TableCell align='right'>{row.protein}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
@@ -388,13 +389,13 @@ const WithPaginationExample = () => {
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
-        component="div"
+        component='div'
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage="ページあたりの行数:"
+        labelRowsPerPage='ページあたりの行数:'
         labelDisplayedRows={({ from, to, count }) =>
           `${count} 件中 ${from}–${to}`
         }
@@ -415,20 +416,20 @@ export const Sticky: Story = {
           <TableHead>
             <TableRow>
               <TableCell>デザート</TableCell>
-              <TableCell align="right">カロリー</TableCell>
-              <TableCell align="right">脂質</TableCell>
-              <TableCell align="right">炭水化物</TableCell>
-              <TableCell align="right">タンパク質</TableCell>
+              <TableCell align='right'>カロリー</TableCell>
+              <TableCell align='right'>脂質</TableCell>
+              <TableCell align='right'>炭水化物</TableCell>
+              <TableCell align='right'>タンパク質</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.name}</TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+                <TableCell align='right'>{row.calories}</TableCell>
+                <TableCell align='right'>{row.fat}</TableCell>
+                <TableCell align='right'>{row.carbs}</TableCell>
+                <TableCell align='right'>{row.protein}</TableCell>
               </TableRow>
             ))}
           </TableBody>

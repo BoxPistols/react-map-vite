@@ -6,7 +6,6 @@ import {
   IconButton,
   InputAdornment,
   TextField,
-  type TextFieldProps,
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
@@ -64,16 +63,12 @@ export const Playground: Story = {
 export const Variants: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         バリエーション
       </Typography>
-      <TextField label="Outlined" variant="outlined" defaultValue="outlined" />
-      <TextField label="Filled" variant="filled" defaultValue="filled" />
-      <TextField
-        label="Standard"
-        variant="standard"
-        defaultValue="standard"
-      />
+      <TextField label='Outlined' variant='outlined' defaultValue='outlined' />
+      <TextField label='Filled' variant='filled' defaultValue='filled' />
+      <TextField label='Standard' variant='standard' defaultValue='standard' />
     </Box>
   ),
 }
@@ -81,11 +76,11 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
-      <TextField label="Small" size="small" />
-      <TextField label="Medium" size="medium" />
+      <TextField label='Small' size='small' />
+      <TextField label='Medium' size='medium' />
     </Box>
   ),
 }
@@ -93,18 +88,14 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         状態
       </Typography>
-      <TextField label="通常" />
-      <TextField label="無効" disabled />
-      <TextField label="必須" required />
-      <TextField label="エラー" error helperText="エラーメッセージ" />
-      <TextField
-        label="成功"
-        color="success"
-        helperText="入力が完了しました"
-      />
+      <TextField label='通常' />
+      <TextField label='無効' disabled />
+      <TextField label='必須' required />
+      <TextField label='エラー' error helperText='エラーメッセージ' />
+      <TextField label='成功' color='success' helperText='入力が完了しました' />
     </Box>
   ),
 }
@@ -112,20 +103,16 @@ export const States: Story = {
 export const WithHelperText: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         ヘルパーテキスト
       </Typography>
-      <TextField label="メール" helperText="example@example.com" />
+      <TextField label='メール' helperText='example@example.com' />
       <TextField
-        label="パスワード"
-        type="password"
-        helperText="8文字以上で入力してください"
+        label='パスワード'
+        type='password'
+        helperText='8文字以上で入力してください'
       />
-      <TextField
-        label="エラー例"
-        error
-        helperText="この項目は必須です"
-      />
+      <TextField label='エラー例' error helperText='この項目は必須です' />
     </Box>
   ),
 }
@@ -135,19 +122,18 @@ const WithIconsExample = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アイコン付き
       </Typography>
       <TextField
-        label="パスワード"
+        label='パスワード'
         type={showPassword ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
+            <InputAdornment position='end'>
               <IconButton
                 onClick={() => setShowPassword(!showPassword)}
-                edge="end"
-              >
+                edge='end'>
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </IconButton>
             </InputAdornment>
@@ -155,9 +141,9 @@ const WithIconsExample = () => {
         }}
       />
       <TextField
-        label="金額"
+        label='金額'
         InputProps={{
-          startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+          startAdornment: <InputAdornment position='start'>¥</InputAdornment>,
         }}
       />
     </Box>
@@ -171,20 +157,20 @@ export const WithIcons: Story = {
 export const Multiline: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         複数行
       </Typography>
       <TextField
-        label="コメント"
+        label='コメント'
         multiline
         rows={4}
-        placeholder="こちらにコメントを入力してください"
+        placeholder='こちらにコメントを入力してください'
       />
       <TextField
-        label="説明"
+        label='説明'
         multiline
         maxRows={4}
-        placeholder="自動で行が増えます"
+        placeholder='自動で行が増えます'
       />
     </Box>
   ),
@@ -193,12 +179,12 @@ export const Multiline: Story = {
 export const FullWidth: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         全幅
       </Typography>
-      <TextField label="氏名" fullWidth />
-      <TextField label="メールアドレス" fullWidth />
-      <TextField label="住所" fullWidth multiline rows={3} />
+      <TextField label='氏名' fullWidth />
+      <TextField label='メールアドレス' fullWidth />
+      <TextField label='住所' fullWidth multiline rows={3} />
     </Box>
   ),
 }

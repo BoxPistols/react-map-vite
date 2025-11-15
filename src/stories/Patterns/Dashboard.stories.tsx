@@ -1,4 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
+import InventoryIcon from '@mui/icons-material/Inventory'
+import PeopleIcon from '@mui/icons-material/People'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import TrendingDownIcon from '@mui/icons-material/TrendingDown'
+import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import {
   Box,
   Card,
@@ -15,12 +20,8 @@ import {
   Chip,
   LinearProgress,
 } from '@mui/material'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import TrendingDownIcon from '@mui/icons-material/TrendingDown'
-import PeopleIcon from '@mui/icons-material/People'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
-import InventoryIcon from '@mui/icons-material/Inventory'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Patterns/Dashboard',
@@ -49,26 +50,26 @@ const StatCard = ({
   <Card>
     <CardContent>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-        <Typography color="text.secondary" variant="body2">
+        <Typography color='text.secondary' variant='body2'>
           {title}
         </Typography>
         <Avatar sx={{ bgcolor: color, width: 48, height: 48 }}>{icon}</Avatar>
       </Box>
-      <Typography variant="h4" component="div" gutterBottom>
+      <Typography variant='h4' component='div' gutterBottom>
         {value}
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
         {change.startsWith('+') ? (
-          <TrendingUpIcon color="success" fontSize="small" />
+          <TrendingUpIcon color='success' fontSize='small' />
         ) : (
-          <TrendingDownIcon color="error" fontSize="small" />
+          <TrendingDownIcon color='error' fontSize='small' />
         )}
         <Typography
-          variant="body2"
+          variant='body2'
           color={change.startsWith('+') ? 'success.main' : 'error.main'}>
           {change}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant='body2' color='text.secondary'>
           前月比
         </Typography>
       </Box>
@@ -79,49 +80,49 @@ const StatCard = ({
 export const AnalyticsDashboard: Story = {
   render: () => (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 4 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h4" gutterBottom>
+      <Container maxWidth='lg'>
+        <Typography variant='h4' gutterBottom>
           ダッシュボード
         </Typography>
-        <Typography color="text.secondary" paragraph>
+        <Typography color='text.secondary' paragraph>
           ビジネス概要と分析
         </Typography>
 
         <Grid container spacing={3} sx={{ mb: 3 }}>
           <Grid xs={12} sm={6} md={3}>
             <StatCard
-              title="総売上"
-              value="¥2,456,789"
-              change="+12.5%"
+              title='総売上'
+              value='¥2,456,789'
+              change='+12.5%'
               icon={<AttachMoneyIcon />}
-              color="primary.main"
+              color='primary.main'
             />
           </Grid>
           <Grid xs={12} sm={6} md={3}>
             <StatCard
-              title="新規顧客"
-              value="1,234"
-              change="+8.3%"
+              title='新規顧客'
+              value='1,234'
+              change='+8.3%'
               icon={<PeopleIcon />}
-              color="success.main"
+              color='success.main'
             />
           </Grid>
           <Grid xs={12} sm={6} md={3}>
             <StatCard
-              title="注文数"
-              value="456"
-              change="-3.2%"
+              title='注文数'
+              value='456'
+              change='-3.2%'
               icon={<ShoppingCartIcon />}
-              color="warning.main"
+              color='warning.main'
             />
           </Grid>
           <Grid xs={12} sm={6} md={3}>
             <StatCard
-              title="在庫商品"
-              value="892"
-              change="+5.1%"
+              title='在庫商品'
+              value='892'
+              change='+5.1%'
               icon={<InventoryIcon />}
-              color="info.main"
+              color='info.main'
             />
           </Grid>
         </Grid>
@@ -130,11 +131,18 @@ export const AnalyticsDashboard: Story = {
           <Grid xs={12} md={8}>
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant='h6' gutterBottom>
                   売上推移
                 </Typography>
-                <Box sx={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default' }}>
-                  <Typography color="text.secondary">
+                <Box
+                  sx={{
+                    height: 300,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: 'background.default',
+                  }}>
+                  <Typography color='text.secondary'>
                     ここにチャートを配置
                   </Typography>
                 </Box>
@@ -144,11 +152,18 @@ export const AnalyticsDashboard: Story = {
           <Grid xs={12} md={4}>
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant='h6' gutterBottom>
                   カテゴリ別売上
                 </Typography>
-                <Box sx={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default' }}>
-                  <Typography color="text.secondary">
+                <Box
+                  sx={{
+                    height: 300,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: 'background.default',
+                  }}>
+                  <Typography color='text.secondary'>
                     ここに円グラフを配置
                   </Typography>
                 </Box>
@@ -161,15 +176,35 @@ export const AnalyticsDashboard: Story = {
           <Grid xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant='h6' gutterBottom>
                   最近の注文
                 </Typography>
                 <List>
                   {[
-                    { name: '山田太郎', product: 'ノートPC', amount: '¥148,000', status: '配送中' },
-                    { name: '佐藤花子', product: 'マウス', amount: '¥3,500', status: '完了' },
-                    { name: '鈴木一郎', product: 'キーボード', amount: '¥12,800', status: '処理中' },
-                    { name: '田中美咲', product: 'モニター', amount: '¥45,000', status: '配送中' },
+                    {
+                      name: '山田太郎',
+                      product: 'ノートPC',
+                      amount: '¥148,000',
+                      status: '配送中',
+                    },
+                    {
+                      name: '佐藤花子',
+                      product: 'マウス',
+                      amount: '¥3,500',
+                      status: '完了',
+                    },
+                    {
+                      name: '鈴木一郎',
+                      product: 'キーボード',
+                      amount: '¥12,800',
+                      status: '処理中',
+                    },
+                    {
+                      name: '田中美咲',
+                      product: 'モニター',
+                      amount: '¥45,000',
+                      status: '配送中',
+                    },
                   ].map((order, index) => (
                     <ListItem key={index} divider={index < 3}>
                       <ListItemAvatar>
@@ -181,10 +216,13 @@ export const AnalyticsDashboard: Story = {
                       />
                       <Chip
                         label={order.status}
-                        size="small"
+                        size='small'
                         color={
-                          order.status === '完了' ? 'success' :
-                          order.status === '配送中' ? 'primary' : 'default'
+                          order.status === '完了'
+                            ? 'success'
+                            : order.status === '配送中'
+                              ? 'primary'
+                              : 'default'
                         }
                       />
                     </ListItem>
@@ -196,7 +234,7 @@ export const AnalyticsDashboard: Story = {
           <Grid xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant='h6' gutterBottom>
                   在庫状況
                 </Typography>
                 <List>
@@ -213,11 +251,14 @@ export const AnalyticsDashboard: Story = {
                       />
                       <Box sx={{ width: '40%', ml: 2 }}>
                         <LinearProgress
-                          variant="determinate"
+                          variant='determinate'
                           value={(item.stock / item.total) * 100}
                           color={
-                            item.stock < 30 ? 'error' :
-                            item.stock < 50 ? 'warning' : 'success'
+                            item.stock < 30
+                              ? 'error'
+                              : item.stock < 50
+                                ? 'warning'
+                                : 'success'
                           }
                         />
                       </Box>
@@ -236,50 +277,50 @@ export const AnalyticsDashboard: Story = {
 export const SimpleDashboard: Story = {
   render: () => (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant='h5' gutterBottom>
         概要
       </Typography>
       <Grid container spacing={2}>
         <Grid xs={12} sm={6} md={3}>
           <Paper sx={{ p: 2 }}>
-            <Typography color="text.secondary" variant="body2">
+            <Typography color='text.secondary' variant='body2'>
               訪問者数
             </Typography>
-            <Typography variant="h4">12,345</Typography>
-            <Typography variant="body2" color="success.main">
+            <Typography variant='h4'>12,345</Typography>
+            <Typography variant='body2' color='success.main'>
               +5.2% ↑
             </Typography>
           </Paper>
         </Grid>
         <Grid xs={12} sm={6} md={3}>
           <Paper sx={{ p: 2 }}>
-            <Typography color="text.secondary" variant="body2">
+            <Typography color='text.secondary' variant='body2'>
               コンバージョン
             </Typography>
-            <Typography variant="h4">3.2%</Typography>
-            <Typography variant="body2" color="error.main">
+            <Typography variant='h4'>3.2%</Typography>
+            <Typography variant='body2' color='error.main'>
               -0.5% ↓
             </Typography>
           </Paper>
         </Grid>
         <Grid xs={12} sm={6} md={3}>
           <Paper sx={{ p: 2 }}>
-            <Typography color="text.secondary" variant="body2">
+            <Typography color='text.secondary' variant='body2'>
               売上
             </Typography>
-            <Typography variant="h4">¥890K</Typography>
-            <Typography variant="body2" color="success.main">
+            <Typography variant='h4'>¥890K</Typography>
+            <Typography variant='body2' color='success.main'>
               +15.3% ↑
             </Typography>
           </Paper>
         </Grid>
         <Grid xs={12} sm={6} md={3}>
           <Paper sx={{ p: 2 }}>
-            <Typography color="text.secondary" variant="body2">
+            <Typography color='text.secondary' variant='body2'>
               顧客満足度
             </Typography>
-            <Typography variant="h4">4.8</Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant='h4'>4.8</Typography>
+            <Typography variant='body2' color='text.secondary'>
               / 5.0
             </Typography>
           </Paper>

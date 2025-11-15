@@ -66,12 +66,12 @@ export const Basic: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
-      <Radio size="small" defaultChecked />
-      <Radio size="medium" defaultChecked />
-      <Radio size="large" defaultChecked />
+      <Radio size='small' defaultChecked />
+      <Radio size='medium' defaultChecked />
+      <Radio size='large' defaultChecked />
     </Box>
   ),
 }
@@ -79,16 +79,16 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         カラー
       </Typography>
       <Box sx={{ display: 'flex', gap: 1 }}>
         <Radio defaultChecked />
-        <Radio defaultChecked color="primary" />
-        <Radio defaultChecked color="secondary" />
-        <Radio defaultChecked color="success" />
-        <Radio defaultChecked color="error" />
-        <Radio defaultChecked color="warning" />
+        <Radio defaultChecked color='primary' />
+        <Radio defaultChecked color='secondary' />
+        <Radio defaultChecked color='success' />
+        <Radio defaultChecked color='error' />
+        <Radio defaultChecked color='warning' />
       </Box>
     </Box>
   ),
@@ -103,33 +103,32 @@ const RadioGroupExampleComponent = () => {
 
   return (
     <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">オプション</FormLabel>
+      <FormLabel id='demo-radio-buttons-group-label'>オプション</FormLabel>
       <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
+        aria-labelledby='demo-radio-buttons-group-label'
         value={value}
         onChange={handleChange}
-        name="radio-buttons-group"
-      >
+        name='radio-buttons-group'>
         <FormControlLabel
-          value="option1"
+          value='option1'
           control={<Radio />}
-          label="オプション 1"
+          label='オプション 1'
         />
         <FormControlLabel
-          value="option2"
+          value='option2'
           control={<Radio />}
-          label="オプション 2"
+          label='オプション 2'
         />
         <FormControlLabel
-          value="option3"
+          value='option3'
           control={<Radio />}
-          label="オプション 3"
+          label='オプション 3'
         />
         <FormControlLabel
-          value="disabled"
+          value='disabled'
           disabled
           control={<Radio />}
-          label="無効なオプション"
+          label='無効なオプション'
         />
       </RadioGroup>
     </FormControl>
@@ -144,47 +143,47 @@ export const Direction: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           縦方向
         </Typography>
-        <RadioGroup defaultValue="vertical1">
+        <RadioGroup defaultValue='vertical1'>
           <FormControlLabel
-            value="vertical1"
+            value='vertical1'
             control={<Radio />}
-            label="縦方向 1"
+            label='縦方向 1'
           />
           <FormControlLabel
-            value="vertical2"
+            value='vertical2'
             control={<Radio />}
-            label="縦方向 2"
+            label='縦方向 2'
           />
           <FormControlLabel
-            value="vertical3"
+            value='vertical3'
             control={<Radio />}
-            label="縦方向 3"
+            label='縦方向 3'
           />
         </RadioGroup>
       </Box>
 
       <Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant='h6' gutterBottom>
           横方向
         </Typography>
-        <RadioGroup row defaultValue="horizontal1">
+        <RadioGroup row defaultValue='horizontal1'>
           <FormControlLabel
-            value="horizontal1"
+            value='horizontal1'
             control={<Radio />}
-            label="横方向 1"
+            label='横方向 1'
           />
           <FormControlLabel
-            value="horizontal2"
+            value='horizontal2'
             control={<Radio />}
-            label="横方向 2"
+            label='横方向 2'
           />
           <FormControlLabel
-            value="horizontal3"
+            value='horizontal3'
             control={<Radio />}
-            label="横方向 3"
+            label='横方向 3'
           />
         </RadioGroup>
       </Box>
@@ -195,22 +194,21 @@ export const Direction: Story = {
 export const WithHelperText: Story = {
   render: () => (
     <FormControl>
-      <FormLabel id="payment-method-label">支払い方法</FormLabel>
+      <FormLabel id='payment-method-label'>支払い方法</FormLabel>
       <RadioGroup
-        aria-labelledby="payment-method-label"
-        defaultValue="credit"
-        name="payment-method-group"
-      >
+        aria-labelledby='payment-method-label'
+        defaultValue='credit'
+        name='payment-method-group'>
         <FormControlLabel
-          value="credit"
+          value='credit'
           control={<Radio />}
-          label="クレジットカード"
+          label='クレジットカード'
         />
-        <FormControlLabel value="bank" control={<Radio />} label="銀行振込" />
+        <FormControlLabel value='bank' control={<Radio />} label='銀行振込' />
         <FormControlLabel
-          value="convenience"
+          value='convenience'
           control={<Radio />}
-          label="コンビニ決済"
+          label='コンビニ決済'
         />
       </RadioGroup>
       <FormHelperText>支払い方法を選択してください</FormHelperText>
@@ -234,21 +232,25 @@ const ErrorStateExample = () => {
   }
 
   return (
-    <FormControl error={error}>
-      <FormLabel id="required-radio-group-label">
-        必須項目 <span style={{ color: 'red' }}>*</span>
-      </FormLabel>
-      <RadioGroup
-        aria-labelledby="required-radio-group-label"
-        value={value}
-        onChange={handleChange}
-        name="required-radio-group"
-      >
-        <FormControlLabel value="yes" control={<Radio />} label="はい" />
-        <FormControlLabel value="no" control={<Radio />} label="いいえ" />
-      </RadioGroup>
-      {error && <FormHelperText>この項目は必須です</FormHelperText>}
-    </FormControl>
+    <Box>
+      <FormControl error={error}>
+        <FormLabel id='required-radio-group-label'>
+          必須項目 <span style={{ color: 'red' }}>*</span>
+        </FormLabel>
+        <RadioGroup
+          aria-labelledby='required-radio-group-label'
+          value={value}
+          onChange={handleChange}
+          name='required-radio-group'>
+          <FormControlLabel value='yes' control={<Radio />} label='はい' />
+          <FormControlLabel value='no' control={<Radio />} label='いいえ' />
+        </RadioGroup>
+        {error && <FormHelperText>この項目は必須です</FormHelperText>}
+      </FormControl>
+      <Box sx={{ mt: 2 }}>
+        <button onClick={handleSubmit}>送信</button>
+      </Box>
+    </Box>
   )
 }
 

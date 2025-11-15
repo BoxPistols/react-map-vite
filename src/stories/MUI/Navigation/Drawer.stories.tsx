@@ -1,6 +1,6 @@
 /** @jsxImportSource react */
-import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
+import InboxIcon from '@mui/icons-material/MoveToInbox'
 import {
   Box,
   Button,
@@ -40,11 +40,7 @@ const TemporaryDrawer = () => {
   const [open, setOpen] = useState(false)
 
   const list = () => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={() => setOpen(false)}
-    >
+    <Box sx={{ width: 250 }} role='presentation' onClick={() => setOpen(false)}>
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -90,7 +86,7 @@ export const Playground: Story = {
 export const Basic: Story = {
   render: () => (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         一時的なDrawer
       </Typography>
       <TemporaryDrawer />
@@ -107,17 +103,15 @@ const AnchorExample = () => {
   })
 
   const toggleDrawer =
-    (anchor: 'top' | 'left' | 'bottom' | 'right', open: boolean) =>
-    () => {
+    (anchor: 'top' | 'left' | 'bottom' | 'right', open: boolean) => () => {
       setState({ ...state, [anchor]: open })
     }
 
   const list = (anchor: 'top' | 'left' | 'bottom' | 'right') => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-    >
+      role='presentation'
+      onClick={toggleDrawer(anchor, false)}>
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -135,7 +129,7 @@ const AnchorExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         方向
       </Typography>
       <Box sx={{ display: 'flex', gap: 1 }}>
@@ -150,8 +144,7 @@ const AnchorExample = () => {
           key={anchor}
           anchor={anchor}
           open={state[anchor]}
-          onClose={toggleDrawer(anchor, false)}
-        >
+          onClose={toggleDrawer(anchor, false)}>
           {list(anchor)}
         </Drawer>
       ))}
@@ -167,7 +160,7 @@ export const Permanent: Story = {
   render: () => (
     <Box sx={{ display: 'flex', height: 400 }}>
       <Drawer
-        variant="permanent"
+        variant='permanent'
         sx={{
           width: 240,
           flexShrink: 0,
@@ -176,8 +169,7 @@ export const Permanent: Story = {
             boxSizing: 'border-box',
             position: 'relative',
           },
-        }}
-      >
+        }}>
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding>
@@ -204,7 +196,7 @@ export const Permanent: Story = {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <Typography>メインコンテンツ</Typography>
       </Box>
     </Box>

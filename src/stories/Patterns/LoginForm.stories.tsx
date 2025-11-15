@@ -1,4 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import GoogleIcon from '@mui/icons-material/Google'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import {
   Box,
   Button,
@@ -14,11 +17,9 @@ import {
   InputAdornment,
   Alert,
 } from '@mui/material'
-import GoogleIcon from '@mui/icons-material/Google'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { useState } from 'react'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Patterns/Login Form',
@@ -33,7 +34,7 @@ type Story = StoryObj<typeof meta>
 
 export const SimpleLogin: Story = {
   render: () => (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <Box
         sx={{
           marginTop: 8,
@@ -41,42 +42,46 @@ export const SimpleLogin: Story = {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           ログイン
         </Typography>
-        <Box component="form" sx={{ mt: 1 }}>
+        <Box component='form' sx={{ mt: 1 }}>
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="email"
-            label="メールアドレス"
-            name="email"
-            autoComplete="email"
+            id='email'
+            label='メールアドレス'
+            name='email'
+            autoComplete='email'
             autoFocus
           />
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            name="password"
-            label="パスワード"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            name='password'
+            label='パスワード'
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="ログイン状態を保持"
+            control={<Checkbox value='remember' color='primary' />}
+            label='ログイン状態を保持'
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}>
             ログイン
           </Button>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Link href="#" variant="body2">
+            <Link href='#' variant='body2'>
               パスワードをお忘れですか？
             </Link>
-            <Link href="#" variant="body2">
+            <Link href='#' variant='body2'>
               アカウント作成
             </Link>
           </Box>
@@ -88,7 +93,7 @@ export const SimpleLogin: Story = {
 
 export const WithSocialLogin: Story = {
   render: () => (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <Box
         sx={{
           marginTop: 8,
@@ -97,55 +102,55 @@ export const WithSocialLogin: Story = {
           alignItems: 'center',
         }}>
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
-          <Typography component="h1" variant="h5" align="center" gutterBottom>
+          <Typography component='h1' variant='h5' align='center' gutterBottom>
             ログイン
           </Typography>
 
           <Box sx={{ mt: 3, mb: 2 }}>
             <Button
               fullWidth
-              variant="outlined"
+              variant='outlined'
               startIcon={<GoogleIcon />}
               sx={{ mb: 1 }}>
               Googleでログイン
             </Button>
-            <Button fullWidth variant="outlined" startIcon={<GitHubIcon />}>
+            <Button fullWidth variant='outlined' startIcon={<GitHubIcon />}>
               GitHubでログイン
             </Button>
           </Box>
 
           <Divider sx={{ my: 2 }}>または</Divider>
 
-          <Box component="form" sx={{ mt: 1 }}>
+          <Box component='form' sx={{ mt: 1 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="メールアドレス"
-              autoComplete="email"
+              label='メールアドレス'
+              autoComplete='email'
               autoFocus
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="パスワード"
-              type="password"
-              autoComplete="current-password"
+              label='パスワード'
+              type='password'
+              autoComplete='current-password'
             />
             <FormControlLabel
-              control={<Checkbox color="primary" />}
-              label="ログイン状態を保持"
+              control={<Checkbox color='primary' />}
+              label='ログイン状態を保持'
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}>
               ログイン
             </Button>
             <Box sx={{ textAlign: 'center' }}>
-              <Link href="#" variant="body2">
+              <Link href='#' variant='body2'>
                 パスワードをお忘れですか？
               </Link>
             </Box>
@@ -153,9 +158,9 @@ export const WithSocialLogin: Story = {
         </Paper>
 
         <Box sx={{ mt: 2 }}>
-          <Typography variant="body2" align="center">
+          <Typography variant='body2' align='center'>
             アカウントをお持ちでないですか？{' '}
-            <Link href="#" variant="body2">
+            <Link href='#' variant='body2'>
               登録する
             </Link>
           </Typography>
@@ -169,7 +174,7 @@ const WithPasswordToggleExample = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <Box
         sx={{
           marginTop: 8,
@@ -178,31 +183,31 @@ const WithPasswordToggleExample = () => {
           alignItems: 'center',
         }}>
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
-          <Typography component="h1" variant="h5" align="center" gutterBottom>
+          <Typography component='h1' variant='h5' align='center' gutterBottom>
             ログイン
           </Typography>
-          <Box component="form" sx={{ mt: 3 }}>
+          <Box component='form' sx={{ mt: 3 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="メールアドレス"
-              autoComplete="email"
+              label='メールアドレス'
+              autoComplete='email'
               autoFocus
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="パスワード"
+              label='パスワード'
               type={showPassword ? 'text' : 'password'}
-              autoComplete="current-password"
+              autoComplete='current-password'
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment position='end'>
                     <IconButton
                       onClick={() => setShowPassword(!showPassword)}
-                      edge="end">
+                      edge='end'>
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -210,9 +215,9 @@ const WithPasswordToggleExample = () => {
               }}
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}>
               ログイン
             </Button>
@@ -229,7 +234,7 @@ export const WithPasswordToggle: Story = {
 
 export const WithError: Story = {
   render: () => (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <Box
         sx={{
           marginTop: 8,
@@ -238,38 +243,38 @@ export const WithError: Story = {
           alignItems: 'center',
         }}>
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
-          <Typography component="h1" variant="h5" align="center" gutterBottom>
+          <Typography component='h1' variant='h5' align='center' gutterBottom>
             ログイン
           </Typography>
 
-          <Alert severity="error" sx={{ mt: 2 }}>
+          <Alert severity='error' sx={{ mt: 2 }}>
             メールアドレスまたはパスワードが正しくありません
           </Alert>
 
-          <Box component="form" sx={{ mt: 3 }}>
+          <Box component='form' sx={{ mt: 3 }}>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
               error
-              label="メールアドレス"
-              defaultValue="user@example.com"
-              autoComplete="email"
+              label='メールアドレス'
+              defaultValue='user@example.com'
+              autoComplete='email'
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
               error
-              label="パスワード"
-              type="password"
-              helperText="パスワードが正しくありません"
-              autoComplete="current-password"
+              label='パスワード'
+              type='password'
+              helperText='パスワードが正しくありません'
+              autoComplete='current-password'
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}>
               ログイン
             </Button>
@@ -290,7 +295,7 @@ export const CenteredCard: Story = {
         justifyContent: 'center',
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       }}>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <Paper
           elevation={10}
           sx={{
@@ -298,30 +303,30 @@ export const CenteredCard: Story = {
             borderRadius: 2,
           }}>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
-            <Typography component="h1" variant="h4" fontWeight="bold">
+            <Typography component='h1' variant='h4' fontWeight='bold'>
               Welcome Back
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+            <Typography variant='body2' color='text.secondary' sx={{ mt: 1 }}>
               アカウントにログインしてください
             </Typography>
           </Box>
 
-          <Box component="form">
+          <Box component='form'>
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="メールアドレス"
-              autoComplete="email"
+              label='メールアドレス'
+              autoComplete='email'
               autoFocus
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              label="パスワード"
-              type="password"
-              autoComplete="current-password"
+              label='パスワード'
+              type='password'
+              autoComplete='current-password'
             />
             <Box
               sx={{
@@ -331,20 +336,20 @@ export const CenteredCard: Story = {
                 mt: 1,
               }}>
               <FormControlLabel
-                control={<Checkbox color="primary" size="small" />}
+                control={<Checkbox color='primary' size='small' />}
                 label={
-                  <Typography variant="body2">ログイン状態を保持</Typography>
+                  <Typography variant='body2'>ログイン状態を保持</Typography>
                 }
               />
-              <Link href="#" variant="body2">
+              <Link href='#' variant='body2'>
                 パスワードを忘れた
               </Link>
             </Box>
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              size="large"
+              variant='contained'
+              size='large'
               sx={{ mt: 3, mb: 2, py: 1.5 }}>
               ログイン
             </Button>
@@ -353,16 +358,16 @@ export const CenteredCard: Story = {
 
             <Button
               fullWidth
-              variant="outlined"
+              variant='outlined'
               startIcon={<GoogleIcon />}
               sx={{ mb: 1 }}>
               Googleでログイン
             </Button>
 
             <Box sx={{ textAlign: 'center', mt: 3 }}>
-              <Typography variant="body2">
+              <Typography variant='body2'>
                 アカウントをお持ちでないですか？{' '}
-                <Link href="#" fontWeight="bold">
+                <Link href='#' fontWeight='bold'>
                   今すぐ登録
                 </Link>
               </Typography>

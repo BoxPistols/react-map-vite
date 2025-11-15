@@ -46,17 +46,17 @@ const BasicExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         スナックバーを表示
       </Button>
       <Snackbar
         open={open}
         autoHideDuration={3000}
         onClose={() => setOpen(false)}
-        message="これはスナックバーメッセージです"
+        message='これはスナックバーメッセージです'
       />
     </Box>
   )
@@ -71,33 +71,32 @@ const WithActionExample = () => {
 
   const action = (
     <>
-      <Button color="secondary" size="small" onClick={() => setOpen(false)}>
+      <Button color='secondary' size='small' onClick={() => setOpen(false)}>
         元に戻す
       </Button>
       <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={() => setOpen(false)}
-      >
-        <CloseIcon fontSize="small" />
+        size='small'
+        aria-label='close'
+        color='inherit'
+        onClick={() => setOpen(false)}>
+        <CloseIcon fontSize='small' />
       </IconButton>
     </>
   )
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アクション付き
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         スナックバーを表示
       </Button>
       <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
-        message="アイテムを削除しました"
+        message='アイテムを削除しました'
         action={action}
       />
     </Box>
@@ -122,16 +121,15 @@ const PositionExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         位置
       </Typography>
       <Stack spacing={1}>
         {positions.map((position) => (
           <Button
             key={`${position.vertical}-${position.horizontal}`}
-            variant="outlined"
-            onClick={() => setOpen(position)}
-          >
+            variant='outlined'
+            onClick={() => setOpen(position)}>
             {position.vertical} - {position.horizontal}
           </Button>
         ))}
@@ -140,11 +138,7 @@ const PositionExample = () => {
         open={!!open}
         autoHideDuration={2000}
         onClose={() => setOpen(null)}
-        message={
-          open
-            ? `${open.vertical} - ${open.horizontal}`
-            : ''
-        }
+        message={open ? `${open.vertical} - ${open.horizontal}` : ''}
         anchorOrigin={open || undefined}
       />
     </Box>
@@ -160,22 +154,20 @@ const WithAlertExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         Alert付き
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         成功メッセージ
       </Button>
       <Snackbar
         open={open}
         autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      >
+        onClose={() => setOpen(false)}>
         <Alert
           onClose={() => setOpen(false)}
-          severity="success"
-          sx={{ width: '100%' }}
-        >
+          severity='success'
+          sx={{ width: '100%' }}>
           これは成功メッセージです！
         </Alert>
       </Snackbar>
@@ -194,49 +186,43 @@ const AlertVariantsExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         Alert バリエーション
       </Typography>
-      <Stack direction="row" spacing={1}>
+      <Stack direction='row' spacing={1}>
         <Button
-          variant="outlined"
-          color="success"
-          onClick={() => setSeverity('success')}
-        >
+          variant='outlined'
+          color='success'
+          onClick={() => setSeverity('success')}>
           Success
         </Button>
         <Button
-          variant="outlined"
-          color="error"
-          onClick={() => setSeverity('error')}
-        >
+          variant='outlined'
+          color='error'
+          onClick={() => setSeverity('error')}>
           Error
         </Button>
         <Button
-          variant="outlined"
-          color="warning"
-          onClick={() => setSeverity('warning')}
-        >
+          variant='outlined'
+          color='warning'
+          onClick={() => setSeverity('warning')}>
           Warning
         </Button>
         <Button
-          variant="outlined"
-          color="info"
-          onClick={() => setSeverity('info')}
-        >
+          variant='outlined'
+          color='info'
+          onClick={() => setSeverity('info')}>
           Info
         </Button>
       </Stack>
       <Snackbar
         open={!!severity}
         autoHideDuration={3000}
-        onClose={() => setSeverity(null)}
-      >
+        onClose={() => setSeverity(null)}>
         <Alert
           onClose={() => setSeverity(null)}
           severity={severity || 'info'}
-          sx={{ width: '100%' }}
-        >
+          sx={{ width: '100%' }}>
           これは{severity}メッセージです！
         </Alert>
       </Snackbar>
@@ -249,15 +235,23 @@ export const AlertVariants: Story = {
 }
 
 const ConsecutiveExample = () => {
-  const [snackPack, setSnackPack] = useState<readonly { message: string; key: number }[]>([])
+  // TODO: Implement useEffect to process snackPack queue for consecutive display
+  const [_snackPack, setSnackPack] = useState<
+    readonly { message: string; key: number }[]
+  >([])
   const [open, setOpen] = useState(false)
-  const [messageInfo, setMessageInfo] = useState<{ message: string; key: number } | undefined>(undefined)
+  const [messageInfo, setMessageInfo] = useState<
+    { message: string; key: number } | undefined
+  >(undefined)
 
   const handleClick = (message: string) => {
     setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }])
   }
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
     if (reason === 'clickaway') {
       return
     }
@@ -270,17 +264,17 @@ const ConsecutiveExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         連続表示
       </Typography>
-      <Stack direction="row" spacing={1}>
-        <Button variant="outlined" onClick={() => handleClick('メッセージ 1')}>
+      <Stack direction='row' spacing={1}>
+        <Button variant='outlined' onClick={() => handleClick('メッセージ 1')}>
           メッセージ 1
         </Button>
-        <Button variant="outlined" onClick={() => handleClick('メッセージ 2')}>
+        <Button variant='outlined' onClick={() => handleClick('メッセージ 2')}>
           メッセージ 2
         </Button>
-        <Button variant="outlined" onClick={() => handleClick('メッセージ 3')}>
+        <Button variant='outlined' onClick={() => handleClick('メッセージ 3')}>
           メッセージ 3
         </Button>
       </Stack>
@@ -311,17 +305,17 @@ const DurationExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         表示時間
       </Typography>
-      <Stack direction="row" spacing={1}>
-        <Button variant="outlined" onClick={() => handleClick(1000)}>
+      <Stack direction='row' spacing={1}>
+        <Button variant='outlined' onClick={() => handleClick(1000)}>
           1秒
         </Button>
-        <Button variant="outlined" onClick={() => handleClick(3000)}>
+        <Button variant='outlined' onClick={() => handleClick(3000)}>
           3秒
         </Button>
-        <Button variant="outlined" onClick={() => handleClick(5000)}>
+        <Button variant='outlined' onClick={() => handleClick(5000)}>
           5秒
         </Button>
       </Stack>

@@ -66,10 +66,10 @@ const BasicExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         基本
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         ダイアログを開く
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -99,29 +99,26 @@ const AlertExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         アラートダイアログ
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         削除確認
       </Button>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          本当に削除しますか？
-        </DialogTitle>
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'>
+        <DialogTitle id='alert-dialog-title'>本当に削除しますか？</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id='alert-dialog-description'>
             この操作は取り消せません。本当に削除してもよろしいですか？
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>キャンセル</Button>
-          <Button onClick={() => setOpen(false)} color="error" autoFocus>
+          <Button onClick={() => setOpen(false)} color='error' autoFocus>
             削除
           </Button>
         </DialogActions>
@@ -139,10 +136,10 @@ const FormExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         フォームダイアログ
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         購読する
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -153,12 +150,12 @@ const FormExample = () => {
           </DialogContentText>
           <TextField
             autoFocus
-            margin="dense"
-            id="email"
-            label="メールアドレス"
-            type="email"
+            margin='dense'
+            id='email'
+            label='メールアドレス'
+            type='email'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
         </DialogContent>
         <DialogActions>
@@ -179,16 +176,12 @@ const SizesExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
       <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
         {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
-          <Button
-            key={size}
-            variant="outlined"
-            onClick={() => setOpen(size)}
-          >
+          <Button key={size} variant='outlined' onClick={() => setOpen(size)}>
             {size}
           </Button>
         ))}
@@ -199,12 +192,11 @@ const SizesExample = () => {
           open={open === size}
           onClose={() => setOpen(null)}
           maxWidth={size as 'xs' | 'sm' | 'md' | 'lg' | 'xl'}
-          fullWidth
-        >
+          fullWidth>
           <DialogTitle>{size.toUpperCase()} ダイアログ</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              これは maxWidth="{size}" のダイアログです。
+              これは maxWidth=&quot;{size}&quot; のダイアログです。
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -225,10 +217,10 @@ const FullScreenExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         フルスクリーン
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         フルスクリーンで開く
       </Button>
       <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
@@ -252,11 +244,11 @@ export const FullScreen: Story = {
 
 const SlideTransition = forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement<any, any>
+    children: React.ReactElement
   },
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction="up" ref={ref} {...props} />
+  return <Slide direction='up' ref={ref} {...props} />
 })
 
 const TransitionsExample = () => {
@@ -265,14 +257,14 @@ const TransitionsExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         トランジション
       </Typography>
       <Box sx={{ display: 'flex', gap: 2 }}>
-        <Button variant="outlined" onClick={() => setSlideOpen(true)}>
+        <Button variant='outlined' onClick={() => setSlideOpen(true)}>
           Slide
         </Button>
-        <Button variant="outlined" onClick={() => setZoomOpen(true)}>
+        <Button variant='outlined' onClick={() => setZoomOpen(true)}>
           Zoom
         </Button>
       </Box>
@@ -280,8 +272,7 @@ const TransitionsExample = () => {
       <Dialog
         open={slideOpen}
         TransitionComponent={SlideTransition}
-        onClose={() => setSlideOpen(false)}
-      >
+        onClose={() => setSlideOpen(false)}>
         <DialogTitle>Slide トランジション</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -296,13 +287,10 @@ const TransitionsExample = () => {
       <Dialog
         open={zoomOpen}
         TransitionComponent={Zoom}
-        onClose={() => setZoomOpen(false)}
-      >
+        onClose={() => setZoomOpen(false)}>
         <DialogTitle>Zoom トランジション</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            ズームして表示されます。
-          </DialogContentText>
+          <DialogContentText>ズームして表示されます。</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setZoomOpen(false)}>閉じる</Button>
@@ -321,13 +309,13 @@ const ScrollableContentExample = () => {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         スクロール可能なコンテンツ
       </Typography>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant='outlined' onClick={() => setOpen(true)}>
         長いコンテンツ
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)} scroll="paper">
+      <Dialog open={open} onClose={() => setOpen(false)} scroll='paper'>
         <DialogTitle>スクロール可能なダイアログ</DialogTitle>
         <DialogContent dividers>
           <DialogContentText>

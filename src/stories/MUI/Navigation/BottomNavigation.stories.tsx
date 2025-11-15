@@ -1,11 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { BottomNavigation, BottomNavigationAction, Paper, Box } from '@mui/material'
-import RestoreIcon from '@mui/icons-material/Restore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
 import FolderIcon from '@mui/icons-material/Folder'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import PersonIcon from '@mui/icons-material/Person'
+import RestoreIcon from '@mui/icons-material/Restore'
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Paper,
+  Box,
+} from '@mui/material'
 import { useState } from 'react'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'MUI/Navigation/BottomNavigation',
@@ -23,16 +29,18 @@ const BasicExample = () => {
   const [value, setValue] = useState(0)
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      elevation={3}>
       <BottomNavigation
         showLabels
         value={value}
         onChange={(_event, newValue) => {
           setValue(newValue)
         }}>
-        <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="お気に入り" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="場所" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label='最近' icon={<RestoreIcon />} />
+        <BottomNavigationAction label='お気に入り' icon={<FavoriteIcon />} />
+        <BottomNavigationAction label='場所' icon={<LocationOnIcon />} />
       </BottomNavigation>
     </Paper>
   )
@@ -47,7 +55,9 @@ const WithoutLabelsExample = () => {
 
   return (
     <Box sx={{ pb: 7 }}>
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper
+        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+        elevation={3}>
         <BottomNavigation
           value={value}
           onChange={(_event, newValue) => {
@@ -71,7 +81,9 @@ const AlwaysShowLabelsExample = () => {
   const [value, setValue] = useState('recents')
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      elevation={3}>
       <BottomNavigation
         showLabels
         value={value}
@@ -79,23 +91,23 @@ const AlwaysShowLabelsExample = () => {
           setValue(newValue)
         }}>
         <BottomNavigationAction
-          value="recents"
-          label="最近"
+          value='recents'
+          label='最近'
           icon={<RestoreIcon />}
         />
         <BottomNavigationAction
-          value="favorites"
-          label="お気に入り"
+          value='favorites'
+          label='お気に入り'
           icon={<FavoriteIcon />}
         />
         <BottomNavigationAction
-          value="nearby"
-          label="近く"
+          value='nearby'
+          label='近く'
           icon={<LocationOnIcon />}
         />
         <BottomNavigationAction
-          value="folder"
-          label="フォルダ"
+          value='folder'
+          label='フォルダ'
           icon={<FolderIcon />}
         />
       </BottomNavigation>
@@ -111,18 +123,20 @@ const FiveActionsExample = () => {
   const [value, setValue] = useState(0)
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      elevation={3}>
       <BottomNavigation
         showLabels
         value={value}
         onChange={(_event, newValue) => {
           setValue(newValue)
         }}>
-        <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="お気に入り" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="近く" icon={<LocationOnIcon />} />
-        <BottomNavigationAction label="フォルダ" icon={<FolderIcon />} />
-        <BottomNavigationAction label="プロフィール" icon={<PersonIcon />} />
+        <BottomNavigationAction label='最近' icon={<RestoreIcon />} />
+        <BottomNavigationAction label='お気に入り' icon={<FavoriteIcon />} />
+        <BottomNavigationAction label='近く' icon={<LocationOnIcon />} />
+        <BottomNavigationAction label='フォルダ' icon={<FolderIcon />} />
+        <BottomNavigationAction label='プロフィール' icon={<PersonIcon />} />
       </BottomNavigation>
     </Paper>
   )
