@@ -198,96 +198,100 @@ export const Interactive: Story = {
   ),
 }
 
-export const Nested: Story = {
-  render: () => {
-    const [open, setOpen] = useState(true)
+const NestedExample = () => {
+  const [open, setOpen] = useState(true)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          ネストされたリスト
-        </Typography>
-        <List
-          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-          component="nav"
-        >
-          <ListItemButton>
-            <ListItemIcon>
-              <SendIcon />
-            </ListItemIcon>
-            <ListItemText primary="送信メール" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText primary="下書き" />
-          </ListItemButton>
-          <ListItemButton onClick={() => setOpen(!open)}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="受信トレイ" />
-          </ListItemButton>
-          {open && (
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarIcon />
-                </ListItemIcon>
-                <ListItemText primary="スター付き" />
-              </ListItemButton>
-            </List>
-          )}
-        </List>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        ネストされたリスト
+      </Typography>
+      <List
+        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+        component="nav"
+      >
+        <ListItemButton>
+          <ListItemIcon>
+            <SendIcon />
+          </ListItemIcon>
+          <ListItemText primary="送信メール" />
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText primary="下書き" />
+        </ListItemButton>
+        <ListItemButton onClick={() => setOpen(!open)}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="受信トレイ" />
+        </ListItemButton>
+        {open && (
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary="スター付き" />
+            </ListItemButton>
+          </List>
+        )}
+      </List>
+    </Box>
+  )
+}
+
+export const Nested: Story = {
+  render: () => <NestedExample />,
+}
+
+const WithSwitchExample = () => {
+  const [checked, setChecked] = useState(['wifi'])
+
+  const handleToggle = (value: string) => () => {
+    const currentIndex = checked.indexOf(value)
+    const newChecked = [...checked]
+
+    if (currentIndex === -1) {
+      newChecked.push(value)
+    } else {
+      newChecked.splice(currentIndex, 1)
+    }
+
+    setChecked(newChecked)
+  }
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        スイッチ付きリスト
+      </Typography>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <ListItem>
+          <ListItemText primary="Wi-Fi" />
+          <Switch
+            edge="end"
+            onChange={handleToggle('wifi')}
+            checked={checked.indexOf('wifi') !== -1}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Bluetooth" />
+          <Switch
+            edge="end"
+            onChange={handleToggle('bluetooth')}
+            checked={checked.indexOf('bluetooth') !== -1}
+          />
+        </ListItem>
+      </List>
+    </Box>
+  )
 }
 
 export const WithSwitch: Story = {
-  render: () => {
-    const [checked, setChecked] = useState(['wifi'])
-
-    const handleToggle = (value: string) => () => {
-      const currentIndex = checked.indexOf(value)
-      const newChecked = [...checked]
-
-      if (currentIndex === -1) {
-        newChecked.push(value)
-      } else {
-        newChecked.splice(currentIndex, 1)
-      }
-
-      setChecked(newChecked)
-    }
-
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          スイッチ付きリスト
-        </Typography>
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          <ListItem>
-            <ListItemText primary="Wi-Fi" />
-            <Switch
-              edge="end"
-              onChange={handleToggle('wifi')}
-              checked={checked.indexOf('wifi') !== -1}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Bluetooth" />
-            <Switch
-              edge="end"
-              onChange={handleToggle('bluetooth')}
-              checked={checked.indexOf('bluetooth') !== -1}
-            />
-          </ListItem>
-        </List>
-      </Box>
-    )
-  },
+  render: () => <WithSwitchExample />,
 }
 
 export const Dense: Story = {

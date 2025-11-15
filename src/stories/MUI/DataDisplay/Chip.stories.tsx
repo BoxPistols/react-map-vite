@@ -201,37 +201,39 @@ export const Clickable: Story = {
   ),
 }
 
-export const Deletable: Story = {
-  render: () => {
-    const [chips, setChips] = useState([
-      { key: 0, label: 'React' },
-      { key: 1, label: 'Vue' },
-      { key: 2, label: 'Angular' },
-    ])
+const DeletableExample = () => {
+  const [chips, setChips] = useState([
+    { key: 0, label: 'React' },
+    { key: 1, label: 'Vue' },
+    { key: 2, label: 'Angular' },
+  ])
 
-    const handleDelete = (chipToDelete: { key: number; label: string }) => {
-      setChips((chips) =>
-        chips.filter((chip) => chip.key !== chipToDelete.key)
-      )
-    }
-
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Typography variant="h6" gutterBottom>
-          削除可能
-        </Typography>
-        <Stack direction="row" spacing={1}>
-          {chips.map((chip) => (
-            <Chip
-              key={chip.key}
-              label={chip.label}
-              onDelete={() => handleDelete(chip)}
-            />
-          ))}
-        </Stack>
-      </Box>
+  const handleDelete = (chipToDelete: { key: number; label: string }) => {
+    setChips((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
     )
-  },
+  }
+
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        削除可能
+      </Typography>
+      <Stack direction="row" spacing={1}>
+        {chips.map((chip) => (
+          <Chip
+            key={chip.key}
+            label={chip.label}
+            onDelete={() => handleDelete(chip)}
+          />
+        ))}
+      </Stack>
+    </Box>
+  )
+}
+
+export const Deletable: Story = {
+  render: () => <DeletableExample />,
 }
 
 export const CustomDeleteIcon: Story = {
@@ -257,43 +259,45 @@ export const CustomDeleteIcon: Story = {
   ),
 }
 
-export const Combined: Story = {
-  render: () => {
-    const [chips, setChips] = useState([
-      { key: 0, label: 'JavaScript', avatar: 'JS' },
-      { key: 1, label: 'TypeScript', avatar: 'TS' },
-      { key: 2, label: 'React', avatar: 'R' },
-    ])
+const CombinedExample = () => {
+  const [chips, setChips] = useState([
+    { key: 0, label: 'JavaScript', avatar: 'JS' },
+    { key: 1, label: 'TypeScript', avatar: 'TS' },
+    { key: 2, label: 'React', avatar: 'R' },
+  ])
 
-    const handleDelete = (chipToDelete: {
-      key: number
-      label: string
-      avatar: string
-    }) => {
-      setChips((chips) =>
-        chips.filter((chip) => chip.key !== chipToDelete.key)
-      )
-    }
-
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Typography variant="h6" gutterBottom>
-          アバター + 削除可能
-        </Typography>
-        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-          {chips.map((chip) => (
-            <Chip
-              key={chip.key}
-              avatar={<Avatar>{chip.avatar}</Avatar>}
-              label={chip.label}
-              onDelete={() => handleDelete(chip)}
-              color="primary"
-            />
-          ))}
-        </Stack>
-      </Box>
+  const handleDelete = (chipToDelete: {
+    key: number
+    label: string
+    avatar: string
+  }) => {
+    setChips((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
     )
-  },
+  }
+
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        アバター + 削除可能
+      </Typography>
+      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+        {chips.map((chip) => (
+          <Chip
+            key={chip.key}
+            avatar={<Avatar>{chip.avatar}</Avatar>}
+            label={chip.label}
+            onDelete={() => handleDelete(chip)}
+            color="primary"
+          />
+        ))}
+      </Stack>
+    </Box>
+  )
+}
+
+export const Combined: Story = {
+  render: () => <CombinedExample />,
 }
 
 export const Disabled: Story = {
