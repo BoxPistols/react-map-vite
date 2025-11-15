@@ -1,0 +1,203 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="MUI/Data Display/概要" />
+
+# Data Display（データ表示）
+
+情報を視覚的に表示・整理するためのコンポーネント群です。
+データを見やすく、理解しやすい形で提示します。
+
+## 📊 コンポーネント一覧
+
+### ユーザー情報
+- **Avatar** - アバター画像
+  - 画像、文字、アイコンを表示
+  - サイズ・形状（circular/rounded/square）を変更可能
+  - AvatarGroupで複数をグループ表示
+
+- **Chip** - チップ（タグ）
+  - ラベルやタグの表示
+  - 削除可能にできる
+  - アバターやアイコンと組み合わせ可能
+
+### テキスト表示
+- **Typography** - テキスト表示
+  - 見出し（h1〜h6）
+  - 本文（body1, body2）
+  - その他（caption, overline, button）
+  - カスタムバリアントも定義可能
+
+### 構造化データ
+- **List** - リスト表示
+  - ListItem, ListItemText, ListItemIconで構成
+  - ネスト（入れ子）構造をサポート
+  - クリッカブルなListItemButton
+
+- **Table** - テーブル表示
+  - 大量のデータを整理して表示
+  - ソート機能
+  - ページネーション
+  - 行選択
+
+### 視覚的要素
+- **Badge** - バッジ
+  - 通知数などを表示
+  - アバターやアイコンに重ねて配置
+  - ドット表示モード
+
+- **Divider** - 区切り線
+  - コンテンツを視覚的に分割
+  - 垂直/水平方向
+  - テキストやチップを含められる
+
+- **Tooltip** - ツールチップ
+  - ホバー時に追加情報を表示
+  - 12方向の配置をサポート
+  - 矢印表示オプション
+
+## 💡 使い分けのヒント
+
+### List vs Table
+| コンポーネント | データ量 | 構造 | 用途 |
+|--------------|---------|------|-----|
+| List | 少〜中 | 1次元 | シンプルなリスト表示 |
+| Table | 中〜大 | 2次元 | 複数カラムのデータ |
+
+### Typography variant の選び方
+```tsx
+// 見出し
+<Typography variant="h1">ページタイトル</Typography>
+<Typography variant="h2">セクション</Typography>
+<Typography variant="h3">サブセクション</Typography>
+
+// 本文
+<Typography variant="body1">通常のテキスト</Typography>
+<Typography variant="body2">補足テキスト</Typography>
+
+// その他
+<Typography variant="caption">小さな注釈</Typography>
+<Typography variant="overline">カテゴリ表示</Typography>
+```
+
+## ♿ アクセシビリティ
+
+### セマンティックHTML
+```tsx
+// ❌ 悪い例
+<Typography>見出し</Typography>
+
+// ✅ 良い例
+<Typography variant="h1" component="h1">
+  見出し
+</Typography>
+```
+
+### テーブルの構造化
+```tsx
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableCell>ヘッダー</TableCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>データ</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### Tooltipの注意点
+- 重要な情報をTooltipだけに頼らない
+- タッチデバイスではTooltipが使いにくい
+- aria-label も併用する
+
+## 🎨 スタイリング
+
+### Typography のカスタマイズ
+```tsx
+<Typography
+  variant="h4"
+  color="primary"
+  gutterBottom
+  align="center"
+>
+  カスタマイズされた見出し
+</Typography>
+```
+
+### Table のスタイリング
+```tsx
+<TableCell
+  align="right"
+  sx={{
+    fontWeight: 'bold',
+    color: 'primary.main',
+  }}
+>
+  データ
+</TableCell>
+```
+
+## 📋 実装パターン
+
+### ユーザーリスト
+```tsx
+<List>
+  <ListItem>
+    <ListItemAvatar>
+      <Avatar>山</Avatar>
+    </ListItemAvatar>
+    <ListItemText
+      primary="山田太郎"
+      secondary="yamada@example.com"
+    />
+    <Chip label="管理者" size="small" />
+  </ListItem>
+</List>
+```
+
+### 通知付きアイコン
+```tsx
+<Badge badgeContent={4} color="error">
+  <NotificationsIcon />
+</Badge>
+```
+
+### タグ一覧
+```tsx
+<Box sx={{ display: 'flex', gap: 1 }}>
+  <Chip label="React" onDelete={handleDelete} />
+  <Chip label="TypeScript" onDelete={handleDelete} />
+  <Chip label="MUI" onDelete={handleDelete} />
+</Box>
+```
+
+## 📊 データ表示のベストプラクティス
+
+### 1. 階層構造を明確に
+- Typographyで適切な見出しレベルを使用
+- Dividerで視覚的に区切る
+- ネストしたListで階層を表現
+
+### 2. データの優先度を視覚化
+- 重要な情報はTypographyのvariantやcolorで強調
+- Badgeで数値を目立たせる
+- Chipでカテゴリやステータスを明示
+
+### 3. 読みやすさを重視
+- 適切な行間・余白を確保
+- コントラスト比を十分に
+- 長いテキストは折り返しを考慮
+
+### 4. インタラクティブ性
+- Tooltipで詳細情報を提供
+- Tableでソートやフィルタ機能を追加
+- ListItemButtonでクリック可能に
+
+## 🔗 関連コンポーネント
+
+- [Inputs](/story/mui-inputs-概要--docs) - データ入力
+- [Layout](/story/mui-layout-概要--docs) - レイアウト構成
+- [Surfaces](/story/mui-surfaces-概要--docs) - コンテンツのグループ化
