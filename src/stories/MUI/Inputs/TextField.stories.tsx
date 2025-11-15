@@ -130,40 +130,42 @@ export const WithHelperText: Story = {
   ),
 }
 
-export const WithIcons: Story = {
-  render: () => {
-    const [showPassword, setShowPassword] = useState(false)
+const WithIconsExample = () => {
+  const [showPassword, setShowPassword] = useState(false)
 
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Typography variant="h6" gutterBottom>
-          アイコン付き
-        </Typography>
-        <TextField
-          label="パスワード"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          label="金額"
-          InputProps={{
-            startAdornment: <InputAdornment position="start">¥</InputAdornment>,
-          }}
-        />
-      </Box>
-    )
-  },
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        アイコン付き
+      </Typography>
+      <TextField
+        label="パスワード"
+        type={showPassword ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={() => setShowPassword(!showPassword)}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+      <TextField
+        label="金額"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+        }}
+      />
+    </Box>
+  )
+}
+
+export const WithIcons: Story = {
+  render: () => <WithIconsExample />,
 }
 
 export const Multiline: Story = {

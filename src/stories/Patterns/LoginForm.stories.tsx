@@ -165,64 +165,66 @@ export const WithSocialLogin: Story = {
   ),
 }
 
-export const WithPasswordToggle: Story = {
-  render: () => {
-    const [showPassword, setShowPassword] = useState(false)
+const WithPasswordToggleExample = () => {
+  const [showPassword, setShowPassword] = useState(false)
 
-    return (
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
-          <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
-            <Typography component="h1" variant="h5" align="center" gutterBottom>
+  return (
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
+        <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
+          <Typography component="h1" variant="h5" align="center" gutterBottom>
+            ログイン
+          </Typography>
+          <Box component="form" sx={{ mt: 3 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="メールアドレス"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="パスワード"
+              type={showPassword ? 'text' : 'password'}
+              autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}>
               ログイン
-            </Typography>
-            <Box component="form" sx={{ mt: 3 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="メールアドレス"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="パスワード"
-                type={showPassword ? 'text' : 'password'}
-                autoComplete="current-password"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() => setShowPassword(!showPassword)}
-                        edge="end">
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}>
-                ログイン
-              </Button>
-            </Box>
-          </Paper>
-        </Box>
-      </Container>
-    )
-  },
+            </Button>
+          </Box>
+        </Paper>
+      </Box>
+    </Container>
+  )
+}
+
+export const WithPasswordToggle: Story = {
+  render: () => <WithPasswordToggleExample />,
 }
 
 export const WithError: Story = {

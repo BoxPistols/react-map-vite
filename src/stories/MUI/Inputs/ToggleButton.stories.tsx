@@ -263,36 +263,38 @@ export const WithText: Story = {
   ),
 }
 
-export const EnforceValue: Story = {
-  render: () => {
-    const [alignment, setAlignment] = useState<string | null>('left')
+const EnforceValueExample = () => {
+  const [alignment, setAlignment] = useState<string | null>('left')
 
-    const handleAlignment = (
-      event: React.MouseEvent<HTMLElement>,
-      newAlignment: string | null
-    ) => {
-      if (newAlignment !== null) {
-        setAlignment(newAlignment)
-      }
+  const handleAlignment = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string | null
+  ) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment)
     }
+  }
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          必ず1つ選択（選択解除不可）
-        </Typography>
-        <ToggleButtonGroup
-          value={alignment}
-          exclusive
-          onChange={handleAlignment}
-        >
-          <ToggleButton value="left">Left</ToggleButton>
-          <ToggleButton value="center">Center</ToggleButton>
-          <ToggleButton value="right">Right</ToggleButton>
-        </ToggleButtonGroup>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        必ず1つ選択（選択解除不可）
+      </Typography>
+      <ToggleButtonGroup
+        value={alignment}
+        exclusive
+        onChange={handleAlignment}
+      >
+        <ToggleButton value="left">Left</ToggleButton>
+        <ToggleButton value="center">Center</ToggleButton>
+        <ToggleButton value="right">Right</ToggleButton>
+      </ToggleButtonGroup>
+    </Box>
+  )
+}
+
+export const EnforceValue: Story = {
+  render: () => <EnforceValueExample />,
 }
 
 export const Disabled: Story = {

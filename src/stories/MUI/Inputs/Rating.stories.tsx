@@ -84,27 +84,29 @@ export const Precision: Story = {
   ),
 }
 
-export const Controlled: Story = {
-  render: () => {
-    const [value, setValue] = useState<number | null>(3)
+const ControlledExample = () => {
+  const [value, setValue] = useState<number | null>(3)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          制御されたRating
-        </Typography>
-        <Rating
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
-        <Typography variant="body2" sx={{ mt: 2 }}>
-          現在の評価: {value !== null ? value : '未評価'}
-        </Typography>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        制御されたRating
+      </Typography>
+      <Rating
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue)
+        }}
+      />
+      <Typography variant="body2" sx={{ mt: 2 }}>
+        現在の評価: {value !== null ? value : '未評価'}
+      </Typography>
+    </Box>
+  )
+}
+
+export const Controlled: Story = {
+  render: () => <ControlledExample />,
 }
 
 export const ReadOnly: Story = {
@@ -130,27 +132,29 @@ export const Disabled: Story = {
   ),
 }
 
-export const NoRating: Story = {
-  render: () => {
-    const [value, setValue] = useState<number | null>(null)
+const NoRatingExample = () => {
+  const [value, setValue] = useState<number | null>(null)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          未評価対応
-        </Typography>
-        <Rating
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
-        <Typography variant="body2" sx={{ mt: 2 }}>
-          {value === null ? '未評価' : `評価: ${value}`}
-        </Typography>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        未評価対応
+      </Typography>
+      <Rating
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue)
+        }}
+      />
+      <Typography variant="body2" sx={{ mt: 2 }}>
+        {value === null ? '未評価' : `評価: ${value}`}
+      </Typography>
+    </Box>
+  )
+}
+
+export const NoRating: Story = {
+  render: () => <NoRatingExample />,
 }
 
 export const CustomIcon: Story = {
@@ -168,43 +172,45 @@ export const CustomIcon: Story = {
   ),
 }
 
-export const Highlighter: Story = {
-  render: () => {
-    const [value, setValue] = useState<number | null>(2)
-    const [hover, setHover] = useState(-1)
+const labels: { [index: string]: string } = {
+  1: '最悪',
+  2: '悪い',
+  3: '普通',
+  4: '良い',
+  5: '最高',
+}
 
-    const labels: { [index: string]: string } = {
-      1: '最悪',
-      2: '悪い',
-      3: '普通',
-      4: '良い',
-      5: '最高',
-    }
+const HighlighterExample = () => {
+  const [value, setValue] = useState<number | null>(2)
+  const [hover, setHover] = useState(-1)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          ホバー表示
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Rating
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue)
-            }}
-            onChangeActive={(event, newHover) => {
-              setHover(newHover)
-            }}
-          />
-          {value !== null && (
-            <Typography variant="body2">
-              {labels[hover !== -1 ? hover : value]}
-            </Typography>
-          )}
-        </Box>
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        ホバー表示
+      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Rating
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue)
+          }}
+          onChangeActive={(event, newHover) => {
+            setHover(newHover)
+          }}
+        />
+        {value !== null && (
+          <Typography variant="body2">
+            {labels[hover !== -1 ? hover : value]}
+          </Typography>
+        )}
       </Box>
-    )
-  },
+    </Box>
+  )
+}
+
+export const Highlighter: Story = {
+  render: () => <HighlighterExample />,
 }
 
 export const Max: Story = {
@@ -225,32 +231,34 @@ export const Max: Story = {
   ),
 }
 
-export const IconStyles: Story = {
-  render: () => {
-    const [value, setValue] = useState<number | null>(2)
+const IconStylesExample = () => {
+  const [value, setValue] = useState<number | null>(2)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          アイコンスタイルのカスタマイズ
-        </Typography>
-        <Rating
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-          icon={<StarIcon fontSize="inherit" />}
-          emptyIcon={<StarIcon fontSize="inherit" />}
-          sx={{
-            '& .MuiRating-iconFilled': {
-              color: '#ff6d75',
-            },
-            '& .MuiRating-iconHover': {
-              color: '#ff3d47',
-            },
-          }}
-        />
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        アイコンスタイルのカスタマイズ
+      </Typography>
+      <Rating
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue)
+        }}
+        icon={<StarIcon fontSize="inherit" />}
+        emptyIcon={<StarIcon fontSize="inherit" />}
+        sx={{
+          '& .MuiRating-iconFilled': {
+            color: '#ff6d75',
+          },
+          '& .MuiRating-iconHover': {
+            color: '#ff3d47',
+          },
+        }}
+      />
+    </Box>
+  )
+}
+
+export const IconStyles: Story = {
+  render: () => <IconStylesExample />,
 }

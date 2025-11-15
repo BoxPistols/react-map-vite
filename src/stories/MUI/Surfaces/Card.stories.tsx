@@ -184,69 +184,71 @@ export const WithHeader: Story = {
   ),
 }
 
-export const Complex: Story = {
-  render: () => {
-    const [expanded, setExpanded] = useState(false)
+const ComplexExample = () => {
+  const [expanded, setExpanded] = useState(false)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          複雑なカード
-        </Typography>
-        <Card sx={{ maxWidth: 345 }}>
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: 'primary.main' }}>U</Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title="ユーザー名"
-            subheader="2024年1月1日"
-          />
-          <CardMedia
-            component="img"
-            height="194"
-            image="https://picsum.photos/400/194?random=1"
-            alt="Random"
-          />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              これは複雑なカードレイアウトの例です。
-              展開可能なコンテンツを含んでいます。
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => setExpanded(!expanded)}
-              aria-expanded={expanded}
-              aria-label="show more"
-              sx={{ marginLeft: 'auto' }}
-            >
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        複雑なカード
+      </Typography>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: 'primary.main' }}>U</Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>詳細情報:</Typography>
-              <Typography paragraph>
-                ここに追加の詳細情報が表示されます。
-                展開ボタンをクリックすることで、この領域を表示・非表示できます。
-              </Typography>
-            </CardContent>
-          </Collapse>
-        </Card>
-      </Box>
-    )
-  },
+          }
+          title="ユーザー名"
+          subheader="2024年1月1日"
+        />
+        <CardMedia
+          component="img"
+          height="194"
+          image="https://picsum.photos/400/194?random=1"
+          alt="Random"
+        />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            これは複雑なカードレイアウトの例です。
+            展開可能なコンテンツを含んでいます。
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-label="show more"
+            sx={{ marginLeft: 'auto' }}
+          >
+            <MoreVertIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>詳細情報:</Typography>
+            <Typography paragraph>
+              ここに追加の詳細情報が表示されます。
+              展開ボタンをクリックすることで、この領域を表示・非表示できます。
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
+    </Box>
+  )
+}
+
+export const Complex: Story = {
+  render: () => <ComplexExample />,
 }
 
 export const ActionButtons: Story = {

@@ -69,51 +69,53 @@ export const Basic: Story = {
   ),
 }
 
-export const Positioning: Story = {
-  render: () => {
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-    const [position, setPosition] = useState<{ vertical: 'top' | 'bottom', horizontal: 'left' | 'right' }>({
-      vertical: 'bottom',
-      horizontal: 'left',
-    })
+const PositioningExample = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+  const [position, setPosition] = useState<{ vertical: 'top' | 'bottom', horizontal: 'left' | 'right' }>({
+    vertical: 'bottom',
+    horizontal: 'left',
+  })
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, vert: 'top' | 'bottom', horiz: 'left' | 'right') => {
-      setAnchorEl(event.currentTarget)
-      setPosition({ vertical: vert, horizontal: horiz })
-    }
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, vert: 'top' | 'bottom', horiz: 'left' | 'right') => {
+    setAnchorEl(event.currentTarget)
+    setPosition({ vertical: vert, horizontal: horiz })
+  }
 
-    const open = Boolean(anchorEl)
+  const open = Boolean(anchorEl)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          位置指定
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-          <Button onClick={(e) => handleClick(e, 'top', 'left')}>
-            Top-Left
-          </Button>
-          <Button onClick={(e) => handleClick(e, 'top', 'right')}>
-            Top-Right
-          </Button>
-          <Button onClick={(e) => handleClick(e, 'bottom', 'left')}>
-            Bottom-Left
-          </Button>
-          <Button onClick={(e) => handleClick(e, 'bottom', 'right')}>
-            Bottom-Right
-          </Button>
-        </Box>
-        <Popover
-          open={open}
-          anchorEl={anchorEl}
-          onClose={() => setAnchorEl(null)}
-          anchorOrigin={position}
-        >
-          <Typography sx={{ p: 2 }}>
-            {position.vertical}-{position.horizontal}
-          </Typography>
-        </Popover>
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        位置指定
+      </Typography>
+      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+        <Button onClick={(e) => handleClick(e, 'top', 'left')}>
+          Top-Left
+        </Button>
+        <Button onClick={(e) => handleClick(e, 'top', 'right')}>
+          Top-Right
+        </Button>
+        <Button onClick={(e) => handleClick(e, 'bottom', 'left')}>
+          Bottom-Left
+        </Button>
+        <Button onClick={(e) => handleClick(e, 'bottom', 'right')}>
+          Bottom-Right
+        </Button>
       </Box>
-    )
-  },
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={position}
+      >
+        <Typography sx={{ p: 2 }}>
+          {position.vertical}-{position.horizontal}
+        </Typography>
+      </Popover>
+    </Box>
+  )
+}
+
+export const Positioning: Story = {
+  render: () => <PositioningExample />,
 }

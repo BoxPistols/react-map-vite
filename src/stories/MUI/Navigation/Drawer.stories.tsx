@@ -98,67 +98,69 @@ export const Basic: Story = {
   ),
 }
 
-export const Anchor: Story = {
-  render: () => {
-    const [state, setState] = useState({
-      top: false,
-      left: false,
-      bottom: false,
-      right: false,
-    })
+const AnchorExample = () => {
+  const [state, setState] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  })
 
-    const toggleDrawer =
-      (anchor: 'top' | 'left' | 'bottom' | 'right', open: boolean) =>
-      () => {
-        setState({ ...state, [anchor]: open })
-      }
+  const toggleDrawer =
+    (anchor: 'top' | 'left' | 'bottom' | 'right', open: boolean) =>
+    () => {
+      setState({ ...state, [anchor]: open })
+    }
 
-    const list = (anchor: 'top' | 'left' | 'bottom' | 'right') => (
-      <Box
-        sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-      >
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    )
+  const list = (anchor: 'top' | 'left' | 'bottom' | 'right') => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  )
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          方向
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          {(['left', 'right', 'top', 'bottom'] as const).map((anchor) => (
-            <Button key={anchor} onClick={toggleDrawer(anchor, true)}>
-              {anchor}
-            </Button>
-          ))}
-        </Box>
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        方向
+      </Typography>
+      <Box sx={{ display: 'flex', gap: 1 }}>
         {(['left', 'right', 'top', 'bottom'] as const).map((anchor) => (
-          <Drawer
-            key={anchor}
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
+          <Button key={anchor} onClick={toggleDrawer(anchor, true)}>
+            {anchor}
+          </Button>
         ))}
       </Box>
-    )
-  },
+      {(['left', 'right', 'top', 'bottom'] as const).map((anchor) => (
+        <Drawer
+          key={anchor}
+          anchor={anchor}
+          open={state[anchor]}
+          onClose={toggleDrawer(anchor, false)}
+        >
+          {list(anchor)}
+        </Drawer>
+      ))}
+    </Box>
+  )
+}
+
+export const Anchor: Story = {
+  render: () => <AnchorExample />,
 }
 
 export const Permanent: Story = {

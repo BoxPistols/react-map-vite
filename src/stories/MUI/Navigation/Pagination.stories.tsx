@@ -101,26 +101,28 @@ export const Shapes: Story = {
   ),
 }
 
-export const Controlled: Story = {
-  render: () => {
-    const [page, setPage] = useState(1)
+const ControlledExample = () => {
+  const [page, setPage] = useState(1)
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          制御されたPagination
-        </Typography>
-        <Stack spacing={2}>
-          <Typography>Page: {page}</Typography>
-          <Pagination
-            count={10}
-            page={page}
-            onChange={(event, value) => setPage(value)}
-          />
-        </Stack>
-      </Box>
-    )
-  },
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        制御されたPagination
+      </Typography>
+      <Stack spacing={2}>
+        <Typography>Page: {page}</Typography>
+        <Pagination
+          count={10}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+        />
+      </Stack>
+    </Box>
+  )
+}
+
+export const Controlled: Story = {
+  render: () => <ControlledExample />,
 }
 
 export const Ranges: Story = {

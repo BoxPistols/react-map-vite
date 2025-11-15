@@ -140,86 +140,90 @@ export const LabelPlacement: Story = {
   ),
 }
 
-export const Group: Story = {
-  render: () => {
-    const [state, setState] = useState({
-      notification: true,
-      email: false,
-      sms: false,
+const GroupExample = () => {
+  const [state, setState] = useState({
+    notification: true,
+    email: false,
+    sms: false,
+  })
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
     })
+  }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setState({
-        ...state,
-        [event.target.name]: event.target.checked,
-      })
-    }
-
-    return (
-      <FormControl component="fieldset" variant="standard">
-        <FormLabel component="legend">通知設定</FormLabel>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={state.notification}
-                onChange={handleChange}
-                name="notification"
-              />
-            }
-            label="通知を有効にする"
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={state.email}
-                onChange={handleChange}
-                name="email"
-                disabled={!state.notification}
-              />
-            }
-            label="メール通知"
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={state.sms}
-                onChange={handleChange}
-                name="sms"
-                disabled={!state.notification}
-              />
-            }
-            label="SMS通知"
-          />
-        </FormGroup>
-        <FormHelperText>通知の設定を変更できます</FormHelperText>
-      </FormControl>
-    )
-  },
-}
-
-export const Controlled: Story = {
-  render: () => {
-    const [checked, setChecked] = useState(false)
-
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          制御されたSwitch
-        </Typography>
+  return (
+    <FormControl component="fieldset" variant="standard">
+      <FormLabel component="legend">通知設定</FormLabel>
+      <FormGroup>
         <FormControlLabel
           control={
             <Switch
-              checked={checked}
-              onChange={(e) => setChecked(e.target.checked)}
+              checked={state.notification}
+              onChange={handleChange}
+              name="notification"
             />
           }
-          label={checked ? 'オン' : 'オフ'}
+          label="通知を有効にする"
         />
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-          現在の状態: {checked ? 'オン' : 'オフ'}
-        </Typography>
-      </Box>
-    )
-  },
+        <FormControlLabel
+          control={
+            <Switch
+              checked={state.email}
+              onChange={handleChange}
+              name="email"
+              disabled={!state.notification}
+            />
+          }
+          label="メール通知"
+        />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={state.sms}
+              onChange={handleChange}
+              name="sms"
+              disabled={!state.notification}
+            />
+          }
+          label="SMS通知"
+        />
+      </FormGroup>
+      <FormHelperText>通知の設定を変更できます</FormHelperText>
+    </FormControl>
+  )
+}
+
+export const Group: Story = {
+  render: () => <GroupExample />,
+}
+
+const ControlledExample = () => {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        制御されたSwitch
+      </Typography>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={checked}
+            onChange={(e) => setChecked(e.target.checked)}
+          />
+        }
+        label={checked ? 'オン' : 'オフ'}
+      />
+      <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+        現在の状態: {checked ? 'オン' : 'オフ'}
+      </Typography>
+    </Box>
+  )
+}
+
+export const Controlled: Story = {
+  render: () => <ControlledExample />,
 }

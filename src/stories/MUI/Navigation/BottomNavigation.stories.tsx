@@ -19,107 +19,115 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
-  render: () => {
-    const [value, setValue] = useState(0)
+const BasicExample = () => {
+  const [value, setValue] = useState(0)
 
-    return (
+  return (
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(_event, newValue) => {
+          setValue(newValue)
+        }}>
+        <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="お気に入り" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="場所" icon={<LocationOnIcon />} />
+      </BottomNavigation>
+    </Paper>
+  )
+}
+
+export const Basic: Story = {
+  render: () => <BasicExample />,
+}
+
+const WithoutLabelsExample = () => {
+  const [value, setValue] = useState(0)
+
+  return (
+    <Box sx={{ pb: 7 }}>
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
-          showLabels
           value={value}
           onChange={(_event, newValue) => {
             setValue(newValue)
           }}>
-          <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="お気に入り" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="場所" icon={<LocationOnIcon />} />
+          <BottomNavigationAction icon={<RestoreIcon />} />
+          <BottomNavigationAction icon={<FavoriteIcon />} />
+          <BottomNavigationAction icon={<LocationOnIcon />} />
+          <BottomNavigationAction icon={<FolderIcon />} />
         </BottomNavigation>
       </Paper>
-    )
-  },
+    </Box>
+  )
 }
 
 export const WithoutLabels: Story = {
-  render: () => {
-    const [value, setValue] = useState(0)
+  render: () => <WithoutLabelsExample />,
+}
 
-    return (
-      <Box sx={{ pb: 7 }}>
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-          <BottomNavigation
-            value={value}
-            onChange={(_event, newValue) => {
-              setValue(newValue)
-            }}>
-            <BottomNavigationAction icon={<RestoreIcon />} />
-            <BottomNavigationAction icon={<FavoriteIcon />} />
-            <BottomNavigationAction icon={<LocationOnIcon />} />
-            <BottomNavigationAction icon={<FolderIcon />} />
-          </BottomNavigation>
-        </Paper>
-      </Box>
-    )
-  },
+const AlwaysShowLabelsExample = () => {
+  const [value, setValue] = useState('recents')
+
+  return (
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(_event, newValue) => {
+          setValue(newValue)
+        }}>
+        <BottomNavigationAction
+          value="recents"
+          label="最近"
+          icon={<RestoreIcon />}
+        />
+        <BottomNavigationAction
+          value="favorites"
+          label="お気に入り"
+          icon={<FavoriteIcon />}
+        />
+        <BottomNavigationAction
+          value="nearby"
+          label="近く"
+          icon={<LocationOnIcon />}
+        />
+        <BottomNavigationAction
+          value="folder"
+          label="フォルダ"
+          icon={<FolderIcon />}
+        />
+      </BottomNavigation>
+    </Paper>
+  )
 }
 
 export const AlwaysShowLabels: Story = {
-  render: () => {
-    const [value, setValue] = useState('recents')
+  render: () => <AlwaysShowLabelsExample />,
+}
 
-    return (
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(_event, newValue) => {
-            setValue(newValue)
-          }}>
-          <BottomNavigationAction
-            value="recents"
-            label="最近"
-            icon={<RestoreIcon />}
-          />
-          <BottomNavigationAction
-            value="favorites"
-            label="お気に入り"
-            icon={<FavoriteIcon />}
-          />
-          <BottomNavigationAction
-            value="nearby"
-            label="近く"
-            icon={<LocationOnIcon />}
-          />
-          <BottomNavigationAction
-            value="folder"
-            label="フォルダ"
-            icon={<FolderIcon />}
-          />
-        </BottomNavigation>
-      </Paper>
-    )
-  },
+const FiveActionsExample = () => {
+  const [value, setValue] = useState(0)
+
+  return (
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(_event, newValue) => {
+          setValue(newValue)
+        }}>
+        <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="お気に入り" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="近く" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label="フォルダ" icon={<FolderIcon />} />
+        <BottomNavigationAction label="プロフィール" icon={<PersonIcon />} />
+      </BottomNavigation>
+    </Paper>
+  )
 }
 
 export const FiveActions: Story = {
-  render: () => {
-    const [value, setValue] = useState(0)
-
-    return (
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(_event, newValue) => {
-            setValue(newValue)
-          }}>
-          <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="お気に入り" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="近く" icon={<LocationOnIcon />} />
-          <BottomNavigationAction label="フォルダ" icon={<FolderIcon />} />
-          <BottomNavigationAction label="プロフィール" icon={<PersonIcon />} />
-        </BottomNavigation>
-      </Paper>
-    )
-  },
+  render: () => <FiveActionsExample />,
 }

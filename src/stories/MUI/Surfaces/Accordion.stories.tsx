@@ -82,75 +82,77 @@ export const Basic: Story = {
   ),
 }
 
+const ControlledExample = () => {
+  const [expanded, setExpanded] = useState<string | false>(false)
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false)
+    }
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        制御されたアコーディオン
+      </Typography>
+      <Accordion
+        expanded={expanded === 'panel1'}
+        onChange={handleChange('panel1')}
+      >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+            一般設定
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            基本的な設定
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            アプリケーションの一般的な設定を管理できます。
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={expanded === 'panel2'}
+        onChange={handleChange('panel2')}
+      >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>ユーザー</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            ユーザー管理
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            ユーザーアカウントとプロフィールを管理できます。
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={expanded === 'panel3'}
+        onChange={handleChange('panel3')}
+      >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+            詳細設定
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            高度な設定
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            高度な設定オプションにアクセスできます。
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </Box>
+  )
+}
+
 export const Controlled: Story = {
-  render: () => {
-    const [expanded, setExpanded] = useState<string | false>(false)
-
-    const handleChange =
-      (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-        setExpanded(isExpanded ? panel : false)
-      }
-
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          制御されたアコーディオン
-        </Typography>
-        <Accordion
-          expanded={expanded === 'panel1'}
-          onChange={handleChange('panel1')}
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>
-              一般設定
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-              基本的な設定
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              アプリケーションの一般的な設定を管理できます。
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === 'panel2'}
-          onChange={handleChange('panel2')}
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>ユーザー</Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-              ユーザー管理
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              ユーザーアカウントとプロフィールを管理できます。
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === 'panel3'}
-          onChange={handleChange('panel3')}
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>
-              詳細設定
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-              高度な設定
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              高度な設定オプションにアクセスできます。
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </Box>
-    )
-  },
+  render: () => <ControlledExample />,
 }
 
 export const WithActions: Story = {

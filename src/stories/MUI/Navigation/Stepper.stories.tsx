@@ -101,48 +101,50 @@ export const Basic: Story = {
   ),
 }
 
-export const Vertical: Story = {
-  render: () => {
-    const [activeStep, setActiveStep] = useState(0)
+const VerticalStepperExample = () => {
+  const [activeStep, setActiveStep] = useState(0)
 
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    }
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  }
 
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1)
-    }
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  }
 
-    return (
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          縦方向
-        </Typography>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <Box sx={{ ml: 4, mb: 2 }}>
-                <Typography>ステップ {index + 1} の内容</Typography>
-                <Box sx={{ mt: 1 }}>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    sx={{ mr: 1 }}
-                  >
-                    戻る
-                  </Button>
-                  <Button onClick={handleNext}>
-                    {index === steps.length - 1 ? '完了' : '次へ'}
-                  </Button>
-                </Box>
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        縦方向
+      </Typography>
+      <Stepper activeStep={activeStep} orientation="vertical">
+        {steps.map((label, index) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+            <Box sx={{ ml: 4, mb: 2 }}>
+              <Typography>ステップ {index + 1} の内容</Typography>
+              <Box sx={{ mt: 1 }}>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  戻る
+                </Button>
+                <Button onClick={handleNext}>
+                  {index === steps.length - 1 ? '完了' : '次へ'}
+                </Button>
               </Box>
-            </Step>
-          ))}
-        </Stepper>
-      </Box>
-    )
-  },
+            </Box>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
+  )
+}
+
+export const Vertical: Story = {
+  render: () => <VerticalStepperExample />,
 }
 
 export const AlternativeLabel: Story = {

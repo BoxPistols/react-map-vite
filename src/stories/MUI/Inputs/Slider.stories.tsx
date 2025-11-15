@@ -128,57 +128,61 @@ export const Discrete: Story = {
   ),
 }
 
+const RangeExample = () => {
+  const [value, setValue] = useState<number[]>([20, 37])
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number[])
+  }
+
+  return (
+    <Box sx={{ width: 300 }}>
+      <Typography variant="h6" gutterBottom>
+        範囲選択
+      </Typography>
+      <Slider
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        min={0}
+        max={100}
+      />
+      <Typography variant="body2" sx={{ mt: 2 }}>
+        選択範囲: {value[0]} - {value[1]}
+      </Typography>
+    </Box>
+  )
+}
+
 export const Range: Story = {
-  render: () => {
-    const [value, setValue] = useState<number[]>([20, 37])
+  render: () => <RangeExample />,
+}
 
-    const handleChange = (event: Event, newValue: number | number[]) => {
-      setValue(newValue as number[])
-    }
+const WithInputExample = () => {
+  const [value, setValue] = useState<number>(30)
 
-    return (
-      <Box sx={{ width: 300 }}>
-        <Typography variant="h6" gutterBottom>
-          範囲選択
-        </Typography>
+  return (
+    <Box sx={{ width: 300 }}>
+      <Typography variant="h6" gutterBottom>
+        入力フィールド付き
+      </Typography>
+      <Stack spacing={2} direction="row" alignItems="center">
+        <VolumeDown />
         <Slider
           value={value}
-          onChange={handleChange}
-          valueLabelDisplay="auto"
-          min={0}
-          max={100}
+          onChange={(_, newValue) => setValue(newValue as number)}
         />
-        <Typography variant="body2" sx={{ mt: 2 }}>
-          選択範囲: {value[0]} - {value[1]}
-        </Typography>
-      </Box>
-    )
-  },
+        <VolumeUp />
+      </Stack>
+      <Typography variant="body2" sx={{ mt: 2 }}>
+        音量: {value}%
+      </Typography>
+    </Box>
+  )
 }
 
 export const WithInput: Story = {
-  render: () => {
-    const [value, setValue] = useState<number>(30)
-
-    return (
-      <Box sx={{ width: 300 }}>
-        <Typography variant="h6" gutterBottom>
-          入力フィールド付き
-        </Typography>
-        <Stack spacing={2} direction="row" alignItems="center">
-          <VolumeDown />
-          <Slider
-            value={value}
-            onChange={(_, newValue) => setValue(newValue as number)}
-          />
-          <VolumeUp />
-        </Stack>
-        <Typography variant="body2" sx={{ mt: 2 }}>
-          音量: {value}%
-        </Typography>
-      </Box>
-    )
-  },
+  render: () => <WithInputExample />,
 }
 
 export const Vertical: Story = {
