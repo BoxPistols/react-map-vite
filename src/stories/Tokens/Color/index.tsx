@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from '@mui/material'
+import { Box, Container, Stack, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
 
@@ -62,9 +62,9 @@ const ColorGroup = ({ title, colors }: ColorGroupProps) => {
         color={theme.palette.text.primary}>
         {title}
       </Typography>
-      <Grid container spacing={3}>
+      <Stack direction='row' spacing={3} flexWrap='wrap' useFlexGap>
         {Object.entries(colors).map(([shade, color]) => (
-          <Grid item key={shade}>
+          <Box key={shade}>
             <BoxStyled style={{ backgroundColor: color }}>
               <TextStyled
                 style={{
@@ -77,9 +77,9 @@ const ColorGroup = ({ title, colors }: ColorGroupProps) => {
                 {shade}: {color}
               </TextStyled>
             </BoxStyled>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Stack>
     </Box>
   )
 }

@@ -118,7 +118,7 @@ export const typographyOptions = {
     fontFamily: 'Inter, Noto Sans JP, Helvetica, Arial, sans-serif',
     lineHeight: lineHeight.medium,
     fontWeight: fontWeight.normal,
-    textTransform: 'inherit',
+    textTransform: 'none' as const,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'antialiased',
     fontSize: pxToRem(baseFontSize),
