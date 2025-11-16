@@ -2,9 +2,8 @@
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
 import { TextField, type TextFieldProps, Tooltip } from '@mui/material'
 import { FormControl, InputLabel } from '@mui/material'
-import styled from '@mui/material/styles/styled'
-
-import type { CSSProperties } from '@mui/material/styles/createTypography'
+import { styled } from '@mui/material/styles'
+import type { CSSProperties } from 'react'
 
 type CustomTextFieldProps = TextFieldProps & {
   label: string

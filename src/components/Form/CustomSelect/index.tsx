@@ -11,7 +11,7 @@ import {
   Tooltip,
   useTheme,
 } from '@mui/material'
-import styled from '@mui/material/styles/styled'
+import { styled } from '@mui/material/styles'
 import { useCallback, useState } from 'react'
 import type { SelectProps } from '@mui/material'
 import type { SelectChangeEvent } from '@mui/material'

@@ -1,0 +1,259 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Feedback/概要' />
+
+# Feedback（フィードバック）
+
+ユーザーの操作に対する反応や、システムの状態を伝えるコンポーネント群です。
+適切なフィードバックは優れたUXの鍵となります。
+
+## 🔔 コンポーネント一覧
+
+### 通知・メッセージ
+
+- **Alert** - アラート表示
+
+  - severity: error, warning, info, success
+  - アイコンとカラーで状態を視覚化
+  - アクションボタンを追加可能
+
+- **Snackbar** - スナックバー通知
+  - 画面下部に一時的に表示
+  - 自動で消える（duration指定）
+  - アクションボタン付き
+
+### ダイアログ
+
+- **Dialog** - ダイアログ
+  - モーダルな操作を要求
+  - fullScreen, maxWidth指定可能
+  - トランジション効果
+
+### ローディング
+
+- **Progress** - プログレスバー
+
+  - **Circular** - 円形プログレス
+  - **Linear** - 線形プログレス
+  - determinate（進捗あり）/ indeterminate（進捗なし）
+
+- **Skeleton** - スケルトンローディング
+
+  - コンテンツの形状を表示
+  - variant: text, rectangular, circular, rounded
+  - アニメーション: pulse, wave, false
+
+- **Backdrop** - 背景オーバーレイ
+  - モーダルの背景を暗くする
+  - ローディング中の操作を防ぐ
+  - CircularProgressと組み合わせ
+
+## 💡 使い分けのヒント
+
+### Alert vs Snackbar vs Dialog
+
+| コンポーネント | 重要度 | 持続時間         | 操作の必要性 | 用途             |
+| -------------- | ------ | ---------------- | ------------ | ---------------- |
+| Alert          | 高     | 長め             | △            | 重要な情報表示   |
+| Snackbar       | 中     | 短い             | ✗            | 操作完了の通知   |
+| Dialog         | 高     | ユーザー操作まで | ✓            | 確認・入力を要求 |
+
+### Progress vs Skeleton
+
+| コンポーネント | 使用場面   | 進捗表示 | 用途                          |
+| -------------- | ---------- | -------- | ----------------------------- |
+| Progress       | 処理中     | 可能     | ファイルアップロードなど      |
+| Skeleton       | 読み込み中 | 不可     | ページ/コンポーネント読み込み |
+
+## ♿ アクセシビリティ
+
+### role属性の使用
+
+```tsx
+// Alertには自動的に適切なroleが付与される
+<Alert severity="error">
+  エラーメッセージ
+</Alert>
+
+// Snackbarも同様
+<Snackbar
+  open={open}
+  message="保存しました"
+/>
+```
+
+### フォーカス管理
+
+```tsx
+// Dialogを開いた時、自動的にフォーカスが移る
+<Dialog open={open} onClose={handleClose}>
+  <DialogTitle>確認</DialogTitle>
+  <DialogContent>削除してもよろしいですか？</DialogContent>
+  <DialogActions>
+    <Button onClick={handleClose}>キャンセル</Button>
+    <Button onClick={handleDelete} autoFocus>
+      削除
+    </Button>
+  </DialogActions>
+</Dialog>
+```
+
+### スクリーンリーダー対応
+
+```tsx
+// aria-labelで状態を伝える
+<CircularProgress aria-label='読み込み中' />
+```
+
+## 🎨 使用パターン
+
+### 成功通知
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<Snackbar
+  open={open}
+  autoHideDuration={3000}
+  onClose={() => setOpen(false)}
+  message="保存しました"
+/>
+```
+
+### エラー表示
+
+```tsx
+<Alert severity='error' onClose={handleClose}>
+  <AlertTitle>エラー</AlertTitle>
+  データの保存に失敗しました。もう一度お試しください。
+</Alert>
+```
+
+### 確認ダイアログ
+
+```tsx
+<Dialog open={open} onClose={handleClose}>
+  <DialogTitle>削除の確認</DialogTitle>
+  <DialogContent>
+    <DialogContentText>
+      このアイテムを削除してもよろしいですか？ この操作は取り消せません。
+    </DialogContentText>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleClose}>キャンセル</Button>
+    <Button onClick={handleDelete} color='error' variant='contained'>
+      削除
+    </Button>
+  </DialogActions>
+</Dialog>
+```
+
+### ローディング状態
+
+```tsx
+// ページ全体のローディング
+;<Backdrop open={loading}>
+  <CircularProgress color='inherit' />
+</Backdrop>
+
+// コンテンツの一部
+{
+  loading ? (
+    <Skeleton variant='rectangular' height={200} />
+  ) : (
+    <img src={imageUrl} alt='画像' />
+  )
+}
+```
+
+## 📋 ベストプラクティス
+
+### 1. フィードバックのタイミング
+
+```tsx
+// ✅ 良い例：即座にフィードバック
+const handleSubmit = async () => {
+  setSnackbar({ open: true, message: '送信中...' })
+  try {
+    await api.submit()
+    setSnackbar({ open: true, message: '送信しました', severity: 'success' })
+  } catch (error) {
+    setAlert({ open: true, message: 'エラーが発生しました', severity: 'error' })
+  }
+}
+```
+
+### 2. 適切なseverityの選択
+
+- **error** - エラー、失敗
+- **warning** - 警告、注意が必要
+- **info** - 情報、ヒント
+- **success** - 成功、完了
+
+### 3. アクションの提供
+
+```tsx
+<Snackbar
+  message='削除しました'
+  action={
+    <Button color='inherit' size='small' onClick={handleUndo}>
+      元に戻す
+    </Button>
+  }
+/>
+```
+
+### 4. 多重表示の防止
+
+```tsx
+// ❌ 悪い例：複数のダイアログを同時表示
+<Dialog open={dialog1Open}>...</Dialog>
+<Dialog open={dialog2Open}>...</Dialog>
+
+// ✅ 良い例：1つずつ表示
+<Dialog open={currentDialog === 'confirm'}>...</Dialog>
+<Dialog open={currentDialog === 'delete'}>...</Dialog>
+```
+
+## 🚫 避けるべきパターン
+
+### 1. 過度なフィードバック
+
+```tsx
+// ❌ ユーザーが行った操作すべてに通知
+onClick={() => setSnackbar({ open: true, message: 'クリックしました' })}
+
+// ✅ 重要な操作のみ
+onClick={async () => {
+  await saveData()
+  setSnackbar({ open: true, message: '保存しました' })
+}}
+```
+
+### 2. 曖昧なメッセージ
+
+```tsx
+// ❌ 何が起きたか不明
+<Alert severity="error">エラーが発生しました</Alert>
+
+// ✅ 具体的な内容と対処法
+<Alert severity="error">
+  ネットワークエラー: 接続を確認して再度お試しください
+</Alert>
+```
+
+### 3. 長すぎる自動非表示時間
+
+```tsx
+// ❌ 10秒は長すぎる
+<Snackbar autoHideDuration={10000} />
+
+// ✅ 3-5秒が適切
+<Snackbar autoHideDuration={3000} />
+```
+
+## 🔗 関連コンポーネント
+
+- [Inputs](/story/mui-inputs-概要--docs) - フォームのバリデーション
+- [Navigation](/story/mui-navigation-概要--docs) - ページ遷移時のフィードバック
+- [Patterns/Forms](/story/patterns-forms--docs) - フォームでのフィードバック実装例

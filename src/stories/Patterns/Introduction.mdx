@@ -1,0 +1,111 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='Patterns/はじめに' />
+
+# レイアウトパターン集
+
+実務で頻繁に使用されるレイアウトパターンを集めました。
+これらのパターンは、MUIコンポーネントを組み合わせて実装されています。
+
+## 🎯 収録パターン
+
+### ログインフォーム
+
+認証画面で使用される様々なログインフォームのパターンです。
+
+- **SimpleLogin** - シンプルなログインフォーム
+- **WithSocialLogin** - SNS認証付きログイン
+- **WithPasswordToggle** - パスワード表示切替機能付き
+- **WithError** - エラー表示付きフォーム
+- **CenteredCard** - 中央配置のカード型ログイン
+
+**主な使用コンポーネント:**
+
+- TextField
+- Button
+- Checkbox
+- Link
+- Paper
+- Alert
+
+### ダッシュボード
+
+管理画面やアナリティクス画面で使用されるダッシュボードレイアウトです。
+
+- **AnalyticsDashboard** - 統計情報を表示する本格的なダッシュボード
+- **SimpleDashboard** - シンプルな概要ダッシュボード
+
+**主な使用コンポーネント:**
+
+- Card
+- Grid
+- Typography
+- Avatar
+- List
+- LinearProgress
+- Chip
+
+### フォーム
+
+データ入力画面で使用される各種フォームパターンです。
+
+- **SimpleContactForm** - お問い合わせフォーム
+- **UserProfileForm** - プロフィール編集フォーム
+- **SurveyForm** - アンケートフォーム
+- **FormValidation** - バリデーション付きフォーム
+- **MultiStepForm** - マルチステップフォーム
+
+**主な使用コンポーネント:**
+
+- TextField
+- Select
+- Radio
+- Checkbox
+- Slider
+- Button
+- Alert
+
+## 🎨 カスタマイズ
+
+これらのパターンは出発点として使用できます。
+プロジェクトの要件に合わせて自由にカスタマイズしてください。
+
+## 📱 レスポンシブ対応
+
+すべてのパターンはレスポンシブデザインに対応しています。
+ビューポートのサイズを変更して動作を確認できます。
+
+## ♿ アクセシビリティ
+
+各パターンは以下のアクセシビリティガイドラインに従っています：
+
+- 適切な **label** の使用
+- **aria-** 属性の適切な設定
+- キーボード操作のサポート
+- 十分なコントラスト比
+
+## 💡 ベストプラクティス
+
+### フォーム設計
+
+- 必須項目には **required** を明示
+- エラーメッセージは具体的に
+- バリデーションはリアルタイムで
+
+### レイアウト
+
+- **Grid** でレスポンシブ対応
+- **spacing** で適切な余白を
+- **Paper/Card** でコンテンツをグループ化
+
+### UX改善
+
+- **Alert** で重要な情報を強調
+- **Skeleton** でローディング状態を表現
+- **Snackbar** で操作のフィードバック
+
+## 🔗 関連リソース
+
+- [MUI コンポーネント一覧](/story/mui-はじめに--docs)
+- [Material Design ガイドライン](https://m3.material.io/)
+- [フォームデザインのベストプラクティス](https://www.nngroup.com/articles/web-form-design/)

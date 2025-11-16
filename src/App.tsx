@@ -9,7 +9,7 @@ import {
   Select,
 } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
-import ThemeProvider from '@mui/system/ThemeProvider/ThemeProvider'
+import { ThemeProvider } from '@mui/material/styles'
 import { useEffect, useRef, useState } from 'react'
 import {
   Route,
