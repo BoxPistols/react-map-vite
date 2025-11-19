@@ -22,7 +22,7 @@ FormControlLabelと組み合わせて使用:
 ```tsx
 import { FormControlLabel } from '@mui/material'
 
-;<FormControlLabel control={<Checkbox />} label='利用規約に同意する' />
+<FormControlLabel control={<Checkbox />} label='利用規約に同意する' />
 ```
 
 ## 制御コンポーネント
@@ -118,7 +118,7 @@ const someChecked = checked.some(Boolean) && !allChecked
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder'
 import Favorite from '@mui/icons-material/Favorite'
 
-;<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
 ```
 
 ## FormGroup
@@ -128,7 +128,7 @@ import Favorite from '@mui/icons-material/Favorite'
 ```tsx
 import { FormGroup } from '@mui/material'
 
-;<FormGroup>
+<FormGroup>
   <FormControlLabel control={<Checkbox />} label='JavaScript' />
   <FormControlLabel control={<Checkbox />} label='TypeScript' />
   <FormControlLabel control={<Checkbox />} label='Python' />
@@ -157,7 +157,7 @@ const handleSubmit = () => {
   }
 }
 
-;<FormControl error={error} component='fieldset'>
+<FormControl error={error} component='fieldset'>
   <FormGroup>
     <FormControlLabel
       control={
@@ -232,7 +232,7 @@ const handleChange = (event) => {
   })
 }
 
-;<FormControl component='fieldset'>
+<FormControl component='fieldset'>
   <FormLabel component='legend'>興味のある分野</FormLabel>
   <FormGroup>
     <FormControlLabel

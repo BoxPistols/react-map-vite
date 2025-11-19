@@ -73,86 +73,34 @@ export const Playground: Story = {
 export const AllVariants: Story = {
   render: () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      <Box>
-        <Typography variant='h6' gutterBottom>
-          Contained
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-          <Button variant='contained'>Primary</Button>
-          <Button variant='contained' color='secondary'>
-            Secondary
-          </Button>
-          <Button variant='contained' color='success'>
-            Success
-          </Button>
-          <Button variant='contained' color='error'>
-            Error
-          </Button>
-          <Button variant='contained' color='warning'>
-            Warning
-          </Button>
-          <Button variant='contained' color='info'>
-            Info
-          </Button>
-          <Button variant='contained' disabled>
-            Disabled
-          </Button>
+      {(['contained', 'outlined', 'text'] as const).map((variant) => (
+        <Box key={variant}>
+          <Typography variant='h6' gutterBottom>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)}
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <Button variant={variant}>Primary</Button>
+            <Button variant={variant} color='secondary'>
+              Secondary
+            </Button>
+            <Button variant={variant} color='success'>
+              Success
+            </Button>
+            <Button variant={variant} color='error'>
+              Error
+            </Button>
+            <Button variant={variant} color='warning'>
+              Warning
+            </Button>
+            <Button variant={variant} color='info'>
+              Info
+            </Button>
+            <Button variant={variant} disabled>
+              Disabled
+            </Button>
+          </Box>
         </Box>
-      </Box>
-
-      <Box>
-        <Typography variant='h6' gutterBottom>
-          Outlined
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-          <Button variant='outlined'>Primary</Button>
-          <Button variant='outlined' color='secondary'>
-            Secondary
-          </Button>
-          <Button variant='outlined' color='success'>
-            Success
-          </Button>
-          <Button variant='outlined' color='error'>
-            Error
-          </Button>
-          <Button variant='outlined' color='warning'>
-            Warning
-          </Button>
-          <Button variant='outlined' color='info'>
-            Info
-          </Button>
-          <Button variant='outlined' disabled>
-            Disabled
-          </Button>
-        </Box>
-      </Box>
-
-      <Box>
-        <Typography variant='h6' gutterBottom>
-          Text
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-          <Button variant='text'>Primary</Button>
-          <Button variant='text' color='secondary'>
-            Secondary
-          </Button>
-          <Button variant='text' color='success'>
-            Success
-          </Button>
-          <Button variant='text' color='error'>
-            Error
-          </Button>
-          <Button variant='text' color='warning'>
-            Warning
-          </Button>
-          <Button variant='text' color='info'>
-            Info
-          </Button>
-          <Button variant='text' disabled>
-            Disabled
-          </Button>
-        </Box>
-      </Box>
+      ))}
     </Box>
   ),
 }
@@ -208,39 +156,21 @@ export const AllSizes: Story = {
       <Typography variant='h6' gutterBottom>
         サイズ
       </Typography>
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-        <Button size='small' variant='contained'>
-          Small
-        </Button>
-        <Button size='medium' variant='contained'>
-          Medium
-        </Button>
-        <Button size='large' variant='contained'>
-          Large
-        </Button>
-      </Box>
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-        <Button size='small' variant='outlined'>
-          Small
-        </Button>
-        <Button size='medium' variant='outlined'>
-          Medium
-        </Button>
-        <Button size='large' variant='outlined'>
-          Large
-        </Button>
-      </Box>
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-        <Button size='small' variant='text'>
-          Small
-        </Button>
-        <Button size='medium' variant='text'>
-          Medium
-        </Button>
-        <Button size='large' variant='text'>
-          Large
-        </Button>
-      </Box>
+      {(['contained', 'outlined', 'text'] as const).map((variant) => (
+        <Box
+          key={variant}
+          sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Button size='small' variant={variant}>
+            Small
+          </Button>
+          <Button size='medium' variant={variant}>
+            Medium
+          </Button>
+          <Button size='large' variant={variant}>
+            Large
+          </Button>
+        </Box>
+      ))}
     </Box>
   ),
 }

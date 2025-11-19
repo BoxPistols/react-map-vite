@@ -19,7 +19,7 @@ import {
   FormLabel,
 } from '@mui/material'
 
-;<FormControl>
+<FormControl>
   <FormLabel>性別</FormLabel>
   <RadioGroup>
     <FormControlLabel value='male' control={<Radio />} label='男性' />
@@ -142,7 +142,7 @@ const [value, setValue] = useState('female')
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
 
-;<Radio
+<Radio
   icon={<RadioButtonUncheckedIcon />}
   checkedIcon={<RadioButtonCheckedIcon />}
 />
@@ -160,7 +160,7 @@ const handleSubmit = () => {
   }
 }
 
-;<FormControl error={error} required>
+<FormControl error={error} required>
   <FormLabel>性別</FormLabel>
   <RadioGroup
     value={value}
