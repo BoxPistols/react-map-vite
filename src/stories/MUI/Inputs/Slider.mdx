@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Slider } from '@mui/material'
 
-<Slider defaultValue={30} />
+;<Slider defaultValue={30} />
 ```
 
 ## 制御コンポーネント
@@ -30,13 +30,7 @@ const [value, setValue] = useState(30)
 `marks`と`step`で離散的な値を設定:
 
 ```tsx
-<Slider
-  defaultValue={30}
-  step={10}
-  marks
-  min={0}
-  max={100}
-/>
+<Slider defaultValue={30} step={10} marks min={0} max={100} />
 ```
 
 ### カスタムマーク
@@ -86,8 +80,8 @@ function valuetext(value) {
   return `${value}°C`
 }
 
-<Slider
-  valueLabelDisplay="auto"
+;<Slider
+  valueLabelDisplay='auto'
   valueLabelFormat={valuetext}
   defaultValue={30}
 />
@@ -112,11 +106,7 @@ function valuetext(value) {
 ## 縦向き
 
 ```tsx
-<Slider
-  orientation="vertical"
-  defaultValue={30}
-  sx={{ height: 300 }}
-/>
+<Slider orientation='vertical' defaultValue={30} sx={{ height: 300 }} />
 ```
 
 ## 無効化

@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Divider } from '@mui/material'
 
-<Divider />
+;<Divider />
 ```
 
 ## バリエーション
@@ -46,7 +46,7 @@ import { Divider } from '@mui/material'
 
 ```tsx
 <Divider>
-  <Chip label="OR" />
+  <Chip label='OR' />
 </Divider>
 ```
 
@@ -67,7 +67,7 @@ import { Divider } from '@mui/material'
 ```tsx
 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
   <Typography>Left</Typography>
-  <Divider orientation="vertical" flexItem />
+  <Divider orientation='vertical' flexItem />
   <Typography>Right</Typography>
 </Box>
 ```
@@ -78,12 +78,12 @@ import { Divider } from '@mui/material'
 
 ```tsx
 <Box>
-  <Typography variant="h6">セクション 1</Typography>
+  <Typography variant='h6'>セクション 1</Typography>
   <Typography paragraph>コンテンツ...</Typography>
 
   <Divider sx={{ my: 2 }} />
 
-  <Typography variant="h6">セクション 2</Typography>
+  <Typography variant='h6'>セクション 2</Typography>
   <Typography paragraph>コンテンツ...</Typography>
 </Box>
 ```
@@ -92,15 +92,15 @@ import { Divider } from '@mui/material'
 
 ```tsx
 <Box>
-  <TextField label="Email" fullWidth />
-  <TextField label="Password" fullWidth />
-  <Button variant="contained" fullWidth>
+  <TextField label='Email' fullWidth />
+  <TextField label='Password' fullWidth />
+  <Button variant='contained' fullWidth>
     ログイン
   </Button>
 
   <Divider sx={{ my: 2 }}>または</Divider>
 
-  <Button variant="outlined" fullWidth>
+  <Button variant='outlined' fullWidth>
     Googleでログイン
   </Button>
 </Box>

@@ -4,32 +4,56 @@ import { Meta } from '@storybook/blocks'
 
 # Popover
 
-要素に対してポップオーバーを表示するコンポーネントです。
+要素に対してポップオーバーを表示するコンポーネントです。Popoverは、アンカー要素に関連付けられた一時的なコンテンツを表示するために使用されます。
 
 ## 基本的な使い方
 
+Popoverコンポーネントは、アンカー要素とその位置を基準にコンテンツを表示します。
+
 ```tsx
 import { Popover, Typography, Button } from '@mui/material'
+import { useState } from 'react'
 
-const [anchorEl, setAnchorEl] = useState(null)
+const BasicPopover = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
-<Button onClick={(e) => setAnchorEl(e.currentTarget)}>
-  ポップオーバーを開く
-</Button>
-<Popover
-  open={Boolean(anchorEl)}
-  anchorEl={anchorEl}
-  onClose={() => setAnchorEl(null)}
-  anchorOrigin={{
-    vertical: 'bottom',
-    horizontal: 'left',
-  }}
->
-  <Typography sx={{ p: 2 }}>ポップオーバーの内容</Typography>
-</Popover>
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
+
+  return (
+    <>
+      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+        ポップオーバーを開く
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}>
+        <Typography sx={{ p: 2 }}>ポップオーバーの内容</Typography>
+      </Popover>
+    </>
+  )
+}
 ```
 
 ## 位置の設定
+
+anchorOriginとtransformOriginプロパティを使用して、ポップオーバーの位置を細かく制御できます。
+
+### 基本的な位置設定
 
 ```tsx
 <Popover
@@ -40,11 +64,412 @@ const [anchorEl, setAnchorEl] = useState(null)
   transformOrigin={{
     vertical: 'top',
     horizontal: 'center',
-  }}
->
-  {/* コンテンツ */}
+  }}>
+  <Typography sx={{ p: 2 }}>中央に配置</Typography>
 </Popover>
 ```
+
+### 様々な位置の組み合わせ
+
+```tsx
+// 右下に表示
+<Popover
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'right',
+  }}
+  transformOrigin={{
+    vertical: 'top',
+    horizontal: 'right',
+  }}>
+  <Typography sx={{ p: 2 }}>右下に配置</Typography>
+</Popover>
+
+// 上部に表示
+<Popover
+  anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'center',
+  }}
+  transformOrigin={{
+    vertical: 'bottom',
+    horizontal: 'center',
+  }}>
+  <Typography sx={{ p: 2 }}>上部に配置</Typography>
+</Popover>
+
+// 左側に表示
+<Popover
+  anchorOrigin={{
+    vertical: 'center',
+    horizontal: 'left',
+  }}
+  transformOrigin={{
+    vertical: 'center',
+    horizontal: 'right',
+  }}>
+  <Typography sx={{ p: 2 }}>左側に配置</Typography>
+</Popover>
+```
+
+## カスタムスタイリング
+
+PaperPropsを使用して、ポップオーバーの外観をカスタマイズできます。
+
+```tsx
+<Popover
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  PaperProps={{
+    sx: {
+      p: 2,
+      backgroundColor: 'primary.main',
+      color: 'white',
+      borderRadius: 2,
+      boxShadow: 3,
+    },
+  }}>
+  <Typography>カスタムスタイルのポップオーバー</Typography>
+</Popover>
+```
+
+## Backdropのカスタマイズ
+
+背景のオーバーレイをカスタマイズすることができます。
+
+```tsx
+<Popover
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  slotProps={{
+    backdrop: {
+      sx: {
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      },
+    },
+  }}>
+  <Typography sx={{ p: 2 }}>コンテンツ</Typography>
+</Popover>
+```
+
+## 実装例
+
+### ユーザープロフィールポップオーバー
+
+```tsx
+import {
+  Popover,
+  Avatar,
+  Box,
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import { Person, Settings, Logout } from '@mui/icons-material'
+
+const UserProfilePopover = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+  return (
+    <>
+      <Avatar onClick={(e) => setAnchorEl(e.currentTarget)} sx={{ cursor: 'pointer' }}>
+        U
+      </Avatar>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}>
+        <Box sx={{ p: 2, minWidth: 200 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <Avatar sx={{ mr: 2 }}>U</Avatar>
+            <Box>
+              <Typography variant='subtitle1'>ユーザー名</Typography>
+              <Typography variant='body2' color='text.secondary'>
+                user@example.com
+              </Typography>
+            </Box>
+          </Box>
+          <Divider />
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText primary='プロフィール' />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <ListItemText primary='設定' />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              <ListItemText primary='ログアウト' />
+            </ListItem>
+          </List>
+        </Box>
+      </Popover>
+    </>
+  )
+}
+```
+
+### カラーピッカーポップオーバー
+
+```tsx
+import { Popover, Box, IconButton } from '@mui/material'
+import { Palette } from '@mui/icons-material'
+
+const ColorPickerPopover = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const [selectedColor, setSelectedColor] = useState('#1976d2')
+
+  const colors = [
+    '#f44336',
+    '#e91e63',
+    '#9c27b0',
+    '#673ab7',
+    '#3f51b5',
+    '#2196f3',
+    '#03a9f4',
+    '#00bcd4',
+    '#009688',
+    '#4caf50',
+    '#8bc34a',
+    '#cddc39',
+  ]
+
+  return (
+    <>
+      <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+        <Palette sx={{ color: selectedColor }} />
+      </IconButton>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}>
+        <Box sx={{ p: 2, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
+          {colors.map((color) => (
+            <Box
+              key={color}
+              onClick={() => {
+                setSelectedColor(color)
+                setAnchorEl(null)
+              }}
+              sx={{
+                width: 40,
+                height: 40,
+                backgroundColor: color,
+                cursor: 'pointer',
+                borderRadius: 1,
+                border: selectedColor === color ? '2px solid black' : 'none',
+                '&:hover': {
+                  opacity: 0.8,
+                },
+              }}
+            />
+          ))}
+        </Box>
+      </Popover>
+    </>
+  )
+}
+```
+
+### フォームヘルプポップオーバー
+
+```tsx
+import { Popover, IconButton, Typography, Box } from '@mui/material'
+import { HelpOutline } from '@mui/icons-material'
+
+const FormHelpPopover = ({ helpText }: { helpText: string }) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+  return (
+    <>
+      <IconButton size='small' onClick={(e) => setAnchorEl(e.currentTarget)}>
+        <HelpOutline fontSize='small' />
+      </IconButton>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}>
+        <Box sx={{ p: 2, maxWidth: 300 }}>
+          <Typography variant='body2'>{helpText}</Typography>
+        </Box>
+      </Popover>
+    </>
+  )
+}
+```
+
+## Popover vs Menu vs Tooltip
+
+| 機能 | Popover | Menu | Tooltip |
+| --- | --- | --- | --- |
+| 用途 | 汎用的なコンテンツ表示 | アクションリスト | 簡単な説明テキスト |
+| インタラクティブ性 | 高い | 高い | 低い |
+| 複雑なコンテンツ | 対応 | リストのみ | 非推奨 |
+| 自動配置 | あり | あり | あり |
+| キーボード操作 | カスタム実装必要 | 対応 | 対応 |
+
+## アクセシビリティ
+
+Popoverを使用する際は、以下のアクセシビリティのベストプラクティスに従ってください。
+
+```tsx
+<Button
+  aria-describedby={id}
+  aria-haspopup='true'
+  aria-expanded={open}
+  onClick={handleClick}>
+  開く
+</Button>
+<Popover
+  id={id}
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  role='dialog'
+  aria-labelledby='popover-title'>
+  <Typography id='popover-title' variant='h6' sx={{ p: 2 }}>
+    タイトル
+  </Typography>
+  <Typography sx={{ p: 2 }}>コンテンツ</Typography>
+</Popover>
+```
+
+### アクセシビリティのポイント
+
+- `aria-describedby`でPopoverとトリガー要素を関連付ける
+- `aria-haspopup`でポップアップ要素があることを示す
+- `aria-expanded`で開閉状態を示す
+- Popoverに適切な`role`属性を設定する
+- タイトルがある場合は`aria-labelledby`で関連付ける
+- Escキーで閉じられるようにする（デフォルトで対応）
+
+## ベストプラクティス
+
+### 適切な使用場面
+
+- ユーザープロフィール情報の表示
+- カラーピッカーやその他のインライン編集ツール
+- 追加情報やヘルプテキストの表示
+- フィルターやオプションパネル
+- フォーム内の詳細設定
+
+### 避けるべき使用方法
+
+- ナビゲーション用途（Menuを使用）
+- 簡単なツールチップ（Tooltipを使用）
+- モーダルダイアログ（Dialogを使用）
+- 重要な情報の表示（常に表示する）
+
+## トランジション効果
+
+カスタムトランジション効果を追加できます。
+
+```tsx
+import { Grow, Fade, Zoom } from '@mui/material'
+
+<Popover
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  TransitionComponent={Grow}
+  transitionDuration={300}>
+  <Typography sx={{ p: 2 }}>アニメーション付きポップオーバー</Typography>
+</Popover>
+```
+
+## マウスオーバーで表示
+
+```tsx
+const MouseOverPopover = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+
+  return (
+    <>
+      <Typography
+        aria-owns={open ? 'mouse-over-popover' : undefined}
+        aria-haspopup='true'
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}>
+        マウスを乗せてください
+      </Typography>
+      <Popover
+        id='mouse-over-popover'
+        sx={{
+          pointerEvents: 'none',
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus>
+        <Typography sx={{ p: 1 }}>マウスオーバー時の説明</Typography>
+      </Popover>
+    </>
+  )
+}
+```
+
+## 関連コンポーネント
+
+- **Menu**: アクションリストを表示する場合
+- **Tooltip**: 簡単な説明テキストを表示する場合
+- **Dialog**: モーダルダイアログを表示する場合
+- **Popper**: より低レベルなポジショニングコントロールが必要な場合
 
 ## 参考リンク
 

@@ -16,10 +16,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
 } from '@mui/material'
 
-<TableContainer component={Paper}>
+;<TableContainer component={Paper}>
   <Table>
     <TableHead>
       <TableRow>
@@ -58,8 +58,7 @@ import {
   {rows.map((row, index) => (
     <TableRow
       key={row.id}
-      sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}
-    >
+      sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}>
       <TableCell>{row.name}</TableCell>
     </TableRow>
   ))}
@@ -78,14 +77,13 @@ const handleSort = (property) => {
   setOrderBy(property)
 }
 
-<TableHead>
+;<TableHead>
   <TableRow>
     <TableCell>
       <TableSortLabel
         active={orderBy === 'name'}
         direction={orderBy === 'name' ? order : 'asc'}
-        onClick={() => handleSort('name')}
-      >
+        onClick={() => handleSort('name')}>
         名前
       </TableSortLabel>
     </TableCell>
@@ -106,9 +104,9 @@ const handleSelectAll = (event) => {
   }
 }
 
-<TableHead>
+;<TableHead>
   <TableRow>
-    <TableCell padding="checkbox">
+    <TableCell padding='checkbox'>
       <Checkbox
         checked={selected.length === rows.length}
         onChange={handleSelectAll}
@@ -122,7 +120,7 @@ const handleSelectAll = (event) => {
 
 ```tsx
 <TablePagination
-  component="div"
+  component='div'
   count={totalRows}
   page={page}
   onPageChange={handleChangePage}
@@ -136,12 +134,8 @@ const handleSelectAll = (event) => {
 ```tsx
 <TableContainer sx={{ maxHeight: 440 }}>
   <Table stickyHeader>
-    <TableHead>
-      {/* ヘッダー */}
-    </TableHead>
-    <TableBody>
-      {/* ボディ */}
-    </TableBody>
+    <TableHead>{/* ヘッダー */}</TableHead>
+    <TableBody>{/* ボディ */}</TableBody>
   </Table>
 </TableContainer>
 ```
@@ -157,8 +151,8 @@ const handleSelectAll = (event) => {
       <TableRow>
         <TableCell>ID</TableCell>
         <TableCell>名前</TableCell>
-        <TableCell align="right">数量</TableCell>
-        <TableCell align="right">価格</TableCell>
+        <TableCell align='right'>数量</TableCell>
+        <TableCell align='right'>価格</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -166,8 +160,8 @@ const handleSelectAll = (event) => {
         <TableRow key={row.id}>
           <TableCell>{row.id}</TableCell>
           <TableCell>{row.name}</TableCell>
-          <TableCell align="right">{row.quantity}</TableCell>
-          <TableCell align="right">¥{row.price}</TableCell>
+          <TableCell align='right'>{row.quantity}</TableCell>
+          <TableCell align='right'>¥{row.price}</TableCell>
         </TableRow>
       ))}
     </TableBody>

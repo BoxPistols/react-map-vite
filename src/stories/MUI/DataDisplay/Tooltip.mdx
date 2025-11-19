@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Tooltip } from '@mui/material'
 
-<Tooltip title="削除">
+;<Tooltip title='削除'>
   <IconButton>
     <DeleteIcon />
   </IconButton>
@@ -54,7 +54,7 @@ import { Tooltip } from '@mui/material'
 ## Arrow（矢印）
 
 ```tsx
-<Tooltip title="With Arrow" arrow>
+<Tooltip title='With Arrow' arrow>
   <Button>Arrow</Button>
 </Tooltip>
 ```
@@ -62,11 +62,7 @@ import { Tooltip } from '@mui/material'
 ## 遅延表示
 
 ```tsx
-<Tooltip
-  title="Delayed"
-  enterDelay={500}
-  leaveDelay={200}
->
+<Tooltip title='Delayed' enterDelay={500} leaveDelay={200}>
   <Button>Delayed</Button>
 </Tooltip>
 ```
@@ -92,11 +88,10 @@ const [open, setOpen] = useState(false)
 <Tooltip
   title={
     <>
-      <Typography variant="subtitle2">タイトル</Typography>
-      <Typography variant="body2">詳細な説明...</Typography>
+      <Typography variant='subtitle2'>タイトル</Typography>
+      <Typography variant='body2'>詳細な説明...</Typography>
     </>
-  }
->
+  }>
   <IconButton>
     <InfoIcon />
   </IconButton>
@@ -112,11 +107,12 @@ const [open, setOpen] = useState(false)
   title={
     <Box>
       <Typography>詳細情報</Typography>
-      <Link href="#" color="inherit">もっと見る</Link>
+      <Link href='#' color='inherit'>
+        もっと見る
+      </Link>
     </Box>
   }
-  interactive
->
+  interactive>
   <Button>Interactive</Button>
 </Tooltip>
 ```
@@ -124,7 +120,7 @@ const [open, setOpen] = useState(false)
 ## 無効な要素
 
 ```tsx
-<Tooltip title="無効なボタン">
+<Tooltip title='無効なボタン'>
   <span>
     <Button disabled>Disabled</Button>
   </span>
@@ -164,9 +160,9 @@ const [open, setOpen] = useState(false)
 ```tsx
 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
   <Typography>設定項目</Typography>
-  <Tooltip title="この設定についての詳しい説明...">
-    <IconButton size="small">
-      <HelpOutlineIcon fontSize="small" />
+  <Tooltip title='この設定についての詳しい説明...'>
+    <IconButton size='small'>
+      <HelpOutlineIcon fontSize='small' />
     </IconButton>
   </Tooltip>
 </Box>
@@ -177,7 +173,7 @@ const [open, setOpen] = useState(false)
 Tooltipは自動的にaria属性を設定:
 
 ```tsx
-<Tooltip title="Accessible tooltip">
+<Tooltip title='Accessible tooltip'>
   <Button>Button</Button>
 </Tooltip>
 // aria-describedby が自動的に設定される

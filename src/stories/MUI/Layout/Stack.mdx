@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Stack } from '@mui/material'
 
-<Stack spacing={2}>
+;<Stack spacing={2}>
   <Item>Item 1</Item>
   <Item>Item 2</Item>
   <Item>Item 3</Item>
@@ -45,10 +45,9 @@ import { Stack } from '@mui/material'
 
 ```tsx
 <Stack
-  direction="row"
-  divider={<Divider orientation="vertical" flexItem />}
-  spacing={2}
->
+  direction='row'
+  divider={<Divider orientation='vertical' flexItem />}
+  spacing={2}>
   <Item>Item 1</Item>
   <Item>Item 2</Item>
   <Item>Item 3</Item>
@@ -60,9 +59,9 @@ import { Stack } from '@mui/material'
 ### フォームのボタン
 
 ```tsx
-<Stack direction="row" spacing={2} justifyContent="flex-end">
-  <Button variant="outlined">キャンセル</Button>
-  <Button variant="contained">保存</Button>
+<Stack direction='row' spacing={2} justifyContent='flex-end'>
+  <Button variant='outlined'>キャンセル</Button>
+  <Button variant='contained'>保存</Button>
 </Stack>
 ```
 

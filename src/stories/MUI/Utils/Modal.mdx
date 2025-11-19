@@ -4,14 +4,61 @@ import { Meta } from '@storybook/blocks'
 
 # Modal
 
-モーダルコンポーネントの基本実装です。Dialogコンポーネントの基礎となっています。
+モーダルコンポーネントの基本実装です。Dialogコンポーネントの基礎となっています。Modalは、ユーザーの注意を引き、現在のワークフローを中断させる必要がある場合に使用される低レベルのコンポーネントです。
 
 ## 基本的な使い方
 
-```tsx
-import { Modal, Box } from '@mui/material'
+Modalは、ページの残りの部分の上にコンテンツを表示し、背景をオーバーレイします。
 
-const style = {
+```tsx
+import { Modal, Box, Typography, Button } from '@mui/material'
+import { useState } from 'react'
+
+const BasicModal = () => {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
+
+  return (
+    <>
+      <Button onClick={handleOpen}>モーダルを開く</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'>
+        <Box sx={style}>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            モーダルタイトル
+          </Typography>
+          <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+            モーダルのコンテンツをここに記述します。
+          </Typography>
+        </Box>
+      </Modal>
+    </>
+  )
+}
+```
+
+## スタイリングパターン
+
+### 中央配置のモーダル
+
+```tsx
+const centerStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -20,31 +67,553 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
+  borderRadius: 2,
+}
+```
+
+### 最小限のスタイル
+
+```tsx
+const minimalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 1,
+}
+```
+
+### カスタムサイズ
+
+```tsx
+// 小さいモーダル
+const smallStyle = {
+  ...centerStyle,
+  width: 300,
+  maxWidth: '90vw',
 }
 
-<Modal open={open} onClose={handleClose}>
-  <Box sx={style}>
-    <Typography variant="h6">モーダルタイトル</Typography>
-    <Typography sx={{ mt: 2 }}>
-      モーダルのコンテンツ
-    </Typography>
-  </Box>
-</Modal>
+// 大きいモーダル
+const largeStyle = {
+  ...centerStyle,
+  width: 800,
+  maxWidth: '90vw',
+  maxHeight: '90vh',
+  overflow: 'auto',
+}
+
+// フルスクリーン
+const fullscreenStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  bgcolor: 'background.paper',
+  overflow: 'auto',
+}
 ```
 
 ## Backdropのカスタマイズ
+
+背景のオーバーレイをカスタマイズすることができます。
 
 ```tsx
 <Modal
   open={open}
   onClose={handleClose}
   BackdropProps={{
-    style: { backgroundColor: 'rgba(0, 0, 0, 0.8)' }
-  }}
->
-  {/* コンテンツ */}
+    sx: {
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    },
+  }}>
+  <Box sx={style}>{/* コンテンツ */}</Box>
 </Modal>
 ```
+
+### Backdropなし
+
+```tsx
+<Modal open={open} onClose={handleClose} hideBackdrop>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+```
+
+### カスタムBackdropコンポーネント
+
+```tsx
+import { Backdrop } from '@mui/material'
+
+<Modal
+  open={open}
+  onClose={handleClose}
+  slots={{
+    backdrop: Backdrop,
+  }}
+  slotProps={{
+    backdrop: {
+      sx: {
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backdropFilter: 'blur(4px)',
+      },
+    },
+  }}>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+```
+
+## トランジション効果
+
+Modalにアニメーション効果を追加できます。
+
+```tsx
+import { Fade, Grow, Slide, Zoom } from '@mui/material'
+
+// フェードイン
+<Modal open={open} onClose={handleClose} closeAfterTransition>
+  <Fade in={open}>
+    <Box sx={style}>{/* コンテンツ */}</Box>
+  </Fade>
+</Modal>
+
+// 拡大表示
+<Modal open={open} onClose={handleClose} closeAfterTransition>
+  <Zoom in={open}>
+    <Box sx={style}>{/* コンテンツ */}</Box>
+  </Zoom>
+</Modal>
+
+// スライドイン
+<Modal open={open} onClose={handleClose} closeAfterTransition>
+  <Slide direction="up" in={open}>
+    <Box sx={style}>{/* コンテンツ */}</Box>
+  </Slide>
+</Modal>
+```
+
+## 実装例
+
+### 確認ダイアログ
+
+```tsx
+import { Modal, Box, Typography, Button, Stack } from '@mui/material'
+
+const ConfirmationModal = ({
+  open,
+  onClose,
+  onConfirm,
+  title,
+  message,
+}: {
+  open: boolean
+  onClose: () => void
+  onConfirm: () => void
+  title: string
+  message: string
+}) => {
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 2,
+  }
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby='confirmation-title'
+      aria-describedby='confirmation-description'>
+      <Box sx={style}>
+        <Typography id='confirmation-title' variant='h6' component='h2' gutterBottom>
+          {title}
+        </Typography>
+        <Typography id='confirmation-description' sx={{ mt: 2, mb: 3 }}>
+          {message}
+        </Typography>
+        <Stack direction='row' spacing={2} justifyContent='flex-end'>
+          <Button variant='outlined' onClick={onClose}>
+            キャンセル
+          </Button>
+          <Button
+            variant='contained'
+            color='error'
+            onClick={() => {
+              onConfirm()
+              onClose()
+            }}>
+            削除
+          </Button>
+        </Stack>
+      </Box>
+    </Modal>
+  )
+}
+```
+
+### フォームモーダル
+
+```tsx
+import { Modal, Box, Typography, TextField, Button, Stack } from '@mui/material'
+import { useState } from 'react'
+
+const FormModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Form submitted:', formData)
+    onClose()
+  }
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 2,
+    maxHeight: '90vh',
+    overflow: 'auto',
+  }
+
+  return (
+    <Modal open={open} onClose={onClose} aria-labelledby='form-modal-title'>
+      <Box sx={style}>
+        <Typography id='form-modal-title' variant='h6' component='h2' gutterBottom>
+          お問い合わせフォーム
+        </Typography>
+        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 2 }}>
+          <TextField
+            fullWidth
+            label='お名前'
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            margin='normal'
+            required
+          />
+          <TextField
+            fullWidth
+            label='メールアドレス'
+            type='email'
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            margin='normal'
+            required
+          />
+          <TextField
+            fullWidth
+            label='メッセージ'
+            multiline
+            rows={4}
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            margin='normal'
+            required
+          />
+          <Stack direction='row' spacing={2} sx={{ mt: 3 }} justifyContent='flex-end'>
+            <Button variant='outlined' onClick={onClose}>
+              キャンセル
+            </Button>
+            <Button type='submit' variant='contained'>
+              送信
+            </Button>
+          </Stack>
+        </Box>
+      </Box>
+    </Modal>
+  )
+}
+```
+
+### 画像ギャラリーモーダル
+
+```tsx
+import { Modal, Box, IconButton } from '@mui/material'
+import { Close, NavigateBefore, NavigateNext } from '@mui/icons-material'
+import { useState } from 'react'
+
+const ImageGalleryModal = ({
+  open,
+  onClose,
+  images,
+  initialIndex = 0,
+}: {
+  open: boolean
+  onClose: () => void
+  images: string[]
+  initialIndex?: number
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex)
+
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1))
+  }
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0))
+  }
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '90vw',
+    maxHeight: '90vh',
+    outline: 'none',
+  }
+
+  return (
+    <Modal open={open} onClose={onClose} aria-labelledby='image-gallery-modal'>
+      <Box sx={style}>
+        <IconButton
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            top: 8,
+            right: 8,
+            color: 'white',
+            bgcolor: 'rgba(0, 0, 0, 0.5)',
+            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.7)' },
+          }}>
+          <Close />
+        </IconButton>
+        <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+          <IconButton
+            onClick={handlePrevious}
+            sx={{
+              position: 'absolute',
+              left: 8,
+              color: 'white',
+              bgcolor: 'rgba(0, 0, 0, 0.5)',
+              '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.7)' },
+            }}>
+            <NavigateBefore />
+          </IconButton>
+          <img
+            src={images[currentIndex]}
+            alt={`Image ${currentIndex + 1}`}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '90vh',
+              display: 'block',
+            }}
+          />
+          <IconButton
+            onClick={handleNext}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              color: 'white',
+              bgcolor: 'rgba(0, 0, 0, 0.5)',
+              '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.7)' },
+            }}>
+            <NavigateNext />
+          </IconButton>
+        </Box>
+      </Box>
+    </Modal>
+  )
+}
+```
+
+## ネストされたモーダル
+
+複数のモーダルを重ねて表示することができますが、UX的には推奨されません。
+
+```tsx
+const NestedModals = () => {
+  const [parentOpen, setParentOpen] = useState(false)
+  const [childOpen, setChildOpen] = useState(false)
+
+  return (
+    <>
+      <Button onClick={() => setParentOpen(true)}>親モーダルを開く</Button>
+      <Modal open={parentOpen} onClose={() => setParentOpen(false)}>
+        <Box sx={modalStyle}>
+          <Typography variant='h6'>親モーダル</Typography>
+          <Button onClick={() => setChildOpen(true)} sx={{ mt: 2 }}>
+            子モーダルを開く
+          </Button>
+        </Box>
+      </Modal>
+      <Modal open={childOpen} onClose={() => setChildOpen(false)}>
+        <Box sx={{ ...modalStyle, zIndex: 1301 }}>
+          <Typography variant='h6'>子モーダル</Typography>
+          <Button onClick={() => setChildOpen(false)} sx={{ mt: 2 }}>
+            閉じる
+          </Button>
+        </Box>
+      </Modal>
+    </>
+  )
+}
+```
+
+## フォーカス管理
+
+Modalは自動的にフォーカスを管理します。
+
+```tsx
+// 最初の要素にフォーカスを当てない
+<Modal open={open} onClose={handleClose} disableAutoFocus>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+
+// 閉じた後のフォーカス復元を無効化
+<Modal open={open} onClose={handleClose} disableRestoreFocus>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+
+// フォーカストラップを無効化（非推奨）
+<Modal open={open} onClose={handleClose} disableEnforceFocus>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+```
+
+## Escapeキーの無効化
+
+デフォルトではEscキーでモーダルが閉じますが、これを無効化できます。
+
+```tsx
+<Modal
+  open={open}
+  onClose={handleClose}
+  disableEscapeKeyDown
+  aria-labelledby='modal-title'>
+  <Box sx={style}>
+    <Typography id='modal-title' variant='h6'>
+      Escキーでは閉じられません
+    </Typography>
+    <Button onClick={handleClose} sx={{ mt: 2 }}>
+      閉じる
+    </Button>
+  </Box>
+</Modal>
+```
+
+## アクセシビリティ
+
+Modalを使用する際は、アクセシビリティに注意してください。
+
+```tsx
+<Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby='modal-title'
+  aria-describedby='modal-description'>
+  <Box sx={style}>
+    <Typography id='modal-title' variant='h6' component='h2'>
+      タイトル
+    </Typography>
+    <Typography id='modal-description' sx={{ mt: 2 }}>
+      説明文
+    </Typography>
+  </Box>
+</Modal>
+```
+
+### アクセシビリティのポイント
+
+- `aria-labelledby`でモーダルのタイトルを指定する
+- `aria-describedby`でモーダルの説明を指定する
+- モーダル内の最初のフォーカス可能な要素に自動的にフォーカスが当たる
+- Tabキーでモーダル内のフォーカス可能な要素間を移動できる
+- Escキーでモーダルを閉じることができる（デフォルト）
+- モーダルの外側をクリックすると閉じる（デフォルト）
+- スクリーンリーダーは、モーダルが開いているときに背景のコンテンツを読み上げない
+
+## パフォーマンスの最適化
+
+### 遅延レンダリング
+
+```tsx
+const LazyModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+  if (!open) return null
+
+  return (
+    <Modal open={open} onClose={onClose}>
+      <Box sx={style}>{/* 重いコンテンツ */}</Box>
+    </Modal>
+  )
+}
+```
+
+### keepMountedの使用
+
+```tsx
+// モーダルを常にDOMにマウントしておく（SEO、検索エンジン向け）
+<Modal open={open} onClose={handleClose} keepMounted>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+```
+
+## Modal vs Dialog
+
+| 機能 | Modal | Dialog |
+| --- | --- | --- |
+| レベル | 低レベル | 高レベル |
+| スタイリング | 自分で実装 | 組み込み済み |
+| タイトル・アクション | 自分で実装 | 専用コンポーネント |
+| レスポンシブ | 自分で実装 | 組み込み済み |
+| 推奨用途 | カスタムUI | 標準的なダイアログ |
+
+## ベストプラクティス
+
+### 推奨事項
+
+- モーダルの内容は簡潔に保つ
+- 明確な閉じるボタンを提供する
+- モーダルの目的を明確にする
+- 重要でない情報にはモーダルを使用しない
+- アクセシビリティ属性を適切に設定する
+- レスポンシブデザインを考慮する
+
+### 避けるべき事項
+
+- モーダルを深くネストしない
+- モーダル内に複雑なフォームを配置しない（可能な限り）
+- モーダルを頻繁に表示しない
+- Escキーでの閉じる機能を無効化しない（特別な理由がない限り）
+- 背景のクリックでの閉じる機能を無効化しない（特別な理由がない限り）
+
+## サーバーサイドレンダリング（SSR）
+
+Next.jsなどのSSRフレームワークを使用する場合は、ポータルのコンテナを指定します。
+
+```tsx
+import { Modal } from '@mui/material'
+
+<Modal
+  open={open}
+  onClose={handleClose}
+  container={() => document.getElementById('modal-root')}>
+  <Box sx={style}>{/* コンテンツ */}</Box>
+</Modal>
+```
+
+## 関連コンポーネント
+
+- **Dialog**: より高レベルで使いやすいモーダルダイアログ
+- **Drawer**: サイドから表示されるパネル
+- **Popover**: アンカー要素に関連付けられた一時的なコンテンツ
+- **Backdrop**: モーダルの背景オーバーレイ
 
 ## 参考リンク
 

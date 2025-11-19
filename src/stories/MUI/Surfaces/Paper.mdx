@@ -4,54 +4,491 @@ import { Meta } from '@storybook/blocks'
 
 # Paper
 
-紙のような表面を表示する基本的なコンポーネントです。
+紙のような表面を表示する基本的なコンポーネントです。Paperは、マテリアルデザインの「紙」のメタファーを実装し、コンテンツをグループ化して視覚的な階層を作成します。
 
 ## 基本的な使い方
 
-```tsx
-import { Paper } from '@mui/material'
+Paperは最もシンプルなサーフェスコンポーネントで、コンテンツをラップして視覚的な区切りを提供します。
 
-<Paper>
-  <Typography>コンテンツ</Typography>
-</Paper>
+```tsx
+import { Paper, Typography } from '@mui/material'
+
+const BasicPaper = () => {
+  return (
+    <Paper>
+      <Typography>コンテンツ</Typography>
+    </Paper>
+  )
+}
 ```
 
 ## Elevation（影の深さ）
 
+elevationプロパティは、要素がページからどれだけ浮いているかを表現します。値は0から24まで設定できます。
+
 ```tsx
 <Paper elevation={0}>影なし</Paper>
-<Paper elevation={1}>軽い影</Paper>
+<Paper elevation={1}>軽い影（デフォルト）</Paper>
+<Paper elevation={2}>やや軽い影</Paper>
 <Paper elevation={3}>標準の影</Paper>
-<Paper elevation={8}>深い影</Paper>
+<Paper elevation={4}>やや濃い影</Paper>
+<Paper elevation={6}>濃い影</Paper>
+<Paper elevation={8}>より濃い影</Paper>
+<Paper elevation={12}>深い影</Paper>
+<Paper elevation={16}>とても深い影</Paper>
 <Paper elevation={24}>最も深い影</Paper>
 ```
 
+### Elevationの使い分け
+
+| Elevation | 用途 |
+| --- | --- |
+| 0 | フラットな表面、背景と同じレベル |
+| 1 | カード、リストアイテム（デフォルト） |
+| 2 | やや強調したい要素 |
+| 3 | ボタン、浮き上がった要素 |
+| 4-8 | ドロップダウン、メニュー |
+| 8-16 | ダイアログ、ポップアップ |
+| 16-24 | モーダル、最前面の要素 |
+
 ## バリアント
 
+Paperには2つの主なバリアントがあります。
+
 ```tsx
-<Paper variant="elevation">
-<Paper variant="outlined">
+// Elevation variant（デフォルト） - 影を使用
+<Paper variant='elevation' elevation={3}>
+  <Typography sx={{ p: 2 }}>Elevationバリアント</Typography>
+</Paper>
+
+// Outlined variant - 枠線を使用
+<Paper variant='outlined'>
+  <Typography sx={{ p: 2 }}>Outlinedバリアント</Typography>
+</Paper>
 ```
+
+### バリアントの比較
+
+| バリアント | 特徴 | 用途 |
+| --- | --- | --- |
+| elevation | 影で深さを表現 | 一般的なカード、セクション |
+| outlined | 枠線で区切りを表現 | フラットなデザイン、密集したレイアウト |
 
 ## 角の丸み
 
+squareプロパティで、角の形状を変更できます。
+
 ```tsx
-<Paper square>角張った</Paper>
-<Paper>丸い（デフォルト）</Paper>
+// 角が丸い（デフォルト）
+<Paper>
+  <Typography sx={{ p: 2 }}>角が丸い</Typography>
+</Paper>
+
+// 角が四角い
+<Paper square>
+  <Typography sx={{ p: 2 }}>角が四角い</Typography>
+</Paper>
+```
+
+## カスタムスタイリング
+
+sxプロパティを使用して、Paperをカスタマイズできます。
+
+```tsx
+// 背景色のカスタマイズ
+<Paper
+  sx={{
+    p: 2,
+    backgroundColor: 'primary.main',
+    color: 'primary.contrastText',
+  }}>
+  <Typography>カスタム背景色</Typography>
+</Paper>
+
+// グラデーション背景
+<Paper
+  sx={{
+    p: 3,
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    color: 'white',
+  }}>
+  <Typography>グラデーション背景</Typography>
+</Paper>
+
+// 境界線のカスタマイズ
+<Paper
+  variant='outlined'
+  sx={{
+    p: 2,
+    borderColor: 'primary.main',
+    borderWidth: 2,
+    borderStyle: 'dashed',
+  }}>
+  <Typography>カスタム境界線</Typography>
+</Paper>
 ```
 
 ## 実装例
 
+### コンテンツカード
+
 ```tsx
-<Paper sx={{ p: 2 }}>
-  <Typography variant="h6" gutterBottom>
-    セクションタイトル
-  </Typography>
-  <Typography>
-    コンテンツ...
-  </Typography>
+import { Paper, Typography, Box } from '@mui/material'
+
+const ContentCard = () => {
+  return (
+    <Paper elevation={2} sx={{ p: 3, maxWidth: 400 }}>
+      <Typography variant='h5' component='h2' gutterBottom>
+        カードタイトル
+      </Typography>
+      <Typography variant='body2' color='text.secondary' paragraph>
+        カードの説明文がここに入ります。Paperコンポーネントを使用することで、コンテンツを視覚的にグループ化できます。
+      </Typography>
+      <Typography variant='caption' color='text.secondary'>
+        2025年1月15日
+      </Typography>
+    </Paper>
+  )
+}
+```
+
+### サイドバーパネル
+
+```tsx
+import { Paper, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material'
+import { Dashboard, Settings, Person, Logout } from '@mui/icons-material'
+
+const SidebarPanel = () => {
+  return (
+    <Paper
+      elevation={3}
+      sx={{
+        width: 250,
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+        top: 0,
+      }}>
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <Dashboard />
+          </ListItemIcon>
+          <ListItemText primary='ダッシュボード' />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Person />
+          </ListItemIcon>
+          <ListItemText primary='プロフィール' />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary='設定' />
+        </ListItem>
+        <Divider />
+        <ListItem button>
+          <ListItemIcon>
+            <Logout />
+          </ListItemIcon>
+          <ListItemText primary='ログアウト' />
+        </ListItem>
+      </List>
+    </Paper>
+  )
+}
+```
+
+### フォームコンテナ
+
+```tsx
+import { Paper, Typography, TextField, Button, Stack } from '@mui/material'
+
+const FormContainer = () => {
+  return (
+    <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: 'auto' }}>
+      <Typography variant='h5' component='h1' gutterBottom>
+        ログイン
+      </Typography>
+      <Typography variant='body2' color='text.secondary' paragraph>
+        アカウント情報を入力してください
+      </Typography>
+      <Stack spacing={2}>
+        <TextField fullWidth label='メールアドレス' type='email' />
+        <TextField fullWidth label='パスワード' type='password' />
+        <Button variant='contained' fullWidth size='large'>
+          ログイン
+        </Button>
+      </Stack>
+    </Paper>
+  )
+}
+```
+
+### ハイライトセクション
+
+```tsx
+import { Paper, Typography, Box } from '@mui/material'
+
+const HighlightSection = () => {
+  return (
+    <Paper
+      elevation={0}
+      sx={{
+        p: 3,
+        backgroundColor: 'info.light',
+        borderLeft: 4,
+        borderColor: 'info.main',
+      }}>
+      <Typography variant='h6' gutterBottom>
+        お知らせ
+      </Typography>
+      <Typography variant='body2'>
+        システムメンテナンスのため、2025年1月20日午前2時から4時までサービスを停止します。
+      </Typography>
+    </Paper>
+  )
+}
+```
+
+### 統計カード
+
+```tsx
+import { Paper, Typography, Box, Stack } from '@mui/material'
+import { TrendingUp } from '@mui/icons-material'
+
+const StatCard = ({ title, value, change }: { title: string; value: string; change: string }) => {
+  return (
+    <Paper
+      elevation={2}
+      sx={{
+        p: 3,
+        transition: 'transform 0.2s, box-shadow 0.2s',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: 6,
+        },
+      }}>
+      <Typography variant='body2' color='text.secondary' gutterBottom>
+        {title}
+      </Typography>
+      <Typography variant='h4' component='div' gutterBottom>
+        {value}
+      </Typography>
+      <Stack direction='row' alignItems='center' spacing={0.5}>
+        <TrendingUp fontSize='small' color='success' />
+        <Typography variant='body2' color='success.main'>
+          {change}
+        </Typography>
+      </Stack>
+    </Paper>
+  )
+}
+
+// 使用例
+const Dashboard = () => {
+  return (
+    <Stack direction='row' spacing={2}>
+      <StatCard title='総売上' value='1,234,567円' change='+12.5%' />
+      <StatCard title='新規顧客' value='456人' change='+8.3%' />
+      <StatCard title='訪問者数' value='12,345人' change='+15.2%' />
+    </Stack>
+  )
+}
+```
+
+### 画像付きカード
+
+```tsx
+import { Paper, Box, Typography } from '@mui/material'
+
+const ImageCard = () => {
+  return (
+    <Paper elevation={3} sx={{ maxWidth: 345, overflow: 'hidden' }}>
+      <Box
+        component='img'
+        sx={{
+          width: '100%',
+          height: 200,
+          objectFit: 'cover',
+        }}
+        src='/path/to/image.jpg'
+        alt='カード画像'
+      />
+      <Box sx={{ p: 2 }}>
+        <Typography variant='h6' gutterBottom>
+          カードタイトル
+        </Typography>
+        <Typography variant='body2' color='text.secondary'>
+          カードの説明文がここに入ります。
+        </Typography>
+      </Box>
+    </Paper>
+  )
+}
+```
+
+## レスポンシブデザイン
+
+Paperを使用したレスポンシブレイアウトの例です。
+
+```tsx
+import { Paper, Typography, Box } from '@mui/material'
+
+const ResponsivePaper = () => {
+  return (
+    <Paper
+      sx={{
+        p: { xs: 2, sm: 3, md: 4 },
+        m: { xs: 1, sm: 2, md: 3 },
+        maxWidth: { xs: '100%', sm: 600, md: 800 },
+      }}>
+      <Typography>レスポンシブなパディングとマージン</Typography>
+    </Paper>
+  )
+}
+```
+
+## インタラクティブなPaper
+
+ホバー効果やクリック可能なPaperの実装例です。
+
+```tsx
+import { Paper, Typography } from '@mui/material'
+
+const InteractivePaper = () => {
+  return (
+    <Paper
+      elevation={2}
+      sx={{
+        p: 3,
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          elevation: 8,
+          transform: 'scale(1.02)',
+          boxShadow: 8,
+        },
+        '&:active': {
+          transform: 'scale(0.98)',
+        },
+      }}
+      onClick={() => console.log('クリックされました')}>
+      <Typography>クリック可能なカード</Typography>
+    </Paper>
+  )
+}
+```
+
+## Paper vs 他のコンポーネント
+
+| コンポーネント | 用途 | 主な違い |
+| --- | --- | --- |
+| Paper | 汎用的なサーフェス | 基本的な紙のメタファー |
+| Card | 構造化されたコンテンツ | Header、Content、Actionsの専用領域 |
+| Box | レイアウトコンテナ | スタイリング用、サーフェスなし |
+| Container | レイアウトコンテナ | レスポンシブな幅制限 |
+
+## アクセシビリティ
+
+Paperは主に視覚的なグループ化のためのコンポーネントですが、以下の点に注意してください。
+
+```tsx
+// セマンティックなHTML要素として使用
+<Paper component='section' aria-label='ユーザー情報'>
+  <Typography variant='h2'>ユーザー情報</Typography>
+  {/* コンテンツ */}
+</Paper>
+
+// ナビゲーション領域として使用
+<Paper component='nav' aria-label='メインナビゲーション'>
+  {/* ナビゲーション項目 */}
 </Paper>
 ```
+
+### アクセシビリティのポイント
+
+- 適切な`component`プロパティを使用してセマンティックなHTML要素を選択する
+- 重要なセクションには`aria-label`や`aria-labelledby`を追加する
+- 色だけでなく、影や境界線などの視覚的要素も併用する
+- 十分なコントラストを確保する
+
+## ベストプラクティス
+
+### 推奨事項
+
+- コンテンツのグループ化に使用する
+- 適切なelevationレベルを選択する（過度に高くしない）
+- 一貫性のあるスタイリングを保つ
+- パディングを適切に設定する
+- レスポンシブデザインを考慮する
+
+### 避けるべき事項
+
+- 過度にネストしない（視覚的な混乱を避ける）
+- 不必要に高いelevationを使用しない
+- Paperの中にPaperを多重に配置しない（特別な理由がない限り）
+- 背景とのコントラストが不十分な色を使用しない
+
+## パフォーマンス最適化
+
+### 影のパフォーマンス
+
+多数のPaperコンポーネントを表示する場合、elevationを控えめにするとパフォーマンスが向上します。
+
+```tsx
+// 多数のアイテムを表示する場合は低いelevationを使用
+<Paper elevation={1}>
+  <Typography>低いelevationでパフォーマンス向上</Typography>
+</Paper>
+
+// 必要に応じてoutlinedバリアントを使用
+<Paper variant='outlined'>
+  <Typography>影なしでさらに軽量</Typography>
+</Paper>
+```
+
+## テーマとの統合
+
+Paperはテーマの設定を自動的に継承します。
+
+```tsx
+import { ThemeProvider, createTheme, Paper } from '@mui/material'
+
+const theme = createTheme({
+  components: {
+    MuiPaper: {
+      defaultProps: {
+        elevation: 2,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+  },
+})
+
+const ThemedPaper = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <Typography sx={{ p: 2 }}>カスタムテーマが適用されたPaper</Typography>
+      </Paper>
+    </ThemeProvider>
+  )
+}
+```
+
+## 関連コンポーネント
+
+- **Card**: より構造化されたコンテンツ表示が必要な場合
+- **Box**: シンプルなレイアウトコンテナが必要な場合
+- **Container**: レスポンシブな幅制限が必要な場合
+- **AppBar**: アプリケーションバーとして使用する場合
 
 ## 参考リンク
 

@@ -71,7 +71,7 @@ const [value, setValue] = useState(null)
 <Autocomplete
   multiple
   options={options}
-  renderInput={(params) => <TextField {...params} label="複数選択" />}
+  renderInput={(params) => <TextField {...params} label='複数選択' />}
 />
 ```
 
@@ -83,7 +83,7 @@ const [value, setValue] = useState(null)
 <Autocomplete
   freeSolo
   options={options}
-  renderInput={(params) => <TextField {...params} label="自由入力可" />}
+  renderInput={(params) => <TextField {...params} label='自由入力可' />}
 />
 ```
 
@@ -95,7 +95,7 @@ const [value, setValue] = useState(null)
 <Autocomplete
   disableClearable
   options={options}
-  renderInput={(params) => <TextField {...params} label="クリア不可" />}
+  renderInput={(params) => <TextField {...params} label='クリア不可' />}
 />
 ```
 
@@ -129,12 +129,12 @@ const options = [
 <Autocomplete
   options={options}
   renderOption={(props, option) => (
-    <Box component="li" {...props}>
+    <Box component='li' {...props}>
       <Avatar src={option.avatar} sx={{ mr: 2 }} />
       {option.label}
     </Box>
   )}
-  renderInput={(params) => <TextField {...params} label="ユーザー" />}
+  renderInput={(params) => <TextField {...params} label='ユーザー' />}
 />
 ```
 
@@ -148,14 +148,10 @@ const options = [
   options={options}
   renderTags={(value, getTagProps) =>
     value.map((option, index) => (
-      <Chip
-        variant="outlined"
-        label={option}
-        {...getTagProps({ index })}
-      />
+      <Chip variant='outlined' label={option} {...getTagProps({ index })} />
     ))
   }
-  renderInput={(params) => <TextField {...params} label="タグ" />}
+  renderInput={(params) => <TextField {...params} label='タグ' />}
 />
 ```
 
@@ -247,10 +243,10 @@ useEffect(() => {
   renderInput={(params) => (
     <TextField
       {...params}
-      label="必須項目"
+      label='必須項目'
       required
       error={!value}
-      helperText={!value && "選択してください"}
+      helperText={!value && '選択してください'}
     />
   )}
 />
@@ -281,7 +277,7 @@ const prefectures = [
   freeSolo
   options={tags}
   renderInput={(params) => (
-    <TextField {...params} label="タグ" placeholder="タグを追加" />
+    <TextField {...params} label='タグ' placeholder='タグを追加' />
   )}
 />
 ```
@@ -293,19 +289,17 @@ const prefectures = [
   options={users}
   getOptionLabel={(option) => option.name}
   renderOption={(props, option) => (
-    <Box component="li" {...props}>
+    <Box component='li' {...props}>
       <Avatar src={option.avatar} sx={{ mr: 2 }} />
       <Box>
-        <Typography variant="body1">{option.name}</Typography>
-        <Typography variant="caption" color="text.secondary">
+        <Typography variant='body1'>{option.name}</Typography>
+        <Typography variant='caption' color='text.secondary'>
           {option.email}
         </Typography>
       </Box>
     </Box>
   )}
-  renderInput={(params) => (
-    <TextField {...params} label="ユーザーを検索" />
-  )}
+  renderInput={(params) => <TextField {...params} label='ユーザーを検索' />}
 />
 ```
 

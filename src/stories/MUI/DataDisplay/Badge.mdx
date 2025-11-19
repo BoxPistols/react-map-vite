@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Badge } from '@mui/material'
 
-<Badge badgeContent={4} color="primary">
+;<Badge badgeContent={4} color='primary'>
   <MailIcon />
 </Badge>
 ```
@@ -42,7 +42,7 @@ import { Badge } from '@mui/material'
 ## ドット
 
 ```tsx
-<Badge variant="dot" color="primary">
+<Badge variant='dot' color='primary'>
   <MailIcon />
 </Badge>
 ```
@@ -74,11 +74,7 @@ import { Badge } from '@mui/material'
 ## 表示・非表示
 
 ```tsx
-<Badge
-  badgeContent={4}
-  invisible={!showBadge}
-  color="primary"
->
+<Badge badgeContent={4} invisible={!showBadge} color='primary'>
   <MailIcon />
 </Badge>
 ```
@@ -88,7 +84,7 @@ import { Badge } from '@mui/material'
 ### 通知アイコン
 
 ```tsx
-<Badge badgeContent={notifications.length} color="error">
+<Badge badgeContent={notifications.length} color='error'>
   <NotificationsIcon />
 </Badge>
 ```
@@ -96,7 +92,7 @@ import { Badge } from '@mui/material'
 ### ショッピングカート
 
 ```tsx
-<Badge badgeContent={cartItems.length} color="primary">
+<Badge badgeContent={cartItems.length} color='primary'>
   <ShoppingCartIcon />
 </Badge>
 ```
@@ -105,11 +101,10 @@ import { Badge } from '@mui/material'
 
 ```tsx
 <Badge
-  overlap="circular"
+  overlap='circular'
   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-  variant="dot"
-  color="success"
->
+  variant='dot'
+  color='success'>
   <Avatar alt={user.name} src={user.avatar} />
 </Badge>
 ```

@@ -22,10 +22,7 @@ FormControlLabelと組み合わせて使用:
 ```tsx
 import { FormControlLabel } from '@mui/material'
 
-<FormControlLabel
-  control={<Switch />}
-  label="通知を有効にする"
-/>
+;<FormControlLabel control={<Switch />} label='通知を有効にする' />
 ```
 
 ## 制御コンポーネント
@@ -164,38 +161,38 @@ const handleChange = (event) => {
   })
 }
 
-<FormControl component="fieldset">
-  <FormLabel component="legend">設定</FormLabel>
+;<FormControl component='fieldset'>
+  <FormLabel component='legend'>設定</FormLabel>
   <FormGroup>
     <FormControlLabel
       control={
         <Switch
           checked={settings.notifications}
           onChange={handleChange}
-          name="notifications"
+          name='notifications'
         />
       }
-      label="プッシュ通知"
+      label='プッシュ通知'
     />
     <FormControlLabel
       control={
         <Switch
           checked={settings.emailUpdates}
           onChange={handleChange}
-          name="emailUpdates"
+          name='emailUpdates'
         />
       }
-      label="メール通知"
+      label='メール通知'
     />
     <FormControlLabel
       control={
         <Switch
           checked={settings.darkMode}
           onChange={handleChange}
-          name="darkMode"
+          name='darkMode'
         />
       }
-      label="ダークモード"
+      label='ダークモード'
     />
   </FormGroup>
 </FormControl>
@@ -276,12 +273,12 @@ Switchは自動的に`role="switch"`が設定されます。
 
 ## Switch vs Checkbox
 
-| 項目 | Switch | Checkbox |
-|------|--------|----------|
-| 用途 | 設定のON/OFF | 選択肢の選択/非選択 |
-| 即座に反映 | 通常は即座に反映 | フォーム送信時に反映 |
+| 項目       | Switch                     | Checkbox                   |
+| ---------- | -------------------------- | -------------------------- |
+| 用途       | 設定のON/OFF               | 選択肢の選択/非選択        |
+| 即座に反映 | 通常は即座に反映           | フォーム送信時に反映       |
 | 視覚的効果 | 物理的なトグルのメタファー | チェックマークのメタファー |
-| 使用場面 | 設定画面、機能の有効化 | フォーム、複数選択 |
+| 使用場面   | 設定画面、機能の有効化     | フォーム、複数選択         |
 
 ### 使い分けの例
 
@@ -378,11 +375,7 @@ const handleChange = async (event) => {
   }
 }
 
-<Switch
-  checked={checked}
-  onChange={handleChange}
-  disabled={loading}
-/>
+;<Switch checked={checked} onChange={handleChange} disabled={loading} />
 ```
 
 ## 関連コンポーネント

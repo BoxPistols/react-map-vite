@@ -9,14 +9,18 @@ import { Meta } from '@storybook/blocks'
 ## 基本的な使い方
 
 ```tsx
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+} from '@mui/material'
 
-<Dialog open={open} onClose={handleClose}>
+;<Dialog open={open} onClose={handleClose}>
   <DialogTitle>タイトル</DialogTitle>
   <DialogContent>
-    <DialogContentText>
-      ダイアログの内容
-    </DialogContentText>
+    <DialogContentText>ダイアログの内容</DialogContentText>
   </DialogContent>
   <DialogActions>
     <Button onClick={handleClose}>キャンセル</Button>

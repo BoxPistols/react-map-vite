@@ -11,14 +11,20 @@ import { Meta } from '@storybook/blocks'
 ラジオボタンは必ずRadioGroupと組み合わせて使用します:
 
 ```tsx
-import { Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material'
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from '@mui/material'
 
-<FormControl>
+;<FormControl>
   <FormLabel>性別</FormLabel>
   <RadioGroup>
-    <FormControlLabel value="male" control={<Radio />} label="男性" />
-    <FormControlLabel value="female" control={<Radio />} label="女性" />
-    <FormControlLabel value="other" control={<Radio />} label="その他" />
+    <FormControlLabel value='male' control={<Radio />} label='男性' />
+    <FormControlLabel value='female' control={<Radio />} label='女性' />
+    <FormControlLabel value='other' control={<Radio />} label='その他' />
   </RadioGroup>
 </FormControl>
 ```
@@ -47,8 +53,8 @@ const [value, setValue] = useState('female')
 
 ```tsx
 <RadioGroup>
-  <FormControlLabel value="1" control={<Radio />} label="選択肢 1" />
-  <FormControlLabel value="2" control={<Radio />} label="選択肢 2" />
+  <FormControlLabel value='1' control={<Radio />} label='選択肢 1' />
+  <FormControlLabel value='2' control={<Radio />} label='選択肢 2' />
 </RadioGroup>
 ```
 
@@ -56,8 +62,8 @@ const [value, setValue] = useState('female')
 
 ```tsx
 <RadioGroup row>
-  <FormControlLabel value="1" control={<Radio />} label="選択肢 1" />
-  <FormControlLabel value="2" control={<Radio />} label="選択肢 2" />
+  <FormControlLabel value='1' control={<Radio />} label='選択肢 1' />
+  <FormControlLabel value='2' control={<Radio />} label='選択肢 2' />
 </RadioGroup>
 ```
 
@@ -86,14 +92,9 @@ const [value, setValue] = useState('female')
 
 ```tsx
 <RadioGroup>
-  <FormControlLabel value="1" control={<Radio />} label="有効" />
-  <FormControlLabel value="2" control={<Radio />} label="有効" />
-  <FormControlLabel
-    value="3"
-    control={<Radio />}
-    label="無効"
-    disabled
-  />
+  <FormControlLabel value='1' control={<Radio />} label='有効' />
+  <FormControlLabel value='2' control={<Radio />} label='有効' />
+  <FormControlLabel value='3' control={<Radio />} label='無効' disabled />
 </RadioGroup>
 ```
 
@@ -101,8 +102,8 @@ const [value, setValue] = useState('female')
 
 ```tsx
 <RadioGroup disabled>
-  <FormControlLabel value="1" control={<Radio />} label="選択肢 1" />
-  <FormControlLabel value="2" control={<Radio />} label="選択肢 2" />
+  <FormControlLabel value='1' control={<Radio />} label='選択肢 1' />
+  <FormControlLabel value='2' control={<Radio />} label='選択肢 2' />
 </RadioGroup>
 ```
 
@@ -141,7 +142,7 @@ const [value, setValue] = useState('female')
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
 
-<Radio
+;<Radio
   icon={<RadioButtonUncheckedIcon />}
   checkedIcon={<RadioButtonCheckedIcon />}
 />
@@ -159,18 +160,17 @@ const handleSubmit = () => {
   }
 }
 
-<FormControl error={error} required>
+;<FormControl error={error} required>
   <FormLabel>性別</FormLabel>
   <RadioGroup
     value={value}
     onChange={(e) => {
       setValue(e.target.value)
       setError(false)
-    }}
-  >
-    <FormControlLabel value="male" control={<Radio />} label="男性" />
-    <FormControlLabel value="female" control={<Radio />} label="女性" />
-    <FormControlLabel value="other" control={<Radio />} label="その他" />
+    }}>
+    <FormControlLabel value='male' control={<Radio />} label='男性' />
+    <FormControlLabel value='female' control={<Radio />} label='女性' />
+    <FormControlLabel value='other' control={<Radio />} label='その他' />
   </RadioGroup>
   {error && <FormHelperText>この項目は必須です</FormHelperText>}
 </FormControl>
@@ -298,11 +298,11 @@ const plans = [
 RadioGroupは自動的にrole="radiogroup"を設定しますが、FormControlを使用することを推奨:
 
 ```tsx
-<FormControl component="fieldset">
-  <FormLabel component="legend">性別</FormLabel>
+<FormControl component='fieldset'>
+  <FormLabel component='legend'>性別</FormLabel>
   <RadioGroup>
-    <FormControlLabel value="male" control={<Radio />} label="男性" />
-    <FormControlLabel value="female" control={<Radio />} label="女性" />
+    <FormControlLabel value='male' control={<Radio />} label='男性' />
+    <FormControlLabel value='female' control={<Radio />} label='女性' />
   </RadioGroup>
 </FormControl>
 ```
@@ -317,23 +317,22 @@ RadioGroupは自動的にrole="radiogroup"を設定しますが、FormControlを
 
 ```tsx
 <RadioGroup
-  aria-labelledby="shipping-label"
+  aria-labelledby='shipping-label'
   value={shipping}
-  onChange={handleChange}
->
-  <FormLabel id="shipping-label">配送方法</FormLabel>
-  <FormControlLabel value="standard" control={<Radio />} label="通常" />
-  <FormControlLabel value="express" control={<Radio />} label="速達" />
+  onChange={handleChange}>
+  <FormLabel id='shipping-label'>配送方法</FormLabel>
+  <FormControlLabel value='standard' control={<Radio />} label='通常' />
+  <FormControlLabel value='express' control={<Radio />} label='速達' />
 </RadioGroup>
 ```
 
 ## Radio vs Checkbox vs Select
 
-| コンポーネント | 選択数 | 表示 | 用途 |
-|--------------|--------|------|------|
-| Radio | 1つのみ | 全選択肢表示 | 少数の排他的選択 |
-| Checkbox | 複数可 | 全選択肢表示 | 複数選択可能 |
-| Select | 1つのみ | ドロップダウン | 多数の選択肢 |
+| コンポーネント | 選択数  | 表示           | 用途             |
+| -------------- | ------- | -------------- | ---------------- |
+| Radio          | 1つのみ | 全選択肢表示   | 少数の排他的選択 |
+| Checkbox       | 複数可  | 全選択肢表示   | 複数選択可能     |
+| Select         | 1つのみ | ドロップダウン | 多数の選択肢     |
 
 ## ベストプラクティス
 

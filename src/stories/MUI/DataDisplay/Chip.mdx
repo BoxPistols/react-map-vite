@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Chip } from '@mui/material'
 
-<Chip label="Chip" />
+;<Chip label='Chip' />
 ```
 
 ## バリエーション
@@ -42,19 +42,13 @@ import { Chip } from '@mui/material'
 ## クリック可能
 
 ```tsx
-<Chip
-  label="Clickable"
-  onClick={() => console.log('clicked')}
-/>
+<Chip label='Clickable' onClick={() => console.log('clicked')} />
 ```
 
 ## 削除可能
 
 ```tsx
-<Chip
-  label="Deletable"
-  onDelete={() => console.log('deleted')}
-/>
+<Chip label='Deletable' onDelete={() => console.log('deleted')} />
 ```
 
 ## アイコン
@@ -75,10 +69,7 @@ import { Chip } from '@mui/material'
 ## Avatar付き
 
 ```tsx
-<Chip
-  avatar={<Avatar alt="User" src="/avatar.jpg" />}
-  label="User Name"
-/>
+<Chip avatar={<Avatar alt='User' src='/avatar.jpg' />} label='User Name' />
 ```
 
 ## 実装例
@@ -88,11 +79,7 @@ import { Chip } from '@mui/material'
 ```tsx
 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
   {tags.map((tag) => (
-    <Chip
-      key={tag}
-      label={tag}
-      onDelete={() => handleDelete(tag)}
-    />
+    <Chip key={tag} label={tag} onDelete={() => handleDelete(tag)} />
   ))}
 </Box>
 ```
@@ -122,7 +109,7 @@ import { Chip } from '@mui/material'
       avatar={<Avatar src={item.avatar} />}
       label={item.name}
       onDelete={() => removeItem(item.id)}
-      color="primary"
+      color='primary'
     />
   ))}
 </Box>
@@ -132,9 +119,9 @@ import { Chip } from '@mui/material'
 
 ```tsx
 <Chip
-  label="Accessible Chip"
+  label='Accessible Chip'
   onClick={handleClick}
-  aria-label="filter by category"
+  aria-label='filter by category'
 />
 ```
 

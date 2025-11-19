@@ -11,10 +11,10 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Breadcrumbs, Link } from '@mui/material'
 
-<Breadcrumbs>
-  <Link href="/">ホーム</Link>
-  <Link href="/category">カテゴリ</Link>
-  <Typography color="text.primary">現在のページ</Typography>
+;<Breadcrumbs>
+  <Link href='/'>ホーム</Link>
+  <Link href='/category'>カテゴリ</Link>
+  <Typography color='text.primary'>現在のページ</Typography>
 </Breadcrumbs>
 ```
 
@@ -29,9 +29,7 @@ import { Breadcrumbs, Link } from '@mui/material'
 ## 最大表示数
 
 ```tsx
-<Breadcrumbs maxItems={2}>
-  {/* アイテム */}
-</Breadcrumbs>
+<Breadcrumbs maxItems={2}>{/* アイテム */}</Breadcrumbs>
 ```
 
 ## 参考リンク

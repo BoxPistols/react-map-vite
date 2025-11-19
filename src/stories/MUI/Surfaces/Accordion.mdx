@@ -11,14 +11,12 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 
-<Accordion>
+;<Accordion>
   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
     <Typography>セクション1</Typography>
   </AccordionSummary>
   <AccordionDetails>
-    <Typography>
-      セクション1の詳細内容
-    </Typography>
+    <Typography>セクション1の詳細内容</Typography>
   </AccordionDetails>
 </Accordion>
 ```
@@ -36,9 +34,7 @@ const [expanded, setExpanded] = useState('panel1')
 ## 無効化
 
 ```tsx
-<Accordion disabled>
-  {/* コンテンツ */}
-</Accordion>
+<Accordion disabled>{/* コンテンツ */}</Accordion>
 ```
 
 ## 参考リンク

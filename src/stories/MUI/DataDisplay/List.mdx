@@ -11,15 +11,15 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { List, ListItem, ListItemText } from '@mui/material'
 
-<List>
+;<List>
   <ListItem>
-    <ListItemText primary="Item 1" />
+    <ListItemText primary='Item 1' />
   </ListItem>
   <ListItem>
-    <ListItemText primary="Item 2" />
+    <ListItemText primary='Item 2' />
   </ListItem>
   <ListItem>
-    <ListItemText primary="Item 3" />
+    <ListItemText primary='Item 3' />
   </ListItem>
 </List>
 ```
@@ -32,13 +32,13 @@ import { List, ListItem, ListItemText } from '@mui/material'
     <ListItemIcon>
       <InboxIcon />
     </ListItemIcon>
-    <ListItemText primary="Inbox" />
+    <ListItemText primary='Inbox' />
   </ListItem>
   <ListItem>
     <ListItemIcon>
       <DraftsIcon />
     </ListItemIcon>
-    <ListItemText primary="Drafts" />
+    <ListItemText primary='Drafts' />
   </ListItem>
 </List>
 ```
@@ -49,12 +49,9 @@ import { List, ListItem, ListItemText } from '@mui/material'
 <List>
   <ListItem>
     <ListItemAvatar>
-      <Avatar src="/user1.jpg" />
+      <Avatar src='/user1.jpg' />
     </ListItemAvatar>
-    <ListItemText
-      primary="User Name"
-      secondary="オンライン"
-    />
+    <ListItemText primary='User Name' secondary='オンライン' />
   </ListItem>
 </List>
 ```
@@ -64,7 +61,7 @@ import { List, ListItem, ListItemText } from '@mui/material'
 ```tsx
 <List>
   <ListItemButton onClick={handleClick}>
-    <ListItemText primary="Clickable Item" />
+    <ListItemText primary='Clickable Item' />
   </ListItemButton>
 </List>
 ```
@@ -97,12 +94,11 @@ const [open, setOpen] = useState(false)
 <List>
   <ListItem
     secondaryAction={
-      <IconButton edge="end">
+      <IconButton edge='end'>
         <DeleteIcon />
       </IconButton>
-    }
-  >
-    <ListItemText primary="Item with action" />
+    }>
+    <ListItemText primary='Item with action' />
   </ListItem>
 </List>
 ```
@@ -131,13 +127,17 @@ const [selected, setSelected] = useState(0)
 
 ```tsx
 <List>
-  <ListItemButton component={Link} to="/home">
-    <ListItemIcon><HomeIcon /></ListItemIcon>
-    <ListItemText primary="ホーム" />
+  <ListItemButton component={Link} to='/home'>
+    <ListItemIcon>
+      <HomeIcon />
+    </ListItemIcon>
+    <ListItemText primary='ホーム' />
   </ListItemButton>
-  <ListItemButton component={Link} to="/settings">
-    <ListItemIcon><SettingsIcon /></ListItemIcon>
-    <ListItemText primary="設定" />
+  <ListItemButton component={Link} to='/settings'>
+    <ListItemIcon>
+      <SettingsIcon />
+    </ListItemIcon>
+    <ListItemText primary='設定' />
   </ListItemButton>
 </List>
 ```
@@ -147,7 +147,7 @@ const [selected, setSelected] = useState(0)
 ```tsx
 <List>
   {messages.map((msg) => (
-    <ListItem key={msg.id} alignItems="flex-start">
+    <ListItem key={msg.id} alignItems='flex-start'>
       <ListItemAvatar>
         <Avatar src={msg.avatar} />
       </ListItemAvatar>
@@ -155,10 +155,10 @@ const [selected, setSelected] = useState(0)
         primary={msg.sender}
         secondary={
           <>
-            <Typography component="span" variant="body2">
+            <Typography component='span' variant='body2'>
               {msg.preview}
             </Typography>
-            <Typography variant="caption" display="block">
+            <Typography variant='caption' display='block'>
               {msg.time}
             </Typography>
           </>

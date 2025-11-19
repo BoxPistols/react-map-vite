@@ -11,11 +11,11 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Snackbar } from '@mui/material'
 
-<Snackbar
+;<Snackbar
   open={open}
   autoHideDuration={6000}
   onClose={handleClose}
-  message="メッセージ"
+  message='メッセージ'
 />
 ```
 
@@ -23,7 +23,7 @@ import { Snackbar } from '@mui/material'
 
 ```tsx
 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-  <Alert onClose={handleClose} severity="success">
+  <Alert onClose={handleClose} severity='success'>
     操作が成功しました
   </Alert>
 </Snackbar>
@@ -35,7 +35,7 @@ import { Snackbar } from '@mui/material'
 <Snackbar
   anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
   open={open}
-  message="メッセージ"
+  message='メッセージ'
 />
 ```
 

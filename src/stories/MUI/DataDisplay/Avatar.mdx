@@ -51,11 +51,11 @@ import { Avatar } from '@mui/material'
 
 ```tsx
 <AvatarGroup max={4}>
-  <Avatar alt="User 1" src="/user1.jpg" />
-  <Avatar alt="User 2" src="/user2.jpg" />
-  <Avatar alt="User 3" src="/user3.jpg" />
-  <Avatar alt="User 4" src="/user4.jpg" />
-  <Avatar alt="User 5" src="/user5.jpg" />
+  <Avatar alt='User 1' src='/user1.jpg' />
+  <Avatar alt='User 2' src='/user2.jpg' />
+  <Avatar alt='User 3' src='/user3.jpg' />
+  <Avatar alt='User 4' src='/user4.jpg' />
+  <Avatar alt='User 5' src='/user5.jpg' />
 </AvatarGroup>
 ```
 
@@ -64,7 +64,7 @@ import { Avatar } from '@mui/material'
 画像が読み込めない場合の表示:
 
 ```tsx
-<Avatar alt="User Name" src="/broken-image.jpg">
+<Avatar alt='User Name' src='/broken-image.jpg'>
   U
 </Avatar>
 ```
@@ -75,14 +75,10 @@ import { Avatar } from '@mui/material'
 
 ```tsx
 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-  <Avatar
-    alt={user.name}
-    src={user.avatar}
-    sx={{ width: 56, height: 56 }}
-  />
+  <Avatar alt={user.name} src={user.avatar} sx={{ width: 56, height: 56 }} />
   <Box>
-    <Typography variant="h6">{user.name}</Typography>
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant='h6'>{user.name}</Typography>
+    <Typography variant='body2' color='text.secondary'>
       {user.email}
     </Typography>
   </Box>
@@ -94,11 +90,7 @@ import { Avatar } from '@mui/material'
 ```tsx
 <AvatarGroup max={3}>
   {teamMembers.map((member) => (
-    <Avatar
-      key={member.id}
-      alt={member.name}
-      src={member.avatar}
-    />
+    <Avatar key={member.id} alt={member.name} src={member.avatar} />
   ))}
 </AvatarGroup>
 ```

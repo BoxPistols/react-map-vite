@@ -12,7 +12,7 @@ import { Meta } from '@storybook/blocks'
 import { Fab } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
-<Fab color="primary">
+;<Fab color='primary'>
   <AddIcon />
 </Fab>
 ```
@@ -22,7 +22,7 @@ import AddIcon from '@mui/icons-material/Add'
 ### circular（デフォルト）
 
 ```tsx
-<Fab color="primary">
+<Fab color='primary'>
   <AddIcon />
 </Fab>
 ```
@@ -32,7 +32,7 @@ import AddIcon from '@mui/icons-material/Add'
 テキストとアイコンを表示:
 
 ```tsx
-<Fab variant="extended">
+<Fab variant='extended'>
   <AddIcon sx={{ mr: 1 }} />
   作成
 </Fab>
@@ -71,13 +71,12 @@ import AddIcon from '@mui/icons-material/Add'
 
 ```tsx
 <Fab
-  color="primary"
+  color='primary'
   sx={{
     position: 'fixed',
     bottom: 16,
     right: 16,
-  }}
->
+  }}>
   <AddIcon />
 </Fab>
 ```
@@ -85,7 +84,7 @@ import AddIcon from '@mui/icons-material/Add'
 ## 無効化
 
 ```tsx
-<Fab disabled color="primary">
+<Fab disabled color='primary'>
   <AddIcon />
 </Fab>
 ```
@@ -96,11 +95,10 @@ import AddIcon from '@mui/icons-material/Add'
 
 ```tsx
 <Fab
-  color="primary"
-  aria-label="add"
+  color='primary'
+  aria-label='add'
   sx={{ position: 'fixed', bottom: 16, right: 16 }}
-  onClick={handleCreate}
->
+  onClick={handleCreate}>
   <AddIcon />
 </Fab>
 ```
@@ -118,16 +116,17 @@ useEffect(() => {
   return () => window.removeEventListener('scroll', handleScroll)
 }, [])
 
-{showScrollTop && (
-  <Fab
-    color="primary"
-    size="small"
-    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-    sx={{ position: 'fixed', bottom: 16, right: 16 }}
-  >
-    <KeyboardArrowUpIcon />
-  </Fab>
-)}
+{
+  showScrollTop && (
+    <Fab
+      color='primary'
+      size='small'
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      sx={{ position: 'fixed', bottom: 16, right: 16 }}>
+      <KeyboardArrowUpIcon />
+    </Fab>
+  )
+}
 ```
 
 ### アクションメニュー
@@ -159,7 +158,7 @@ const [open, setOpen] = useState(false)
 ## アクセシビリティ
 
 ```tsx
-<Fab aria-label="add" color="primary">
+<Fab aria-label='add' color='primary'>
   <AddIcon />
 </Fab>
 ```

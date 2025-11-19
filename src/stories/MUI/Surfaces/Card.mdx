@@ -4,50 +4,761 @@ import { Meta } from '@storybook/blocks'
 
 # Card
 
-カードレイアウトを表示するコンポーネントです。
+カードレイアウトを表示するコンポーネントです。Cardは、関連情報をまとめて表示するための柔軟で拡張可能なコンテナです。Paperコンポーネントを基盤とし、ヘッダー、コンテンツ、アクションなどの構造化された領域を提供します。
 
 ## 基本的な使い方
 
+Cardは、CardContent、CardActions、CardHeader、CardMediaなどのサブコンポーネントと組み合わせて使用します。
+
 ```tsx
-import { Card, CardContent, CardActions, Button, Typography } from '@mui/material'
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+} from '@mui/material'
+
+const BasicCard = () => {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardContent>
+        <Typography variant='h5' component='div'>
+          カードタイトル
+        </Typography>
+        <Typography variant='body2' color='text.secondary'>
+          カードの説明文がここに入ります。Cardコンポーネントは、関連する情報をまとめて表示するのに最適です。
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size='small'>詳細</Button>
+        <Button size='small'>共有</Button>
+      </CardActions>
+    </Card>
+  )
+}
+```
+
+## カードの構造
+
+### CardHeader
+
+カードのヘッダー部分を表示します。タイトル、サブヘッダー、アバター、アクションを含めることができます。
+
+```tsx
+import { Card, CardHeader, Avatar, IconButton } from '@mui/material'
+import { MoreVert } from '@mui/icons-material'
 
 <Card>
+  <CardHeader
+    avatar={<Avatar sx={{ bgcolor: 'red' }}>R</Avatar>}
+    action={
+      <IconButton aria-label='settings'>
+        <MoreVert />
+      </IconButton>
+    }
+    title='カードタイトル'
+    subheader='2025年1月15日'
+  />
   <CardContent>
-    <Typography variant="h5" component="div">
-      タイトル
-    </Typography>
-    <Typography variant="body2" color="text.secondary">
-      説明文
-    </Typography>
+    <Typography>コンテンツ</Typography>
   </CardContent>
-  <CardActions>
-    <Button size="small">詳細</Button>
-  </CardActions>
 </Card>
 ```
 
-## 画像付き
+### CardMedia
+
+画像やビデオなどのメディアを表示します。
 
 ```tsx
+import { Card, CardMedia, CardContent } from '@mui/material'
+
 <Card>
-  <CardMedia
-    component="img"
-    height="140"
-    image="/image.jpg"
-    alt="説明"
-  />
+  <CardMedia component='img' height='140' image='/path/to/image.jpg' alt='説明' />
   <CardContent>
-    <Typography variant="h5">タイトル</Typography>
+    <Typography variant='h5'>画像付きカード</Typography>
   </CardContent>
 </Card>
+
+// ビデオの場合
+<Card>
+  <CardMedia
+    component='video'
+    height='200'
+    src='/path/to/video.mp4'
+    controls
+    alt='ビデオ説明'
+  />
+</Card>
+
+// 背景画像として使用
+<Card>
+  <CardMedia
+    sx={{ height: 200 }}
+    image='/path/to/image.jpg'
+    title='背景画像タイトル'
+  />
+</Card>
+```
+
+### CardContent
+
+カードのメインコンテンツを表示します。
+
+```tsx
+import { Card, CardContent, Typography } from '@mui/material'
+
+<Card>
+  <CardContent>
+    <Typography gutterBottom variant='h5' component='div'>
+      メインタイトル
+    </Typography>
+    <Typography variant='body2' color='text.secondary'>
+      詳細な説明文がここに入ります。
+    </Typography>
+  </CardContent>
+</Card>
+```
+
+### CardActions
+
+カードに関連するアクションボタンを表示します。
+
+```tsx
+import { Card, CardActions, Button } from '@mui/material'
+
+<Card>
+  <CardContent>{/* コンテンツ */}</CardContent>
+  <CardActions>
+    <Button size='small'>共有</Button>
+    <Button size='small'>詳細</Button>
+  </CardActions>
+</Card>
+
+// 右揃え
+<CardActions sx={{ justifyContent: 'flex-end' }}>
+  <Button>キャンセル</Button>
+  <Button variant='contained'>保存</Button>
+</CardActions>
 ```
 
 ## バリアント
 
+Cardには2つの主なバリアントがあります。
+
 ```tsx
-<Card variant="outlined">
-<Card variant="elevation">
+// Elevation variant（デフォルト） - 影を使用
+<Card variant='elevation' elevation={3}>
+  <CardContent>
+    <Typography>Elevationバリアント</Typography>
+  </CardContent>
+</Card>
+
+// Outlined variant - 枠線を使用
+<Card variant='outlined'>
+  <CardContent>
+    <Typography>Outlinedバリアント</Typography>
+  </CardContent>
+</Card>
 ```
+
+## 実装例
+
+### 商品カード
+
+```tsx
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
+  Chip,
+  Stack,
+} from '@mui/material'
+
+const ProductCard = () => {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component='img'
+        height='200'
+        image='/product-image.jpg'
+        alt='商品画像'
+      />
+      <CardContent>
+        <Stack direction='row' spacing={1} sx={{ mb: 1 }}>
+          <Chip label='新商品' color='primary' size='small' />
+          <Chip label='セール' color='error' size='small' />
+        </Stack>
+        <Typography gutterBottom variant='h5' component='div'>
+          商品名
+        </Typography>
+        <Typography variant='body2' color='text.secondary' paragraph>
+          この商品は高品質な素材を使用しており、長持ちします。
+        </Typography>
+        <Typography variant='h6' color='primary'>
+          12,800円
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size='small' variant='outlined' fullWidth>
+          カートに追加
+        </Button>
+        <Button size='small' variant='contained' fullWidth>
+          購入する
+        </Button>
+      </CardActions>
+    </Card>
+  )
+}
+```
+
+### ユーザープロフィールカード
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Avatar,
+  Typography,
+  Button,
+  Divider,
+  Stack,
+} from '@mui/material'
+import { Email, Phone, LocationOn } from '@mui/icons-material'
+
+const UserProfileCard = () => {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardHeader
+        avatar={<Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>YT</Avatar>}
+        title={<Typography variant='h6'>山田 太郎</Typography>}
+        subheader='ソフトウェアエンジニア'
+      />
+      <CardContent>
+        <Stack spacing={1.5}>
+          <Stack direction='row' spacing={1} alignItems='center'>
+            <Email fontSize='small' color='action' />
+            <Typography variant='body2'>yamada@example.com</Typography>
+          </Stack>
+          <Stack direction='row' spacing={1} alignItems='center'>
+            <Phone fontSize='small' color='action' />
+            <Typography variant='body2'>090-1234-5678</Typography>
+          </Stack>
+          <Stack direction='row' spacing={1} alignItems='center'>
+            <LocationOn fontSize='small' color='action' />
+            <Typography variant='body2'>東京都</Typography>
+          </Stack>
+        </Stack>
+      </CardContent>
+      <Divider />
+      <CardActions>
+        <Button fullWidth variant='outlined'>
+          メッセージを送る
+        </Button>
+      </CardActions>
+    </Card>
+  )
+}
+```
+
+### 記事カード
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Avatar,
+  IconButton,
+  Typography,
+} from '@mui/material'
+import { Favorite, Share, MoreVert } from '@mui/icons-material'
+
+const ArticleCard = () => {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardHeader
+        avatar={<Avatar sx={{ bgcolor: 'red' }}>著</Avatar>}
+        action={
+          <IconButton aria-label='settings'>
+            <MoreVert />
+          </IconButton>
+        }
+        title='記事のタイトル'
+        subheader='2025年1月15日'
+      />
+      <CardMedia component='img' height='194' image='/article-image.jpg' alt='記事画像' />
+      <CardContent>
+        <Typography variant='body2' color='text.secondary'>
+          この記事では、MUIのCardコンポーネントの使い方について詳しく解説しています。実践的な例を交えながら、効果的な実装方法を紹介します。
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label='add to favorites'>
+          <Favorite />
+        </IconButton>
+        <IconButton aria-label='share'>
+          <Share />
+        </IconButton>
+      </CardActions>
+    </Card>
+  )
+}
+```
+
+### 価格カード
+
+```tsx
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@mui/material'
+import { Check } from '@mui/icons-material'
+
+const PricingCard = ({ featured }: { featured?: boolean }) => {
+  return (
+    <Card
+      variant={featured ? 'elevation' : 'outlined'}
+      elevation={featured ? 8 : 1}
+      sx={{
+        maxWidth: 300,
+        border: featured ? 2 : 1,
+        borderColor: featured ? 'primary.main' : 'divider',
+      }}>
+      <CardContent>
+        {featured && (
+          <Typography variant='overline' color='primary' gutterBottom>
+            人気プラン
+          </Typography>
+        )}
+        <Typography variant='h5' component='div' gutterBottom>
+          プロフェッショナル
+        </Typography>
+        <Typography variant='h3' component='div' gutterBottom>
+          2,980円
+          <Typography variant='body2' component='span' color='text.secondary'>
+            /月
+          </Typography>
+        </Typography>
+        <Divider sx={{ my: 2 }} />
+        <List dense>
+          <ListItem disableGutters>
+            <ListItemIcon>
+              <Check color='primary' />
+            </ListItemIcon>
+            <ListItemText primary='無制限のプロジェクト' />
+          </ListItem>
+          <ListItem disableGutters>
+            <ListItemIcon>
+              <Check color='primary' />
+            </ListItemIcon>
+            <ListItemText primary='優先サポート' />
+          </ListItem>
+          <ListItem disableGutters>
+            <ListItemIcon>
+              <Check color='primary' />
+            </ListItemIcon>
+            <ListItemText primary='カスタムドメイン' />
+          </ListItem>
+        </List>
+      </CardContent>
+      <CardActions>
+        <Button
+          fullWidth
+          variant={featured ? 'contained' : 'outlined'}
+          color='primary'
+          size='large'>
+          プランを選択
+        </Button>
+      </CardActions>
+    </Card>
+  )
+}
+```
+
+### SNSカード
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Avatar,
+  IconButton,
+  Typography,
+  Stack,
+} from '@mui/material'
+import { FavoriteBorder, ChatBubbleOutline, Share, MoreVert } from '@mui/icons-material'
+
+const SocialMediaCard = () => {
+  return (
+    <Card sx={{ maxWidth: 500 }}>
+      <CardHeader
+        avatar={<Avatar sx={{ bgcolor: 'purple' }}>U</Avatar>}
+        action={
+          <IconButton aria-label='settings'>
+            <MoreVert />
+          </IconButton>
+        }
+        title='ユーザー名'
+        subheader='2時間前'
+      />
+      <CardContent>
+        <Typography variant='body1' paragraph>
+          今日は素晴らしい天気ですね。公園で散歩してきました。
+        </Typography>
+        <Typography variant='body2' color='primary'>
+          #散歩 #公園 #天気
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <Stack direction='row' spacing={1} sx={{ width: '100%' }}>
+          <IconButton aria-label='like'>
+            <FavoriteBorder />
+          </IconButton>
+          <IconButton aria-label='comment'>
+            <ChatBubbleOutline />
+          </IconButton>
+          <IconButton aria-label='share'>
+            <Share />
+          </IconButton>
+        </Stack>
+      </CardActions>
+    </Card>
+  )
+}
+```
+
+### 統計カード
+
+```tsx
+import { Card, CardContent, Typography, Box, Stack } from '@mui/material'
+import { TrendingUp, TrendingDown } from '@mui/icons-material'
+
+const StatsCard = ({
+  title,
+  value,
+  change,
+  isPositive,
+}: {
+  title: string
+  value: string
+  change: string
+  isPositive: boolean
+}) => {
+  return (
+    <Card>
+      <CardContent>
+        <Typography color='text.secondary' gutterBottom variant='overline'>
+          {title}
+        </Typography>
+        <Typography variant='h4' component='div' gutterBottom>
+          {value}
+        </Typography>
+        <Stack direction='row' alignItems='center' spacing={0.5}>
+          {isPositive ? (
+            <TrendingUp fontSize='small' color='success' />
+          ) : (
+            <TrendingDown fontSize='small' color='error' />
+          )}
+          <Typography variant='body2' color={isPositive ? 'success.main' : 'error.main'}>
+            {change}
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            vs 先月
+          </Typography>
+        </Stack>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+## インタラクティブなカード
+
+ホバー効果やクリック可能なカードの実装例です。
+
+```tsx
+import { Card, CardContent, Typography } from '@mui/material'
+
+const InteractiveCard = () => {
+  return (
+    <Card
+      sx={{
+        maxWidth: 345,
+        cursor: 'pointer',
+        transition: 'all 0.3s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-8px)',
+          boxShadow: 8,
+        },
+      }}
+      onClick={() => console.log('カードがクリックされました')}>
+      <CardContent>
+        <Typography variant='h5'>クリック可能なカード</Typography>
+        <Typography variant='body2' color='text.secondary'>
+          カードをクリックすると反応します
+        </Typography>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+## グリッドレイアウト
+
+複数のカードをグリッドレイアウトで配置する例です。
+
+```tsx
+import { Grid, Card, CardContent, Typography } from '@mui/material'
+
+const CardGrid = () => {
+  const cards = [1, 2, 3, 4, 5, 6]
+
+  return (
+    <Grid container spacing={3}>
+      {cards.map((card) => (
+        <Grid item xs={12} sm={6} md={4} key={card}>
+          <Card>
+            <CardContent>
+              <Typography variant='h5'>カード {card}</Typography>
+              <Typography variant='body2' color='text.secondary'>
+                カードの内容
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
+  )
+}
+```
+
+## レスポンシブデザイン
+
+レスポンシブなカードレイアウトの例です。
+
+```tsx
+import { Card, CardContent, Typography } from '@mui/material'
+
+const ResponsiveCard = () => {
+  return (
+    <Card
+      sx={{
+        maxWidth: { xs: '100%', sm: 600, md: 800 },
+        margin: { xs: 1, sm: 2, md: 3 },
+      }}>
+      <CardContent
+        sx={{
+          p: { xs: 2, sm: 3, md: 4 },
+        }}>
+        <Typography
+          variant='h5'
+          sx={{
+            fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' },
+          }}>
+          レスポンシブカード
+        </Typography>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+## 展開可能なカード
+
+折りたたみ可能なカードの実装例です。
+
+```tsx
+import { useState } from 'react'
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Collapse,
+  IconButton,
+  Typography,
+} from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
+
+const ExpandableCard = () => {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardHeader title='展開可能なカード' subheader='詳細を表示' />
+      <CardContent>
+        <Typography variant='body2' color='text.secondary'>
+          基本情報がここに表示されます。
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
+          aria-label='show more'
+          sx={{
+            transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+            marginLeft: 'auto',
+            transition: 'transform 0.3s',
+          }}>
+          <ExpandMore />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout='auto' unmountOnExit>
+        <CardContent>
+          <Typography paragraph>詳細情報:</Typography>
+          <Typography paragraph>
+            展開された部分のコンテンツがここに表示されます。追加の詳細情報や説明文を配置できます。
+          </Typography>
+        </CardContent>
+      </Collapse>
+    </Card>
+  )
+}
+```
+
+## Card vs Paper
+
+| 機能 | Card | Paper |
+| --- | --- | --- |
+| 構造 | 構造化された領域（Header、Content、Actions） | 自由な構造 |
+| 用途 | コンテンツカード、商品一覧 | 汎用的なサーフェス |
+| サブコンポーネント | CardHeader、CardMedia、CardContent、CardActions | なし |
+| 複雑さ | やや複雑 | シンプル |
+
+## アクセシビリティ
+
+カードを使用する際は、アクセシビリティに注意してください。
+
+```tsx
+// クリック可能なカード
+<Card
+  component='button'
+  onClick={handleClick}
+  aria-label='商品の詳細を表示'
+  sx={{ cursor: 'pointer' }}>
+  <CardContent>{/* コンテンツ */}</CardContent>
+</Card>
+
+// リンクとしてのカード
+<Card
+  component='a'
+  href='/product/123'
+  aria-label='商品123の詳細ページへ'
+  sx={{ textDecoration: 'none' }}>
+  <CardContent>{/* コンテンツ */}</CardContent>
+</Card>
+
+// セマンティックな構造
+<Card component='article' aria-labelledby='card-title'>
+  <CardHeader id='card-title' title='記事タイトル' />
+  <CardContent>{/* コンテンツ */}</CardContent>
+</Card>
+```
+
+### アクセシビリティのポイント
+
+- クリック可能なカードには適切な`aria-label`を提供する
+- キーボードナビゲーションをサポートする
+- 画像には適切な`alt`属性を設定する
+- 十分なコントラストを確保する
+- インタラクティブな要素にはフォーカス状態を明示する
+
+## ベストプラクティス
+
+### 推奨事項
+
+- 関連情報をグループ化するために使用する
+- 一貫性のあるカードサイズを保つ
+- 適切なスペーシングを設定する
+- 画像には最適化されたサイズを使用する
+- レスポンシブデザインを考慮する
+- 必要に応じてelevationを調整する
+
+### 避けるべき事項
+
+- カード内に過度に多くの情報を詰め込まない
+- 複雑なネスト構造を作らない
+- 一貫性のないスタイリングを使用しない
+- 画像のアスペクト比を無視しない
+- アクセシビリティを無視しない
+
+## パフォーマンス最適化
+
+### 画像の遅延読み込み
+
+```tsx
+import { Card, CardMedia } from '@mui/material'
+
+<Card>
+  <CardMedia
+    component='img'
+    height='200'
+    image='/image.jpg'
+    alt='説明'
+    loading='lazy'
+  />
+  <CardContent>{/* コンテンツ */}</CardContent>
+</Card>
+```
+
+### 仮想化されたリスト
+
+大量のカードを表示する場合は、react-windowやreact-virtualized を使用して仮想化を検討してください。
+
+```tsx
+import { FixedSizeGrid } from 'react-window'
+import { Card, CardContent } from '@mui/material'
+
+const VirtualizedCardGrid = () => {
+  const Cell = ({ columnIndex, rowIndex, style }) => (
+    <div style={style}>
+      <Card sx={{ m: 1 }}>
+        <CardContent>
+          カード {rowIndex * 3 + columnIndex}
+        </CardContent>
+      </Card>
+    </div>
+  )
+
+  return (
+    <FixedSizeGrid
+      columnCount={3}
+      columnWidth={200}
+      height={600}
+      rowCount={100}
+      rowHeight={150}
+      width={650}>
+      {Cell}
+    </FixedSizeGrid>
+  )
+}
+```
+
+## 関連コンポーネント
+
+- **Paper**: よりシンプルなサーフェスコンポーネント
+- **Box**: レイアウト用のコンテナ
+- **Grid**: カードをグリッドレイアウトで配置する場合
+- **Stack**: カードを縦または横に並べる場合
 
 ## 参考リンク
 

@@ -22,10 +22,7 @@ FormControlLabelと組み合わせて使用:
 ```tsx
 import { FormControlLabel } from '@mui/material'
 
-<FormControlLabel
-  control={<Checkbox />}
-  label="利用規約に同意する"
-/>
+;<FormControlLabel control={<Checkbox />} label='利用規約に同意する' />
 ```
 
 ## 制御コンポーネント
@@ -121,10 +118,7 @@ const someChecked = checked.some(Boolean) && !allChecked
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder'
 import Favorite from '@mui/icons-material/Favorite'
 
-<Checkbox
-  icon={<FavoriteBorder />}
-  checkedIcon={<Favorite />}
-/>
+;<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
 ```
 
 ## FormGroup
@@ -134,10 +128,10 @@ import Favorite from '@mui/icons-material/Favorite'
 ```tsx
 import { FormGroup } from '@mui/material'
 
-<FormGroup>
-  <FormControlLabel control={<Checkbox />} label="JavaScript" />
-  <FormControlLabel control={<Checkbox />} label="TypeScript" />
-  <FormControlLabel control={<Checkbox />} label="Python" />
+;<FormGroup>
+  <FormControlLabel control={<Checkbox />} label='JavaScript' />
+  <FormControlLabel control={<Checkbox />} label='TypeScript' />
+  <FormControlLabel control={<Checkbox />} label='Python' />
 </FormGroup>
 ```
 
@@ -145,9 +139,9 @@ import { FormGroup } from '@mui/material'
 
 ```tsx
 <FormGroup row>
-  <FormControlLabel control={<Checkbox />} label="JavaScript" />
-  <FormControlLabel control={<Checkbox />} label="TypeScript" />
-  <FormControlLabel control={<Checkbox />} label="Python" />
+  <FormControlLabel control={<Checkbox />} label='JavaScript' />
+  <FormControlLabel control={<Checkbox />} label='TypeScript' />
+  <FormControlLabel control={<Checkbox />} label='Python' />
 </FormGroup>
 ```
 
@@ -163,7 +157,7 @@ const handleSubmit = () => {
   }
 }
 
-<FormControl error={error} component="fieldset">
+;<FormControl error={error} component='fieldset'>
   <FormGroup>
     <FormControlLabel
       control={
@@ -175,7 +169,7 @@ const handleSubmit = () => {
           }}
         />
       }
-      label="利用規約に同意する"
+      label='利用規約に同意する'
     />
   </FormGroup>
   {error && <FormHelperText>同意が必要です</FormHelperText>}
@@ -238,38 +232,38 @@ const handleChange = (event) => {
   })
 }
 
-<FormControl component="fieldset">
-  <FormLabel component="legend">興味のある分野</FormLabel>
+;<FormControl component='fieldset'>
+  <FormLabel component='legend'>興味のある分野</FormLabel>
   <FormGroup>
     <FormControlLabel
       control={
         <Checkbox
           checked={interests.programming}
           onChange={handleChange}
-          name="programming"
+          name='programming'
         />
       }
-      label="プログラミング"
+      label='プログラミング'
     />
     <FormControlLabel
       control={
         <Checkbox
           checked={interests.design}
           onChange={handleChange}
-          name="design"
+          name='design'
         />
       }
-      label="デザイン"
+      label='デザイン'
     />
     <FormControlLabel
       control={
         <Checkbox
           checked={interests.marketing}
           onChange={handleChange}
-          name="marketing"
+          name='marketing'
         />
       }
-      label="マーケティング"
+      label='マーケティング'
     />
   </FormGroup>
 </FormControl>
@@ -282,7 +276,7 @@ const handleChange = (event) => {
   control={<Checkbox required />}
   label={
     <Typography>
-      <Link href="/terms">利用規約</Link>に同意する
+      <Link href='/terms'>利用規約</Link>に同意する
     </Typography>
   }
 />
@@ -320,17 +314,17 @@ const handleChange = (event) => {
       }}
     />
   }
-  label="利用規約に同意する"
+  label='利用規約に同意する'
 />
 ```
 
 ## Checkbox vs Radio vs Switch
 
-| コンポーネント | 選択数 | 用途 |
-|--------------|--------|------|
-| Checkbox | 複数可 | リストから複数選択 |
-| Radio | 1つのみ | グループから1つ選択 |
-| Switch | - | ON/OFF切り替え |
+| コンポーネント | 選択数  | 用途                |
+| -------------- | ------- | ------------------- |
+| Checkbox       | 複数可  | リストから複数選択  |
+| Radio          | 1つのみ | グループから1つ選択 |
+| Switch         | -       | ON/OFF切り替え      |
 
 ## ベストプラクティス
 

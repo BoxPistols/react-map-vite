@@ -29,15 +29,17 @@ import { Skeleton } from '@mui/material'
 ## 実装例
 
 ```tsx
-{loading ? (
-  <>
-    <Skeleton variant="text" width="60%" />
-    <Skeleton variant="text" width="80%" />
-    <Skeleton variant="rectangular" height={200} />
-  </>
-) : (
-  <ActualContent />
-)}
+{
+  loading ? (
+    <>
+      <Skeleton variant='text' width='60%' />
+      <Skeleton variant='text' width='80%' />
+      <Skeleton variant='rectangular' height={200} />
+    </>
+  ) : (
+    <ActualContent />
+  )
+}
 ```
 
 ## 参考リンク

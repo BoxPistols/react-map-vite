@@ -36,13 +36,12 @@ import { Alert } from '@mui/material'
 
 ```tsx
 <Alert
-  severity="info"
+  severity='info'
   action={
-    <Button color="inherit" size="small">
+    <Button color='inherit' size='small'>
       実行
     </Button>
-  }
->
+  }>
   アクション付きアラート
 </Alert>
 ```
@@ -50,15 +49,13 @@ import { Alert } from '@mui/material'
 ## 閉じるボタン
 
 ```tsx
-<Alert onClose={() => console.log('closed')}>
-  閉じることができます
-</Alert>
+<Alert onClose={() => console.log('closed')}>閉じることができます</Alert>
 ```
 
 ## タイトル付き
 
 ```tsx
-<Alert severity="error">
+<Alert severity='error'>
   <AlertTitle>エラー</AlertTitle>
   詳細なエラーメッセージがここに表示されます
 </Alert>
@@ -69,24 +66,25 @@ import { Alert } from '@mui/material'
 ### フォームのエラー表示
 
 ```tsx
-{error && (
-  <Alert severity="error" sx={{ mb: 2 }}>
-    {error}
-  </Alert>
-)}
+{
+  error && (
+    <Alert severity='error' sx={{ mb: 2 }}>
+      {error}
+    </Alert>
+  )
+}
 ```
 
 ### 成功メッセージ
 
 ```tsx
-{success && (
-  <Alert
-    severity="success"
-    onClose={() => setSuccess(false)}
-  >
-    データを保存しました
-  </Alert>
-)}
+{
+  success && (
+    <Alert severity='success' onClose={() => setSuccess(false)}>
+      データを保存しました
+    </Alert>
+  )
+}
 ```
 
 ## ベストプラクティス

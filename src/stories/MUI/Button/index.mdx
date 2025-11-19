@@ -12,7 +12,7 @@ Material-UIの中で最も頻繁に使用されるコンポーネントの一つ
 ```tsx
 import { Button } from '@mui/material'
 
-<Button variant="contained">ボタン</Button>
+;<Button variant='contained'>ボタン</Button>
 ```
 
 ## バリエーション
@@ -22,10 +22,12 @@ import { Button } from '@mui/material'
 ボタンの表示スタイルを3種類から選択できます:
 
 - **contained** - 背景色のある塗りつぶしボタン（最も目立つ）
+
   - 主要なアクション（保存、送信、決定など）に使用
   - ページに1-2個程度に抑えることを推奨
 
 - **outlined** - 枠線のみのボタン（中間の強調度）
+
   - 二次的なアクション（キャンセル、戻るなど）に使用
   - containedボタンと組み合わせて使用することが多い
 
@@ -83,7 +85,7 @@ import { Button } from '@mui/material'
 ```tsx
 import SendIcon from '@mui/icons-material/Send'
 
-<Button startIcon={<SendIcon />}>送信</Button>
+;<Button startIcon={<SendIcon />}>送信</Button>
 ```
 
 ### endIcon
@@ -93,7 +95,7 @@ import SendIcon from '@mui/icons-material/Send'
 ```tsx
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
-<Button endIcon={<ArrowForwardIcon />}>次へ</Button>
+;<Button endIcon={<ArrowForwardIcon />}>次へ</Button>
 ```
 
 ## 状態
@@ -113,7 +115,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 ```tsx
 import { LoadingButton } from '@mui/lab'
 
-<LoadingButton loading>読み込み中</LoadingButton>
+;<LoadingButton loading>読み込み中</LoadingButton>
 ```
 
 ## fullWidth
@@ -130,8 +132,8 @@ import { LoadingButton } from '@mui/lab'
 
 ```tsx
 <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
-  <Button variant="outlined">キャンセル</Button>
-  <Button variant="contained">保存</Button>
+  <Button variant='outlined'>キャンセル</Button>
+  <Button variant='contained'>保存</Button>
 </Box>
 ```
 
@@ -139,8 +141,10 @@ import { LoadingButton } from '@mui/lab'
 
 ```tsx
 <DialogActions>
-  <Button variant="text">閉じる</Button>
-  <Button variant="contained" color="error">削除</Button>
+  <Button variant='text'>閉じる</Button>
+  <Button variant='contained' color='error'>
+    削除
+  </Button>
 </DialogActions>
 ```
 
@@ -148,10 +152,10 @@ import { LoadingButton } from '@mui/lab'
 
 ```tsx
 <Box sx={{ display: 'flex', gap: 2 }}>
-  <Button startIcon={<AddIcon />} variant="contained">
+  <Button startIcon={<AddIcon />} variant='contained'>
     新規作成
   </Button>
-  <Button startIcon={<DeleteIcon />} variant="outlined" color="error">
+  <Button startIcon={<DeleteIcon />} variant='outlined' color='error'>
     削除
   </Button>
 </Box>
@@ -164,7 +168,7 @@ import { LoadingButton } from '@mui/lab'
 アイコンのみのボタンには必ず`aria-label`を設定:
 
 ```tsx
-<IconButton aria-label="削除">
+<IconButton aria-label='削除'>
   <DeleteIcon />
 </IconButton>
 ```
@@ -178,7 +182,7 @@ import { LoadingButton } from '@mui/lab'
 ### 無効化状態
 
 ```tsx
-<Button disabled aria-disabled="true">
+<Button disabled aria-disabled='true'>
   無効なボタン
 </Button>
 ```
@@ -196,8 +200,7 @@ import { LoadingButton } from '@mui/lab'
     '&:hover': {
       backgroundColor: 'primary.dark',
     },
-  }}
->
+  }}>
   カスタムボタン
 </Button>
 ```
@@ -227,6 +230,7 @@ const theme = createTheme({
 ### 優先順位の明確化
 
 1つのビューで複数のアクションがある場合:
+
 - 最も重要なアクション: `variant="contained"`
 - 二次的なアクション: `variant="outlined"`
 - 補助的なアクション: `variant="text"`
@@ -234,16 +238,16 @@ const theme = createTheme({
 ### 破壊的なアクション
 
 削除などの破壊的なアクションには:
+
 - `color="error"`を使用
 - 確認ダイアログと組み合わせる
 
 ```tsx
 <Button
-  variant="outlined"
-  color="error"
+  variant='outlined'
+  color='error'
   startIcon={<DeleteIcon />}
-  onClick={handleDelete}
->
+  onClick={handleDelete}>
   削除
 </Button>
 ```

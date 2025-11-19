@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Rating } from '@mui/material'
 
-<Rating />
+;<Rating />
 ```
 
 ## 制御コンポーネント
@@ -50,10 +50,7 @@ const [value, setValue] = useState(3)
 半分の星を許可:
 
 ```tsx
-<Rating
-  value={2.5}
-  precision={0.5}
-/>
+<Rating value={2.5} precision={0.5} />
 ```
 
 ## アイコンのカスタマイズ
@@ -62,9 +59,9 @@ const [value, setValue] = useState(3)
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
-<Rating
-  icon={<FavoriteIcon fontSize="inherit" />}
-  emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+;<Rating
+  icon={<FavoriteIcon fontSize='inherit' />}
+  emptyIcon={<FavoriteBorderIcon fontSize='inherit' />}
 />
 ```
 
@@ -73,7 +70,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 ```tsx
 <Box sx={{ display: 'flex', alignItems: 'center' }}>
   <Rating value={4} readOnly />
-  <Typography variant="body2" sx={{ ml: 1 }}>
+  <Typography variant='body2' sx={{ ml: 1 }}>
     4.0 (120件のレビュー)
   </Typography>
 </Box>
@@ -111,11 +108,8 @@ const labels = {
 
 ```tsx
 <Box>
-  <Typography component="legend">商品の評価</Typography>
-  <Rating
-    value={rating}
-    onChange={(e, newValue) => setRating(newValue)}
-  />
+  <Typography component='legend'>商品の評価</Typography>
+  <Rating value={rating} onChange={(e, newValue) => setRating(newValue)} />
 </Box>
 ```
 
@@ -124,10 +118,10 @@ const labels = {
 ```tsx
 <Card>
   <CardContent>
-    <Typography variant="h6">商品名</Typography>
+    <Typography variant='h6'>商品名</Typography>
     <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
       <Rating value={4.5} precision={0.5} readOnly />
-      <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
+      <Typography variant='body2' color='text.secondary' sx={{ ml: 1 }}>
         4.5 (234)
       </Typography>
     </Box>
@@ -139,7 +133,7 @@ const labels = {
 
 ```tsx
 <Rating
-  name="product-rating"
+  name='product-rating'
   value={rating}
   onChange={(e, newValue) => setRating(newValue)}
 />

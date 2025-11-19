@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Container } from '@mui/material'
 
-<Container>
+;<Container>
   <Typography>コンテンツ</Typography>
 </Container>
 ```
@@ -30,9 +30,7 @@ import { Container } from '@mui/material'
 ## 固定幅
 
 ```tsx
-<Container fixed>
-  固定幅のコンテナ
-</Container>
+<Container fixed>固定幅のコンテナ</Container>
 ```
 
 ## disableGutters
@@ -40,21 +38,17 @@ import { Container } from '@mui/material'
 パディングを無効化:
 
 ```tsx
-<Container disableGutters>
-  パディングなし
-</Container>
+<Container disableGutters>パディングなし</Container>
 ```
 
 ## 実装例
 
 ```tsx
-<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-  <Typography variant="h4" gutterBottom>
+<Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
+  <Typography variant='h4' gutterBottom>
     ページタイトル
   </Typography>
-  <Typography paragraph>
-    コンテンツ...
-  </Typography>
+  <Typography paragraph>コンテンツ...</Typography>
 </Container>
 ```
 

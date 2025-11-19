@@ -11,9 +11,9 @@ import { Meta } from '@storybook/blocks'
 ```tsx
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 
-<FormControl fullWidth>
+;<FormControl fullWidth>
   <InputLabel>年齢</InputLabel>
-  <Select label="年齢">
+  <Select label='年齢'>
     <MenuItem value={10}>10歳</MenuItem>
     <MenuItem value={20}>20歳</MenuItem>
     <MenuItem value={30}>30歳</MenuItem>
@@ -84,8 +84,7 @@ const [selected, setSelected] = useState([])
   multiple
   value={selected}
   onChange={(e) => setSelected(e.target.value)}
-  renderValue={(selected) => selected.join(', ')}
->
+  renderValue={(selected) => selected.join(', ')}>
   {options.map((name) => (
     <MenuItem key={name} value={name}>
       <Checkbox checked={selected.indexOf(name) > -1} />
@@ -108,8 +107,7 @@ const [selected, setSelected] = useState([])
         <Chip key={value} label={value} />
       ))}
     </Box>
-  )}
->
+  )}>
   {options.map((name) => (
     <MenuItem key={name} value={name}>
       {name}
@@ -125,12 +123,12 @@ ListSubheaderを使ってグループ化:
 ```tsx
 <Select>
   <ListSubheader>フルーツ</ListSubheader>
-  <MenuItem value="apple">りんご</MenuItem>
-  <MenuItem value="banana">バナナ</MenuItem>
+  <MenuItem value='apple'>りんご</MenuItem>
+  <MenuItem value='banana'>バナナ</MenuItem>
 
   <ListSubheader>野菜</ListSubheader>
-  <MenuItem value="carrot">にんじん</MenuItem>
-  <MenuItem value="tomato">トマト</MenuItem>
+  <MenuItem value='carrot'>にんじん</MenuItem>
+  <MenuItem value='tomato'>トマト</MenuItem>
 </Select>
 ```
 
@@ -160,7 +158,7 @@ HTMLのネイティブselect要素を使用:
 ```tsx
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
-<Select IconComponent={KeyboardArrowDownIcon} />
+;<Select IconComponent={KeyboardArrowDownIcon} />
 ```
 
 ### メニューの位置
@@ -202,10 +200,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
   <InputLabel>必須項目</InputLabel>
   <Select
     value={value}
-    label="必須項目"
-    onChange={(e) => setValue(e.target.value)}
-  >
-    <MenuItem value="">
+    label='必須項目'
+    onChange={(e) => setValue(e.target.value)}>
+    <MenuItem value=''>
       <em>選択してください</em>
     </MenuItem>
     <MenuItem value={10}>オプション1</MenuItem>
@@ -263,12 +260,16 @@ const categories = {
 
 ```tsx
 <Select>
-  <MenuItem value="edit">
-    <ListItemIcon><EditIcon /></ListItemIcon>
+  <MenuItem value='edit'>
+    <ListItemIcon>
+      <EditIcon />
+    </ListItemIcon>
     <ListItemText>編集</ListItemText>
   </MenuItem>
-  <MenuItem value="delete">
-    <ListItemIcon><DeleteIcon /></ListItemIcon>
+  <MenuItem value='delete'>
+    <ListItemIcon>
+      <DeleteIcon />
+    </ListItemIcon>
     <ListItemText>削除</ListItemText>
   </MenuItem>
 </Select>
@@ -282,8 +283,8 @@ FormControlとInputLabelを使用して適切にラベルを関連付け:
 
 ```tsx
 <FormControl>
-  <InputLabel id="age-label">年齢</InputLabel>
-  <Select labelId="age-label" label="年齢">
+  <InputLabel id='age-label'>年齢</InputLabel>
+  <Select labelId='age-label' label='年齢'>
     <MenuItem value={10}>10歳</MenuItem>
   </Select>
 </FormControl>
@@ -299,13 +300,13 @@ FormControlとInputLabelを使用して適切にラベルを関連付け:
 
 ## Select vs Autocomplete
 
-| 項目 | Select | Autocomplete |
-|------|--------|--------------|
-| 選択肢の数 | 少〜中（〜20個程度） | 多（20個以上） |
-| 検索機能 | なし | あり |
-| 自由入力 | 不可 | 可能（freeSolo） |
-| UI | シンプル | リッチ |
-| パフォーマンス | 軽量 | やや重い |
+| 項目           | Select               | Autocomplete     |
+| -------------- | -------------------- | ---------------- |
+| 選択肢の数     | 少〜中（〜20個程度） | 多（20個以上）   |
+| 検索機能       | なし                 | あり             |
+| 自由入力       | 不可                 | 可能（freeSolo） |
+| UI             | シンプル             | リッチ           |
+| パフォーマンス | 軽量                 | やや重い         |
 
 ## ベストプラクティス
 
