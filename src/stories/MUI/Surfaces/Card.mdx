@@ -49,7 +49,7 @@ const BasicCard = () => {
 import { Card, CardHeader, Avatar, IconButton } from '@mui/material'
 import { MoreVert } from '@mui/icons-material'
 
-<Card>
+;<Card>
   <CardHeader
     avatar={<Avatar sx={{ bgcolor: 'red' }}>R</Avatar>}
     action={
@@ -108,7 +108,7 @@ import { Card, CardMedia, CardContent } from '@mui/material'
 ```tsx
 import { Card, CardContent, Typography } from '@mui/material'
 
-<Card>
+;<Card>
   <CardContent>
     <Typography gutterBottom variant='h5' component='div'>
       メインタイトル
@@ -235,7 +235,11 @@ const UserProfileCard = () => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>YT</Avatar>}
+        avatar={
+          <Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>
+            YT
+          </Avatar>
+        }
         title={<Typography variant='h6'>山田 太郎</Typography>}
         subheader='ソフトウェアエンジニア'
       />
@@ -294,7 +298,12 @@ const ArticleCard = () => {
         title='記事のタイトル'
         subheader='2025年1月15日'
       />
-      <CardMedia component='img' height='194' image='/article-image.jpg' alt='記事画像' />
+      <CardMedia
+        component='img'
+        height='194'
+        image='/article-image.jpg'
+        alt='記事画像'
+      />
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
           この記事では、MUIのCardコンポーネントの使い方について詳しく解説しています。実践的な例を交えながら、効果的な実装方法を紹介します。
@@ -404,7 +413,12 @@ import {
   Typography,
   Stack,
 } from '@mui/material'
-import { FavoriteBorder, ChatBubbleOutline, Share, MoreVert } from '@mui/icons-material'
+import {
+  FavoriteBorder,
+  ChatBubbleOutline,
+  Share,
+  MoreVert,
+} from '@mui/icons-material'
 
 const SocialMediaCard = () => {
   return (
@@ -477,7 +491,9 @@ const StatsCard = ({
           ) : (
             <TrendingDown fontSize='small' color='error' />
           )}
-          <Typography variant='body2' color={isPositive ? 'success.main' : 'error.main'}>
+          <Typography
+            variant='body2'
+            color={isPositive ? 'success.main' : 'error.main'}>
             {change}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
@@ -637,12 +653,12 @@ const ExpandableCard = () => {
 
 ## Card vs Paper
 
-| 機能 | Card | Paper |
-| --- | --- | --- |
-| 構造 | 構造化された領域（Header、Content、Actions） | 自由な構造 |
-| 用途 | コンテンツカード、商品一覧 | 汎用的なサーフェス |
-| サブコンポーネント | CardHeader、CardMedia、CardContent、CardActions | なし |
-| 複雑さ | やや複雑 | シンプル |
+| 機能               | Card                                            | Paper              |
+| ------------------ | ----------------------------------------------- | ------------------ |
+| 構造               | 構造化された領域（Header、Content、Actions）    | 自由な構造         |
+| 用途               | コンテンツカード、商品一覧                      | 汎用的なサーフェス |
+| サブコンポーネント | CardHeader、CardMedia、CardContent、CardActions | なし               |
+| 複雑さ             | やや複雑                                        | シンプル           |
 
 ## アクセシビリティ
 
@@ -708,7 +724,7 @@ const ExpandableCard = () => {
 ```tsx
 import { Card, CardMedia } from '@mui/material'
 
-<Card>
+;<Card>
   <CardMedia
     component='img'
     height='200'
@@ -732,9 +748,7 @@ const VirtualizedCardGrid = () => {
   const Cell = ({ columnIndex, rowIndex, style }) => (
     <div style={style}>
       <Card sx={{ m: 1 }}>
-        <CardContent>
-          カード {rowIndex * 3 + columnIndex}
-        </CardContent>
+        <CardContent>カード {rowIndex * 3 + columnIndex}</CardContent>
       </Card>
     </div>
   )

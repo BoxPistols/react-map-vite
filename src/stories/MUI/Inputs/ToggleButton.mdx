@@ -44,7 +44,7 @@ const handleFormat = (event, newFormats) => {
   setFormats(newFormats)
 }
 
-<ToggleButtonGroup value={formats} onChange={handleFormat}>
+;<ToggleButtonGroup value={formats} onChange={handleFormat}>
   <ToggleButton value='bold'>太字</ToggleButton>
   <ToggleButton value='italic'>斜体</ToggleButton>
   <ToggleButton value='underlined'>下線</ToggleButton>

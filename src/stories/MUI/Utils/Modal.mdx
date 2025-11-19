@@ -147,7 +147,7 @@ const fullscreenStyle = {
 ```tsx
 import { Backdrop } from '@mui/material'
 
-<Modal
+;<Modal
   open={open}
   onClose={handleClose}
   slots={{
@@ -233,7 +233,11 @@ const ConfirmationModal = ({
       aria-labelledby='confirmation-title'
       aria-describedby='confirmation-description'>
       <Box sx={style}>
-        <Typography id='confirmation-title' variant='h6' component='h2' gutterBottom>
+        <Typography
+          id='confirmation-title'
+          variant='h6'
+          component='h2'
+          gutterBottom>
           {title}
         </Typography>
         <Typography id='confirmation-description' sx={{ mt: 2, mb: 3 }}>
@@ -265,7 +269,13 @@ const ConfirmationModal = ({
 import { Modal, Box, Typography, TextField, Button, Stack } from '@mui/material'
 import { useState } from 'react'
 
-const FormModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+const FormModal = ({
+  open,
+  onClose,
+}: {
+  open: boolean
+  onClose: () => void
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -295,7 +305,11 @@ const FormModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
   return (
     <Modal open={open} onClose={onClose} aria-labelledby='form-modal-title'>
       <Box sx={style}>
-        <Typography id='form-modal-title' variant='h6' component='h2' gutterBottom>
+        <Typography
+          id='form-modal-title'
+          variant='h6'
+          component='h2'
+          gutterBottom>
           お問い合わせフォーム
         </Typography>
         <Box component='form' onSubmit={handleSubmit} sx={{ mt: 2 }}>
@@ -312,7 +326,9 @@ const FormModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
             label='メールアドレス'
             type='email'
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             margin='normal'
             required
           />
@@ -322,11 +338,17 @@ const FormModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
             multiline
             rows={4}
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
             margin='normal'
             required
           />
-          <Stack direction='row' spacing={2} sx={{ mt: 3 }} justifyContent='flex-end'>
+          <Stack
+            direction='row'
+            spacing={2}
+            sx={{ mt: 3 }}
+            justifyContent='flex-end'>
             <Button variant='outlined' onClick={onClose}>
               キャンセル
             </Button>
@@ -394,7 +416,8 @@ const ImageGalleryModal = ({
           }}>
           <Close />
         </IconButton>
-        <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        <Box
+          sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
           <IconButton
             onClick={handlePrevious}
             sx={{
@@ -544,7 +567,13 @@ Modalを使用する際は、アクセシビリティに注意してください
 ### 遅延レンダリング
 
 ```tsx
-const LazyModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+const LazyModal = ({
+  open,
+  onClose,
+}: {
+  open: boolean
+  onClose: () => void
+}) => {
   if (!open) return null
 
   return (
@@ -566,13 +595,13 @@ const LazyModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 
 ## Modal vs Dialog
 
-| 機能 | Modal | Dialog |
-| --- | --- | --- |
-| レベル | 低レベル | 高レベル |
-| スタイリング | 自分で実装 | 組み込み済み |
+| 機能                 | Modal      | Dialog             |
+| -------------------- | ---------- | ------------------ |
+| レベル               | 低レベル   | 高レベル           |
+| スタイリング         | 自分で実装 | 組み込み済み       |
 | タイトル・アクション | 自分で実装 | 専用コンポーネント |
-| レスポンシブ | 自分で実装 | 組み込み済み |
-| 推奨用途 | カスタムUI | 標準的なダイアログ |
+| レスポンシブ         | 自分で実装 | 組み込み済み       |
+| 推奨用途             | カスタムUI | 標準的なダイアログ |
 
 ## ベストプラクティス
 
@@ -600,7 +629,7 @@ Next.jsなどのSSRフレームワークを使用する場合は、ポータル�
 ```tsx
 import { Modal } from '@mui/material'
 
-<Modal
+;<Modal
   open={open}
   onClose={handleClose}
   container={() => document.getElementById('modal-root')}>

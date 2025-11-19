@@ -41,15 +41,15 @@ elevationプロパティは、要素がページからどれだけ浮いてい�
 
 ### Elevationの使い分け
 
-| Elevation | 用途 |
-| --- | --- |
-| 0 | フラットな表面、背景と同じレベル |
-| 1 | カード、リストアイテム（デフォルト） |
-| 2 | やや強調したい要素 |
-| 3 | ボタン、浮き上がった要素 |
-| 4-8 | ドロップダウン、メニュー |
-| 8-16 | ダイアログ、ポップアップ |
-| 16-24 | モーダル、最前面の要素 |
+| Elevation | 用途                                 |
+| --------- | ------------------------------------ |
+| 0         | フラットな表面、背景と同じレベル     |
+| 1         | カード、リストアイテム（デフォルト） |
+| 2         | やや強調したい要素                   |
+| 3         | ボタン、浮き上がった要素             |
+| 4-8       | ドロップダウン、メニュー             |
+| 8-16      | ダイアログ、ポップアップ             |
+| 16-24     | モーダル、最前面の要素               |
 
 ## バリアント
 
@@ -69,10 +69,10 @@ Paperには2つの主なバリアントがあります。
 
 ### バリアントの比較
 
-| バリアント | 特徴 | 用途 |
-| --- | --- | --- |
-| elevation | 影で深さを表現 | 一般的なカード、セクション |
-| outlined | 枠線で区切りを表現 | フラットなデザイン、密集したレイアウト |
+| バリアント | 特徴               | 用途                                   |
+| ---------- | ------------------ | -------------------------------------- |
+| elevation  | 影で深さを表現     | 一般的なカード、セクション             |
+| outlined   | 枠線で区切りを表現 | フラットなデザイン、密集したレイアウト |
 
 ## 角の丸み
 
@@ -155,7 +155,14 @@ const ContentCard = () => {
 ### サイドバーパネル
 
 ```tsx
-import { Paper, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material'
+import {
+  Paper,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@mui/material'
 import { Dashboard, Settings, Person, Logout } from '@mui/icons-material'
 
 const SidebarPanel = () => {
@@ -259,7 +266,15 @@ const HighlightSection = () => {
 import { Paper, Typography, Box, Stack } from '@mui/material'
 import { TrendingUp } from '@mui/icons-material'
 
-const StatCard = ({ title, value, change }: { title: string; value: string; change: string }) => {
+const StatCard = ({
+  title,
+  value,
+  change,
+}: {
+  title: string
+  value: string
+  change: string
+}) => {
   return (
     <Paper
       elevation={2}
@@ -384,12 +399,12 @@ const InteractivePaper = () => {
 
 ## Paper vs 他のコンポーネント
 
-| コンポーネント | 用途 | 主な違い |
-| --- | --- | --- |
-| Paper | 汎用的なサーフェス | 基本的な紙のメタファー |
-| Card | 構造化されたコンテンツ | Header、Content、Actionsの専用領域 |
-| Box | レイアウトコンテナ | スタイリング用、サーフェスなし |
-| Container | レイアウトコンテナ | レスポンシブな幅制限 |
+| コンポーネント | 用途                   | 主な違い                           |
+| -------------- | ---------------------- | ---------------------------------- |
+| Paper          | 汎用的なサーフェス     | 基本的な紙のメタファー             |
+| Card           | 構造化されたコンテンツ | Header、Content、Actionsの専用領域 |
+| Box            | レイアウトコンテナ     | スタイリング用、サーフェスなし     |
+| Container      | レイアウトコンテナ     | レスポンシブな幅制限               |
 
 ## アクセシビリティ
 

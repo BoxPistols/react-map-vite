@@ -30,7 +30,7 @@ const BasicPopover = () => {
 
   return (
     <>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+      <Button aria-describedby={id} variant='contained' onClick={handleClick}>
         ポップオーバーを開く
       </Button>
       <Popover
@@ -177,7 +177,9 @@ const UserProfilePopover = () => {
 
   return (
     <>
-      <Avatar onClick={(e) => setAnchorEl(e.currentTarget)} sx={{ cursor: 'pointer' }}>
+      <Avatar
+        onClick={(e) => setAnchorEl(e.currentTarget)}
+        sx={{ cursor: 'pointer' }}>
         U
       </Avatar>
       <Popover
@@ -273,7 +275,13 @@ const ColorPickerPopover = () => {
           vertical: 'top',
           horizontal: 'center',
         }}>
-        <Box sx={{ p: 2, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
+        <Box
+          sx={{
+            p: 2,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 1,
+          }}>
           {colors.map((color) => (
             <Box
               key={color}
@@ -338,13 +346,13 @@ const FormHelpPopover = ({ helpText }: { helpText: string }) => {
 
 ## Popover vs Menu vs Tooltip
 
-| 機能 | Popover | Menu | Tooltip |
-| --- | --- | --- | --- |
-| 用途 | 汎用的なコンテンツ表示 | アクションリスト | 簡単な説明テキスト |
-| インタラクティブ性 | 高い | 高い | 低い |
-| 複雑なコンテンツ | 対応 | リストのみ | 非推奨 |
-| 自動配置 | あり | あり | あり |
-| キーボード操作 | カスタム実装必要 | 対応 | 対応 |
+| 機能               | Popover                | Menu             | Tooltip            |
+| ------------------ | ---------------------- | ---------------- | ------------------ |
+| 用途               | 汎用的なコンテンツ表示 | アクションリスト | 簡単な説明テキスト |
+| インタラクティブ性 | 高い                   | 高い             | 低い               |
+| 複雑なコンテンツ   | 対応                   | リストのみ       | 非推奨             |
+| 自動配置           | あり                   | あり             | あり               |
+| キーボード操作     | カスタム実装必要       | 対応             | 対応               |
 
 ## アクセシビリティ
 
@@ -405,7 +413,7 @@ Popoverを使用する際は、以下のアクセシビリティのベストプ�
 ```tsx
 import { Grow, Fade, Zoom } from '@mui/material'
 
-<Popover
+;<Popover
   open={open}
   anchorEl={anchorEl}
   onClose={handleClose}
