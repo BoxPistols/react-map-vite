@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Link/概要' />
+
+# Link
+
+リンクを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Link } from '@mui/material'
+
+;<Link href='/'>ホームへ</Link>
+```
+
+## underline
+
+```tsx
+<Link underline="none">
+<Link underline="hover">
+<Link underline="always">
+```
+
+## カラー
+
+```tsx
+<Link color="primary">
+<Link color="secondary">
+<Link color="inherit">
+```
+
+## React Routerとの統合
+
+```tsx
+import { Link as RouterLink } from 'react-router-dom'
+
+;<Link component={RouterLink} to='/about'>
+  About
+</Link>
+```
+
+## 参考リンク
+
+- [MUI Link API](https://mui.com/material-ui/api/link/)
+- [MUI Link Documentation](https://mui.com/material-ui/react-link/)

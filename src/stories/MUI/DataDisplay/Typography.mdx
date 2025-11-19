@@ -1,0 +1,187 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Typography/概要' />
+
+# Typography
+
+テキストを表示するための基本的なコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Typography } from '@mui/material'
+
+;<Typography>デフォルトのテキスト</Typography>
+```
+
+## バリアント
+
+```tsx
+<Typography variant="h1">Heading 1</Typography>
+<Typography variant="h2">Heading 2</Typography>
+<Typography variant="h3">Heading 3</Typography>
+<Typography variant="h4">Heading 4</Typography>
+<Typography variant="h5">Heading 5</Typography>
+<Typography variant="h6">Heading 6</Typography>
+
+<Typography variant="subtitle1">Subtitle 1</Typography>
+<Typography variant="subtitle2">Subtitle 2</Typography>
+
+<Typography variant="body1">Body 1</Typography>
+<Typography variant="body2">Body 2</Typography>
+
+<Typography variant="button">Button Text</Typography>
+<Typography variant="caption">Caption</Typography>
+<Typography variant="overline">Overline</Typography>
+```
+
+## カラー
+
+```tsx
+<Typography color="primary">Primary</Typography>
+<Typography color="secondary">Secondary</Typography>
+<Typography color="error">Error</Typography>
+<Typography color="warning">Warning</Typography>
+<Typography color="info">Info</Typography>
+<Typography color="success">Success</Typography>
+<Typography color="text.primary">Text Primary</Typography>
+<Typography color="text.secondary">Text Secondary</Typography>
+<Typography color="text.disabled">Text Disabled</Typography>
+```
+
+## テキストの整列
+
+```tsx
+<Typography align="left">Left</Typography>
+<Typography align="center">Center</Typography>
+<Typography align="right">Right</Typography>
+<Typography align="justify">Justify</Typography>
+```
+
+## テキストの切り詰め
+
+```tsx
+<Typography noWrap>
+  この長いテキストは切り詰められます...
+</Typography>
+
+<Typography
+  sx={{
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+  }}
+>
+  複数行の切り詰め...
+</Typography>
+```
+
+## 段落
+
+```tsx
+<Typography paragraph>段落テキスト。下部にマージンが追加されます。</Typography>
+```
+
+## コンポーネントの変更
+
+```tsx
+<Typography component="div">
+  divとしてレンダリング
+</Typography>
+
+<Typography component="span">
+  spanとしてレンダリング
+</Typography>
+```
+
+## gutterBottom
+
+```tsx
+<Typography gutterBottom>下部にマージンを追加</Typography>
+```
+
+## 実装例
+
+### ページタイトル
+
+```tsx
+<Box>
+  <Typography variant='h4' component='h1' gutterBottom>
+    ページタイトル
+  </Typography>
+  <Typography variant='subtitle1' color='text.secondary'>
+    サブタイトルや説明文
+  </Typography>
+</Box>
+```
+
+### カード内のテキスト
+
+```tsx
+<Card>
+  <CardContent>
+    <Typography variant='h5' component='div'>
+      カードタイトル
+    </Typography>
+    <Typography variant='body2' color='text.secondary'>
+      カードの説明文...
+    </Typography>
+  </CardContent>
+</Card>
+```
+
+### リッチテキスト
+
+```tsx
+<Typography>
+  通常のテキストと
+  <Typography component='span' color='primary' fontWeight='bold'>
+    強調されたテキスト
+  </Typography>
+  を組み合わせる
+</Typography>
+```
+
+## フォントウェイト
+
+```tsx
+<Typography fontWeight="light">Light (300)</Typography>
+<Typography fontWeight="regular">Regular (400)</Typography>
+<Typography fontWeight="medium">Medium (500)</Typography>
+<Typography fontWeight="bold">Bold (700)</Typography>
+```
+
+## フォントスタイル
+
+```tsx
+<Typography fontStyle="normal">Normal</Typography>
+<Typography fontStyle="italic">Italic</Typography>
+```
+
+## アクセシビリティ
+
+適切なHTML要素を使用:
+
+```tsx
+<Typography variant="h1" component="h1">
+  ページの主見出し
+</Typography>
+
+<Typography variant="h6" component="h2">
+  セクションの見出し
+</Typography>
+```
+
+## ベストプラクティス
+
+1. **適切なvariant** - 用途に応じた選択
+2. **component指定** - セマンティックなHTML
+3. **色の意味** - UIの一貫性を保つ
+4. **階層構造** - h1からh6を適切に使用
+
+## 参考リンク
+
+- [MUI Typography API](https://mui.com/material-ui/api/typography/)
+- [MUI Typography Documentation](https://mui.com/material-ui/react-typography/)

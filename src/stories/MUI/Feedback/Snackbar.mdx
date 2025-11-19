@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Feedback/Snackbar/概要' />
+
+# Snackbar
+
+画面下部に一時的なメッセージを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Snackbar } from '@mui/material'
+
+;<Snackbar
+  open={open}
+  autoHideDuration={6000}
+  onClose={handleClose}
+  message='メッセージ'
+/>
+```
+
+## Alertと組み合わせ
+
+```tsx
+<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+  <Alert onClose={handleClose} severity='success'>
+    操作が成功しました
+  </Alert>
+</Snackbar>
+```
+
+## 位置
+
+```tsx
+<Snackbar
+  anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+  open={open}
+  message='メッセージ'
+/>
+```
+
+## 参考リンク
+
+- [MUI Snackbar API](https://mui.com/material-ui/api/snackbar/)
+- [MUI Snackbar Documentation](https://mui.com/material-ui/react-snackbar/)

@@ -1,0 +1,182 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Table/概要' />
+
+# Table
+
+表形式でデータを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material'
+
+;<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>名前</TableCell>
+        <TableCell>年齢</TableCell>
+        <TableCell>都市</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>太郎</TableCell>
+        <TableCell>25</TableCell>
+        <TableCell>東京</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
+```
+
+## サイズ
+
+```tsx
+<Table size="small">
+  {/* コンパクトなテーブル */}
+</Table>
+
+<Table size="medium">
+  {/* 標準サイズ */}
+</Table>
+```
+
+## ストライプ
+
+```tsx
+<TableBody>
+  {rows.map((row, index) => (
+    <TableRow
+      key={row.id}
+      sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}>
+      <TableCell>{row.name}</TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+```
+
+## ソート可能
+
+```tsx
+const [order, setOrder] = useState('asc')
+const [orderBy, setOrderBy] = useState('name')
+
+const handleSort = (property) => {
+  const isAsc = orderBy === property && order === 'asc'
+  setOrder(isAsc ? 'desc' : 'asc')
+  setOrderBy(property)
+}
+
+;<TableHead>
+  <TableRow>
+    <TableCell>
+      <TableSortLabel
+        active={orderBy === 'name'}
+        direction={orderBy === 'name' ? order : 'asc'}
+        onClick={() => handleSort('name')}>
+        名前
+      </TableSortLabel>
+    </TableCell>
+  </TableRow>
+</TableHead>
+```
+
+## 選択可能
+
+```tsx
+const [selected, setSelected] = useState([])
+
+const handleSelectAll = (event) => {
+  if (event.target.checked) {
+    setSelected(rows.map((row) => row.id))
+  } else {
+    setSelected([])
+  }
+}
+
+;<TableHead>
+  <TableRow>
+    <TableCell padding='checkbox'>
+      <Checkbox
+        checked={selected.length === rows.length}
+        onChange={handleSelectAll}
+      />
+    </TableCell>
+  </TableRow>
+</TableHead>
+```
+
+## ページネーション
+
+```tsx
+<TablePagination
+  component='div'
+  count={totalRows}
+  page={page}
+  onPageChange={handleChangePage}
+  rowsPerPage={rowsPerPage}
+  onRowsPerPageChange={handleChangeRowsPerPage}
+/>
+```
+
+## 固定ヘッダー
+
+```tsx
+<TableContainer sx={{ maxHeight: 440 }}>
+  <Table stickyHeader>
+    <TableHead>{/* ヘッダー */}</TableHead>
+    <TableBody>{/* ボディ */}</TableBody>
+  </Table>
+</TableContainer>
+```
+
+## 実装例
+
+### データテーブル
+
+```tsx
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>ID</TableCell>
+        <TableCell>名前</TableCell>
+        <TableCell align='right'>数量</TableCell>
+        <TableCell align='right'>価格</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {rows.map((row) => (
+        <TableRow key={row.id}>
+          <TableCell>{row.id}</TableCell>
+          <TableCell>{row.name}</TableCell>
+          <TableCell align='right'>{row.quantity}</TableCell>
+          <TableCell align='right'>¥{row.price}</TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
+```
+
+## ベストプラクティス
+
+1. **TableContainer使用** - スクロール対応のため
+2. **適切なalign** - 数値は右揃え
+3. **ソート機能** - データが多い場合は必須
+4. **ページネーション** - 大量データの処理
+
+## 参考リンク
+
+- [MUI Table API](https://mui.com/material-ui/api/table/)
+- [MUI Table Documentation](https://mui.com/material-ui/react-table/)

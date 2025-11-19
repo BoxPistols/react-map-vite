@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Breadcrumbs/概要' />
+
+# Breadcrumbs
+
+現在の位置をパンくずリストで表示するナビゲーションコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Breadcrumbs, Link } from '@mui/material'
+
+;<Breadcrumbs>
+  <Link href='/'>ホーム</Link>
+  <Link href='/category'>カテゴリ</Link>
+  <Typography color='text.primary'>現在のページ</Typography>
+</Breadcrumbs>
+```
+
+## セパレーター
+
+```tsx
+<Breadcrumbs separator="›">
+<Breadcrumbs separator="-">
+<Breadcrumbs separator={<NavigateNextIcon />}>
+```
+
+## 最大表示数
+
+```tsx
+<Breadcrumbs maxItems={2}>{/* アイテム */}</Breadcrumbs>
+```
+
+## 参考リンク
+
+- [MUI Breadcrumbs API](https://mui.com/material-ui/api/breadcrumbs/)
+- [MUI Breadcrumbs Documentation](https://mui.com/material-ui/react-breadcrumbs/)

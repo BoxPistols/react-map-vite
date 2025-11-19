@@ -1,0 +1,328 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Select/概要' />
+
+# Select
+
+ドロップダウンリストから選択肢を選ぶためのコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material'
+
+;<FormControl fullWidth>
+  <InputLabel>年齢</InputLabel>
+  <Select label='年齢'>
+    <MenuItem value={10}>10歳</MenuItem>
+    <MenuItem value={20}>20歳</MenuItem>
+    <MenuItem value={30}>30歳</MenuItem>
+  </Select>
+</FormControl>
+```
+
+## バリエーション
+
+TextFieldと同様に3つのバリエーションがあります:
+
+```tsx
+// Outlined (デフォルト)
+<Select variant="outlined" />
+
+// Filled
+<Select variant="filled" />
+
+// Standard
+<Select variant="standard" />
+```
+
+## 制御コンポーネント
+
+```tsx
+const [age, setAge] = useState('')
+
+<FormControl fullWidth>
+  <InputLabel>年齢</InputLabel>
+  <Select
+    value={age}
+    label="年齢"
+    onChange={(e) => setAge(e.target.value)}
+  >
+    <MenuItem value={10}>10歳</MenuItem>
+    <MenuItem value={20}>20歳</MenuItem>
+    <MenuItem value={30}>30歳</MenuItem>
+  </Select>
+</FormControl>
+```
+
+## 複数選択
+
+`multiple`プロップで複数選択を有効化:
+
+```tsx
+const [selected, setSelected] = useState([])
+
+<FormControl fullWidth>
+  <InputLabel>タグ</InputLabel>
+  <Select
+    multiple
+    value={selected}
+    onChange={(e) => setSelected(e.target.value)}
+    renderValue={(selected) => selected.join(', ')}
+  >
+    <MenuItem value="react">React</MenuItem>
+    <MenuItem value="vue">Vue</MenuItem>
+    <MenuItem value="angular">Angular</MenuItem>
+  </Select>
+</FormControl>
+```
+
+### チェックボックス付き複数選択
+
+```tsx
+<Select
+  multiple
+  value={selected}
+  onChange={(e) => setSelected(e.target.value)}
+  renderValue={(selected) => selected.join(', ')}>
+  {options.map((name) => (
+    <MenuItem key={name} value={name}>
+      <Checkbox checked={selected.indexOf(name) > -1} />
+      <ListItemText primary={name} />
+    </MenuItem>
+  ))}
+</Select>
+```
+
+### Chip を使った複数選択
+
+```tsx
+<Select
+  multiple
+  value={selected}
+  onChange={(e) => setSelected(e.target.value)}
+  renderValue={(selected) => (
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+      {selected.map((value) => (
+        <Chip key={value} label={value} />
+      ))}
+    </Box>
+  )}>
+  {options.map((name) => (
+    <MenuItem key={name} value={name}>
+      {name}
+    </MenuItem>
+  ))}
+</Select>
+```
+
+## グループ化
+
+ListSubheaderを使ってグループ化:
+
+```tsx
+<Select>
+  <ListSubheader>フルーツ</ListSubheader>
+  <MenuItem value='apple'>りんご</MenuItem>
+  <MenuItem value='banana'>バナナ</MenuItem>
+
+  <ListSubheader>野菜</ListSubheader>
+  <MenuItem value='carrot'>にんじん</MenuItem>
+  <MenuItem value='tomato'>トマト</MenuItem>
+</Select>
+```
+
+## サイズ
+
+```tsx
+<Select size="small" />
+<Select size="medium" />
+```
+
+## ネイティブSelect
+
+HTMLのネイティブselect要素を使用:
+
+```tsx
+<Select native>
+  <option value={10}>10歳</option>
+  <option value={20}>20歳</option>
+  <option value={30}>30歳</option>
+</Select>
+```
+
+## カスタマイズ
+
+### アイコンのカスタマイズ
+
+```tsx
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+
+;<Select IconComponent={KeyboardArrowDownIcon} />
+```
+
+### メニューの位置
+
+```tsx
+<Select
+  MenuProps={{
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: 'left',
+    },
+    transformOrigin: {
+      vertical: 'top',
+      horizontal: 'left',
+    },
+  }}
+/>
+```
+
+### メニューのスタイル
+
+```tsx
+<Select
+  MenuProps={{
+    PaperProps: {
+      style: {
+        maxHeight: 48 * 4.5,
+        width: 250,
+      },
+    },
+  }}
+/>
+```
+
+## バリデーション
+
+```tsx
+<FormControl error={!value} required>
+  <InputLabel>必須項目</InputLabel>
+  <Select
+    value={value}
+    label='必須項目'
+    onChange={(e) => setValue(e.target.value)}>
+    <MenuItem value=''>
+      <em>選択してください</em>
+    </MenuItem>
+    <MenuItem value={10}>オプション1</MenuItem>
+    <MenuItem value={20}>オプション2</MenuItem>
+  </Select>
+  {!value && <FormHelperText>この項目は必須です</FormHelperText>}
+</FormControl>
+```
+
+## 実装例
+
+### 都道府県選択
+
+```tsx
+const prefectures = [
+  '北海道', '青森県', '岩手県', // ...
+]
+
+<FormControl fullWidth>
+  <InputLabel>都道府県</InputLabel>
+  <Select label="都道府県">
+    {prefectures.map((pref) => (
+      <MenuItem key={pref} value={pref}>
+        {pref}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
+```
+
+### カテゴリ選択
+
+```tsx
+const categories = {
+  'プログラミング': ['JavaScript', 'Python', 'Java'],
+  'デザイン': ['UI/UX', 'グラフィック', 'モーション']
+}
+
+<FormControl fullWidth>
+  <InputLabel>カテゴリ</InputLabel>
+  <Select label="カテゴリ">
+    {Object.entries(categories).map(([group, items]) => [
+      <ListSubheader key={group}>{group}</ListSubheader>,
+      ...items.map((item) => (
+        <MenuItem key={item} value={item}>
+          {item}
+        </MenuItem>
+      ))
+    ])}
+  </Select>
+</FormControl>
+```
+
+### アイコン付きメニュー
+
+```tsx
+<Select>
+  <MenuItem value='edit'>
+    <ListItemIcon>
+      <EditIcon />
+    </ListItemIcon>
+    <ListItemText>編集</ListItemText>
+  </MenuItem>
+  <MenuItem value='delete'>
+    <ListItemIcon>
+      <DeleteIcon />
+    </ListItemIcon>
+    <ListItemText>削除</ListItemText>
+  </MenuItem>
+</Select>
+```
+
+## アクセシビリティ
+
+### ラベルの関連付け
+
+FormControlとInputLabelを使用して適切にラベルを関連付け:
+
+```tsx
+<FormControl>
+  <InputLabel id='age-label'>年齢</InputLabel>
+  <Select labelId='age-label' label='年齢'>
+    <MenuItem value={10}>10歳</MenuItem>
+  </Select>
+</FormControl>
+```
+
+### キーボード操作
+
+- `Space/Enter`: メニューを開く
+- `Arrow Down/Up`: オプション間を移動
+- `Home/End`: 最初/最後のオプションに移動
+- `Escape`: メニューを閉じる
+- `文字キー`: その文字で始まるオプションに移動
+
+## Select vs Autocomplete
+
+| 項目           | Select               | Autocomplete     |
+| -------------- | -------------------- | ---------------- |
+| 選択肢の数     | 少〜中（〜20個程度） | 多（20個以上）   |
+| 検索機能       | なし                 | あり             |
+| 自由入力       | 不可                 | 可能（freeSolo） |
+| UI             | シンプル             | リッチ           |
+| パフォーマンス | 軽量                 | やや重い         |
+
+## ベストプラクティス
+
+1. **FormControl と組み合わせる** - ラベルやヘルパーテキストのため
+2. **label プロップを必ず設定** - アクセシビリティのため
+3. **選択肢が多い場合は Autocomplete を検討** - UX向上のため
+4. **空の選択肢を提供** - 必須でない場合
+5. **複数選択時は renderValue をカスタマイズ** - 視認性向上のため
+
+## 関連コンポーネント
+
+- **Autocomplete** - 検索機能付き選択
+- **NativeSelect** - ネイティブHTML select
+- **Menu** - カスタムメニュー
+
+## 参考リンク
+
+- [MUI Select API](https://mui.com/material-ui/api/select/)
+- [MUI Select Documentation](https://mui.com/material-ui/react-select/)

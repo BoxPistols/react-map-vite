@@ -1,0 +1,152 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Rating/概要' />
+
+# Rating
+
+星マークなどで評価を入力・表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Rating } from '@mui/material'
+
+;<Rating />
+```
+
+## 制御コンポーネント
+
+```tsx
+const [value, setValue] = useState(3)
+
+<Rating
+  value={value}
+  onChange={(event, newValue) => setValue(newValue)}
+/>
+```
+
+## 読み取り専用
+
+```tsx
+<Rating value={4} readOnly />
+```
+
+## 無効化
+
+```tsx
+<Rating value={3} disabled />
+```
+
+## サイズ
+
+```tsx
+<Rating size="small" />
+<Rating size="medium" />
+<Rating size="large" />
+```
+
+## 精度
+
+半分の星を許可:
+
+```tsx
+<Rating value={2.5} precision={0.5} />
+```
+
+## アイコンのカスタマイズ
+
+```tsx
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+
+;<Rating
+  icon={<FavoriteIcon fontSize='inherit' />}
+  emptyIcon={<FavoriteBorderIcon fontSize='inherit' />}
+/>
+```
+
+## 評価数の表示
+
+```tsx
+<Box sx={{ display: 'flex', alignItems: 'center' }}>
+  <Rating value={4} readOnly />
+  <Typography variant='body2' sx={{ ml: 1 }}>
+    4.0 (120件のレビュー)
+  </Typography>
+</Box>
+```
+
+## ホバー時のフィードバック
+
+```tsx
+const [value, setValue] = useState(2)
+const [hover, setHover] = useState(-1)
+
+const labels = {
+  1: '悪い',
+  2: '普通',
+  3: '良い',
+  4: 'とても良い',
+  5: '最高',
+}
+
+<Box sx={{ display: 'flex', alignItems: 'center' }}>
+  <Rating
+    value={value}
+    onChange={(e, newValue) => setValue(newValue)}
+    onChangeActive={(e, newHover) => setHover(newHover)}
+  />
+  <Typography sx={{ ml: 2 }}>
+    {labels[hover !== -1 ? hover : value]}
+  </Typography>
+</Box>
+```
+
+## 実装例
+
+### レビューフォーム
+
+```tsx
+<Box>
+  <Typography component='legend'>商品の評価</Typography>
+  <Rating value={rating} onChange={(e, newValue) => setRating(newValue)} />
+</Box>
+```
+
+### 評価の表示
+
+```tsx
+<Card>
+  <CardContent>
+    <Typography variant='h6'>商品名</Typography>
+    <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+      <Rating value={4.5} precision={0.5} readOnly />
+      <Typography variant='body2' color='text.secondary' sx={{ ml: 1 }}>
+        4.5 (234)
+      </Typography>
+    </Box>
+  </CardContent>
+</Card>
+```
+
+## アクセシビリティ
+
+```tsx
+<Rating
+  name='product-rating'
+  value={rating}
+  onChange={(e, newValue) => setRating(newValue)}
+/>
+```
+
+## ベストプラクティス
+
+1. **読み取り専用での表示** - 既存の評価を表示
+2. **精度の適切な設定** - 0.5刻みが一般的
+3. **評価数の表示** - 信頼性の向上
+4. **ホバーフィードバック** - UX向上
+
+## 参考リンク
+
+- [MUI Rating API](https://mui.com/material-ui/api/rating/)
+- [MUI Rating Documentation](https://mui.com/material-ui/react-rating/)

@@ -1,0 +1,213 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Tooltip/概要' />
+
+# Tooltip
+
+要素にホバーやフォーカスした際に補足情報を表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Tooltip, IconButton } from '@mui/material'
+import { DeleteIcon } from '@mui/icons-material'
+
+<Tooltip title='削除'>
+  <IconButton>
+    <DeleteIcon />
+  </IconButton>
+</Tooltip>
+```
+
+## 配置
+
+```tsx
+<Tooltip title="Top" placement="top">
+  <Button>Top</Button>
+</Tooltip>
+
+<Tooltip title="Right" placement="right">
+  <Button>Right</Button>
+</Tooltip>
+
+<Tooltip title="Bottom" placement="bottom">
+  <Button>Bottom</Button>
+</Tooltip>
+
+<Tooltip title="Left" placement="left">
+  <Button>Left</Button>
+</Tooltip>
+```
+
+### 詳細な配置
+
+```tsx
+import { Tooltip, Button, Box } from '@mui/material'
+
+<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+  <Tooltip title='Top Start' placement='top-start'>
+    <Button>top-start</Button>
+  </Tooltip>
+  <Tooltip title='Top End' placement='top-end'>
+    <Button>top-end</Button>
+  </Tooltip>
+  <Tooltip title='Bottom Start' placement='bottom-start'>
+    <Button>bottom-start</Button>
+  </Tooltip>
+  <Tooltip title='Bottom End' placement='bottom-end'>
+    <Button>bottom-end</Button>
+  </Tooltip>
+  <Tooltip title='Left Start' placement='left-start'>
+    <Button>left-start</Button>
+  </Tooltip>
+  <Tooltip title='Left End' placement='left-end'>
+    <Button>left-end</Button>
+  </Tooltip>
+  <Tooltip title='Right Start' placement='right-start'>
+    <Button>right-start</Button>
+  </Tooltip>
+  <Tooltip title='Right End' placement='right-end'>
+    <Button>right-end</Button>
+  </Tooltip>
+</Box>
+```
+
+## Arrow（矢印）
+
+```tsx
+<Tooltip title='With Arrow' arrow>
+  <Button>Arrow</Button>
+</Tooltip>
+```
+
+## 遅延表示
+
+```tsx
+<Tooltip title='Delayed' enterDelay={500} leaveDelay={200}>
+  <Button>Delayed</Button>
+</Tooltip>
+```
+
+## 制御可能
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<Tooltip
+  title="Controlled"
+  open={open}
+  onClose={() => setOpen(false)}
+  onOpen={() => setOpen(true)}
+>
+  <Button>Controlled</Button>
+</Tooltip>
+```
+
+## カスタムコンテンツ
+
+```tsx
+<Tooltip
+  title={
+    <>
+      <Typography variant='subtitle2'>タイトル</Typography>
+      <Typography variant='body2'>詳細な説明...</Typography>
+    </>
+  }>
+  <IconButton>
+    <InfoIcon />
+  </IconButton>
+</Tooltip>
+```
+
+## インタラクティブ
+
+ツールチップ内をクリック可能に:
+
+```tsx
+<Tooltip
+  title={
+    <Box>
+      <Typography>詳細情報</Typography>
+      <Link href='#' color='inherit'>
+        もっと見る
+      </Link>
+    </Box>
+  }
+  interactive>
+  <Button>Interactive</Button>
+</Tooltip>
+```
+
+## 無効な要素
+
+```tsx
+<Tooltip title='無効なボタン'>
+  <span>
+    <Button disabled>Disabled</Button>
+  </span>
+</Tooltip>
+```
+
+## 実装例
+
+### アイコンボタンの説明
+
+```tsx
+<Tooltip title="設定">
+  <IconButton>
+    <SettingsIcon />
+  </IconButton>
+</Tooltip>
+
+<Tooltip title="通知">
+  <IconButton>
+    <NotificationsIcon />
+  </IconButton>
+</Tooltip>
+```
+
+### 切り詰められたテキスト
+
+```tsx
+<Tooltip title={fullText}>
+  <Typography noWrap sx={{ maxWidth: 200 }}>
+    {fullText}
+  </Typography>
+</Tooltip>
+```
+
+### ヘルプアイコン
+
+```tsx
+<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+  <Typography>設定項目</Typography>
+  <Tooltip title='この設定についての詳しい説明...'>
+    <IconButton size='small'>
+      <HelpOutlineIcon fontSize='small' />
+    </IconButton>
+  </Tooltip>
+</Box>
+```
+
+## アクセシビリティ
+
+Tooltipは自動的にaria属性を設定:
+
+```tsx
+<Tooltip title='Accessible tooltip'>
+  <Button>Button</Button>
+</Tooltip>
+// aria-describedby が自動的に設定される
+```
+
+## ベストプラクティス
+
+1. **簡潔なテキスト** - 長すぎる説明は避ける
+2. **重要な情報は避ける** - 必須情報はツールチップ外に
+3. **遅延の調整** - UXに応じて適切な遅延を設定
+4. **無効要素の対応** - spanでラップする
+
+## 参考リンク
+
+- [MUI Tooltip API](https://mui.com/material-ui/api/tooltip/)
+- [MUI Tooltip Documentation](https://mui.com/material-ui/react-tooltip/)

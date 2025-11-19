@@ -1,0 +1,119 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Divider/概要' />
+
+# Divider
+
+コンテンツを視覚的に分離するための区切り線コンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Divider } from '@mui/material'
+
+;<Divider />
+```
+
+## バリエーション
+
+```tsx
+<Divider variant="fullWidth" />
+<Divider variant="inset" />
+<Divider variant="middle" />
+```
+
+## 方向
+
+```tsx
+// 水平（デフォルト）
+<Divider />
+
+// 垂直
+<Divider orientation="vertical" />
+```
+
+## テキスト付き
+
+```tsx
+<Divider>OR</Divider>
+
+<Divider textAlign="left">Left</Divider>
+<Divider textAlign="center">Center</Divider>
+<Divider textAlign="right">Right</Divider>
+```
+
+## チップ付き
+
+```tsx
+<Divider>
+  <Chip label='OR' />
+</Divider>
+```
+
+## リスト内
+
+```tsx
+<List>
+  <ListItem>Item 1</ListItem>
+  <Divider />
+  <ListItem>Item 2</ListItem>
+  <Divider />
+  <ListItem>Item 3</ListItem>
+</List>
+```
+
+## Flexbox内で垂直方向
+
+```tsx
+<Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+  <Typography>Left</Typography>
+  <Divider orientation='vertical' flexItem />
+  <Typography>Right</Typography>
+</Box>
+```
+
+## 実装例
+
+### セクション区切り
+
+```tsx
+<Box>
+  <Typography variant='h6'>セクション 1</Typography>
+  <Typography paragraph>コンテンツ...</Typography>
+
+  <Divider sx={{ my: 2 }} />
+
+  <Typography variant='h6'>セクション 2</Typography>
+  <Typography paragraph>コンテンツ...</Typography>
+</Box>
+```
+
+### ログインフォームの区切り
+
+```tsx
+<Box>
+  <TextField label='Email' fullWidth />
+  <TextField label='Password' fullWidth />
+  <Button variant='contained' fullWidth>
+    ログイン
+  </Button>
+
+  <Divider sx={{ my: 2 }}>または</Divider>
+
+  <Button variant='outlined' fullWidth>
+    Googleでログイン
+  </Button>
+</Box>
+```
+
+## ベストプラクティス
+
+1. **適切なマージン** - 区切りの前後に余白を
+2. **テキストの活用** - 意味のある区切りを表現
+3. **リストでの使用** - 項目間を視覚的に分離
+4. **垂直方向** - flexItemを忘れずに
+
+## 参考リンク
+
+- [MUI Divider API](https://mui.com/material-ui/api/divider/)
+- [MUI Divider Documentation](https://mui.com/material-ui/react-divider/)

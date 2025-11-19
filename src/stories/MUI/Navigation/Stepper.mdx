@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Stepper/概要' />
+
+# Stepper
+
+ステップ形式のナビゲーションを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Stepper, Step, StepLabel } from '@mui/material'
+
+const steps = ['ステップ1', 'ステップ2', 'ステップ3']
+
+<Stepper activeStep={activeStep}>
+  {steps.map((label) => (
+    <Step key={label}>
+      <StepLabel>{label}</StepLabel>
+    </Step>
+  ))}
+</Stepper>
+```
+
+## 縦方向
+
+```tsx
+<Stepper activeStep={activeStep} orientation='vertical'>
+  {/* ステップ */}
+</Stepper>
+```
+
+## 代替ラベル
+
+```tsx
+<Stepper activeStep={activeStep} alternativeLabel>
+  {/* ステップ */}
+</Stepper>
+```
+
+## 参考リンク
+
+- [MUI Stepper API](https://mui.com/material-ui/api/stepper/)
+- [MUI Stepper Documentation](https://mui.com/material-ui/react-stepper/)

@@ -1,0 +1,81 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Layout/Grid/概要' />
+
+# Grid
+
+レスポンシブなグリッドレイアウトを作成するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Grid } from '@mui/material'
+
+;<Grid container spacing={2}>
+  <Grid item xs={12} sm={6} md={4}>
+    <Typography>Item 1</Typography>
+  </Grid>
+  <Grid item xs={12} sm={6} md={4}>
+    <Typography>Item 2</Typography>
+  </Grid>
+  <Grid item xs={12} sm={6} md={4}>
+    <Typography>Item 3</Typography>
+  </Grid>
+</Grid>
+```
+
+## スペーシング
+
+```tsx
+<Grid container spacing={1}>  {/* 8px */}
+<Grid container spacing={2}>  {/* 16px */}
+<Grid container spacing={3}>  {/* 24px */}
+```
+
+## ブレークポイント
+
+```tsx
+<Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+  レスポンシブなグリッドアイテム
+</Grid>
+```
+
+## 配置
+
+```tsx
+<Grid container justifyContent="center">
+<Grid container justifyContent="flex-start">
+<Grid container justifyContent="flex-end">
+<Grid container justifyContent="space-between">
+<Grid container justifyContent="space-around">
+<Grid container justifyContent="space-evenly">
+```
+
+```tsx
+<Grid container alignItems="center">
+<Grid container alignItems="flex-start">
+<Grid container alignItems="flex-end">
+<Grid container alignItems="stretch">
+```
+
+## 実装例
+
+```tsx
+<Grid container spacing={3}>
+  <Grid item xs={12} md={8}>
+    <Paper sx={{ p: 2 }}>
+      <Typography>メインコンテンツ</Typography>
+    </Paper>
+  </Grid>
+  <Grid item xs={12} md={4}>
+    <Paper sx={{ p: 2 }}>
+      <Typography>サイドバー</Typography>
+    </Paper>
+  </Grid>
+</Grid>
+```
+
+## 参考リンク
+
+- [MUI Grid API](https://mui.com/material-ui/api/grid/)
+- [MUI Grid Documentation](https://mui.com/material-ui/react-grid/)

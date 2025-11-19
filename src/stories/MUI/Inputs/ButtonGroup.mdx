@@ -1,0 +1,166 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/ButtonGroup/概要' />
+
+# ButtonGroup
+
+関連するボタンをグループ化して表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { ButtonGroup, Button } from '@mui/material'
+
+;<ButtonGroup>
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+```
+
+## バリエーション
+
+```tsx
+<ButtonGroup variant="contained">
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+
+<ButtonGroup variant="outlined">
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+
+<ButtonGroup variant="text">
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+```
+
+## サイズ
+
+```tsx
+<ButtonGroup size="small">
+  <Button>Small</Button>
+  <Button>Small</Button>
+</ButtonGroup>
+
+<ButtonGroup size="medium">
+  <Button>Medium</Button>
+  <Button>Medium</Button>
+</ButtonGroup>
+
+<ButtonGroup size="large">
+  <Button>Large</Button>
+  <Button>Large</Button>
+</ButtonGroup>
+```
+
+## カラー
+
+```tsx
+<ButtonGroup color="primary">
+  <Button>Primary</Button>
+  <Button>Primary</Button>
+</ButtonGroup>
+
+<ButtonGroup color="secondary">
+  <Button>Secondary</Button>
+  <Button>Secondary</Button>
+</ButtonGroup>
+```
+
+## 垂直配置
+
+```tsx
+<ButtonGroup orientation='vertical'>
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+```
+
+## 分割ボタン
+
+```tsx
+const [open, setOpen] = useState(false)
+const anchorRef = useRef(null)
+const [selectedIndex, setSelectedIndex] = useState(1)
+
+const options = ['オプション 1', 'オプション 2', 'オプション 3']
+
+const handleClick = () => {
+  console.log(`選択: ${options[selectedIndex]}`)
+}
+
+;<ButtonGroup variant='contained' ref={anchorRef}>
+  <Button onClick={handleClick}>{options[selectedIndex]}</Button>
+  <Button size='small' onClick={() => setOpen((prevOpen) => !prevOpen)}>
+    <ArrowDropDownIcon />
+  </Button>
+</ButtonGroup>
+```
+
+## 無効化
+
+```tsx
+<ButtonGroup disabled>
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>
+```
+
+## 実装例
+
+### エディタのツールバー
+
+```tsx
+<ButtonGroup>
+  <Button startIcon={<FormatBoldIcon />}>太字</Button>
+  <Button startIcon={<FormatItalicIcon />}>斜体</Button>
+  <Button startIcon={<FormatUnderlinedIcon />}>下線</Button>
+</ButtonGroup>
+```
+
+### 表示切り替え
+
+```tsx
+const [view, setView] = useState('list')
+
+<ButtonGroup>
+  <Button
+    variant={view === 'list' ? 'contained' : 'outlined'}
+    onClick={() => setView('list')}
+  >
+    <ViewListIcon />
+  </Button>
+  <Button
+    variant={view === 'grid' ? 'contained' : 'outlined'}
+    onClick={() => setView('grid')}
+  >
+    <ViewModuleIcon />
+  </Button>
+</ButtonGroup>
+```
+
+## ベストプラクティス
+
+1. **関連する操作をグループ化** - 視覚的な関連性
+2. **3-5個程度に抑える** - 多すぎると分かりにくい
+3. **variant/size/color を統一** - 一貫性の確保
+4. **アイコンの活用** - 直感的な理解
+
+## 関連コンポーネント
+
+- **Button** - 個別のボタン
+- **ToggleButtonGroup** - トグル機能付き
+- **Toolbar** - ツールバーのレイアウト
+
+## 参考リンク
+
+- [MUI ButtonGroup API](https://mui.com/material-ui/api/button-group/)
+- [MUI ButtonGroup Documentation](https://mui.com/material-ui/react-button-group/)

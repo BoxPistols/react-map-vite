@@ -1,0 +1,347 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Checkbox/概要' />
+
+# Checkbox
+
+ユーザーが複数の選択肢から複数を選択できるコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Checkbox } from '@mui/material'
+
+<Checkbox />
+<Checkbox defaultChecked />
+```
+
+## ラベル付き
+
+FormControlLabelと組み合わせて使用:
+
+```tsx
+import { FormControlLabel } from '@mui/material'
+
+;<FormControlLabel control={<Checkbox />} label='利用規約に同意する' />
+```
+
+## 制御コンポーネント
+
+```tsx
+const [checked, setChecked] = useState(false)
+
+<FormControlLabel
+  control={
+    <Checkbox
+      checked={checked}
+      onChange={(e) => setChecked(e.target.checked)}
+    />
+  }
+  label="チェック"
+/>
+```
+
+## サイズ
+
+```tsx
+<Checkbox size="small" />
+<Checkbox size="medium" />
+```
+
+## カラー
+
+```tsx
+<Checkbox color="primary" />
+<Checkbox color="secondary" />
+<Checkbox color="success" />
+<Checkbox color="error" />
+<Checkbox color="warning" />
+<Checkbox color="info" />
+<Checkbox color="default" />
+```
+
+## 不定状態 (Indeterminate)
+
+一部が選択されている状態を表現:
+
+```tsx
+<Checkbox indeterminate />
+```
+
+### 全選択の実装例
+
+```tsx
+const [checked, setChecked] = useState([false, false, false])
+
+const handleChangeAll = (event) => {
+  setChecked([event.target.checked, event.target.checked, event.target.checked])
+}
+
+const handleChange = (index) => (event) => {
+  const newChecked = [...checked]
+  newChecked[index] = event.target.checked
+  setChecked(newChecked)
+}
+
+const allChecked = checked.every(Boolean)
+const someChecked = checked.some(Boolean) && !allChecked
+
+<FormControlLabel
+  label="全て選択"
+  control={
+    <Checkbox
+      checked={allChecked}
+      indeterminate={someChecked}
+      onChange={handleChangeAll}
+    />
+  }
+/>
+<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+  <FormControlLabel
+    label="オプション 1"
+    control={<Checkbox checked={checked[0]} onChange={handleChange(0)} />}
+  />
+  <FormControlLabel
+    label="オプション 2"
+    control={<Checkbox checked={checked[1]} onChange={handleChange(1)} />}
+  />
+  <FormControlLabel
+    label="オプション 3"
+    control={<Checkbox checked={checked[2]} onChange={handleChange(2)} />}
+  />
+</Box>
+```
+
+## アイコンのカスタマイズ
+
+```tsx
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder'
+import Favorite from '@mui/icons-material/Favorite'
+
+;<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+```
+
+## FormGroup
+
+複数のチェックボックスをグループ化:
+
+```tsx
+import { FormGroup } from '@mui/material'
+
+;<FormGroup>
+  <FormControlLabel control={<Checkbox />} label='JavaScript' />
+  <FormControlLabel control={<Checkbox />} label='TypeScript' />
+  <FormControlLabel control={<Checkbox />} label='Python' />
+</FormGroup>
+```
+
+### 横並び
+
+```tsx
+<FormGroup row>
+  <FormControlLabel control={<Checkbox />} label='JavaScript' />
+  <FormControlLabel control={<Checkbox />} label='TypeScript' />
+  <FormControlLabel control={<Checkbox />} label='Python' />
+</FormGroup>
+```
+
+## バリデーション
+
+```tsx
+const [accepted, setAccepted] = useState(false)
+const [error, setError] = useState(false)
+
+const handleSubmit = () => {
+  if (!accepted) {
+    setError(true)
+  }
+}
+
+;<FormControl error={error} component='fieldset'>
+  <FormGroup>
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={accepted}
+          onChange={(e) => {
+            setAccepted(e.target.checked)
+            setError(false)
+          }}
+        />
+      }
+      label='利用規約に同意する'
+    />
+  </FormGroup>
+  {error && <FormHelperText>同意が必要です</FormHelperText>}
+</FormControl>
+```
+
+## 無効化
+
+```tsx
+<FormControlLabel
+  control={<Checkbox disabled />}
+  label="無効"
+/>
+<FormControlLabel
+  control={<Checkbox disabled checked />}
+  label="無効（チェック済み）"
+/>
+```
+
+## ラベルの配置
+
+```tsx
+<FormControlLabel
+  control={<Checkbox />}
+  label="右側（デフォルト）"
+  labelPlacement="end"
+/>
+<FormControlLabel
+  control={<Checkbox />}
+  label="左側"
+  labelPlacement="start"
+/>
+<FormControlLabel
+  control={<Checkbox />}
+  label="上"
+  labelPlacement="top"
+/>
+<FormControlLabel
+  control={<Checkbox />}
+  label="下"
+  labelPlacement="bottom"
+/>
+```
+
+## 実装例
+
+### 興味のある分野を選択
+
+```tsx
+const [interests, setInterests] = useState({
+  programming: false,
+  design: false,
+  marketing: false,
+})
+
+const handleChange = (event) => {
+  setInterests({
+    ...interests,
+    [event.target.name]: event.target.checked,
+  })
+}
+
+;<FormControl component='fieldset'>
+  <FormLabel component='legend'>興味のある分野</FormLabel>
+  <FormGroup>
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={interests.programming}
+          onChange={handleChange}
+          name='programming'
+        />
+      }
+      label='プログラミング'
+    />
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={interests.design}
+          onChange={handleChange}
+          name='design'
+        />
+      }
+      label='デザイン'
+    />
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={interests.marketing}
+          onChange={handleChange}
+          name='marketing'
+        />
+      }
+      label='マーケティング'
+    />
+  </FormGroup>
+</FormControl>
+```
+
+### 利用規約への同意
+
+```tsx
+<FormControlLabel
+  control={<Checkbox required />}
+  label={
+    <Typography>
+      <Link href='/terms'>利用規約</Link>に同意する
+    </Typography>
+  }
+/>
+```
+
+## アクセシビリティ
+
+### ラベルの関連付け
+
+必ずFormControlLabelを使用するか、aria-labelを設定:
+
+```tsx
+// 推奨
+<FormControlLabel control={<Checkbox />} label="同意する" />
+
+// ラベルなしの場合
+<Checkbox aria-label="同意する" />
+```
+
+### キーボード操作
+
+- `Space`: チェック/チェック解除
+- `Tab`: 次のチェックボックスに移動
+
+### スクリーンリーダー
+
+適切なラベルとaria属性を提供:
+
+```tsx
+<FormControlLabel
+  control={
+    <Checkbox
+      inputProps={{
+        'aria-label': '利用規約への同意',
+      }}
+    />
+  }
+  label='利用規約に同意する'
+/>
+```
+
+## Checkbox vs Radio vs Switch
+
+| コンポーネント | 選択数  | 用途                |
+| -------------- | ------- | ------------------- |
+| Checkbox       | 複数可  | リストから複数選択  |
+| Radio          | 1つのみ | グループから1つ選択 |
+| Switch         | -       | ON/OFF切り替え      |
+
+## ベストプラクティス
+
+1. **必ずラベルを提供** - アクセシビリティのため
+2. **FormGroup でグループ化** - 関連するチェックボックスをまとめる
+3. **不定状態を活用** - 親子関係がある選択肢で有効
+4. **分かりやすいラベル** - 何を選択するのか明確に
+5. **バリデーションを適切に** - 必須項目は明確にエラー表示
+
+## 関連コンポーネント
+
+- **Radio** - 排他的選択
+- **Switch** - ON/OFF切り替え
+- **FormControlLabel** - ラベルとの統合
+- **FormGroup** - グループ化
+
+## 参考リンク
+
+- [MUI Checkbox API](https://mui.com/material-ui/api/checkbox/)
+- [MUI Checkbox Documentation](https://mui.com/material-ui/react-checkbox/)

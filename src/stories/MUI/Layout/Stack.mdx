@@ -1,0 +1,83 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Layout/Stack/概要' />
+
+# Stack
+
+要素を1次元に並べるレイアウトコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Stack } from '@mui/material'
+
+;<Stack spacing={2}>
+  <Item>Item 1</Item>
+  <Item>Item 2</Item>
+  <Item>Item 3</Item>
+</Stack>
+```
+
+## 方向
+
+```tsx
+<Stack direction="row" spacing={2}>
+  <Item>Item 1</Item>
+  <Item>Item 2</Item>
+</Stack>
+
+<Stack direction="column" spacing={2}>
+  <Item>Item 1</Item>
+  <Item>Item 2</Item>
+</Stack>
+```
+
+## レスポンシブ
+
+```tsx
+<Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+  <Item>Item 1</Item>
+  <Item>Item 2</Item>
+</Stack>
+```
+
+## Divider
+
+```tsx
+<Stack
+  direction='row'
+  divider={<Divider orientation='vertical' flexItem />}
+  spacing={2}>
+  <Item>Item 1</Item>
+  <Item>Item 2</Item>
+  <Item>Item 3</Item>
+</Stack>
+```
+
+## 実装例
+
+### フォームのボタン
+
+```tsx
+<Stack direction='row' spacing={2} justifyContent='flex-end'>
+  <Button variant='outlined'>キャンセル</Button>
+  <Button variant='contained'>保存</Button>
+</Stack>
+```
+
+### カード一覧
+
+```tsx
+<Stack spacing={3}>
+  {items.map((item) => (
+    <Card key={item.id}>
+      <CardContent>{item.title}</CardContent>
+    </Card>
+  ))}
+</Stack>
+```
+
+## 参考リンク
+
+- [MUI Stack API](https://mui.com/material-ui/api/stack/)
+- [MUI Stack Documentation](https://mui.com/material-ui/react-stack/)

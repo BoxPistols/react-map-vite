@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Pagination/概要' />
+
+# Pagination
+
+ページネーションを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Pagination } from '@mui/material'
+
+;<Pagination count={10} />
+```
+
+## 制御コンポーネント
+
+```tsx
+const [page, setPage] = useState(1)
+
+<Pagination
+  count={10}
+  page={page}
+  onChange={(event, value) => setPage(value)}
+/>
+```
+
+## バリアント
+
+```tsx
+<Pagination variant="outlined" />
+<Pagination variant="text" />
+```
+
+## サイズ
+
+```tsx
+<Pagination size="small" />
+<Pagination size="medium" />
+<Pagination size="large" />
+```
+
+## カラー
+
+```tsx
+<Pagination color="primary" />
+<Pagination color="secondary" />
+```
+
+## 参考リンク
+
+- [MUI Pagination API](https://mui.com/material-ui/api/pagination/)
+- [MUI Pagination Documentation](https://mui.com/material-ui/react-pagination/)
