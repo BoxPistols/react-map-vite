@@ -1,0 +1,196 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Slider/概要' />
+
+# Slider
+
+スライダーは、範囲内の値を選択するためのコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Slider } from '@mui/material'
+
+<Slider defaultValue={30} />
+```
+
+## 制御コンポーネント
+
+```tsx
+const [value, setValue] = useState(30)
+
+<Slider
+  value={value}
+  onChange={(e, newValue) => setValue(newValue)}
+/>
+```
+
+## 離散値
+
+`marks`と`step`で離散的な値を設定:
+
+```tsx
+<Slider
+  defaultValue={30}
+  step={10}
+  marks
+  min={0}
+  max={100}
+/>
+```
+
+### カスタムマーク
+
+```tsx
+const marks = [
+  { value: 0, label: '0°C' },
+  { value: 20, label: '20°C' },
+  { value: 37, label: '37°C' },
+  { value: 100, label: '100°C' },
+]
+
+<Slider
+  defaultValue={20}
+  marks={marks}
+  min={0}
+  max={100}
+/>
+```
+
+## 範囲選択
+
+```tsx
+const [value, setValue] = useState([20, 37])
+
+<Slider
+  value={value}
+  onChange={(e, newValue) => setValue(newValue)}
+  valueLabelDisplay="auto"
+  min={0}
+  max={100}
+/>
+```
+
+## 値ラベル
+
+```tsx
+<Slider valueLabelDisplay="auto" defaultValue={30} />
+<Slider valueLabelDisplay="on" defaultValue={30} />
+<Slider valueLabelDisplay="off" defaultValue={30} />
+```
+
+### カスタム値ラベル
+
+```tsx
+function valuetext(value) {
+  return `${value}°C`
+}
+
+<Slider
+  valueLabelDisplay="auto"
+  valueLabelFormat={valuetext}
+  defaultValue={30}
+/>
+```
+
+## サイズ
+
+```tsx
+<Slider size="small" defaultValue={30} />
+<Slider size="medium" defaultValue={30} />
+```
+
+## カラー
+
+```tsx
+<Slider color="primary" />
+<Slider color="secondary" />
+<Slider color="success" />
+<Slider color="error" />
+```
+
+## 縦向き
+
+```tsx
+<Slider
+  orientation="vertical"
+  defaultValue={30}
+  sx={{ height: 300 }}
+/>
+```
+
+## 無効化
+
+```tsx
+<Slider disabled defaultValue={30} />
+```
+
+## 実装例
+
+### 音量調整
+
+```tsx
+const [volume, setVolume] = useState(30)
+
+<Box sx={{ width: 300 }}>
+  <Stack spacing={2} direction="row" alignItems="center">
+    <VolumeDown />
+    <Slider
+      value={volume}
+      onChange={(e, newValue) => setVolume(newValue)}
+      aria-label="Volume"
+    />
+    <VolumeUp />
+  </Stack>
+</Box>
+```
+
+### 価格範囲フィルター
+
+```tsx
+const [priceRange, setPriceRange] = useState([20, 80])
+
+<Box sx={{ width: 300 }}>
+  <Typography>
+    価格範囲: ¥{priceRange[0]}万 - ¥{priceRange[1]}万
+  </Typography>
+  <Slider
+    value={priceRange}
+    onChange={(e, newValue) => setPriceRange(newValue)}
+    valueLabelDisplay="auto"
+    min={0}
+    max={100}
+  />
+</Box>
+```
+
+## アクセシビリティ
+
+```tsx
+<Slider
+  aria-label="Temperature"
+  valueLabelDisplay="auto"
+/>
+
+<Slider
+  aria-labelledby="input-slider"
+  valueLabelDisplay="auto"
+/>
+```
+
+## ベストプラクティス
+
+1. **適切なstep値** - ユーザーが選択しやすい間隔
+2. **valueLabelDisplay** - 値が重要な場合は表示
+3. **min/max の明示** - 範囲を明確に
+4. **marks の活用** - 重要な値を視覚化
+
+## 関連コンポーネント
+
+- **Input** - 数値入力との組み合わせ
+- **TextField** - テキスト入力
+
+## 参考リンク
+
+- [MUI Slider API](https://mui.com/material-ui/api/slider/)
+- [MUI Slider Documentation](https://mui.com/material-ui/react-slider/)

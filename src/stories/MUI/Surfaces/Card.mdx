@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Surfaces/Card/概要' />
+
+# Card
+
+カードレイアウトを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Card, CardContent, CardActions, Button, Typography } from '@mui/material'
+
+<Card>
+  <CardContent>
+    <Typography variant="h5" component="div">
+      タイトル
+    </Typography>
+    <Typography variant="body2" color="text.secondary">
+      説明文
+    </Typography>
+  </CardContent>
+  <CardActions>
+    <Button size="small">詳細</Button>
+  </CardActions>
+</Card>
+```
+
+## 画像付き
+
+```tsx
+<Card>
+  <CardMedia
+    component="img"
+    height="140"
+    image="/image.jpg"
+    alt="説明"
+  />
+  <CardContent>
+    <Typography variant="h5">タイトル</Typography>
+  </CardContent>
+</Card>
+```
+
+## バリアント
+
+```tsx
+<Card variant="outlined">
+<Card variant="elevation">
+```
+
+## 参考リンク
+
+- [MUI Card API](https://mui.com/material-ui/api/card/)
+- [MUI Card Documentation](https://mui.com/material-ui/react-card/)

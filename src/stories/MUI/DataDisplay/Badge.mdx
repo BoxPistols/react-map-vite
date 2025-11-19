@@ -1,0 +1,127 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Badge/概要' />
+
+# Badge
+
+他のコンポーネントの右上に小さなバッジを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Badge } from '@mui/material'
+
+<Badge badgeContent={4} color="primary">
+  <MailIcon />
+</Badge>
+```
+
+## カラー
+
+```tsx
+<Badge badgeContent={4} color="primary"><MailIcon /></Badge>
+<Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
+<Badge badgeContent={4} color="error"><MailIcon /></Badge>
+<Badge badgeContent={4} color="success"><MailIcon /></Badge>
+<Badge badgeContent={4} color="warning"><MailIcon /></Badge>
+<Badge badgeContent={4} color="info"><MailIcon /></Badge>
+```
+
+## 最大値
+
+```tsx
+<Badge badgeContent={99} color="primary">
+  <MailIcon />
+</Badge>
+
+<Badge badgeContent={100} max={99} color="primary">
+  <MailIcon />
+</Badge>
+```
+
+## ドット
+
+```tsx
+<Badge variant="dot" color="primary">
+  <MailIcon />
+</Badge>
+```
+
+## 位置
+
+```tsx
+<Badge
+  badgeContent={4}
+  anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'right',
+  }}
+>
+  <MailIcon />
+</Badge>
+
+<Badge
+  badgeContent={4}
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'right',
+  }}
+>
+  <MailIcon />
+</Badge>
+```
+
+## 表示・非表示
+
+```tsx
+<Badge
+  badgeContent={4}
+  invisible={!showBadge}
+  color="primary"
+>
+  <MailIcon />
+</Badge>
+```
+
+## 実装例
+
+### 通知アイコン
+
+```tsx
+<Badge badgeContent={notifications.length} color="error">
+  <NotificationsIcon />
+</Badge>
+```
+
+### ショッピングカート
+
+```tsx
+<Badge badgeContent={cartItems.length} color="primary">
+  <ShoppingCartIcon />
+</Badge>
+```
+
+### オンライン状態
+
+```tsx
+<Badge
+  overlap="circular"
+  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+  variant="dot"
+  color="success"
+>
+  <Avatar alt={user.name} src={user.avatar} />
+</Badge>
+```
+
+## ベストプラクティス
+
+1. **適切なmax値** - 99+など読みやすい上限設定
+2. **カラーで意味を** - error=重要な通知など
+3. **invisibleで制御** - 条件付き表示
+4. **ドットの活用** - 数値が不要な場合
+
+## 参考リンク
+
+- [MUI Badge API](https://mui.com/material-ui/api/badge/)
+- [MUI Badge Documentation](https://mui.com/material-ui/react-badge/)

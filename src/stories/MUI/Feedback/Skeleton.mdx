@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Feedback/Skeleton/概要' />
+
+# Skeleton
+
+コンテンツ読み込み中のプレースホルダーを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Skeleton } from '@mui/material'
+
+<Skeleton />
+<Skeleton variant="text" />
+<Skeleton variant="circular" width={40} height={40} />
+<Skeleton variant="rectangular" width={210} height={118} />
+<Skeleton variant="rounded" width={210} height={60} />
+```
+
+## アニメーション
+
+```tsx
+<Skeleton animation="wave" />
+<Skeleton animation="pulse" />
+<Skeleton animation={false} />
+```
+
+## 実装例
+
+```tsx
+{loading ? (
+  <>
+    <Skeleton variant="text" width="60%" />
+    <Skeleton variant="text" width="80%" />
+    <Skeleton variant="rectangular" height={200} />
+  </>
+) : (
+  <ActualContent />
+)}
+```
+
+## 参考リンク
+
+- [MUI Skeleton API](https://mui.com/material-ui/api/skeleton/)
+- [MUI Skeleton Documentation](https://mui.com/material-ui/react-skeleton/)

@@ -1,0 +1,177 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Fab/概要' />
+
+# Fab (Floating Action Button)
+
+フローティングアクションボタンは、画面上で最も重要なアクションを表します。
+
+## 基本的な使い方
+
+```tsx
+import { Fab } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+
+<Fab color="primary">
+  <AddIcon />
+</Fab>
+```
+
+## バリエーション
+
+### circular（デフォルト）
+
+```tsx
+<Fab color="primary">
+  <AddIcon />
+</Fab>
+```
+
+### extended
+
+テキストとアイコンを表示:
+
+```tsx
+<Fab variant="extended">
+  <AddIcon sx={{ mr: 1 }} />
+  作成
+</Fab>
+```
+
+## サイズ
+
+```tsx
+<Fab size="small" color="primary">
+  <AddIcon />
+</Fab>
+
+<Fab size="medium" color="primary">
+  <AddIcon />
+</Fab>
+
+<Fab size="large" color="primary">
+  <AddIcon />
+</Fab>
+```
+
+## カラー
+
+```tsx
+<Fab color="primary"><AddIcon /></Fab>
+<Fab color="secondary"><AddIcon /></Fab>
+<Fab color="success"><AddIcon /></Fab>
+<Fab color="error"><AddIcon /></Fab>
+<Fab color="info"><AddIcon /></Fab>
+<Fab color="warning"><AddIcon /></Fab>
+```
+
+## 配置
+
+画面の固定位置に配置:
+
+```tsx
+<Fab
+  color="primary"
+  sx={{
+    position: 'fixed',
+    bottom: 16,
+    right: 16,
+  }}
+>
+  <AddIcon />
+</Fab>
+```
+
+## 無効化
+
+```tsx
+<Fab disabled color="primary">
+  <AddIcon />
+</Fab>
+```
+
+## 実装例
+
+### 新規作成ボタン
+
+```tsx
+<Fab
+  color="primary"
+  aria-label="add"
+  sx={{ position: 'fixed', bottom: 16, right: 16 }}
+  onClick={handleCreate}
+>
+  <AddIcon />
+</Fab>
+```
+
+### スクロールトップボタン
+
+```tsx
+const [showScrollTop, setShowScrollTop] = useState(false)
+
+useEffect(() => {
+  const handleScroll = () => {
+    setShowScrollTop(window.scrollY > 300)
+  }
+  window.addEventListener('scroll', handleScroll)
+  return () => window.removeEventListener('scroll', handleScroll)
+}, [])
+
+{showScrollTop && (
+  <Fab
+    color="primary"
+    size="small"
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    sx={{ position: 'fixed', bottom: 16, right: 16 }}
+  >
+    <KeyboardArrowUpIcon />
+  </Fab>
+)}
+```
+
+### アクションメニュー
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<Box>
+  <Fab
+    color="primary"
+    onClick={() => setOpen(!open)}
+  >
+    {open ? <CloseIcon /> : <AddIcon />}
+  </Fab>
+
+  {open && (
+    <Box sx={{ position: 'absolute', bottom: 80, right: 16 }}>
+      <Fab size="small" color="secondary" sx={{ mb: 1 }}>
+        <EditIcon />
+      </Fab>
+      <Fab size="small" color="secondary">
+        <ShareIcon />
+      </Fab>
+    </Box>
+  )}
+</Box>
+```
+
+## アクセシビリティ
+
+```tsx
+<Fab aria-label="add" color="primary">
+  <AddIcon />
+</Fab>
+```
+
+## ベストプラクティス
+
+1. **1画面に1つ** - 最も重要なアクションのみ
+2. **aria-label必須** - アイコンのみの場合
+3. **適切な配置** - 右下が一般的
+4. **Extended variant** - テキストが必要な場合
+
+## 参考リンク
+
+- [MUI Fab API](https://mui.com/material-ui/api/fab/)
+- [MUI Fab Documentation](https://mui.com/material-ui/react-floating-action-button/)

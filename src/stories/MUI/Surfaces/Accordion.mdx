@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Surfaces/Accordion/概要' />
+
+# Accordion
+
+展開・折りたたみ可能なパネルを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
+
+<Accordion>
+  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+    <Typography>セクション1</Typography>
+  </AccordionSummary>
+  <AccordionDetails>
+    <Typography>
+      セクション1の詳細内容
+    </Typography>
+  </AccordionDetails>
+</Accordion>
+```
+
+## 制御コンポーネント
+
+```tsx
+const [expanded, setExpanded] = useState('panel1')
+
+<Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+  {/* コンテンツ */}
+</Accordion>
+```
+
+## 無効化
+
+```tsx
+<Accordion disabled>
+  {/* コンテンツ */}
+</Accordion>
+```
+
+## 参考リンク
+
+- [MUI Accordion API](https://mui.com/material-ui/api/accordion/)
+- [MUI Accordion Documentation](https://mui.com/material-ui/react-accordion/)

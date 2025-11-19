@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Utils/Modal/概要' />
+
+# Modal
+
+モーダルコンポーネントの基本実装です。Dialogコンポーネントの基礎となっています。
+
+## 基本的な使い方
+
+```tsx
+import { Modal, Box } from '@mui/material'
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+}
+
+<Modal open={open} onClose={handleClose}>
+  <Box sx={style}>
+    <Typography variant="h6">モーダルタイトル</Typography>
+    <Typography sx={{ mt: 2 }}>
+      モーダルのコンテンツ
+    </Typography>
+  </Box>
+</Modal>
+```
+
+## Backdropのカスタマイズ
+
+```tsx
+<Modal
+  open={open}
+  onClose={handleClose}
+  BackdropProps={{
+    style: { backgroundColor: 'rgba(0, 0, 0, 0.8)' }
+  }}
+>
+  {/* コンテンツ */}
+</Modal>
+```
+
+## 参考リンク
+
+- [MUI Modal API](https://mui.com/material-ui/api/modal/)
+- [MUI Modal Documentation](https://mui.com/material-ui/react-modal/)

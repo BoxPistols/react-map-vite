@@ -1,0 +1,378 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Autocomplete/概要' />
+
+# Autocomplete
+
+自動補完機能付きの入力コンポーネントです。大量の選択肢から検索・選択する際に便利です。
+
+## 基本的な使い方
+
+```tsx
+import { Autocomplete, TextField } from '@mui/material'
+
+const options = ['Option 1', 'Option 2', 'Option 3']
+
+<Autocomplete
+  options={options}
+  renderInput={(params) => <TextField {...params} label="選択してください" />}
+/>
+```
+
+## 主な機能
+
+### オプションの表示
+
+文字列配列やオブジェクト配列をオプションとして使用:
+
+```tsx
+// 文字列配列
+const options = ['Tokyo', 'Osaka', 'Kyoto']
+
+<Autocomplete
+  options={options}
+  renderInput={(params) => <TextField {...params} label="都市" />}
+/>
+
+// オブジェクト配列
+const options = [
+  { label: '東京', id: 1 },
+  { label: '大阪', id: 2 },
+  { label: '京都', id: 3 }
+]
+
+<Autocomplete
+  options={options}
+  getOptionLabel={(option) => option.label}
+  renderInput={(params) => <TextField {...params} label="都市" />}
+/>
+```
+
+### 制御コンポーネント
+
+```tsx
+const [value, setValue] = useState(null)
+
+<Autocomplete
+  value={value}
+  onChange={(event, newValue) => {
+    setValue(newValue)
+  }}
+  options={options}
+  renderInput={(params) => <TextField {...params} label="選択" />}
+/>
+```
+
+### 複数選択
+
+`multiple`プロップで複数選択を有効化:
+
+```tsx
+<Autocomplete
+  multiple
+  options={options}
+  renderInput={(params) => <TextField {...params} label="複数選択" />}
+/>
+```
+
+### freeSolo
+
+ユーザーが任意の値を入力できるようにする:
+
+```tsx
+<Autocomplete
+  freeSolo
+  options={options}
+  renderInput={(params) => <TextField {...params} label="自由入力可" />}
+/>
+```
+
+### disableClearable
+
+クリアボタンを非表示:
+
+```tsx
+<Autocomplete
+  disableClearable
+  options={options}
+  renderInput={(params) => <TextField {...params} label="クリア不可" />}
+/>
+```
+
+## グルーピング
+
+オプションをグループ化:
+
+```tsx
+const options = [
+  { category: 'Fruits', label: 'Apple' },
+  { category: 'Fruits', label: 'Banana' },
+  { category: 'Vegetables', label: 'Carrot' },
+  { category: 'Vegetables', label: 'Tomato' }
+]
+
+<Autocomplete
+  options={options}
+  groupBy={(option) => option.category}
+  getOptionLabel={(option) => option.label}
+  renderInput={(params) => <TextField {...params} label="食べ物" />}
+/>
+```
+
+## カスタムレンダリング
+
+### renderOption
+
+オプション項目のカスタマイズ:
+
+```tsx
+<Autocomplete
+  options={options}
+  renderOption={(props, option) => (
+    <Box component="li" {...props}>
+      <Avatar src={option.avatar} sx={{ mr: 2 }} />
+      {option.label}
+    </Box>
+  )}
+  renderInput={(params) => <TextField {...params} label="ユーザー" />}
+/>
+```
+
+### renderTags
+
+選択されたタグのカスタマイズ:
+
+```tsx
+<Autocomplete
+  multiple
+  options={options}
+  renderTags={(value, getTagProps) =>
+    value.map((option, index) => (
+      <Chip
+        variant="outlined"
+        label={option}
+        {...getTagProps({ index })}
+      />
+    ))
+  }
+  renderInput={(params) => <TextField {...params} label="タグ" />}
+/>
+```
+
+## フィルタリング
+
+### createFilterOptions
+
+カスタムフィルターを作成:
+
+```tsx
+import { createFilterOptions } from '@mui/material/Autocomplete'
+
+const filterOptions = createFilterOptions({
+  matchFrom: 'start', // 'start' | 'any'
+  stringify: (option) => option.label,
+  trim: true,
+})
+
+<Autocomplete
+  options={options}
+  filterOptions={filterOptions}
+  renderInput={(params) => <TextField {...params} label="検索" />}
+/>
+```
+
+### 大文字小文字を区別しない検索
+
+```tsx
+const filterOptions = createFilterOptions({
+  ignoreCase: true,
+})
+```
+
+## 非同期データ読み込み
+
+```tsx
+const [open, setOpen] = useState(false)
+const [options, setOptions] = useState([])
+const loading = open && options.length === 0
+
+useEffect(() => {
+  if (!loading) {
+    return undefined
+  }
+
+  (async () => {
+    const response = await fetch('https://api.example.com/data')
+    const data = await response.json()
+    setOptions(data)
+  })()
+}, [loading])
+
+<Autocomplete
+  open={open}
+  onOpen={() => setOpen(true)}
+  onClose={() => setOpen(false)}
+  loading={loading}
+  options={options}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label="非同期読み込み"
+      InputProps={{
+        ...params.InputProps,
+        endAdornment: (
+          <>
+            {loading ? <CircularProgress size={20} /> : null}
+            {params.InputProps.endAdornment}
+          </>
+        ),
+      }}
+    />
+  )}
+/>
+```
+
+## サイズ
+
+```tsx
+<Autocomplete size="small" />
+<Autocomplete size="medium" />
+```
+
+## バリデーション
+
+```tsx
+<Autocomplete
+  options={options}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label="必須項目"
+      required
+      error={!value}
+      helperText={!value && "選択してください"}
+    />
+  )}
+/>
+```
+
+## 実装例
+
+### 都道府県選択
+
+```tsx
+const prefectures = [
+  '北海道', '青森県', '岩手県', // ...
+]
+
+<Autocomplete
+  options={prefectures}
+  renderInput={(params) => (
+    <TextField {...params} label="都道府県" required />
+  )}
+/>
+```
+
+### タグ入力
+
+```tsx
+<Autocomplete
+  multiple
+  freeSolo
+  options={tags}
+  renderInput={(params) => (
+    <TextField {...params} label="タグ" placeholder="タグを追加" />
+  )}
+/>
+```
+
+### ユーザー検索
+
+```tsx
+<Autocomplete
+  options={users}
+  getOptionLabel={(option) => option.name}
+  renderOption={(props, option) => (
+    <Box component="li" {...props}>
+      <Avatar src={option.avatar} sx={{ mr: 2 }} />
+      <Box>
+        <Typography variant="body1">{option.name}</Typography>
+        <Typography variant="caption" color="text.secondary">
+          {option.email}
+        </Typography>
+      </Box>
+    </Box>
+  )}
+  renderInput={(params) => (
+    <TextField {...params} label="ユーザーを検索" />
+  )}
+/>
+```
+
+## アクセシビリティ
+
+- WAI-ARIA準拠
+- キーボードナビゲーション対応
+- スクリーンリーダー対応
+
+### キーボード操作
+
+- `Enter`: オプションを選択
+- `Escape`: ドロップダウンを閉じる
+- `Arrow Down/Up`: オプション間を移動
+- `Home/End`: 最初/最後のオプションに移動
+
+## パフォーマンス最適化
+
+### 仮想化
+
+大量のオプションがある場合:
+
+```tsx
+import { FixedSizeList } from 'react-window'
+
+const ListboxComponent = React.forwardRef((props, ref) => {
+  const { children, ...other } = props
+  const itemCount = Array.isArray(children) ? children.length : 0
+
+  return (
+    <div ref={ref}>
+      <FixedSizeList
+        height={250}
+        itemSize={46}
+        itemCount={itemCount}
+        {...other}
+      >
+        {({ index, style }) => (
+          <div style={style}>{children[index]}</div>
+        )}
+      </FixedSizeList>
+    </div>
+  )
+})
+
+<Autocomplete
+  options={largeOptions}
+  ListboxComponent={ListboxComponent}
+  renderInput={(params) => <TextField {...params} />}
+/>
+```
+
+## ベストプラクティス
+
+1. **適切なラベル** - renderInput内で必ずlabelを提供
+2. **オプション数の考慮** - 大量のオプションには仮想化を検討
+3. **非同期読み込み** - APIから取得する場合はローディング状態を表示
+4. **バリデーション** - 必須項目には適切なエラー表示
+5. **freeSolo の慎重な使用** - 自由入力が本当に必要か検討
+
+## 関連コンポーネント
+
+- **TextField** - 入力フィールド
+- **Select** - 少数の選択肢の場合
+- **Chip** - 選択されたタグの表示
+
+## 参考リンク
+
+- [MUI Autocomplete API](https://mui.com/material-ui/api/autocomplete/)
+- [MUI Autocomplete Documentation](https://mui.com/material-ui/react-autocomplete/)

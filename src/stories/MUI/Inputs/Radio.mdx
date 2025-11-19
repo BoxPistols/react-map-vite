@@ -1,0 +1,356 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Radio/概要' />
+
+# Radio
+
+ラジオボタンは、複数の選択肢から1つだけを選択させるコンポーネントです。
+
+## 基本的な使い方
+
+ラジオボタンは必ずRadioGroupと組み合わせて使用します:
+
+```tsx
+import { Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material'
+
+<FormControl>
+  <FormLabel>性別</FormLabel>
+  <RadioGroup>
+    <FormControlLabel value="male" control={<Radio />} label="男性" />
+    <FormControlLabel value="female" control={<Radio />} label="女性" />
+    <FormControlLabel value="other" control={<Radio />} label="その他" />
+  </RadioGroup>
+</FormControl>
+```
+
+## 制御コンポーネント
+
+```tsx
+const [value, setValue] = useState('female')
+
+<FormControl>
+  <FormLabel>性別</FormLabel>
+  <RadioGroup
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+  >
+    <FormControlLabel value="male" control={<Radio />} label="男性" />
+    <FormControlLabel value="female" control={<Radio />} label="女性" />
+    <FormControlLabel value="other" control={<Radio />} label="その他" />
+  </RadioGroup>
+</FormControl>
+```
+
+## 方向
+
+### 垂直（デフォルト）
+
+```tsx
+<RadioGroup>
+  <FormControlLabel value="1" control={<Radio />} label="選択肢 1" />
+  <FormControlLabel value="2" control={<Radio />} label="選択肢 2" />
+</RadioGroup>
+```
+
+### 水平
+
+```tsx
+<RadioGroup row>
+  <FormControlLabel value="1" control={<Radio />} label="選択肢 1" />
+  <FormControlLabel value="2" control={<Radio />} label="選択肢 2" />
+</RadioGroup>
+```
+
+## サイズ
+
+```tsx
+<Radio size="small" />
+<Radio size="medium" />
+```
+
+## カラー
+
+```tsx
+<Radio color="primary" />
+<Radio color="secondary" />
+<Radio color="success" />
+<Radio color="error" />
+<Radio color="warning" />
+<Radio color="info" />
+<Radio color="default" />
+```
+
+## 無効化
+
+### 個別のラジオボタンを無効化
+
+```tsx
+<RadioGroup>
+  <FormControlLabel value="1" control={<Radio />} label="有効" />
+  <FormControlLabel value="2" control={<Radio />} label="有効" />
+  <FormControlLabel
+    value="3"
+    control={<Radio />}
+    label="無効"
+    disabled
+  />
+</RadioGroup>
+```
+
+### RadioGroup全体を無効化
+
+```tsx
+<RadioGroup disabled>
+  <FormControlLabel value="1" control={<Radio />} label="選択肢 1" />
+  <FormControlLabel value="2" control={<Radio />} label="選択肢 2" />
+</RadioGroup>
+```
+
+## ラベルの配置
+
+```tsx
+<FormControlLabel
+  value="end"
+  control={<Radio />}
+  label="右側（デフォルト）"
+  labelPlacement="end"
+/>
+<FormControlLabel
+  value="start"
+  control={<Radio />}
+  label="左側"
+  labelPlacement="start"
+/>
+<FormControlLabel
+  value="top"
+  control={<Radio />}
+  label="上"
+  labelPlacement="top"
+/>
+<FormControlLabel
+  value="bottom"
+  control={<Radio />}
+  label="下"
+  labelPlacement="bottom"
+/>
+```
+
+## カスタムアイコン
+
+```tsx
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked'
+
+<Radio
+  icon={<RadioButtonUncheckedIcon />}
+  checkedIcon={<RadioButtonCheckedIcon />}
+/>
+```
+
+## バリデーション
+
+```tsx
+const [value, setValue] = useState('')
+const [error, setError] = useState(false)
+
+const handleSubmit = () => {
+  if (!value) {
+    setError(true)
+  }
+}
+
+<FormControl error={error} required>
+  <FormLabel>性別</FormLabel>
+  <RadioGroup
+    value={value}
+    onChange={(e) => {
+      setValue(e.target.value)
+      setError(false)
+    }}
+  >
+    <FormControlLabel value="male" control={<Radio />} label="男性" />
+    <FormControlLabel value="female" control={<Radio />} label="女性" />
+    <FormControlLabel value="other" control={<Radio />} label="その他" />
+  </RadioGroup>
+  {error && <FormHelperText>この項目は必須です</FormHelperText>}
+</FormControl>
+```
+
+## 実装例
+
+### 配送方法の選択
+
+```tsx
+const [shipping, setShipping] = useState('standard')
+
+const shippingOptions = [
+  { value: 'standard', label: '通常配送', price: '無料', days: '3-5日' },
+  { value: 'express', label: '速達', price: '¥500', days: '1-2日' },
+  { value: 'overnight', label: '翌日配送', price: '¥1,000', days: '翌日' },
+]
+
+<FormControl>
+  <FormLabel>配送方法</FormLabel>
+  <RadioGroup value={shipping} onChange={(e) => setShipping(e.target.value)}>
+    {shippingOptions.map((option) => (
+      <FormControlLabel
+        key={option.value}
+        value={option.value}
+        control={<Radio />}
+        label={
+          <Box>
+            <Typography variant="body1">{option.label}</Typography>
+            <Typography variant="caption" color="text.secondary">
+              {option.price} - {option.days}
+            </Typography>
+          </Box>
+        }
+      />
+    ))}
+  </RadioGroup>
+</FormControl>
+```
+
+### 支払い方法の選択
+
+```tsx
+const [payment, setPayment] = useState('credit')
+
+<FormControl>
+  <FormLabel>支払い方法</FormLabel>
+  <RadioGroup value={payment} onChange={(e) => setPayment(e.target.value)}>
+    <FormControlLabel
+      value="credit"
+      control={<Radio />}
+      label={
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <CreditCardIcon sx={{ mr: 1 }} />
+          クレジットカード
+        </Box>
+      }
+    />
+    <FormControlLabel
+      value="bank"
+      control={<Radio />}
+      label={
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <AccountBalanceIcon sx={{ mr: 1 }} />
+          銀行振込
+        </Box>
+      }
+    />
+    <FormControlLabel
+      value="convenience"
+      control={<Radio />}
+      label={
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <StoreIcon sx={{ mr: 1 }} />
+          コンビニ決済
+        </Box>
+      }
+    />
+  </RadioGroup>
+</FormControl>
+```
+
+### プラン選択
+
+```tsx
+const [plan, setPlan] = useState('basic')
+
+const plans = [
+  { value: 'free', name: '無料プラン', price: '¥0/月', features: ['基本機能'] },
+  { value: 'basic', name: 'ベーシック', price: '¥1,000/月', features: ['基本機能', 'サポート'] },
+  { value: 'pro', name: 'プロフェッショナル', price: '¥3,000/月', features: ['全機能', '優先サポート'] },
+]
+
+<FormControl fullWidth>
+  <FormLabel>プランを選択</FormLabel>
+  <RadioGroup value={plan} onChange={(e) => setPlan(e.target.value)}>
+    {plans.map((item) => (
+      <Paper key={item.value} sx={{ p: 2, mb: 1 }}>
+        <FormControlLabel
+          value={item.value}
+          control={<Radio />}
+          label={
+            <Box sx={{ width: '100%' }}>
+              <Typography variant="h6">{item.name}</Typography>
+              <Typography variant="body1" color="primary">
+                {item.price}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                {item.features.join(', ')}
+              </Typography>
+            </Box>
+          }
+          sx={{ width: '100%', m: 0 }}
+        />
+      </Paper>
+    ))}
+  </RadioGroup>
+</FormControl>
+```
+
+## アクセシビリティ
+
+### fieldsetとlegendの使用
+
+RadioGroupは自動的にrole="radiogroup"を設定しますが、FormControlを使用することを推奨:
+
+```tsx
+<FormControl component="fieldset">
+  <FormLabel component="legend">性別</FormLabel>
+  <RadioGroup>
+    <FormControlLabel value="male" control={<Radio />} label="男性" />
+    <FormControlLabel value="female" control={<Radio />} label="女性" />
+  </RadioGroup>
+</FormControl>
+```
+
+### キーボード操作
+
+- `Tab`: RadioGroup間を移動
+- `Arrow Keys`: グループ内のラジオボタン間を移動
+- `Space`: 選択を変更
+
+### aria属性
+
+```tsx
+<RadioGroup
+  aria-labelledby="shipping-label"
+  value={shipping}
+  onChange={handleChange}
+>
+  <FormLabel id="shipping-label">配送方法</FormLabel>
+  <FormControlLabel value="standard" control={<Radio />} label="通常" />
+  <FormControlLabel value="express" control={<Radio />} label="速達" />
+</RadioGroup>
+```
+
+## Radio vs Checkbox vs Select
+
+| コンポーネント | 選択数 | 表示 | 用途 |
+|--------------|--------|------|------|
+| Radio | 1つのみ | 全選択肢表示 | 少数の排他的選択 |
+| Checkbox | 複数可 | 全選択肢表示 | 複数選択可能 |
+| Select | 1つのみ | ドロップダウン | 多数の選択肢 |
+
+## ベストプラクティス
+
+1. **必ずRadioGroupと使用** - 単独では使用しない
+2. **2-7個程度の選択肢** - それ以上ならSelectを検討
+3. **明確なラベル** - 各選択肢の意味を明確に
+4. **デフォルト値の設定** - ユーザーの負担を減らす
+5. **排他的な選択** - 同時に複数選択できないことを明示
+
+## 関連コンポーネント
+
+- **Checkbox** - 複数選択可能
+- **Switch** - ON/OFF切り替え
+- **Select** - ドロップダウン選択
+- **ToggleButtonGroup** - ボタン形式の排他的選択
+
+## 参考リンク
+
+- [MUI Radio API](https://mui.com/material-ui/api/radio/)
+- [MUI Radio Documentation](https://mui.com/material-ui/react-radio-button/)

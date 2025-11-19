@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Drawer/概要' />
+
+# Drawer
+
+サイドメニューを表示するナビゲーションコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Drawer } from '@mui/material'
+
+<Drawer open={open} onClose={handleClose}>
+  <List>
+    <ListItem button>
+      <ListItemText primary="メニュー1" />
+    </ListItem>
+  </List>
+</Drawer>
+```
+
+## Anchor（位置）
+
+```tsx
+<Drawer anchor="left">
+<Drawer anchor="right">
+<Drawer anchor="top">
+<Drawer anchor="bottom">
+```
+
+## バリアント
+
+```tsx
+<Drawer variant="temporary">
+<Drawer variant="permanent">
+<Drawer variant="persistent">
+```
+
+## 参考リンク
+
+- [MUI Drawer API](https://mui.com/material-ui/api/drawer/)
+- [MUI Drawer Documentation](https://mui.com/material-ui/react-drawer/)

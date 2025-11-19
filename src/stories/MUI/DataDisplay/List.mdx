@@ -1,0 +1,182 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/List/概要' />
+
+# List
+
+リスト形式でデータを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { List, ListItem, ListItemText } from '@mui/material'
+
+<List>
+  <ListItem>
+    <ListItemText primary="Item 1" />
+  </ListItem>
+  <ListItem>
+    <ListItemText primary="Item 2" />
+  </ListItem>
+  <ListItem>
+    <ListItemText primary="Item 3" />
+  </ListItem>
+</List>
+```
+
+## アイコン付き
+
+```tsx
+<List>
+  <ListItem>
+    <ListItemIcon>
+      <InboxIcon />
+    </ListItemIcon>
+    <ListItemText primary="Inbox" />
+  </ListItem>
+  <ListItem>
+    <ListItemIcon>
+      <DraftsIcon />
+    </ListItemIcon>
+    <ListItemText primary="Drafts" />
+  </ListItem>
+</List>
+```
+
+## Avatar付き
+
+```tsx
+<List>
+  <ListItem>
+    <ListItemAvatar>
+      <Avatar src="/user1.jpg" />
+    </ListItemAvatar>
+    <ListItemText
+      primary="User Name"
+      secondary="オンライン"
+    />
+  </ListItem>
+</List>
+```
+
+## クリック可能
+
+```tsx
+<List>
+  <ListItemButton onClick={handleClick}>
+    <ListItemText primary="Clickable Item" />
+  </ListItemButton>
+</List>
+```
+
+## ネストされたリスト
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<List>
+  <ListItemButton onClick={() => setOpen(!open)}>
+    <ListItemIcon><InboxIcon /></ListItemIcon>
+    <ListItemText primary="Inbox" />
+    {open ? <ExpandLess /> : <ExpandMore />}
+  </ListItemButton>
+  <Collapse in={open}>
+    <List component="div" disablePadding>
+      <ListItemButton sx={{ pl: 4 }}>
+        <ListItemIcon><StarIcon /></ListItemIcon>
+        <ListItemText primary="Starred" />
+      </ListItemButton>
+    </List>
+  </Collapse>
+</List>
+```
+
+## 二次的なアクション
+
+```tsx
+<List>
+  <ListItem
+    secondaryAction={
+      <IconButton edge="end">
+        <DeleteIcon />
+      </IconButton>
+    }
+  >
+    <ListItemText primary="Item with action" />
+  </ListItem>
+</List>
+```
+
+## 選択可能
+
+```tsx
+const [selected, setSelected] = useState(0)
+
+<List>
+  {items.map((item, index) => (
+    <ListItemButton
+      key={index}
+      selected={selected === index}
+      onClick={() => setSelected(index)}
+    >
+      <ListItemText primary={item} />
+    </ListItemButton>
+  ))}
+</List>
+```
+
+## 実装例
+
+### ナビゲーションメニュー
+
+```tsx
+<List>
+  <ListItemButton component={Link} to="/home">
+    <ListItemIcon><HomeIcon /></ListItemIcon>
+    <ListItemText primary="ホーム" />
+  </ListItemButton>
+  <ListItemButton component={Link} to="/settings">
+    <ListItemIcon><SettingsIcon /></ListItemIcon>
+    <ListItemText primary="設定" />
+  </ListItemButton>
+</List>
+```
+
+### メッセージリスト
+
+```tsx
+<List>
+  {messages.map((msg) => (
+    <ListItem key={msg.id} alignItems="flex-start">
+      <ListItemAvatar>
+        <Avatar src={msg.avatar} />
+      </ListItemAvatar>
+      <ListItemText
+        primary={msg.sender}
+        secondary={
+          <>
+            <Typography component="span" variant="body2">
+              {msg.preview}
+            </Typography>
+            <Typography variant="caption" display="block">
+              {msg.time}
+            </Typography>
+          </>
+        }
+      />
+    </ListItem>
+  ))}
+</List>
+```
+
+## ベストプラクティス
+
+1. **適切なListItem** - ListItemとListItemButtonの使い分け
+2. **アイコンの統一** - 同じサイズ・スタイルで統一
+3. **区切り線** - Dividerで項目を分離
+4. **二次アクション** - secondaryActionで補助操作
+
+## 参考リンク
+
+- [MUI List API](https://mui.com/material-ui/api/list/)
+- [MUI List Documentation](https://mui.com/material-ui/react-list/)

@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Feedback/Dialog/概要' />
+
+# Dialog
+
+モーダルダイアログを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
+
+<Dialog open={open} onClose={handleClose}>
+  <DialogTitle>タイトル</DialogTitle>
+  <DialogContent>
+    <DialogContentText>
+      ダイアログの内容
+    </DialogContentText>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleClose}>キャンセル</Button>
+    <Button onClick={handleConfirm}>OK</Button>
+  </DialogActions>
+</Dialog>
+```
+
+## フルスクリーン
+
+```tsx
+<Dialog fullScreen open={open} onClose={handleClose}>
+  {/* コンテンツ */}
+</Dialog>
+```
+
+## サイズ
+
+```tsx
+<Dialog maxWidth="xs" open={open}>
+<Dialog maxWidth="sm" open={open}>
+<Dialog maxWidth="md" open={open}>
+<Dialog maxWidth="lg" open={open}>
+<Dialog maxWidth="xl" open={open}>
+```
+
+## スクロール
+
+```tsx
+<Dialog scroll="paper">
+<Dialog scroll="body">
+```
+
+## 参考リンク
+
+- [MUI Dialog API](https://mui.com/material-ui/api/dialog/)
+- [MUI Dialog Documentation](https://mui.com/material-ui/react-dialog/)

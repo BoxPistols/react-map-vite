@@ -1,0 +1,268 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Button/概要' />
+
+# Button
+
+ユーザーアクションを実行するための基本的なボタンコンポーネントです。
+Material-UIの中で最も頻繁に使用されるコンポーネントの一つです。
+
+## 基本的な使い方
+
+```tsx
+import { Button } from '@mui/material'
+
+<Button variant="contained">ボタン</Button>
+```
+
+## バリエーション
+
+### variant
+
+ボタンの表示スタイルを3種類から選択できます:
+
+- **contained** - 背景色のある塗りつぶしボタン（最も目立つ）
+  - 主要なアクション（保存、送信、決定など）に使用
+  - ページに1-2個程度に抑えることを推奨
+
+- **outlined** - 枠線のみのボタン（中間の強調度）
+  - 二次的なアクション（キャンセル、戻るなど）に使用
+  - containedボタンと組み合わせて使用することが多い
+
+- **text** - テキストのみのボタン（最も控えめ）
+  - あまり重要でないアクション（もっと見る、詳細など）に使用
+  - ダイアログ内のアクションなどに適している
+
+```tsx
+<Button variant="contained">Contained</Button>
+<Button variant="outlined">Outlined</Button>
+<Button variant="text">Text</Button>
+```
+
+## サイズ
+
+3つのサイズから選択できます:
+
+- **small** - コンパクトなUI向け（テーブル内、狭いスペースなど）
+- **medium** - デフォルトサイズ（通常のフォーム、ページなど）
+- **large** - 大きめの表示（ランディングページ、主要なCTAなど）
+
+```tsx
+<Button size="small">Small</Button>
+<Button size="medium">Medium</Button>
+<Button size="large">Large</Button>
+```
+
+## カラー
+
+複数のカラーオプションがあります:
+
+- **primary** - プライマリーカラー（主要なアクション）
+- **secondary** - セカンダリーカラー（補助的なアクション）
+- **error** - 削除、キャンセルなどの破壊的なアクション
+- **warning** - 警告が必要なアクション
+- **info** - 情報提供的なアクション
+- **success** - 成功、確認などのアクション
+- **inherit** - 親要素の色を継承
+
+```tsx
+<Button color="primary">Primary</Button>
+<Button color="secondary">Secondary</Button>
+<Button color="error">Error</Button>
+<Button color="success">Success</Button>
+```
+
+## アイコン
+
+ボタンにアイコンを追加してより直感的なUIを作成できます:
+
+### startIcon
+
+ボタンテキストの前にアイコンを配置:
+
+```tsx
+import SendIcon from '@mui/icons-material/Send'
+
+<Button startIcon={<SendIcon />}>送信</Button>
+```
+
+### endIcon
+
+ボタンテキストの後にアイコンを配置:
+
+```tsx
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+
+<Button endIcon={<ArrowForwardIcon />}>次へ</Button>
+```
+
+## 状態
+
+### disabled
+
+ボタンを無効化します:
+
+```tsx
+<Button disabled>無効なボタン</Button>
+```
+
+### loading
+
+ローディング状態を表現する場合は、LoadingButtonコンポーネントの使用を推奨:
+
+```tsx
+import { LoadingButton } from '@mui/lab'
+
+<LoadingButton loading>読み込み中</LoadingButton>
+```
+
+## fullWidth
+
+ボタンを親要素の幅いっぱいに広げます:
+
+```tsx
+<Button fullWidth>全幅ボタン</Button>
+```
+
+## 実装例
+
+### フォームのアクションボタン
+
+```tsx
+<Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
+  <Button variant="outlined">キャンセル</Button>
+  <Button variant="contained">保存</Button>
+</Box>
+```
+
+### ダイアログのアクション
+
+```tsx
+<DialogActions>
+  <Button variant="text">閉じる</Button>
+  <Button variant="contained" color="error">削除</Button>
+</DialogActions>
+```
+
+### アイコン付きアクションボタン
+
+```tsx
+<Box sx={{ display: 'flex', gap: 2 }}>
+  <Button startIcon={<AddIcon />} variant="contained">
+    新規作成
+  </Button>
+  <Button startIcon={<DeleteIcon />} variant="outlined" color="error">
+    削除
+  </Button>
+</Box>
+```
+
+## アクセシビリティ
+
+### ラベルの提供
+
+アイコンのみのボタンには必ず`aria-label`を設定:
+
+```tsx
+<IconButton aria-label="削除">
+  <DeleteIcon />
+</IconButton>
+```
+
+### フォーカス管理
+
+- ボタンは自動的にフォーカス可能
+- Enterキー、Spaceキーで操作可能
+- `autoFocus`プロップでページ読み込み時に自動フォーカス可能
+
+### 無効化状態
+
+```tsx
+<Button disabled aria-disabled="true">
+  無効なボタン
+</Button>
+```
+
+## カスタマイズ
+
+### sx プロップを使用したカスタマイズ
+
+```tsx
+<Button
+  sx={{
+    borderRadius: '20px',
+    textTransform: 'none',
+    padding: '10px 30px',
+    '&:hover': {
+      backgroundColor: 'primary.dark',
+    },
+  }}
+>
+  カスタムボタン
+</Button>
+```
+
+### テーマでのカスタマイズ
+
+```tsx
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          textTransform: 'none',
+        },
+      },
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
+  },
+})
+```
+
+## ベストプラクティス
+
+### 優先順位の明確化
+
+1つのビューで複数のアクションがある場合:
+- 最も重要なアクション: `variant="contained"`
+- 二次的なアクション: `variant="outlined"`
+- 補助的なアクション: `variant="text"`
+
+### 破壊的なアクション
+
+削除などの破壊的なアクションには:
+- `color="error"`を使用
+- 確認ダイアログと組み合わせる
+
+```tsx
+<Button
+  variant="outlined"
+  color="error"
+  startIcon={<DeleteIcon />}
+  onClick={handleDelete}
+>
+  削除
+</Button>
+```
+
+### テキストの簡潔性
+
+- ボタンのテキストは短く明確に
+- 動詞で始める（「保存」「送信」「削除」など）
+- 長すぎる場合はツールチップで補足情報を提供
+
+## 関連コンポーネント
+
+- **IconButton** - アイコンのみのボタン
+- **ButtonGroup** - 複数のボタンをグループ化
+- **ToggleButton** - ON/OFF状態を持つボタン
+- **Fab** - フローティングアクションボタン
+- **LoadingButton** - ローディング状態を表現するボタン
+
+## 参考リンク
+
+- [MUI Button API](https://mui.com/material-ui/api/button/)
+- [MUI Button Documentation](https://mui.com/material-ui/react-button/)

@@ -7,7 +7,7 @@ import { Box, Button, type ButtonProps, Typography } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<ButtonProps> = {
-  title: 'Mui/Button',
+  title: 'MUI/Button',
   component: Button,
   argTypes: {
     variant: {
@@ -60,7 +60,7 @@ export default meta
 
 type Story = StoryObj<ButtonProps>
 
-export const Variants: Story = {
+export const Playground: Story = {
   args: {
     children: 'Button',
     variant: 'contained',
@@ -68,15 +68,92 @@ export const Variants: Story = {
     size: 'medium',
     disabled: false,
   },
-  render: (args) => (
-    <>
-      <Box p={4}>
+}
+
+export const AllVariants: Story = {
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      <Box>
         <Typography variant='h6' gutterBottom>
-          ボタンバリエーション検証
+          Contained
         </Typography>
-        <Button {...args} />
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <Button variant='contained'>Primary</Button>
+          <Button variant='contained' color='secondary'>
+            Secondary
+          </Button>
+          <Button variant='contained' color='success'>
+            Success
+          </Button>
+          <Button variant='contained' color='error'>
+            Error
+          </Button>
+          <Button variant='contained' color='warning'>
+            Warning
+          </Button>
+          <Button variant='contained' color='info'>
+            Info
+          </Button>
+          <Button variant='contained' disabled>
+            Disabled
+          </Button>
+        </Box>
       </Box>
-    </>
+
+      <Box>
+        <Typography variant='h6' gutterBottom>
+          Outlined
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <Button variant='outlined'>Primary</Button>
+          <Button variant='outlined' color='secondary'>
+            Secondary
+          </Button>
+          <Button variant='outlined' color='success'>
+            Success
+          </Button>
+          <Button variant='outlined' color='error'>
+            Error
+          </Button>
+          <Button variant='outlined' color='warning'>
+            Warning
+          </Button>
+          <Button variant='outlined' color='info'>
+            Info
+          </Button>
+          <Button variant='outlined' disabled>
+            Disabled
+          </Button>
+        </Box>
+      </Box>
+
+      <Box>
+        <Typography variant='h6' gutterBottom>
+          Text
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <Button variant='text'>Primary</Button>
+          <Button variant='text' color='secondary'>
+            Secondary
+          </Button>
+          <Button variant='text' color='success'>
+            Success
+          </Button>
+          <Button variant='text' color='error'>
+            Error
+          </Button>
+          <Button variant='text' color='warning'>
+            Warning
+          </Button>
+          <Button variant='text' color='info'>
+            Info
+          </Button>
+          <Button variant='text' disabled>
+            Disabled
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   ),
 }
 
@@ -123,6 +200,111 @@ export const Disabled: Story = {
     disabled: true,
     variant: 'contained',
   },
+}
+
+export const AllSizes: Story = {
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography variant='h6' gutterBottom>
+        サイズ
+      </Typography>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Button size='small' variant='contained'>
+          Small
+        </Button>
+        <Button size='medium' variant='contained'>
+          Medium
+        </Button>
+        <Button size='large' variant='contained'>
+          Large
+        </Button>
+      </Box>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Button size='small' variant='outlined'>
+          Small
+        </Button>
+        <Button size='medium' variant='outlined'>
+          Medium
+        </Button>
+        <Button size='large' variant='outlined'>
+          Large
+        </Button>
+      </Box>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Button size='small' variant='text'>
+          Small
+        </Button>
+        <Button size='medium' variant='text'>
+          Medium
+        </Button>
+        <Button size='large' variant='text'>
+          Large
+        </Button>
+      </Box>
+    </Box>
+  ),
+}
+
+export const WithIcons: Story = {
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      <Box>
+        <Typography variant='h6' gutterBottom>
+          アイコン付き
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <Button startIcon={<SendIcon />} variant='contained'>
+            送信
+          </Button>
+          <Button endIcon={<SendIcon />} variant='contained'>
+            送信
+          </Button>
+          <Button startIcon={<DeleteIcon />} variant='outlined' color='error'>
+            削除
+          </Button>
+          <Button endIcon={<AddIcon />} variant='text'>
+            追加
+          </Button>
+        </Box>
+      </Box>
+
+      <Box>
+        <Typography variant='h6' gutterBottom>
+          サイズ別
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Button size='small' startIcon={<SendIcon />} variant='contained'>
+            Small
+          </Button>
+          <Button size='medium' startIcon={<SendIcon />} variant='contained'>
+            Medium
+          </Button>
+          <Button size='large' startIcon={<SendIcon />} variant='contained'>
+            Large
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  ),
+}
+
+export const FullWidth: Story = {
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography variant='h6' gutterBottom>
+        全幅ボタン
+      </Typography>
+      <Button fullWidth variant='contained'>
+        全幅 Contained
+      </Button>
+      <Button fullWidth variant='outlined'>
+        全幅 Outlined
+      </Button>
+      <Button fullWidth variant='text'>
+        全幅 Text
+      </Button>
+    </Box>
+  ),
 }
 
 export const Custom: Story = {

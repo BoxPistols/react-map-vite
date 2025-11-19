@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Surfaces/Paper/概要' />
+
+# Paper
+
+紙のような表面を表示する基本的なコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Paper } from '@mui/material'
+
+<Paper>
+  <Typography>コンテンツ</Typography>
+</Paper>
+```
+
+## Elevation（影の深さ）
+
+```tsx
+<Paper elevation={0}>影なし</Paper>
+<Paper elevation={1}>軽い影</Paper>
+<Paper elevation={3}>標準の影</Paper>
+<Paper elevation={8}>深い影</Paper>
+<Paper elevation={24}>最も深い影</Paper>
+```
+
+## バリアント
+
+```tsx
+<Paper variant="elevation">
+<Paper variant="outlined">
+```
+
+## 角の丸み
+
+```tsx
+<Paper square>角張った</Paper>
+<Paper>丸い（デフォルト）</Paper>
+```
+
+## 実装例
+
+```tsx
+<Paper sx={{ p: 2 }}>
+  <Typography variant="h6" gutterBottom>
+    セクションタイトル
+  </Typography>
+  <Typography>
+    コンテンツ...
+  </Typography>
+</Paper>
+```
+
+## 参考リンク
+
+- [MUI Paper API](https://mui.com/material-ui/api/paper/)
+- [MUI Paper Documentation](https://mui.com/material-ui/react-paper/)

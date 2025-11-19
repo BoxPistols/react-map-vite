@@ -1,0 +1,397 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/Switch/概要' />
+
+# Switch
+
+ON/OFFの切り替えを行うトグルスイッチコンポーネントです。設定画面などでよく使用されます。
+
+## 基本的な使い方
+
+```tsx
+import { Switch } from '@mui/material'
+
+<Switch />
+<Switch defaultChecked />
+```
+
+## ラベル付き
+
+FormControlLabelと組み合わせて使用:
+
+```tsx
+import { FormControlLabel } from '@mui/material'
+
+<FormControlLabel
+  control={<Switch />}
+  label="通知を有効にする"
+/>
+```
+
+## 制御コンポーネント
+
+```tsx
+const [checked, setChecked] = useState(false)
+
+<FormControlLabel
+  control={
+    <Switch
+      checked={checked}
+      onChange={(e) => setChecked(e.target.checked)}
+    />
+  }
+  label="ダークモード"
+/>
+```
+
+## サイズ
+
+```tsx
+<Switch size="small" />
+<Switch size="medium" />
+```
+
+## カラー
+
+```tsx
+<Switch color="primary" />
+<Switch color="secondary" />
+<Switch color="success" />
+<Switch color="error" />
+<Switch color="warning" />
+<Switch color="info" />
+<Switch color="default" />
+```
+
+## 無効化
+
+```tsx
+<Switch disabled />
+<Switch disabled checked />
+```
+
+## ラベルの配置
+
+```tsx
+<FormControlLabel
+  control={<Switch />}
+  label="右側（デフォルト）"
+  labelPlacement="end"
+/>
+<FormControlLabel
+  control={<Switch />}
+  label="左側"
+  labelPlacement="start"
+/>
+<FormControlLabel
+  control={<Switch />}
+  label="上"
+  labelPlacement="top"
+/>
+<FormControlLabel
+  control={<Switch />}
+  label="下"
+  labelPlacement="bottom"
+/>
+```
+
+## カスタムアイコン
+
+thumbとtrackをカスタマイズ:
+
+```tsx
+<Switch
+  sx={{
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      color: '#4caf50',
+    },
+    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+      backgroundColor: '#4caf50',
+    },
+  }}
+/>
+```
+
+### iOS風スタイル
+
+```tsx
+<Switch
+  sx={{
+    width: 42,
+    height: 26,
+    padding: 0,
+    '& .MuiSwitch-switchBase': {
+      padding: 0,
+      margin: 0.25,
+      '&.Mui-checked': {
+        transform: 'translateX(16px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          backgroundColor: '#34c759',
+          opacity: 1,
+          border: 0,
+        },
+      },
+    },
+    '& .MuiSwitch-thumb': {
+      width: 22,
+      height: 22,
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 26 / 2,
+      backgroundColor: '#e9e9ea',
+      opacity: 1,
+    },
+  }}
+/>
+```
+
+## 実装例
+
+### 設定パネル
+
+```tsx
+const [settings, setSettings] = useState({
+  notifications: true,
+  emailUpdates: false,
+  darkMode: false,
+})
+
+const handleChange = (event) => {
+  setSettings({
+    ...settings,
+    [event.target.name]: event.target.checked,
+  })
+}
+
+<FormControl component="fieldset">
+  <FormLabel component="legend">設定</FormLabel>
+  <FormGroup>
+    <FormControlLabel
+      control={
+        <Switch
+          checked={settings.notifications}
+          onChange={handleChange}
+          name="notifications"
+        />
+      }
+      label="プッシュ通知"
+    />
+    <FormControlLabel
+      control={
+        <Switch
+          checked={settings.emailUpdates}
+          onChange={handleChange}
+          name="emailUpdates"
+        />
+      }
+      label="メール通知"
+    />
+    <FormControlLabel
+      control={
+        <Switch
+          checked={settings.darkMode}
+          onChange={handleChange}
+          name="darkMode"
+        />
+      }
+      label="ダークモード"
+    />
+  </FormGroup>
+</FormControl>
+```
+
+### テーマ切り替え
+
+```tsx
+const [darkMode, setDarkMode] = useState(false)
+
+const theme = createTheme({
+  palette: {
+    mode: darkMode ? 'dark' : 'light',
+  },
+})
+
+<ThemeProvider theme={theme}>
+  <FormControlLabel
+    control={
+      <Switch
+        checked={darkMode}
+        onChange={(e) => setDarkMode(e.target.checked)}
+      />
+    }
+    label="ダークモード"
+  />
+</ThemeProvider>
+```
+
+### 機能の有効/無効切り替え
+
+```tsx
+const [isEnabled, setIsEnabled] = useState(false)
+
+<Box>
+  <FormControlLabel
+    control={
+      <Switch
+        checked={isEnabled}
+        onChange={(e) => setIsEnabled(e.target.checked)}
+      />
+    }
+    label="高度な機能を有効にする"
+  />
+
+  <Box sx={{ mt: 2, opacity: isEnabled ? 1 : 0.5 }}>
+    <TextField
+      disabled={!isEnabled}
+      label="高度な設定"
+      fullWidth
+    />
+  </Box>
+</Box>
+```
+
+## アクセシビリティ
+
+### ラベルの提供
+
+必ずFormControlLabelを使用するか、aria-labelを設定:
+
+```tsx
+// 推奨
+<FormControlLabel control={<Switch />} label="通知を有効" />
+
+// ラベルなしの場合
+<Switch aria-label="通知を有効" />
+```
+
+### キーボード操作
+
+- `Space`: ON/OFF切り替え
+- `Tab`: 次のスイッチに移動
+
+### role属性
+
+Switchは自動的に`role="switch"`が設定されます。
+
+## Switch vs Checkbox
+
+| 項目 | Switch | Checkbox |
+|------|--------|----------|
+| 用途 | 設定のON/OFF | 選択肢の選択/非選択 |
+| 即座に反映 | 通常は即座に反映 | フォーム送信時に反映 |
+| 視覚的効果 | 物理的なトグルのメタファー | チェックマークのメタファー |
+| 使用場面 | 設定画面、機能の有効化 | フォーム、複数選択 |
+
+### 使い分けの例
+
+```tsx
+// Switch - 即座に反映される設定
+<FormControlLabel
+  control={<Switch checked={darkMode} onChange={toggleDarkMode} />}
+  label="ダークモード"
+/>
+
+// Checkbox - フォーム送信時に反映
+<FormControlLabel
+  control={<Checkbox name="terms" />}
+  label="利用規約に同意する"
+/>
+```
+
+## ベストプラクティス
+
+1. **即座に反映される設定に使用** - 保存ボタンが不要な場合
+2. **明確なラベル** - 何がON/OFFになるか明確に
+3. **状態の説明** - 必要に応じてON/OFFの意味を補足
+4. **変更時の確認** - 重要な設定は確認ダイアログを表示
+5. **デフォルト値の慎重な設定** - ユーザーの意図と合致するように
+
+## パフォーマンス
+
+### useCallback の使用
+
+```tsx
+const handleChange = useCallback((event) => {
+  setChecked(event.target.checked)
+}, [])
+
+<Switch onChange={handleChange} />
+```
+
+## カスタマイズ例
+
+### サイズ変更
+
+```tsx
+<Switch
+  sx={{
+    width: 62,
+    height: 34,
+    padding: 1,
+    '& .MuiSwitch-thumb': {
+      width: 20,
+      height: 20,
+    },
+  }}
+/>
+```
+
+### カラーカスタマイズ
+
+```tsx
+<Switch
+  sx={{
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      color: '#ff6b6b',
+    },
+    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+      backgroundColor: '#ff6b6b',
+    },
+  }}
+/>
+```
+
+## 実装時の注意点
+
+1. **即座に反映** - Switchの変更は通常すぐに適用されることを想定
+2. **副作用の処理** - onChange内でAPI呼び出しなどの副作用を適切に処理
+3. **エラーハンドリング** - API呼び出しが失敗した場合の状態の復元
+4. **ローディング状態** - 処理中は無効化するなど
+
+```tsx
+const [checked, setChecked] = useState(false)
+const [loading, setLoading] = useState(false)
+
+const handleChange = async (event) => {
+  const newValue = event.target.checked
+  setLoading(true)
+
+  try {
+    await api.updateSetting(newValue)
+    setChecked(newValue)
+  } catch (error) {
+    // エラー時は元の状態に戻す
+    console.error('Failed to update setting', error)
+  } finally {
+    setLoading(false)
+  }
+}
+
+<Switch
+  checked={checked}
+  onChange={handleChange}
+  disabled={loading}
+/>
+```
+
+## 関連コンポーネント
+
+- **Checkbox** - 選択/非選択の切り替え
+- **ToggleButton** - ボタン形式のトグル
+- **FormControlLabel** - ラベルとの統合
+
+## 参考リンク
+
+- [MUI Switch API](https://mui.com/material-ui/api/switch/)
+- [MUI Switch Documentation](https://mui.com/material-ui/react-switch/)

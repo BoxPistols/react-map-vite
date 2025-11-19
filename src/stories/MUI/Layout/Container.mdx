@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Layout/Container/概要' />
+
+# Container
+
+コンテンツを中央に配置し、最大幅を制限するレイアウトコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Container } from '@mui/material'
+
+<Container>
+  <Typography>コンテンツ</Typography>
+</Container>
+```
+
+## 最大幅
+
+```tsx
+<Container maxWidth="xs">Extra Small</Container>
+<Container maxWidth="sm">Small</Container>
+<Container maxWidth="md">Medium</Container>
+<Container maxWidth="lg">Large</Container>
+<Container maxWidth="xl">Extra Large</Container>
+<Container maxWidth={false}>無制限</Container>
+```
+
+## 固定幅
+
+```tsx
+<Container fixed>
+  固定幅のコンテナ
+</Container>
+```
+
+## disableGutters
+
+パディングを無効化:
+
+```tsx
+<Container disableGutters>
+  パディングなし
+</Container>
+```
+
+## 実装例
+
+```tsx
+<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+  <Typography variant="h4" gutterBottom>
+    ページタイトル
+  </Typography>
+  <Typography paragraph>
+    コンテンツ...
+  </Typography>
+</Container>
+```
+
+## 参考リンク
+
+- [MUI Container API](https://mui.com/material-ui/api/container/)
+- [MUI Container Documentation](https://mui.com/material-ui/react-container/)

@@ -1,0 +1,407 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/TextField/概要' />
+
+# TextField
+
+テキスト入力フィールドは、ユーザーがテキストを入力できる最も基本的なフォームコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { TextField } from '@mui/material'
+
+<TextField label="氏名" />
+```
+
+## バリエーション
+
+TextFieldは3つのバリエーションをサポートしています:
+
+### outlined（デフォルト）
+
+最も一般的な形式で、枠線で囲まれています:
+
+```tsx
+<TextField label="メールアドレス" variant="outlined" />
+```
+
+### filled
+
+背景色が付いたスタイル:
+
+```tsx
+<TextField label="メールアドレス" variant="filled" />
+```
+
+### standard
+
+下線のみのシンプルなスタイル:
+
+```tsx
+<TextField label="メールアドレス" variant="standard" />
+```
+
+## サイズ
+
+2つのサイズオプションがあります:
+
+- **small** - コンパクトなUI向け
+- **medium** - デフォルトサイズ
+
+```tsx
+<TextField label="Small" size="small" />
+<TextField label="Medium" size="medium" />
+```
+
+## 状態管理
+
+### 制御コンポーネント
+
+```tsx
+const [value, setValue] = useState('')
+
+<TextField
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  label="名前"
+/>
+```
+
+### 非制御コンポーネント
+
+```tsx
+<TextField defaultValue="初期値" label="名前" />
+```
+
+## バリデーション
+
+### required
+
+必須項目を示します:
+
+```tsx
+<TextField required label="メールアドレス" />
+```
+
+### error
+
+エラー状態を表示:
+
+```tsx
+<TextField
+  error
+  label="メールアドレス"
+  helperText="有効なメールアドレスを入力してください"
+/>
+```
+
+### helperText
+
+補足情報やエラーメッセージを表示:
+
+```tsx
+<TextField
+  label="パスワード"
+  helperText="8文字以上で入力してください"
+/>
+```
+
+## 入力タイプ
+
+### type属性
+
+HTML5の入力タイプを指定できます:
+
+```tsx
+<TextField type="email" label="メール" />
+<TextField type="password" label="パスワード" />
+<TextField type="number" label="年齢" />
+<TextField type="tel" label="電話番号" />
+<TextField type="url" label="ウェブサイト" />
+<TextField type="date" label="生年月日" InputLabelProps={{ shrink: true }} />
+```
+
+### multiline
+
+複数行のテキスト入力:
+
+```tsx
+<TextField
+  multiline
+  rows={4}
+  label="コメント"
+/>
+
+<TextField
+  multiline
+  maxRows={4}
+  label="自動拡張"
+/>
+```
+
+## アドーンメント
+
+入力フィールドの前後にアイコンやテキストを追加:
+
+### InputAdornment
+
+```tsx
+import { InputAdornment } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+
+<TextField
+  label="検索"
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <SearchIcon />
+      </InputAdornment>
+    ),
+  }}
+/>
+
+<TextField
+  label="価格"
+  InputProps={{
+    startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+  }}
+/>
+```
+
+### アイコンボタン付き
+
+```tsx
+<TextField
+  type={showPassword ? 'text' : 'password'}
+  label="パスワード"
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+/>
+```
+
+## レイアウト
+
+### fullWidth
+
+親要素の幅いっぱいに広げます:
+
+```tsx
+<TextField fullWidth label="住所" />
+```
+
+### margin
+
+上下のマージンを設定:
+
+```tsx
+<TextField margin="none" label="なし" />
+<TextField margin="dense" label="狭い" />
+<TextField margin="normal" label="通常" />
+```
+
+## カラー
+
+```tsx
+<TextField color="primary" label="Primary" />
+<TextField color="secondary" label="Secondary" />
+<TextField color="success" label="Success" />
+<TextField color="error" label="Error" />
+```
+
+## プレースホルダー
+
+```tsx
+<TextField
+  label="メールアドレス"
+  placeholder="example@example.com"
+/>
+```
+
+## 実装例
+
+### ログインフォーム
+
+```tsx
+<Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+  <TextField
+    required
+    fullWidth
+    label="メールアドレス"
+    type="email"
+    autoComplete="email"
+  />
+  <TextField
+    required
+    fullWidth
+    label="パスワード"
+    type="password"
+    autoComplete="current-password"
+  />
+</Box>
+```
+
+### 検索フィールド
+
+```tsx
+<TextField
+  fullWidth
+  label="検索"
+  placeholder="キーワードを入力"
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <SearchIcon />
+      </InputAdornment>
+    ),
+  }}
+/>
+```
+
+### バリデーション付きフォーム
+
+```tsx
+const [email, setEmail] = useState('')
+const [error, setError] = useState('')
+
+const validateEmail = (value: string) => {
+  if (!value) {
+    setError('メールアドレスは必須です')
+  } else if (!/\S+@\S+\.\S+/.test(value)) {
+    setError('有効なメールアドレスを入力してください')
+  } else {
+    setError('')
+  }
+}
+
+<TextField
+  fullWidth
+  label="メールアドレス"
+  value={email}
+  onChange={(e) => {
+    setEmail(e.target.value)
+    validateEmail(e.target.value)
+  }}
+  error={!!error}
+  helperText={error}
+/>
+```
+
+## アクセシビリティ
+
+### ラベルの提供
+
+必ず`label`を設定してください:
+
+```tsx
+<TextField label="氏名" />
+```
+
+ラベルが不要な場合は`aria-label`を使用:
+
+```tsx
+<TextField aria-label="検索" placeholder="検索..." />
+```
+
+### オートコンプリート
+
+ブラウザの自動入力をサポート:
+
+```tsx
+<TextField
+  label="メールアドレス"
+  autoComplete="email"
+/>
+
+<TextField
+  label="パスワード"
+  type="password"
+  autoComplete="current-password"
+/>
+```
+
+### エラーメッセージ
+
+`error`と`helperText`を組み合わせて使用:
+
+```tsx
+<TextField
+  error
+  label="年齢"
+  helperText="0以上の数値を入力してください"
+/>
+```
+
+## パフォーマンス最適化
+
+### useCallback の使用
+
+```tsx
+const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  setValue(e.target.value)
+}, [])
+
+<TextField onChange={handleChange} />
+```
+
+### デバウンス
+
+高頻度の更新を制御:
+
+```tsx
+import { debounce } from 'lodash'
+
+const debouncedSearch = useMemo(
+  () => debounce((value: string) => {
+    // 検索処理
+  }, 300),
+  []
+)
+
+<TextField onChange={(e) => debouncedSearch(e.target.value)} />
+```
+
+## カスタマイズ
+
+### sx プロップ
+
+```tsx
+<TextField
+  label="カスタム"
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      borderRadius: 2,
+      '&:hover fieldset': {
+        borderColor: 'primary.main',
+      },
+    },
+  }}
+/>
+```
+
+## ベストプラクティス
+
+1. **必ず label を提供** - アクセシビリティのため
+2. **適切な type を指定** - モバイルでの最適なキーボード表示のため
+3. **helperText で補足情報を提供** - ユーザビリティ向上のため
+4. **エラーは明確に** - error と helperText を組み合わせる
+5. **autoComplete を活用** - ユーザー体験の向上のため
+
+## 関連コンポーネント
+
+- **Autocomplete** - 自動補完付き入力
+- **Select** - ドロップダウン選択
+- **FormControl** - より細かい制御が必要な場合
+- **Input** - より低レベルのコンポーネント
+
+## 参考リンク
+
+- [MUI TextField API](https://mui.com/material-ui/api/text-field/)
+- [MUI TextField Documentation](https://mui.com/material-ui/react-text-field/)

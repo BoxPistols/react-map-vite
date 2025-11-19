@@ -1,0 +1,151 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Chip/概要' />
+
+# Chip
+
+コンパクトな要素を表示するコンポーネントです。タグ、選択された項目、フィルターなどに使用します。
+
+## 基本的な使い方
+
+```tsx
+import { Chip } from '@mui/material'
+
+<Chip label="Chip" />
+```
+
+## バリエーション
+
+```tsx
+<Chip label="Filled" />
+<Chip label="Outlined" variant="outlined" />
+```
+
+## カラー
+
+```tsx
+<Chip label="Primary" color="primary" />
+<Chip label="Secondary" color="secondary" />
+<Chip label="Success" color="success" />
+<Chip label="Error" color="error" />
+<Chip label="Warning" color="warning" />
+<Chip label="Info" color="info" />
+```
+
+## サイズ
+
+```tsx
+<Chip label="Small" size="small" />
+<Chip label="Medium" size="medium" />
+```
+
+## クリック可能
+
+```tsx
+<Chip
+  label="Clickable"
+  onClick={() => console.log('clicked')}
+/>
+```
+
+## 削除可能
+
+```tsx
+<Chip
+  label="Deletable"
+  onDelete={() => console.log('deleted')}
+/>
+```
+
+## アイコン
+
+```tsx
+<Chip
+  icon={<FaceIcon />}
+  label="With Icon"
+/>
+
+<Chip
+  label="Custom Delete Icon"
+  onDelete={handleDelete}
+  deleteIcon={<DoneIcon />}
+/>
+```
+
+## Avatar付き
+
+```tsx
+<Chip
+  avatar={<Avatar alt="User" src="/avatar.jpg" />}
+  label="User Name"
+/>
+```
+
+## 実装例
+
+### タグ一覧
+
+```tsx
+<Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+  {tags.map((tag) => (
+    <Chip
+      key={tag}
+      label={tag}
+      onDelete={() => handleDelete(tag)}
+    />
+  ))}
+</Box>
+```
+
+### フィルター
+
+```tsx
+<Box sx={{ display: 'flex', gap: 1 }}>
+  {filters.map((filter) => (
+    <Chip
+      key={filter.id}
+      label={filter.label}
+      color={filter.active ? 'primary' : 'default'}
+      onClick={() => toggleFilter(filter.id)}
+    />
+  ))}
+</Box>
+```
+
+### 選択された項目
+
+```tsx
+<Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+  {selected.map((item) => (
+    <Chip
+      key={item.id}
+      avatar={<Avatar src={item.avatar} />}
+      label={item.name}
+      onDelete={() => removeItem(item.id)}
+      color="primary"
+    />
+  ))}
+</Box>
+```
+
+## アクセシビリティ
+
+```tsx
+<Chip
+  label="Accessible Chip"
+  onClick={handleClick}
+  aria-label="filter by category"
+/>
+```
+
+## ベストプラクティス
+
+1. **適切な用途** - タグ、フィルター、選択項目に使用
+2. **色の意味** - 状態や重要度を色で表現
+3. **削除機能** - ユーザーが削除できる場合のみonDelete
+4. **アイコンの活用** - 視覚的に分かりやすく
+
+## 参考リンク
+
+- [MUI Chip API](https://mui.com/material-ui/api/chip/)
+- [MUI Chip Documentation](https://mui.com/material-ui/react-chip/)

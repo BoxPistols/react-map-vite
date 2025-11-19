@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/BottomNavigation/概要' />
+
+# BottomNavigation
+
+画面下部に配置するナビゲーションコンポーネントです。モバイルアプリでよく使用されます。
+
+## 基本的な使い方
+
+```tsx
+import { BottomNavigation, BottomNavigationAction } from '@mui/material'
+
+const [value, setValue] = useState(0)
+
+<BottomNavigation
+  value={value}
+  onChange={(event, newValue) => setValue(newValue)}
+>
+  <BottomNavigationAction label="ホーム" icon={<HomeIcon />} />
+  <BottomNavigationAction label="検索" icon={<SearchIcon />} />
+  <BottomNavigationAction label="プロフィール" icon={<PersonIcon />} />
+</BottomNavigation>
+```
+
+## ラベル表示
+
+```tsx
+<BottomNavigation showLabels>
+  {/* アクション */}
+</BottomNavigation>
+```
+
+## 参考リンク
+
+- [MUI BottomNavigation API](https://mui.com/material-ui/api/bottom-navigation/)
+- [MUI BottomNavigation Documentation](https://mui.com/material-ui/react-bottom-navigation/)

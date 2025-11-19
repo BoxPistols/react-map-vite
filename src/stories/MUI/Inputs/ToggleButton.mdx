@@ -1,0 +1,214 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Inputs/ToggleButton/概要' />
+
+# ToggleButton
+
+ON/OFF状態を持つボタンコンポーネントです。ToggleButtonGroupと組み合わせて使用します。
+
+## 基本的な使い方
+
+```tsx
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+
+const [alignment, setAlignment] = useState('left')
+
+<ToggleButtonGroup
+  value={alignment}
+  exclusive
+  onChange={(e, newAlignment) => setAlignment(newAlignment)}
+>
+  <ToggleButton value="left">左揃え</ToggleButton>
+  <ToggleButton value="center">中央揃え</ToggleButton>
+  <ToggleButton value="right">右揃え</ToggleButton>
+</ToggleButtonGroup>
+```
+
+## 排他的選択
+
+`exclusive`プロップで1つだけ選択可能:
+
+```tsx
+<ToggleButtonGroup
+  value={value}
+  exclusive
+  onChange={handleChange}
+>
+  <ToggleButton value="option1">オプション1</ToggleButton>
+  <ToggleButton value="option2">オプション2</ToggleButton>
+</ToggleButtonGroup>
+```
+
+## 複数選択
+
+```tsx
+const [formats, setFormats] = useState([])
+
+const handleFormat = (event, newFormats) => {
+  setFormats(newFormats)
+}
+
+<ToggleButtonGroup
+  value={formats}
+  onChange={handleFormat}
+>
+  <ToggleButton value="bold">太字</ToggleButton>
+  <ToggleButton value="italic">斜体</ToggleButton>
+  <ToggleButton value="underlined">下線</ToggleButton>
+</ToggleButtonGroup>
+```
+
+## アイコン
+
+```tsx
+<ToggleButtonGroup
+  value={alignment}
+  exclusive
+  onChange={handleAlignment}
+>
+  <ToggleButton value="left">
+    <FormatAlignLeftIcon />
+  </ToggleButton>
+  <ToggleButton value="center">
+    <FormatAlignCenterIcon />
+  </ToggleButton>
+  <ToggleButton value="right">
+    <FormatAlignRightIcon />
+  </ToggleButton>
+</ToggleButtonGroup>
+```
+
+## サイズ
+
+```tsx
+<ToggleButtonGroup size="small">
+  <ToggleButton value="small">Small</ToggleButton>
+</ToggleButtonGroup>
+
+<ToggleButtonGroup size="medium">
+  <ToggleButton value="medium">Medium</ToggleButton>
+</ToggleButtonGroup>
+
+<ToggleButtonGroup size="large">
+  <ToggleButton value="large">Large</ToggleButton>
+</ToggleButtonGroup>
+```
+
+## カラー
+
+```tsx
+<ToggleButtonGroup color="primary">
+  <ToggleButton value="option">Primary</ToggleButton>
+</ToggleButtonGroup>
+
+<ToggleButtonGroup color="secondary">
+  <ToggleButton value="option">Secondary</ToggleButton>
+</ToggleButtonGroup>
+```
+
+## 垂直配置
+
+```tsx
+<ToggleButtonGroup
+  orientation="vertical"
+  value={view}
+  exclusive
+  onChange={handleChange}
+>
+  <ToggleButton value="list">
+    <ViewListIcon />
+  </ToggleButton>
+  <ToggleButton value="module">
+    <ViewModuleIcon />
+  </ToggleButton>
+  <ToggleButton value="quilt">
+    <ViewQuiltIcon />
+  </ToggleButton>
+</ToggleButtonGroup>
+```
+
+## 選択の強制
+
+`onChange`内で空の値を防ぐ:
+
+```tsx
+const [alignment, setAlignment] = useState('left')
+
+const handleAlignment = (event, newAlignment) => {
+  if (newAlignment !== null) {
+    setAlignment(newAlignment)
+  }
+}
+```
+
+## 無効化
+
+```tsx
+<ToggleButtonGroup>
+  <ToggleButton value="option1">有効</ToggleButton>
+  <ToggleButton value="option2" disabled>無効</ToggleButton>
+</ToggleButtonGroup>
+```
+
+## 実装例
+
+### テキストエディタのフォーマット
+
+```tsx
+const [formats, setFormats] = useState([])
+
+<ToggleButtonGroup
+  value={formats}
+  onChange={(e, newFormats) => setFormats(newFormats)}
+>
+  <ToggleButton value="bold">
+    <FormatBoldIcon />
+  </ToggleButton>
+  <ToggleButton value="italic">
+    <FormatItalicIcon />
+  </ToggleButton>
+  <ToggleButton value="underlined">
+    <FormatUnderlinedIcon />
+  </ToggleButton>
+  <ToggleButton value="color">
+    <FormatColorFillIcon />
+  </ToggleButton>
+</ToggleButtonGroup>
+```
+
+### 表示モード切り替え
+
+```tsx
+const [view, setView] = useState('grid')
+
+<ToggleButtonGroup
+  value={view}
+  exclusive
+  onChange={(e, newView) => newView && setView(newView)}
+>
+  <ToggleButton value="list">
+    <ViewListIcon />
+  </ToggleButton>
+  <ToggleButton value="grid">
+    <ViewModuleIcon />
+  </ToggleButton>
+</ToggleButtonGroup>
+```
+
+## ベストプラクティス
+
+1. **排他的選択はexclusiveを使用** - 1つだけ選択可能に
+2. **選択の強制** - 必要に応じてnull値を防ぐ
+3. **アイコンの活用** - 視覚的に分かりやすく
+4. **適切な用途** - 状態の切り替えに使用
+
+## 関連コンポーネント
+
+- **Button** - 通常のボタン
+- **ButtonGroup** - ボタンのグループ化
+- **Radio** - 排他的選択
+
+## 参考リンク
+
+- [MUI ToggleButton API](https://mui.com/material-ui/api/toggle-button/)
+- [MUI ToggleButton Documentation](https://mui.com/material-ui/react-toggle-button/)

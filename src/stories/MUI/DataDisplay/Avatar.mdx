@@ -1,0 +1,116 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/DataDisplay/Avatar/概要' />
+
+# Avatar
+
+ユーザーやオブジェクトを視覚的に表現するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Avatar } from '@mui/material'
+
+// 画像
+<Avatar alt="User Name" src="/path/to/image.jpg" />
+
+// 文字
+<Avatar>U</Avatar>
+
+// アイコン
+<Avatar><FolderIcon /></Avatar>
+```
+
+## バリエーション
+
+```tsx
+<Avatar variant="circular">C</Avatar>
+<Avatar variant="rounded">R</Avatar>
+<Avatar variant="square">S</Avatar>
+```
+
+## サイズ
+
+```tsx
+<Avatar sx={{ width: 24, height: 24 }}>S</Avatar>
+<Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
+<Avatar sx={{ width: 56, height: 56 }}>L</Avatar>
+```
+
+## カラー
+
+```tsx
+<Avatar sx={{ bgcolor: 'primary.main' }}>P</Avatar>
+<Avatar sx={{ bgcolor: 'secondary.main' }}>S</Avatar>
+<Avatar sx={{ bgcolor: 'error.main' }}>E</Avatar>
+```
+
+## AvatarGroup
+
+複数のアバターをグループ化:
+
+```tsx
+<AvatarGroup max={4}>
+  <Avatar alt="User 1" src="/user1.jpg" />
+  <Avatar alt="User 2" src="/user2.jpg" />
+  <Avatar alt="User 3" src="/user3.jpg" />
+  <Avatar alt="User 4" src="/user4.jpg" />
+  <Avatar alt="User 5" src="/user5.jpg" />
+</AvatarGroup>
+```
+
+## フォールバック
+
+画像が読み込めない場合の表示:
+
+```tsx
+<Avatar alt="User Name" src="/broken-image.jpg">
+  U
+</Avatar>
+```
+
+## 実装例
+
+### ユーザープロフィール
+
+```tsx
+<Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+  <Avatar
+    alt={user.name}
+    src={user.avatar}
+    sx={{ width: 56, height: 56 }}
+  />
+  <Box>
+    <Typography variant="h6">{user.name}</Typography>
+    <Typography variant="body2" color="text.secondary">
+      {user.email}
+    </Typography>
+  </Box>
+</Box>
+```
+
+### チームメンバーリスト
+
+```tsx
+<AvatarGroup max={3}>
+  {teamMembers.map((member) => (
+    <Avatar
+      key={member.id}
+      alt={member.name}
+      src={member.avatar}
+    />
+  ))}
+</AvatarGroup>
+```
+
+## ベストプラクティス
+
+1. **alt属性を必ず設定** - アクセシビリティのため
+2. **フォールバックを提供** - 画像読み込み失敗時の対応
+3. **適切なサイズ** - コンテキストに応じたサイズ選択
+4. **AvatarGroupの活用** - 複数ユーザーの表示に便利
+
+## 参考リンク
+
+- [MUI Avatar API](https://mui.com/material-ui/api/avatar/)
+- [MUI Avatar Documentation](https://mui.com/material-ui/react-avatar/)

@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Surfaces/AppBar/概要' />
+
+# AppBar
+
+アプリケーションバーを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material'
+
+<AppBar position="static">
+  <Toolbar>
+    <IconButton edge="start" color="inherit">
+      <MenuIcon />
+    </IconButton>
+    <Typography variant="h6">
+      アプリケーション名
+    </Typography>
+  </Toolbar>
+</AppBar>
+```
+
+## Position
+
+```tsx
+<AppBar position="static">
+<AppBar position="fixed">
+<AppBar position="absolute">
+<AppBar position="sticky">
+<AppBar position="relative">
+```
+
+## カラー
+
+```tsx
+<AppBar color="primary">
+<AppBar color="secondary">
+<AppBar color="default">
+<AppBar color="transparent">
+```
+
+## 参考リンク
+
+- [MUI AppBar API](https://mui.com/material-ui/api/app-bar/)
+- [MUI AppBar Documentation](https://mui.com/material-ui/react-app-bar/)

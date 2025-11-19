@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Utils/Popover/概要' />
+
+# Popover
+
+要素に対してポップオーバーを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Popover, Typography, Button } from '@mui/material'
+
+const [anchorEl, setAnchorEl] = useState(null)
+
+<Button onClick={(e) => setAnchorEl(e.currentTarget)}>
+  ポップオーバーを開く
+</Button>
+<Popover
+  open={Boolean(anchorEl)}
+  anchorEl={anchorEl}
+  onClose={() => setAnchorEl(null)}
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'left',
+  }}
+>
+  <Typography sx={{ p: 2 }}>ポップオーバーの内容</Typography>
+</Popover>
+```
+
+## 位置の設定
+
+```tsx
+<Popover
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'center',
+  }}
+  transformOrigin={{
+    vertical: 'top',
+    horizontal: 'center',
+  }}
+>
+  {/* コンテンツ */}
+</Popover>
+```
+
+## 参考リンク
+
+- [MUI Popover API](https://mui.com/material-ui/api/popover/)
+- [MUI Popover Documentation](https://mui.com/material-ui/react-popover/)

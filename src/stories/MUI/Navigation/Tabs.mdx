@@ -1,0 +1,60 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Tabs/概要' />
+
+# Tabs
+
+タブナビゲーションを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Tabs, Tab, Box } from '@mui/material'
+
+const [value, setValue] = useState(0)
+
+<Box>
+  <Tabs value={value} onChange={(e, newValue) => setValue(newValue)}>
+    <Tab label="タブ1" />
+    <Tab label="タブ2" />
+    <Tab label="タブ3" />
+  </Tabs>
+  <TabPanel value={value} index={0}>
+    タブ1のコンテンツ
+  </TabPanel>
+  <TabPanel value={value} index={1}>
+    タブ2のコンテンツ
+  </TabPanel>
+  <TabPanel value={value} index={2}>
+    タブ3のコンテンツ
+  </TabPanel>
+</Box>
+```
+
+## バリアント
+
+```tsx
+<Tabs variant="standard">
+<Tabs variant="scrollable">
+<Tabs variant="fullWidth">
+```
+
+## 縦方向
+
+```tsx
+<Tabs orientation="vertical">
+  {/* タブ */}
+</Tabs>
+```
+
+## アイコン付き
+
+```tsx
+<Tab icon={<PhoneIcon />} label="電話" />
+<Tab icon={<FavoriteIcon />} label="お気に入り" />
+```
+
+## 参考リンク
+
+- [MUI Tabs API](https://mui.com/material-ui/api/tabs/)
+- [MUI Tabs Documentation](https://mui.com/material-ui/react-tabs/)

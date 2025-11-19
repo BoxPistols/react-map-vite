@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Navigation/Menu/概要' />
+
+# Menu
+
+メニューリストを表示するコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Menu, MenuItem } from '@mui/material'
+
+const [anchorEl, setAnchorEl] = useState(null)
+
+<Button onClick={(e) => setAnchorEl(e.currentTarget)}>
+  メニューを開く
+</Button>
+<Menu
+  anchorEl={anchorEl}
+  open={Boolean(anchorEl)}
+  onClose={() => setAnchorEl(null)}
+>
+  <MenuItem onClick={handleClose}>プロフィール</MenuItem>
+  <MenuItem onClick={handleClose}>設定</MenuItem>
+  <MenuItem onClick={handleClose}>ログアウト</MenuItem>
+</Menu>
+```
+
+## アイコン付き
+
+```tsx
+<MenuItem>
+  <ListItemIcon><EditIcon /></ListItemIcon>
+  <ListItemText>編集</ListItemText>
+</MenuItem>
+```
+
+## 参考リンク
+
+- [MUI Menu API](https://mui.com/material-ui/api/menu/)
+- [MUI Menu Documentation](https://mui.com/material-ui/react-menu/)
