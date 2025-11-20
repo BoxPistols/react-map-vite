@@ -18,58 +18,25 @@ import {
   TableRow,
   Typography,
   Avatar,
+  CircularProgress,
+  Alert,
 } from '@mui/material'
 
 import MainGrid from '@/components/MainGrid'
+import { useUsers } from '@/hooks/useUsers'
 import type { PageProps } from '@/types/type'
 
-type User = {
-  id: number
-  name: string
-  email: string
-  role: string
-  status: 'active' | 'inactive'
-  avatar?: string
-}
-
 const UsersPage = (_props: PageProps) => {
-  const users: User[] = [
-    {
-      id: 1,
-      name: '山田太郎',
-      email: 'yamada@example.com',
-      role: 'Admin',
-      status: 'active',
-    },
-    {
-      id: 2,
-      name: '佐藤花子',
-      email: 'sato@example.com',
-      role: 'Editor',
-      status: 'active',
-    },
-    {
-      id: 3,
-      name: '鈴木一郎',
-      email: 'suzuki@example.com',
-      role: 'Viewer',
-      status: 'active',
-    },
-    {
-      id: 4,
-      name: '田中美咲',
-      email: 'tanaka@example.com',
-      role: 'Editor',
-      status: 'inactive',
-    },
-    {
-      id: 5,
-      name: '高橋健',
-      email: 'takahashi@example.com',
-      role: 'Viewer',
-      status: 'active',
-    },
-  ]
+  const { users, loading, error, deleteUser } = useUsers()
+
+  const handleDelete = async (userId: string, userName: string) => {
+    if (confirm(`${userName} を削除してもよろしいですか?`)) {
+      const result = await deleteUser(userId)
+      if (!result.success) {
+        alert('削除に失敗しました')
+      }
+    }
+  }
 
   return (
     <MainGrid overview='Users'>
@@ -87,7 +54,7 @@ const UsersPage = (_props: PageProps) => {
                 ユーザー管理
               </Typography>
               <Typography color='text.secondary'>
-                システムユーザーの管理と権限設定
+                システムユーザーの管理と権限設定 (Firebase連携)
               </Typography>
             </Box>
             <Button variant='contained' startIcon={<AddIcon />} size='large'>
@@ -95,80 +62,103 @@ const UsersPage = (_props: PageProps) => {
             </Button>
           </Box>
 
-          <Card>
-            <CardContent>
-              <TableContainer component={Paper} elevation={0}>
-                <Table sx={{ minWidth: 650 }} aria-label='users table'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>ユーザー</TableCell>
-                      <TableCell>メールアドレス</TableCell>
-                      <TableCell>役割</TableCell>
-                      <TableCell>ステータス</TableCell>
-                      <TableCell align='right'>アクション</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {users.map((user) => (
-                      <TableRow
-                        key={user.id}
-                        sx={{
-                          '&:last-child td, &:last-child th': { border: 0 },
-                          '&:hover': { bgcolor: 'action.hover' },
-                        }}>
-                        <TableCell component='th' scope='row'>
-                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Avatar sx={{ mr: 2 }}>{user.name[0]}</Avatar>
-                            <Typography variant='body2' fontWeight='medium'>
-                              {user.name}
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell>
-                          <Typography variant='body2' color='text.secondary'>
-                            {user.email}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={user.role}
-                            size='small'
-                            color={
-                              user.role === 'Admin'
-                                ? 'error'
-                                : user.role === 'Editor'
-                                  ? 'primary'
-                                  : 'default'
-                            }
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={user.status === 'active' ? '有効' : '無効'}
-                            size='small'
-                            color={
-                              user.status === 'active' ? 'success' : 'default'
-                            }
-                            variant={
-                              user.status === 'active' ? 'filled' : 'outlined'
-                            }
-                          />
-                        </TableCell>
-                        <TableCell align='right'>
-                          <IconButton size='small' color='primary'>
-                            <EditIcon fontSize='small' />
-                          </IconButton>
-                          <IconButton size='small' color='error'>
-                            <DeleteIcon fontSize='small' />
-                          </IconButton>
-                        </TableCell>
+          {error && (
+            <Alert severity='error' sx={{ mb: 3 }}>
+              エラーが発生しました: {error.message}
+            </Alert>
+          )}
+
+          {loading && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+              <CircularProgress />
+            </Box>
+          )}
+
+          {!loading && users.length === 0 && (
+            <Alert severity='info' sx={{ mb: 3 }}>
+              ユーザーデータがありません。Firebaseにデータを追加してください。
+            </Alert>
+          )}
+
+          {!loading && users.length > 0 && (
+            <Card>
+              <CardContent>
+                <TableContainer component={Paper} elevation={0}>
+                  <Table sx={{ minWidth: 650 }} aria-label='users table'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>ユーザー</TableCell>
+                        <TableCell>メールアドレス</TableCell>
+                        <TableCell>役割</TableCell>
+                        <TableCell>ステータス</TableCell>
+                        <TableCell align='right'>アクション</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </CardContent>
-          </Card>
+                    </TableHead>
+                    <TableBody>
+                      {users.map((user) => (
+                        <TableRow
+                          key={user.id}
+                          sx={{
+                            '&:last-child td, &:last-child th': { border: 0 },
+                            '&:hover': { bgcolor: 'action.hover' },
+                          }}>
+                          <TableCell component='th' scope='row'>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                              <Avatar sx={{ mr: 2 }}>{user.name[0]}</Avatar>
+                              <Typography variant='body2' fontWeight='medium'>
+                                {user.name}
+                              </Typography>
+                            </Box>
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant='body2' color='text.secondary'>
+                              {user.email}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={user.role}
+                              size='small'
+                              color={
+                                user.role === 'Admin'
+                                  ? 'error'
+                                  : user.role === 'Editor'
+                                    ? 'primary'
+                                    : 'default'
+                              }
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={user.status === 'active' ? '有効' : '無効'}
+                              size='small'
+                              color={
+                                user.status === 'active' ? 'success' : 'default'
+                              }
+                              variant={
+                                user.status === 'active' ? 'filled' : 'outlined'
+                              }
+                            />
+                          </TableCell>
+                          <TableCell align='right'>
+                            <IconButton size='small' color='primary'>
+                              <EditIcon fontSize='small' />
+                            </IconButton>
+                            <IconButton
+                              size='small'
+                              color='error'
+                              onClick={() => handleDelete(user.id, user.name)}>
+                              <DeleteIcon fontSize='small' />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </CardContent>
+            </Card>
+          )}
 
           <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
             <Card sx={{ flex: 1 }}>

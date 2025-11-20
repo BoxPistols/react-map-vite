@@ -13,11 +13,14 @@ import {
   ListItemText,
   Chip,
   Avatar,
+  CircularProgress,
+  Alert,
 } from '@mui/material'
 
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
+import { useLocations } from '@/hooks/useLocations'
 import type { PageProps } from '@/types/type'
 
 const StatCard = ({
@@ -61,12 +64,10 @@ const StatCard = ({
 )
 
 const MapAnalyticsPage = (_props: PageProps) => {
-  const locations = [
-    { name: '東京オフィス', visitors: 1234, status: 'active' },
-    { name: '大阪支店', visitors: 856, status: 'active' },
-    { name: '名古屋支店', visitors: 567, status: 'active' },
-    { name: '福岡支店', visitors: 432, status: 'inactive' },
-  ]
+  const { locations, loading, error } = useLocations()
+
+  const totalVisitors = locations.reduce((sum, loc) => sum + loc.visitors, 0)
+  const activeLocations = locations.filter((loc) => loc.status === 'active').length
 
   return (
     <div>
@@ -105,7 +106,7 @@ const MapAnalyticsPage = (_props: PageProps) => {
               <Box sx={{ pointerEvents: 'auto' }}>
                 <StatCard
                   title='総訪問者数'
-                  value='3,089'
+                  value={totalVisitors.toLocaleString()}
                   change='+12.5%'
                   icon={<LocationOnIcon />}
                   color='primary.main'
@@ -116,7 +117,7 @@ const MapAnalyticsPage = (_props: PageProps) => {
               <Box sx={{ pointerEvents: 'auto' }}>
                 <StatCard
                   title='有効拠点数'
-                  value='3'
+                  value={activeLocations.toString()}
                   change='+0%'
                   icon={<LocationOnIcon />}
                   color='success.main'
@@ -140,88 +141,104 @@ const MapAnalyticsPage = (_props: PageProps) => {
           <Card elevation={4}>
             <CardContent>
               <Typography variant='h6' gutterBottom>
-                拠点別分析
+                拠点別分析 (Firebase連携)
               </Typography>
-              <List sx={{ maxHeight: 300, overflow: 'auto' }}>
-                {locations.map((location, index) => (
-                  <ListItem
-                    key={index}
-                    divider={index < locations.length - 1}
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      px: 0,
-                    }}>
-                    <Box sx={{ flex: 1 }}>
-                      <ListItemText
-                        primary={location.name}
-                        secondary={`訪問者: ${location.visitors.toLocaleString()}`}
+              {loading && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
+                  <CircularProgress size={24} />
+                </Box>
+              )}
+              {error && (
+                <Alert severity='error' sx={{ mb: 2 }}>
+                  エラー: {error.message}
+                </Alert>
+              )}
+              {!loading && locations.length === 0 && (
+                <Alert severity='info'>拠点データがありません</Alert>
+              )}
+              {!loading && locations.length > 0 && (
+                <List sx={{ maxHeight: 300, overflow: 'auto' }}>
+                  {locations.map((location, index) => (
+                    <ListItem
+                      key={location.id}
+                      divider={index < locations.length - 1}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        px: 0,
+                      }}>
+                      <Box sx={{ flex: 1 }}>
+                        <ListItemText
+                          primary={location.name}
+                          secondary={`訪問者: ${location.visitors.toLocaleString()} | ${location.region}`}
+                        />
+                      </Box>
+                      <Chip
+                        label={location.status === 'active' ? '有効' : '無効'}
+                        size='small'
+                        color={
+                          location.status === 'active' ? 'success' : 'default'
+                        }
+                        variant={
+                          location.status === 'active' ? 'filled' : 'outlined'
+                        }
                       />
-                    </Box>
-                    <Chip
-                      label={location.status === 'active' ? '有効' : '無効'}
-                      size='small'
-                      color={
-                        location.status === 'active' ? 'success' : 'default'
-                      }
-                      variant={
-                        location.status === 'active' ? 'filled' : 'outlined'
-                      }
-                    />
-                  </ListItem>
-                ))}
-              </List>
+                    </ListItem>
+                  ))}
+                </List>
+              )}
             </CardContent>
           </Card>
         </Box>
 
         {/* Additional Info Panel */}
-        <Box
-          sx={{
-            position: 'fixed',
-            top: LAYOUT_CONSTANTS.HEADER.HEIGHT + 160,
-            left: 16,
-            width: { xs: 'calc(100% - 32px)', md: 350 },
-            zIndex: 10,
-            pointerEvents: 'auto',
-          }}>
-          <Paper elevation={4} sx={{ p: 2, bgcolor: 'background.paper' }}>
-            <Typography variant='subtitle1' fontWeight='bold' gutterBottom>
-              地域別サマリー
-            </Typography>
-            <Box sx={{ mt: 2 }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  mb: 1,
-                }}>
-                <Typography variant='body2'>関東エリア</Typography>
-                <Typography variant='body2' fontWeight='bold'>
-                  1,234
-                </Typography>
+        {!loading && locations.length > 0 && (
+          <Box
+            sx={{
+              position: 'fixed',
+              top: LAYOUT_CONSTANTS.HEADER.HEIGHT + 160,
+              left: 16,
+              width: { xs: 'calc(100% - 32px)', md: 350 },
+              zIndex: 10,
+              pointerEvents: 'auto',
+            }}>
+            <Paper elevation={4} sx={{ p: 2, bgcolor: 'background.paper' }}>
+              <Typography variant='subtitle1' fontWeight='bold' gutterBottom>
+                地域別サマリー
+              </Typography>
+              <Box sx={{ mt: 2 }}>
+                {locations
+                  .reduce(
+                    (acc, loc) => {
+                      const existing = acc.find((item) => item.region === loc.region)
+                      if (existing) {
+                        existing.visitors += loc.visitors
+                      } else {
+                        acc.push({ region: loc.region, visitors: loc.visitors })
+                      }
+                      return acc
+                    },
+                    [] as Array<{ region: string; visitors: number }>
+                  )
+                  .sort((a, b) => b.visitors - a.visitors)
+                  .map((item, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        mb: 1,
+                      }}>
+                      <Typography variant='body2'>{item.region}</Typography>
+                      <Typography variant='body2' fontWeight='bold'>
+                        {item.visitors.toLocaleString()}
+                      </Typography>
+                    </Box>
+                  ))}
               </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  mb: 1,
-                }}>
-                <Typography variant='body2'>関西エリア</Typography>
-                <Typography variant='body2' fontWeight='bold'>
-                  856
-                </Typography>
-              </Box>
-              <Box
-                sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant='body2'>その他エリア</Typography>
-                <Typography variant='body2' fontWeight='bold'>
-                  999
-                </Typography>
-              </Box>
-            </Box>
-          </Paper>
-        </Box>
+            </Paper>
+          </Box>
+        )}
       </MainGrid>
     </div>
   )

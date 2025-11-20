@@ -90,6 +90,7 @@
     "@types/maplibre-gl": "^1.14.0",
     "@types/react-router-dom": "^5.3.3",
     "cli-table3": "^0.6.4",
+    "firebase": "^12.6.0",
     "init": "^0.1.2",
     "map-or-similar": "^1.5.0",
     "mapbox-gl": "^3.3.0",
