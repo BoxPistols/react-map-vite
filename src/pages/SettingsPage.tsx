@@ -8,7 +8,6 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
-  Grid,
   InputLabel,
   MenuItem,
   Select,
@@ -16,6 +15,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import Grid from '@mui/material/GridLegacy'
 import { useState } from 'react'
 
 import MainGrid from '@/components/MainGrid'
@@ -43,7 +43,7 @@ const SettingsPage = (_props: PageProps) => {
                   基本情報
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       required
                       fullWidth
@@ -51,7 +51,7 @@ const SettingsPage = (_props: PageProps) => {
                       defaultValue='山田'
                     />
                   </Grid>
-                  <Grid xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       required
                       fullWidth
@@ -59,7 +59,7 @@ const SettingsPage = (_props: PageProps) => {
                       defaultValue='太郎'
                     />
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <TextField
                       required
                       fullWidth
@@ -68,14 +68,14 @@ const SettingsPage = (_props: PageProps) => {
                       defaultValue='yamada@example.com'
                     />
                   </Grid>
-                  <Grid xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label='電話番号'
                       defaultValue='090-1234-5678'
                     />
                   </Grid>
-                  <Grid xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>年齢</InputLabel>
                       <Select
@@ -99,14 +99,14 @@ const SettingsPage = (_props: PageProps) => {
                   住所
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid xs={12} sm={4}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       fullWidth
                       label='郵便番号'
                       placeholder='123-4567'
                     />
                   </Grid>
-                  <Grid xs={12} sm={8}>
+                  <Grid item xs={12} sm={8}>
                     <FormControl fullWidth>
                       <InputLabel>都道府県</InputLabel>
                       <Select defaultValue=''>
@@ -116,10 +116,10 @@ const SettingsPage = (_props: PageProps) => {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <TextField fullWidth label='市区町村' />
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <TextField fullWidth label='番地・建物名' />
                   </Grid>
                 </Grid>
@@ -163,7 +163,7 @@ const SettingsPage = (_props: PageProps) => {
                   表示設定
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>言語</InputLabel>
                       <Select defaultValue='ja'>
@@ -173,7 +173,7 @@ const SettingsPage = (_props: PageProps) => {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>タイムゾーン</InputLabel>
                       <Select defaultValue='asia-tokyo'>
@@ -189,7 +189,7 @@ const SettingsPage = (_props: PageProps) => {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel>日付形式</InputLabel>
                       <Select defaultValue='yyyy-mm-dd'>
@@ -209,28 +209,28 @@ const SettingsPage = (_props: PageProps) => {
                   セキュリティ
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <TextField
                       fullWidth
                       label='現在のパスワード'
                       type='password'
                     />
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <TextField
                       fullWidth
                       label='新しいパスワード'
                       type='password'
                     />
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <TextField
                       fullWidth
                       label='パスワード（確認）'
                       type='password'
                     />
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <FormControlLabel
                       control={<Switch />}
                       label='2段階認証を有効にする'

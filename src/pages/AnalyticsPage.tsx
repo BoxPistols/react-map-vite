@@ -9,7 +9,6 @@ import {
   Card,
   CardContent,
   Container,
-  Grid,
   Typography,
   Avatar,
   List,
@@ -19,6 +18,7 @@ import {
   Chip,
   LinearProgress,
 } from '@mui/material'
+import Grid from '@mui/material/GridLegacy'
 
 import MainGrid from '@/components/MainGrid'
 import type { PageProps } from '@/types/type'
@@ -79,7 +79,7 @@ const AnalyticsPage = (_props: PageProps) => {
           </Typography>
 
           <Grid container spacing={3} sx={{ mb: 3 }}>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <StatCard
                 title='総売上'
                 value='¥2,456,789'
@@ -88,7 +88,7 @@ const AnalyticsPage = (_props: PageProps) => {
                 color='primary.main'
               />
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <StatCard
                 title='新規顧客'
                 value='1,234'
@@ -97,7 +97,7 @@ const AnalyticsPage = (_props: PageProps) => {
                 color='success.main'
               />
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <StatCard
                 title='注文数'
                 value='456'
@@ -106,7 +106,7 @@ const AnalyticsPage = (_props: PageProps) => {
                 color='warning.main'
               />
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <StatCard
                 title='在庫商品'
                 value='892'
@@ -118,7 +118,7 @@ const AnalyticsPage = (_props: PageProps) => {
           </Grid>
 
           <Grid container spacing={3}>
-            <Grid xs={12} md={8}>
+            <Grid item xs={12} md={8}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>
@@ -139,7 +139,7 @@ const AnalyticsPage = (_props: PageProps) => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid xs={12} md={4}>
+            <Grid item xs={12} md={4}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>
@@ -163,7 +163,7 @@ const AnalyticsPage = (_props: PageProps) => {
           </Grid>
 
           <Grid container spacing={3} sx={{ mt: 0 }}>
-            <Grid xs={12} md={6}>
+            <Grid item xs={12} md={6}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>
@@ -221,7 +221,7 @@ const AnalyticsPage = (_props: PageProps) => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid xs={12} md={6}>
+            <Grid item xs={12} md={6}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>

@@ -5,7 +5,6 @@ import {
   Box,
   Card,
   CardContent,
-  Grid,
   Paper,
   Typography,
   List,
@@ -16,6 +15,7 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material'
+import Grid from '@mui/material/GridLegacy'
 
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
@@ -104,7 +104,7 @@ const MapAnalyticsPage = (_props: PageProps) => {
             pointerEvents: 'none',
           }}>
           <Grid container spacing={2}>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Box sx={{ pointerEvents: 'auto' }}>
                 <StatCard
                   title='総訪問者数'
@@ -115,7 +115,7 @@ const MapAnalyticsPage = (_props: PageProps) => {
                 />
               </Box>
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Box sx={{ pointerEvents: 'auto' }}>
                 <StatCard
                   title='有効拠点数'

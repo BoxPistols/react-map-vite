@@ -7,10 +7,10 @@ import {
   Card,
   CardContent,
   Container,
-  Grid,
   Paper,
   Typography,
 } from '@mui/material'
+import Grid from '@mui/material/GridLegacy'
 
 import MainGrid from '@/components/MainGrid'
 import type { PageProps } from '@/types/type'
@@ -28,7 +28,7 @@ const DashboardPage = (_props: PageProps) => {
           </Typography>
 
           <Grid container spacing={3} sx={{ mb: 3 }}>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Paper sx={{ p: 3 }}>
                 <Box
                   sx={{
@@ -49,7 +49,7 @@ const DashboardPage = (_props: PageProps) => {
                 </Box>
               </Paper>
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Paper sx={{ p: 3 }}>
                 <Box
                   sx={{
@@ -70,7 +70,7 @@ const DashboardPage = (_props: PageProps) => {
                 </Box>
               </Paper>
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Paper sx={{ p: 3 }}>
                 <Box
                   sx={{
@@ -91,7 +91,7 @@ const DashboardPage = (_props: PageProps) => {
                 </Box>
               </Paper>
             </Grid>
-            <Grid xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Paper sx={{ p: 3 }}>
                 <Box
                   sx={{
@@ -115,7 +115,7 @@ const DashboardPage = (_props: PageProps) => {
           </Grid>
 
           <Grid container spacing={3}>
-            <Grid xs={12} md={8}>
+            <Grid item xs={12} md={8}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>
@@ -137,7 +137,7 @@ const DashboardPage = (_props: PageProps) => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid xs={12} md={4}>
+            <Grid item xs={12} md={4}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>
@@ -190,7 +190,7 @@ const DashboardPage = (_props: PageProps) => {
           </Grid>
 
           <Grid container spacing={3} sx={{ mt: 0 }}>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Card>
                 <CardContent>
                   <Typography variant='h6' gutterBottom>

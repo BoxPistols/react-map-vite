@@ -13,7 +13,7 @@ export function useUsers() {
   )
 
   const createUser = async (userData: Omit<UserData, 'id' | 'createdAt' | 'updatedAt'>) => {
-    const result = await firestoreOperations.create<UserData>(COLLECTION_NAME, userData)
+    const result = await firestoreOperations.create<UserData>(COLLECTION_NAME, userData as Omit<UserData, 'id'>)
     if (result.success) {
       refresh()
     }

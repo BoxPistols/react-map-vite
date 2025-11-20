@@ -28,7 +28,7 @@ export function useSettings(userId: string | null) {
   ) => {
     const result = await firestoreOperations.create<SettingsData>(
       COLLECTION_NAME,
-      settingsData
+      settingsData as Omit<SettingsData, 'id'>
     )
     return result
   }
