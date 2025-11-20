@@ -24,10 +24,14 @@ import { hookUseTheme } from '@/hooks/useTheme'
 import { Header } from '@/layouts/header'
 import { SideNav } from '@/layouts/sideNav'
 
+import AnalyticsPage from './pages/AnalyticsPage'
 import DashboardPage from './pages/DashboardPage'
 import InboxPage from './pages/InboxPage'
+import MapAnalyticsPage from './pages/MapAnalyticsPage'
 import MapPage from './pages/MapPage'
 import NaviPage from './pages/NaviPage'
+import SettingsPage from './pages/SettingsPage'
+import UsersPage from './pages/UsersPage'
 import WifiPage from './pages/WifiPage'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -166,7 +170,11 @@ const AppContent = () => {
 
         <Routes>
           <Route path='/' element={<DashboardPage {...sharedProps} />} />
+          <Route path='/analytics' element={<AnalyticsPage {...sharedProps} />} />
+          <Route path='/users' element={<UsersPage {...sharedProps} />} />
+          <Route path='/settings' element={<SettingsPage {...sharedProps} />} />
           <Route path='/map' element={<MapPage {...sharedProps} />} />
+          <Route path='/map-analytics' element={<MapAnalyticsPage {...sharedProps} />} />
           <Route path='/navi' element={<NaviPage {...sharedProps} />} />
           <Route path='/wifi' element={<WifiPage {...sharedProps} />} />
           <Route path='/inbox' element={<InboxPage {...sharedProps} />} />

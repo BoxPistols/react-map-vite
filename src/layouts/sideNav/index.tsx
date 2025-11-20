@@ -1,7 +1,11 @@
 import { MoveToInbox as InboxIcon } from '@mui/icons-material'
+import AssessmentIcon from '@mui/icons-material/Assessment'
 import ConnectingAirportsSharpIcon from '@mui/icons-material/ConnectingAirportsSharp'
 import DashboardIcon from '@mui/icons-material/Dashboard'
+import MapIcon from '@mui/icons-material/Map'
+import PeopleIcon from '@mui/icons-material/People'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined'
+import SettingsIcon from '@mui/icons-material/Settings'
 import WifiSharpIcon from '@mui/icons-material/WifiSharp'
 // src/layouts/sideNav/index.tsx
 import { Drawer } from '@mui/material'
@@ -25,7 +29,11 @@ export const SideNav = ({ open, width }: SideNavProps) => {
 
   const navItems = [
     { to: '/', icon: <DashboardIcon />, text: 'Dashboard' },
+    { to: '/analytics', icon: <AssessmentIcon />, text: 'Analytics' },
+    { to: '/users', icon: <PeopleIcon />, text: 'Users' },
+    { to: '/settings', icon: <SettingsIcon />, text: 'Settings' },
     { to: '/map', icon: <RoomOutlinedIcon />, text: 'Map' },
+    { to: '/map-analytics', icon: <MapIcon />, text: 'Map Analytics' },
     { to: '/navi', icon: <ConnectingAirportsSharpIcon />, text: 'Navi' },
     { to: '/wifi', icon: <WifiSharpIcon />, text: 'Wifi' },
     { to: '/inbox', icon: <InboxIcon />, text: 'Inbox' },
