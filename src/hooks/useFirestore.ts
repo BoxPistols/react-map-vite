@@ -74,7 +74,8 @@ export function useFirestoreCollection<T extends DocumentData>(
     )
 
     return () => unsubscribe()
-  }, [collectionName, refreshKey, constraints.length])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collectionName, refreshKey])
 
   const refresh = () => setRefreshKey((prev) => prev + 1)
 

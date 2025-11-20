@@ -23,11 +23,13 @@ import {
 } from '@mui/material'
 
 import MainGrid from '@/components/MainGrid'
-import { useUsers } from '@/hooks/useUsers'
+import { useAuth } from '@/hooks/useAuth'
+import { useUsersStorage } from '@/hooks/useDataStorage'
 import type { PageProps } from '@/types/type'
 
 const UsersPage = (_props: PageProps) => {
-  const { users, loading, error, deleteUser } = useUsers()
+  const { isAuthenticated } = useAuth()
+  const { users, loading, error, deleteUser } = useUsersStorage()
 
   const handleDelete = async (userId: string, userName: string) => {
     if (confirm(`${userName} を削除してもよろしいですか?`)) {
@@ -54,7 +56,7 @@ const UsersPage = (_props: PageProps) => {
                 ユーザー管理
               </Typography>
               <Typography color='text.secondary'>
-                システムユーザーの管理と権限設定 (Firebase連携)
+                システムユーザーの管理と権限設定 ({isAuthenticated ? 'Firebase連携' : 'ローカルストレージ'})
               </Typography>
             </Box>
             <Button variant='contained' startIcon={<AddIcon />} size='large'>
@@ -76,7 +78,7 @@ const UsersPage = (_props: PageProps) => {
 
           {!loading && users.length === 0 && (
             <Alert severity='info' sx={{ mb: 3 }}>
-              ユーザーデータがありません。Firebaseにデータを追加してください。
+              ユーザーデータがありません。{isAuthenticated ? 'Firebaseにデータを追加してください。' : 'デモデータを初期化するか、ログインしてください。'}
             </Alert>
           )}
 

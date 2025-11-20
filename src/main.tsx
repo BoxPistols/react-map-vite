@@ -5,7 +5,11 @@ import ReactDOM from 'react-dom/client'
 
 import App from '@/App'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { initializeDemoData } from '@/hooks/useLocalStorage'
 import './index.css'
+
+// Initialize demo data in localStorage
+initializeDemoData()
 
 const cache = createCache({
   key: 'css',

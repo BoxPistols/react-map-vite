@@ -20,7 +20,8 @@ import {
 import MainGrid from '@/components/MainGrid'
 import { Map3D } from '@/components/Map3D'
 import { LAYOUT_CONSTANTS } from '@/constants/layout'
-import { useLocations } from '@/hooks/useLocations'
+import { useAuth } from '@/hooks/useAuth'
+import { useLocationsStorage } from '@/hooks/useDataStorage'
 import type { PageProps } from '@/types/type'
 
 const StatCard = ({
@@ -64,7 +65,8 @@ const StatCard = ({
 )
 
 const MapAnalyticsPage = (_props: PageProps) => {
-  const { locations, loading, error } = useLocations()
+  const { isAuthenticated } = useAuth()
+  const { locations, loading, error } = useLocationsStorage()
 
   const totalVisitors = locations.reduce((sum, loc) => sum + loc.visitors, 0)
   const activeLocations = locations.filter((loc) => loc.status === 'active').length
@@ -141,7 +143,7 @@ const MapAnalyticsPage = (_props: PageProps) => {
           <Card elevation={4}>
             <CardContent>
               <Typography variant='h6' gutterBottom>
-                拠点別分析 (Firebase連携)
+                拠点別分析 ({isAuthenticated ? 'Firebase連携' : 'ローカルストレージ'})
               </Typography>
               {loading && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
