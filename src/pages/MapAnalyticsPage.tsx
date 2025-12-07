@@ -69,7 +69,9 @@ const MapAnalyticsPage = (_props: PageProps) => {
   const { locations, loading, error } = useLocationsStorage()
 
   const totalVisitors = locations.reduce((sum, loc) => sum + loc.visitors, 0)
-  const activeLocations = locations.filter((loc) => loc.status === 'active').length
+  const activeLocations = locations.filter(
+    (loc) => loc.status === 'active'
+  ).length
 
   return (
     <div>
@@ -143,7 +145,8 @@ const MapAnalyticsPage = (_props: PageProps) => {
           <Card elevation={4}>
             <CardContent>
               <Typography variant='h6' gutterBottom>
-                拠点別分析 ({isAuthenticated ? 'Firebase連携' : 'ローカルストレージ'})
+                拠点別分析 (
+                {isAuthenticated ? 'Firebase連携' : 'ローカルストレージ'})
               </Typography>
               {loading && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
@@ -212,7 +215,9 @@ const MapAnalyticsPage = (_props: PageProps) => {
                 {locations
                   .reduce(
                     (acc, loc) => {
-                      const existing = acc.find((item) => item.region === loc.region)
+                      const existing = acc.find(
+                        (item) => item.region === loc.region
+                      )
                       if (existing) {
                         existing.visitors += loc.visitors
                       } else {

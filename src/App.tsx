@@ -170,11 +170,17 @@ const AppContent = () => {
 
         <Routes>
           <Route path='/' element={<DashboardPage {...sharedProps} />} />
-          <Route path='/analytics' element={<AnalyticsPage {...sharedProps} />} />
+          <Route
+            path='/analytics'
+            element={<AnalyticsPage {...sharedProps} />}
+          />
           <Route path='/users' element={<UsersPage {...sharedProps} />} />
           <Route path='/settings' element={<SettingsPage {...sharedProps} />} />
           <Route path='/map' element={<MapPage {...sharedProps} />} />
-          <Route path='/map-analytics' element={<MapAnalyticsPage {...sharedProps} />} />
+          <Route
+            path='/map-analytics'
+            element={<MapAnalyticsPage {...sharedProps} />}
+          />
           <Route path='/navi' element={<NaviPage {...sharedProps} />} />
           <Route path='/wifi' element={<WifiPage {...sharedProps} />} />
           <Route path='/inbox' element={<InboxPage {...sharedProps} />} />

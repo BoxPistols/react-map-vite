@@ -56,7 +56,8 @@ const UsersPage = (_props: PageProps) => {
                 ユーザー管理
               </Typography>
               <Typography color='text.secondary'>
-                システムユーザーの管理と権限設定 ({isAuthenticated ? 'Firebase連携' : 'ローカルストレージ'})
+                システムユーザーの管理と権限設定 (
+                {isAuthenticated ? 'Firebase連携' : 'ローカルストレージ'})
               </Typography>
             </Box>
             <Button variant='contained' startIcon={<AddIcon />} size='large'>
@@ -78,7 +79,10 @@ const UsersPage = (_props: PageProps) => {
 
           {!loading && users.length === 0 && (
             <Alert severity='info' sx={{ mb: 3 }}>
-              ユーザーデータがありません。{isAuthenticated ? 'Firebaseにデータを追加してください。' : 'デモデータを初期化するか、ログインしてください。'}
+              ユーザーデータがありません。
+              {isAuthenticated
+                ? 'Firebaseにデータを追加してください。'
+                : 'デモデータを初期化するか、ログインしてください。'}
             </Alert>
           )}
 

@@ -87,7 +87,9 @@ const DashboardPage = (_props: PageProps) => {
                       +15.3% ↑
                     </Typography>
                   </Box>
-                  <TrendingUpIcon sx={{ fontSize: 48, color: 'warning.main' }} />
+                  <TrendingUpIcon
+                    sx={{ fontSize: 48, color: 'warning.main' }}
+                  />
                 </Box>
               </Paper>
             </Grid>
@@ -176,9 +178,7 @@ const DashboardPage = (_props: PageProps) => {
                         cursor: 'pointer',
                         '&:hover': { bgcolor: 'action.hover' },
                       }}>
-                      <Typography variant='subtitle2'>
-                        ユーザー管理
-                      </Typography>
+                      <Typography variant='subtitle2'>ユーザー管理</Typography>
                       <Typography variant='body2' color='text.secondary'>
                         メンバーを管理
                       </Typography>
@@ -218,8 +218,7 @@ const DashboardPage = (_props: PageProps) => {
                           display: 'flex',
                           justifyContent: 'space-between',
                           py: 1.5,
-                          borderBottom:
-                            index < 3 ? '1px solid' : 'none',
+                          borderBottom: index < 3 ? '1px solid' : 'none',
                           borderColor: 'divider',
                         }}>
                         <Typography variant='body2'>

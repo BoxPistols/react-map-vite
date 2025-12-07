@@ -177,9 +177,7 @@ const SettingsPage = (_props: PageProps) => {
                     <FormControl fullWidth>
                       <InputLabel>タイムゾーン</InputLabel>
                       <Select defaultValue='asia-tokyo'>
-                        <MenuItem value='asia-tokyo'>
-                          Asia/Tokyo (JST)
-                        </MenuItem>
+                        <MenuItem value='asia-tokyo'>Asia/Tokyo (JST)</MenuItem>
                         <MenuItem value='america-new-york'>
                           America/New York (EST)
                         </MenuItem>

@@ -7,14 +7,12 @@ import { firestoreOperations, useFirestoreCollection } from './useFirestore'
 const COLLECTION_NAME = 'locations'
 
 export function useLocations() {
-  const { data, loading, error, refresh } = useFirestoreCollection<LocationData>(
-    COLLECTION_NAME,
-    [orderBy('visitors', 'desc')]
-  )
+  const { data, loading, error, refresh } =
+    useFirestoreCollection<LocationData>(COLLECTION_NAME, [
+      orderBy('visitors', 'desc'),
+    ])
 
-  const createLocation = async (
-    locationData: Omit<LocationData, 'id'>
-  ) => {
+  const createLocation = async (locationData: Omit<LocationData, 'id'>) => {
     const result = await firestoreOperations.create<LocationData>(
       COLLECTION_NAME,
       locationData

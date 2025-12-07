@@ -61,12 +61,12 @@ function useLocalStorageState<T>(key: string, initialValue: T[]) {
  * Users local storage hook
  */
 export function useLocalUsers() {
-  const { data, setData, loading, error, refresh } = useLocalStorageState<UserData>(
-    STORAGE_KEYS.USERS,
-    []
-  )
+  const { data, setData, loading, error, refresh } =
+    useLocalStorageState<UserData>(STORAGE_KEYS.USERS, [])
 
-  const createUser = async (userData: Omit<UserData, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const createUser = async (
+    userData: Omit<UserData, 'id' | 'createdAt' | 'updatedAt'>
+  ) => {
     try {
       const newUser: UserData = {
         ...userData,
@@ -84,7 +84,9 @@ export function useLocalUsers() {
   const updateUser = async (userId: string, userData: Partial<UserData>) => {
     try {
       const updatedData = data.map((user) =>
-        user.id === userId ? { ...user, ...userData, updatedAt: new Date() } : user
+        user.id === userId
+          ? { ...user, ...userData, updatedAt: new Date() }
+          : user
       )
       setData(updatedData)
       return { success: true }
@@ -118,10 +120,8 @@ export function useLocalUsers() {
  * Locations local storage hook
  */
 export function useLocalLocations() {
-  const { data, setData, loading, error, refresh } = useLocalStorageState<LocationData>(
-    STORAGE_KEYS.LOCATIONS,
-    []
-  )
+  const { data, setData, loading, error, refresh } =
+    useLocalStorageState<LocationData>(STORAGE_KEYS.LOCATIONS, [])
 
   const createLocation = async (locationData: Omit<LocationData, 'id'>) => {
     try {
@@ -176,14 +176,23 @@ export function useLocalLocations() {
  * Analytics local storage hook
  */
 export function useLocalAnalytics() {
-  const { data: analyticsData, loading: analyticsLoading, error: analyticsError } =
-    useLocalStorageState<AnalyticsData>(STORAGE_KEYS.ANALYTICS, [])
+  const {
+    data: analyticsData,
+    loading: analyticsLoading,
+    error: analyticsError,
+  } = useLocalStorageState<AnalyticsData>(STORAGE_KEYS.ANALYTICS, [])
 
-  const { data: orders, loading: ordersLoading, error: ordersError } =
-    useLocalStorageState<OrderData>(STORAGE_KEYS.ORDERS, [])
+  const {
+    data: orders,
+    loading: ordersLoading,
+    error: ordersError,
+  } = useLocalStorageState<OrderData>(STORAGE_KEYS.ORDERS, [])
 
-  const { data: inventory, loading: inventoryLoading, error: inventoryError } =
-    useLocalStorageState<InventoryData>(STORAGE_KEYS.INVENTORY, [])
+  const {
+    data: inventory,
+    loading: inventoryLoading,
+    error: inventoryError,
+  } = useLocalStorageState<InventoryData>(STORAGE_KEYS.INVENTORY, [])
 
   const currentAnalytics = analyticsData.length > 0 ? analyticsData[0] : null
 
@@ -315,6 +324,9 @@ export function initializeDemoData() {
   }
 
   if (!window.localStorage.getItem(STORAGE_KEYS.LOCATIONS)) {
-    window.localStorage.setItem(STORAGE_KEYS.LOCATIONS, JSON.stringify(demoLocations))
+    window.localStorage.setItem(
+      STORAGE_KEYS.LOCATIONS,
+      JSON.stringify(demoLocations)
+    )
   }
 }

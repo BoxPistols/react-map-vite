@@ -39,7 +39,10 @@ export function useAnalytics() {
   const createAnalytics = async (
     data: Omit<AnalyticsData, 'id' | 'createdAt' | 'updatedAt'>
   ) => {
-    const result = await firestoreOperations.create<AnalyticsData>('analytics', data)
+    const result = await firestoreOperations.create<AnalyticsData>(
+      'analytics',
+      data
+    )
     if (result.success) {
       refreshAnalytics()
     }
@@ -47,7 +50,11 @@ export function useAnalytics() {
   }
 
   const updateInventory = async (id: string, data: Partial<InventoryData>) => {
-    const result = await firestoreOperations.update<InventoryData>('inventory', id, data)
+    const result = await firestoreOperations.update<InventoryData>(
+      'inventory',
+      id,
+      data
+    )
     if (result.success) {
       refreshInventory()
     }
