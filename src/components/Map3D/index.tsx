@@ -199,7 +199,7 @@ export const Map3D: React.FC<Map3DProps> = ({
   // Map click handler for pin mode
   const handleMapClick = useCallback(
     (e: maplibregl.MapMouseEvent) => {
-      if (isPinMode && !isMobile) {
+      if (isPinMode) {
         handlePinPlacement(e.lngLat)
       }
     },
