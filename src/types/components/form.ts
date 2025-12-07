@@ -18,7 +18,8 @@ export type CustomTextFieldProps = TextFieldProps &
  * カスタムセレクトのプロパティ
  */
 export interface CustomSelectProps
-  extends Omit<SelectProps, 'label' | 'multiple' | 'value' | 'onChange'>,
+  extends
+    Omit<SelectProps, 'label' | 'multiple' | 'value' | 'onChange'>,
     FormFieldBaseProps {
   options: Array<{ value: string | number; label: string }>
   value: string | string[] | number | number[] | undefined

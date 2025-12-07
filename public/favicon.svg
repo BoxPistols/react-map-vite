@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Modern map pin icon - flat design, no gradient -->
+  <circle cx="16" cy="12" r="10" fill="#1976D2"/>
+  <circle cx="16" cy="12" r="4" fill="#FFFFFF"/>
+  <polygon points="16,28 8,16 24,16" fill="#1976D2"/>
+</svg>

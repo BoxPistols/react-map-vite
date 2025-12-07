@@ -11,7 +11,6 @@ Material-UIの中で最も頻繁に使用されるコンポーネントの一つ
 
 ```tsx
 import { Button } from '@mui/material'
-
 ;<Button variant='contained'>ボタン</Button>
 ```
 
@@ -22,12 +21,10 @@ import { Button } from '@mui/material'
 ボタンの表示スタイルを3種類から選択できます:
 
 - **contained** - 背景色のある塗りつぶしボタン（最も目立つ）
-
   - 主要なアクション（保存、送信、決定など）に使用
   - ページに1-2個程度に抑えることを推奨
 
 - **outlined** - 枠線のみのボタン（中間の強調度）
-
   - 二次的なアクション（キャンセル、戻るなど）に使用
   - containedボタンと組み合わせて使用することが多い
 
@@ -84,7 +81,6 @@ import { Button } from '@mui/material'
 
 ```tsx
 import SendIcon from '@mui/icons-material/Send'
-
 ;<Button startIcon={<SendIcon />}>送信</Button>
 ```
 
@@ -94,7 +90,6 @@ import SendIcon from '@mui/icons-material/Send'
 
 ```tsx
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-
 ;<Button endIcon={<ArrowForwardIcon />}>次へ</Button>
 ```
 
@@ -114,7 +109,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
 ```tsx
 import { LoadingButton } from '@mui/lab'
-
 ;<LoadingButton loading>読み込み中</LoadingButton>
 ```
 

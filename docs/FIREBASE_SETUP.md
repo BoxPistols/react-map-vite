@@ -68,6 +68,7 @@ service cloud.firestore {
 プロジェクトでは以下のコレクションを使用します：
 
 #### users
+
 ```typescript
 {
   id: string
@@ -81,6 +82,7 @@ service cloud.firestore {
 ```
 
 #### locations
+
 ```typescript
 {
   id: string
@@ -94,6 +96,7 @@ service cloud.firestore {
 ```
 
 #### analytics
+
 ```typescript
 {
   id: string
@@ -110,6 +113,7 @@ service cloud.firestore {
 ```
 
 #### orders
+
 ```typescript
 {
   id: string
@@ -122,6 +126,7 @@ service cloud.firestore {
 ```
 
 #### inventory
+
 ```typescript
 {
   id: string
@@ -133,6 +138,7 @@ service cloud.firestore {
 ```
 
 #### settings
+
 ```typescript
 {
   id: string
@@ -154,6 +160,7 @@ service cloud.firestore {
 Firestore Consoleから手動でサンプルデータを追加するか、以下のようなスクリプトを作成して初期データを投入できます。
 
 #### サンプルユーザーデータ
+
 ```json
 {
   "name": "山田太郎",
@@ -166,6 +173,7 @@ Firestore Consoleから手動でサンプルデータを追加するか、以下
 ```
 
 #### サンプル拠点データ
+
 ```json
 {
   "name": "東京オフィス",
@@ -184,18 +192,20 @@ Firestore Consoleから手動でサンプルデータを追加するか、以下
 プロジェクトでは、Firebaseデータへのアクセスを簡素化するカスタムフックを提供しています。
 
 #### useUsers
+
 ```typescript
 import { useUsers } from '@/hooks/useUsers'
 
 function Component() {
-  const { users, loading, error, createUser, updateUser, deleteUser } = useUsers()
+  const { users, loading, error, createUser, updateUser, deleteUser } =
+    useUsers()
 
   // ユーザーを作成
   await createUser({
     name: '新規ユーザー',
     email: 'new@example.com',
     role: 'Viewer',
-    status: 'active'
+    status: 'active',
   })
 
   // ユーザーを更新
@@ -207,16 +217,19 @@ function Component() {
 ```
 
 #### useLocations
+
 ```typescript
 import { useLocations } from '@/hooks/useLocations'
 
 function Component() {
-  const { locations, loading, error, createLocation, updateLocation } = useLocations()
+  const { locations, loading, error, createLocation, updateLocation } =
+    useLocations()
   // ...
 }
 ```
 
 #### useSettings
+
 ```typescript
 import { useSettings } from '@/hooks/useSettings'
 

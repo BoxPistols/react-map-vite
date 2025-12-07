@@ -43,7 +43,10 @@ export function useFirestoreCollection<T extends DocumentData>(
     setError(null)
 
     const collectionRef = collection(db, collectionName)
-    const q = constraints.length > 0 ? query(collectionRef, ...constraints) : collectionRef
+    const q =
+      constraints.length > 0
+        ? query(collectionRef, ...constraints)
+        : collectionRef
 
     const unsubscribe = onSnapshot(
       q,
@@ -140,7 +143,10 @@ export function useFirestoreDoc<T extends DocumentData>(
  */
 export const firestoreOperations = {
   // Create
-  async create<T extends DocumentData>(collectionName: string, data: Omit<T, 'id'>) {
+  async create<T extends DocumentData>(
+    collectionName: string,
+    data: Omit<T, 'id'>
+  ) {
     try {
       const collectionRef = collection(db, collectionName)
       const docRef = await addDoc(collectionRef, {
@@ -221,7 +227,10 @@ export const firestoreOperations = {
   ) {
     try {
       const collectionRef = collection(db, collectionName)
-      const q = constraints.length > 0 ? query(collectionRef, ...constraints) : collectionRef
+      const q =
+        constraints.length > 0
+          ? query(collectionRef, ...constraints)
+          : collectionRef
       const snapshot = await getDocs(q)
 
       const items = snapshot.docs.map((doc) => {
