@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Feedback/Progress/概要' />
+
+# Progress
+
+処理中であることをユーザーに伝えるコンポーネントです。
+
+## CircularProgress
+
+```tsx
+import { CircularProgress } from '@mui/material'
+
+<CircularProgress />
+<CircularProgress color="secondary" />
+<CircularProgress variant="determinate" value={75} />
+```
+
+## LinearProgress
+
+```tsx
+import { LinearProgress } from '@mui/material'
+
+<LinearProgress />
+<LinearProgress variant="determinate" value={50} />
+<LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
+```
+
+## サイズ
+
+```tsx
+<CircularProgress size={20} />
+<CircularProgress size={40} />
+<CircularProgress size={60} />
+```
+
+## 参考リンク
+
+- [MUI CircularProgress API](https://mui.com/material-ui/api/circular-progress/)
+- [MUI LinearProgress API](https://mui.com/material-ui/api/linear-progress/)
+- [MUI Progress Documentation](https://mui.com/material-ui/react-progress/)

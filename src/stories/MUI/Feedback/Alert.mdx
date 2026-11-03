@@ -1,0 +1,100 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title='MUI/Feedback/Alert/概要' />
+
+# Alert
+
+ユーザーに重要な情報を伝えるためのフィードバックコンポーネントです。
+
+## 基本的な使い方
+
+```tsx
+import { Alert } from '@mui/material'
+
+<Alert severity="error">エラーが発生しました</Alert>
+<Alert severity="warning">警告メッセージ</Alert>
+<Alert severity="info">情報メッセージ</Alert>
+<Alert severity="success">成功しました</Alert>
+```
+
+## バリエーション
+
+```tsx
+<Alert variant="filled" severity="success">Filled</Alert>
+<Alert variant="outlined" severity="info">Outlined</Alert>
+<Alert variant="standard" severity="warning">Standard</Alert>
+```
+
+## アイコン
+
+```tsx
+<Alert icon={<CheckIcon />}>カスタムアイコン</Alert>
+<Alert icon={false}>アイコンなし</Alert>
+```
+
+## アクション
+
+```tsx
+<Alert
+  severity='info'
+  action={
+    <Button color='inherit' size='small'>
+      実行
+    </Button>
+  }>
+  アクション付きアラート
+</Alert>
+```
+
+## 閉じるボタン
+
+```tsx
+<Alert onClose={() => console.log('closed')}>閉じることができます</Alert>
+```
+
+## タイトル付き
+
+```tsx
+<Alert severity='error'>
+  <AlertTitle>エラー</AlertTitle>
+  詳細なエラーメッセージがここに表示されます
+</Alert>
+```
+
+## 実装例
+
+### フォームのエラー表示
+
+```tsx
+{
+  error && (
+    <Alert severity='error' sx={{ mb: 2 }}>
+      {error}
+    </Alert>
+  )
+}
+```
+
+### 成功メッセージ
+
+```tsx
+{
+  success && (
+    <Alert severity='success' onClose={() => setSuccess(false)}>
+      データを保存しました
+    </Alert>
+  )
+}
+```
+
+## ベストプラクティス
+
+1. **適切なseverity** - 状況に応じた選択
+2. **明確なメッセージ** - 何が起きたか明確に
+3. **アクション提供** - 必要に応じて次の行動を
+4. **閉じる機能** - 一時的なメッセージには必須
+
+## 参考リンク
+
+- [MUI Alert API](https://mui.com/material-ui/api/alert/)
+- [MUI Alert Documentation](https://mui.com/material-ui/react-alert/)
